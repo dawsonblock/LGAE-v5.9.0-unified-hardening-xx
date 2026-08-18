@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/governance/__init__.py
+# hypothesis_version: 6.151.4
+
+['AuthorityRequirement', 'DEFAULT_REGISTRY', 'InvariantRegistry', 'InvariantResult', 'InvariantSeverity', 'invariant', 'register_invariant', 'requirement_for']

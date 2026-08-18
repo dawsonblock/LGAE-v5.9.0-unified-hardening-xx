@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/timescales.py
+# hypothesis_version: 6.151.4
+
+[100, 1000, 'equilibrium', 'fast', 'fast_interval', 'fast_updates', 'last_fast_step', 'last_medium_step', 'last_slow_step', 'medium', 'medium_interval', 'medium_updates', 'schedule', 'slow', 'slow_interval', 'slow_updates', 'step', 'version']

@@ -1,0 +1,18 @@
+{
+  "test_directories": ["tests/", "tests/integration/"],
+  "test_file_count": 114,
+  "test_count_last_measured": 1404,
+  "test_suites": {
+    "unit": "tests/test_v510_*.py, tests/test_v511_*.py, tests/test_v411_*.py, tests/test_engine.py",
+    "integration": "tests/integration/test_*.py",
+    "property": "tests/test_v510_metamorphic.py, tests/test_v510_property_based.py (requires hypothesis)",
+    "determinism": "tests/integration/test_canonical_golden_scenario.py",
+    "authority": "tests/integration/test_adversarial_authority.py, tests/test_v511_transaction_authority.py",
+    "crash": "tests/integration/test_crash_recovery.py",
+    "performance": "tests/integration/test_performance_gates.py",
+    "scientific": "tests/integration/test_scientific_benchmarks.py",
+    "release": "tests/integration/test_v511_final_qualification.py, tests/test_v510_release.py"
+  },
+  "known_missing_dependencies": ["hypothesis"],
+  "notes": "Full test collection fails without hypothesis installed. Property-based tests (metamorphic, property_based) cannot run. This is defect D11-015."
+}

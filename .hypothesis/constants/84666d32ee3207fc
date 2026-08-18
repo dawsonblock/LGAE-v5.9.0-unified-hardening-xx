@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/ood_qualification.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'family', 'held_out', 'id_results', 'is_held_out', 'mean_id', 'mean_ood', 'metadata', 'metric_value', 'n_nodes', 'ood_gate_passed', 'ood_results', 'seed', 'sigma_id', 'sigma_ood', 'train']

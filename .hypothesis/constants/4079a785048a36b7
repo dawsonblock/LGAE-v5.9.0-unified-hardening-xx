@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/contracts/candidates.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'action_type', 'candidate_id', 'candidates', 'duplicates_removed', 'expected_utility', 'heuristic', 'origin', 'parameters', 'snapshot_id', 'source_state_hash', 'source_state_version', 'state_hash', 'state_version', 'total_generated']

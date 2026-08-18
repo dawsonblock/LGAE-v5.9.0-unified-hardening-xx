@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/encoders/normalization.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1.0, 'dataset_hash', 'dimension', 'feature_schema_hash', 'fitted_train', 'frozen', 'mean', 'n_samples', 'normalization_hash', 'state', 'std', 'train', 'unfit']

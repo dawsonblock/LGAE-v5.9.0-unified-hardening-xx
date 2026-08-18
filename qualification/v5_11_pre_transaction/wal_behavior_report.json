@@ -1,0 +1,34 @@
+{
+  "audit_date": "2025-01-20",
+  "description": "Report on WAL behavior in the v5.11-dev build.",
+  "defects_referenced": ["D11-004", "D11-005", "D11-006"],
+  "wal_file": "src/lgae_v3/runtime/wal.py",
+  "current_ordering": {
+    "description": "BEGIN → WRITE → APPLY GRAPH → APPLY FIBER → APPLY GAUGE → COMMIT",
+    "problem": "Live mutation occurs between WRITE and COMMIT. If process dies after partial apply, recovery discards transaction but in-memory state is already partially mutated.",
+    "defect": "D11-005",
+    "required_ordering": "1. validate transaction, 2. construct new state completely in shadow, 3. compute expected post-state hash, 4. WAL PREPARE, 5. fsync, 6. atomically swap state, 7. persist evidence/receipt, 8. WAL COMMIT, 9. fsync"
+  },
+  "wal_content": {
+    "description": "WAL WRITE records serialize only graph deltas (shadow_graph_state). No fiber, gauge, calibration, or model delta serialization.",
+    "defect": "D11-004",
+    "missing": ["fiber_delta", "gauge_delta", "calibration_delta", "model_delta"],
+    "impact": "Recovery can only replay graph state. Full graph+fiber+gauge transactions cannot be reconstructed from WAL."
+  },
+  "wal_restart": {
+    "description": "WriteAheadLog.__init__() initializes _lsn=0 and _next_txn_id=0 without scanning existing log.",
+    "defect": "D11-006",
+    "impact": "Reopening an existing WAL can reuse txn_id=0, lsn=1 after prior transactions already used them. Recovery becomes ambiguous across runtime lifetimes.",
+    "required": "Scan existing records on init. Set next_lsn = max_lsn + 1, next_txn_id = max_txn_id + 1."
+  },
+  "wal_integrity_chain": {
+    "present": false,
+    "description": "No previous_record_hash or record_hash chain. No tamper/corruption detection.",
+    "required": "H_n = SHA256(H_{n-1} || canonical(record_n))"
+  },
+  "wal_record_types": {
+    "current": ["BEGIN", "WRITE", "COMMIT", "ABORT", "CHECKPOINT"],
+    "required": ["TX_PREPARE", "TX_COMMIT", "TX_ABORT", "CHECKPOINT"],
+    "note": "TX_PREPARE should contain the full transaction, not just graph state."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "credit_conserves_blended_advantage": true,
+    "credit_weights_normalized": true,
+    "joint_connection_orthogonal": true,
+    "joint_connection_special": true,
+    "localized_credit_bounded": true,
+    "post_commit_connection_matches_shadow": true
+  },
+  "claim_boundary": "PASS certifies SO(d) joint-action construction, shadow/commit connection consistency, and conservative localized credit accounting. It does not certify learned joint-action superiority on unseen topologies.",
+  "metrics": {
+    "commit_connection_error": 1.3328659065336979e-07,
+    "determinant": 1.0,
+    "dirichlet_after": 1.8323171138763428,
+    "dirichlet_before": 1.7956476211547852,
+    "normalized_dirichlet_improvement": -0.010107455775141716,
+    "orthogonality_error": 1.0327822508315876e-07
+  },
+  "schema": "LGAE_JOINT_STRUCTURAL_ACTION_QUALIFICATION_V5_8_3",
+  "scientific_generalization_status": "NOT_YET_QUALIFIED",
+  "status": "PASS"
+}

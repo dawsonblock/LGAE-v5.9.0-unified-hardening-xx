@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/runtime/contracts/commit.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'authority_hash_after', 'committed', 'delta_utility', 'evidence_hash', 'new_state_hash', 'new_state_version', 'receipt_hash', 'snapshot_id', 'state_hash', 'state_version', 'transaction_id']

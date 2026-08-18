@@ -1,0 +1,15 @@
+{
+  "version": "5.11.0",
+  "schema_version": "LGAE_CANONICAL_CONVERGENCE_V5_11_0",
+  "timestamp": "2026-08-18T23:45:29Z",
+  "test_results": {
+    "collected": 1978,
+    "passed": 1978,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "returncode": 0,
+    "elapsed_seconds": 454.19
+  },
+  "status": "QUALIFIED"
+}

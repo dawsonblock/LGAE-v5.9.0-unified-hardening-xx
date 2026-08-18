@@ -1,0 +1,26 @@
+{
+  "audit_date": "2025-01-20",
+  "description": "Report on determinism in the v5.11-dev build.",
+  "defects_referenced": ["D11-008"],
+  "python_hash_usage": {
+    "file": "src/lgae_v3/runtime/transaction.py",
+    "line": 68,
+    "code": "h = str(hash(self.shadow_fiber_snapshot))",
+    "context": "FiberDelta.to_hash() fallback when snapshot has no state_hash()",
+    "defect": "D11-008",
+    "impact": "Transaction identity becomes nondeterministic across PYTHONHASHSEED values. Transaction hashes are not reproducible.",
+    "fix": "Remove hash() fallback. Require state_hash() or canonical serialization. Raise TypeError if unsupported."
+  },
+  "deterministic_components": {
+    "curriculum_seeding": "FIXED — SHA-256 replaces hash(family.value)",
+    "canonical_json": "FIXED — deterministic serialization",
+    "graph_state_hash": "FIXED — deterministic tensor hashing",
+    "transaction_id": "PARTIALLY FIXED — SHA-256 derived but FiberDelta fallback uses hash()",
+    "authorization_binding": "PARTIALLY FIXED — deterministic but binding is optional",
+    "golden_scenario": "PASSING — cross-process and cross-PYTHONHASHSEED tests pass"
+  },
+  "enforcement_test": {
+    "present": false,
+    "required": "Repository-wide test that scans for hash() usage in deterministic runtime paths and fails if found."
+  }
+}

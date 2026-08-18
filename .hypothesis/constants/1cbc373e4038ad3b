@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/curvature/ollivier.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-06, 0.05, 1.0, 200, 'exact_lp', 'highs', 'inf', 'length', 'p must lie in [0,1]', 'sinkhorn_log', 'weight']

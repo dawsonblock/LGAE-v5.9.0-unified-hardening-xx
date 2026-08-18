@@ -1,0 +1,59 @@
+{
+  "baseline_note": "fosr_reference is an exact spectral-gap-gain proposal reference on bounded graphs. forman_flow_reference is a BORF-style AF3 deficit proposal proxy, not a paper-exact BORF implementation.",
+  "checks": {
+    "anchored_ensemble_members": true,
+    "calibration_finite": true,
+    "candidate_recall_measured": true,
+    "frozen_randomized_priors": true,
+    "reference_channels_present": true,
+    "regret_finite": true,
+    "stratified_replay_populated": true,
+    "train_heldout_families_disjoint": true
+  },
+  "claim_boundary": "PASS certifies v5.8.1 infrastructure and measurement integrity only. Learned generalization is claimed only when scientific_generalization_status is PASS.",
+  "heldout": {
+    "beats_best_reference_baseline": false,
+    "families": [
+      "small_world",
+      "scale_free",
+      "geometric"
+    ],
+    "mean_effective_resistance_regret": 0.0514852124651273,
+    "mean_forman_flow_reference_regret": 0.0704845232963562,
+    "mean_fosr_reference_regret": 0.015493776082992553,
+    "mean_learned_lcb_regret": 0.036077086448669436,
+    "oracle_candidate_recall_at_union": 1.0,
+    "states": 6
+  },
+  "schema": "LGAE_STRUCTURAL_INTELLIGENCE_HARDENING_QUALIFICATION_V5_8_1",
+  "scientific_generalization_status": "NOT_YET_QUALIFIED",
+  "status": "PASS",
+  "training": {
+    "actions": 125,
+    "families": [
+      "erdos_renyi",
+      "block",
+      "tree"
+    ],
+    "last_step": {
+      "loss": 0.42217960953712463,
+      "ranking_loss": 0.6752722263336182,
+      "samples": 63,
+      "states": 6,
+      "value_loss": -0.08427456021308899
+    },
+    "states": 12
+  },
+  "uncertainty": {
+    "calibration": {
+      "coverage_1sigma": 1.0,
+      "coverage_2sigma": 1.0,
+      "mean_abs_error": 0.05425146594643593,
+      "mean_predicted_std": 0.7859882712364197,
+      "normalized_error": 0.06968488544225693
+    },
+    "mean_heldout_epistemic_std": 0.0889350033258317,
+    "mean_id_epistemic_std": 0.09050799667602405,
+    "ood_greater_than_id": false
+  }
+}

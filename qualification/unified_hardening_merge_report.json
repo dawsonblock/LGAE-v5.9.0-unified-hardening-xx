@@ -1,0 +1,36 @@
+{
+  "checks": {
+    "bayesian_curvature_hysteresis_restored": true,
+    "canonical_action_order_restored": true,
+    "certification_levels_restored": true,
+    "checkpoint_merkle_root_restored": true,
+    "combined_test_suite_passes": true,
+    "deterministic_rng_restored": true,
+    "dynamic_gauge_hardening_restored": true,
+    "ed25519_receipt_signing_restored": true,
+    "graph_feature_baseline_available": true,
+    "hash_seed_reproducibility_passes": true,
+    "information_gain_benchmark_restored": true,
+    "mutation_authority_levels_restored": true,
+    "reproducibility_metadata_restored": true,
+    "residual_equilibrium_barrier_restored": true,
+    "structural_mpc_restored": true,
+    "tensor_native_topology_restored": true,
+    "v584_trunk_retained": true
+  },
+  "metrics": {
+    "hash_seed_values": [
+      0,
+      1,
+      2,
+      42,
+      123456
+    ],
+    "pytest_collected": 719,
+    "pytest_passed": 719
+  },
+  "schema": "LGAE_UNIFIED_HARDENING_QUALIFICATION_V5_9_0",
+  "scientific_generalization_status": "NOT_YET_QUALIFIED",
+  "status": "PASS",
+  "version": "5.9.0"
+}

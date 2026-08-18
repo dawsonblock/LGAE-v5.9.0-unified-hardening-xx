@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/runtime/runtime_result.py
+# hypothesis_version: 6.151.4
+
+['certification_level', 'chosen_action', 'committed', 'delta_utility', 'evidence_hash', 'executed', 'governance_decision', 'phases', 'receipt_hash', 'snapshot_after', 'snapshot_before', 'step', 'utility_after', 'utility_before']

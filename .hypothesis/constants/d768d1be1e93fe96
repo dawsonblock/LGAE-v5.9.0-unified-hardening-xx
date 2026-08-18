@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/encoders/complexity.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 0.0001, 0.001, 1.0, 10.0, 1000.0, 'complexity_score', 'dimension', 'effectiveness_score', 'encoder_id', 'encoding_latency_ms', 'memory_bytes', 'n_parameters', 'predictive_gain', 'probe_results']

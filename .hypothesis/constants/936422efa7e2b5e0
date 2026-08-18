@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/baseline_competition.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.5, 100.0, 'count', 'learned', 'mean_regret', 'median_regret', 'no_op', 'oracle', 'p90_regret', 'p99_regret']

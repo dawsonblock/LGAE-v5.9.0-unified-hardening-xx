@@ -1,0 +1,178 @@
+{
+  "version": "5.11.0-dev",
+  "audit_date": "2025-01-20",
+  "defect_count": 19,
+  "defects": [
+    {
+      "id": "D11-001",
+      "name": "direct_engine_mutation_bypasses_commit_channel",
+      "severity": "P0",
+      "description": "LGAEEngine still publicly exposes multiple direct mutation paths. evolution.py contains 'self.graph = shadow' inside the legacy evaluate_and_maybe_commit() path. The runtime exposes rt.engine publicly. Direct mutation is not physically prevented, only conventionally avoided by canonical code.",
+      "location": "src/lgae_v3/evolution.py, src/lgae_v3/runtime/canonical_runtime.py (rt.engine is public)",
+      "fix_phase": 1,
+      "fix_approach": "Make engine private (_engine). Return read-only facade for backward compat. Capability-gate all mutation methods."
+    },
+    {
+      "id": "D11-002",
+      "name": "commit_channel_only_logically_exclusive",
+      "severity": "P0",
+      "description": "CommitChannel.commit() is the intended sole mutation path, but nothing prevents calling engine.evaluate_and_maybe_commit() directly. The invariant is 'canonical code tries to use CommitChannel' rather than 'authoritative state cannot be modified except through CommitChannel'.",
+      "location": "src/lgae_v3/runtime/authority.py, src/lgae_v3/evolution.py",
+      "fix_phase": 2,
+      "fix_approach": "Require _AuthorityCapability token for all mutation methods. Generate exactly one token. No external code can produce it."
+    },
+    {
+      "id": "D11-003",
+      "name": "graph_fiber_gauge_apply_is_non_atomic",
+      "severity": "P0",
+      "description": "CommitChannel._apply() sequentially performs graph replacement, fiber restore, gauge copy. If fiber restore raises after graph state changed, graph remains changed. Seqlock provides read consistency, not transactional rollback.",
+      "location": "src/lgae_v3/runtime/authority.py, _apply() method",
+      "fix_phase": 7,
+      "fix_approach": "Pre-build complete StateBundle, validate, single pointer swap. Or capture full pre-state and rollback on exception."
+    },
+    {
+      "id": "D11-004",
+      "name": "wal_records_graph_but_not_complete_transaction_state",
+      "severity": "P0",
+      "description": "WAL WRITE records serialize only graph deltas (shadow_graph_state). No equivalent serialization of fiber, gauge, calibration, or model deltas. Recovery can only replay graph state, not full transactions.",
+      "location": "src/lgae_v3/runtime/authority.py, WAL write section",
+      "fix_phase": 9,
+      "fix_approach": "Serialize all transaction components into WAL. TX_PREPARE record contains full transaction."
+    },
+    {
+      "id": "D11-005",
+      "name": "wal_commit_occurs_after_live_mutation",
+      "severity": "P0",
+      "description": "WAL ordering is BEGIN → WRITE → APPLY GRAPH → APPLY FIBER → APPLY GAUGE → COMMIT. If process dies after partial apply but before COMMIT, recovery discards the transaction, but authoritative state was already partially mutated in memory.",
+      "location": "src/lgae_v3/runtime/authority.py, _apply() method",
+      "fix_phase": 10,
+      "fix_approach": "Construct complete new state in shadow memory before PREPARE. Swap atomically after PREPARE+fsync. COMMIT after swap."
+    },
+    {
+      "id": "D11-006",
+      "name": "wal_counters_reset_on_reopen",
+      "severity": "P0",
+      "description": "WriteAheadLog.__init__() initializes _lsn=0 and _next_txn_id=0 without scanning existing log. Reopening an existing WAL can reuse txn_id=0, lsn=1 after prior transactions already used them.",
+      "location": "src/lgae_v3/runtime/wal.py, __init__()",
+      "fix_phase": 11,
+      "fix_approach": "Scan existing records on init. Set next_lsn = max_lsn + 1, next_txn_id = max_txn_id + 1."
+    },
+    {
+      "id": "D11-007",
+      "name": "crash_tests_do_not_kill_inside_transaction_stages",
+      "severity": "P0",
+      "description": "Existing crash tests kill after complete step() iterations, not inside commit transaction stages. The dangerous crash points (after BEGIN, after WRITE, after graph apply, after fiber apply, before COMMIT) are not tested.",
+      "location": "tests/integration/test_crash_recovery.py",
+      "fix_phase": 13,
+      "fix_approach": "Add injectable failpoints inside CommitChannel. Use subprocess + SIGKILL at each failpoint."
+    },
+    {
+      "id": "D11-008",
+      "name": "fiber_delta_fallback_uses_python_hash",
+      "severity": "P0",
+      "description": "FiberDelta.to_hash() contains fallback 'str(hash(self.shadow_fiber_snapshot))' which reintroduces Python hash() nondeterminism into transaction identity.",
+      "location": "src/lgae_v3/runtime/transaction.py, FiberDelta.to_hash()",
+      "fix_phase": 4,
+      "fix_approach": "Remove hash() fallback. Require state_hash() or canonical serialization. Raise TypeError if unsupported."
+    },
+    {
+      "id": "D11-009",
+      "name": "authorization_binding_is_optional_incomplete",
+      "severity": "P0",
+      "description": "CommitChannel validates authorization binding only 'if transaction.authorization_id is not None'. A transaction with authorization_id=None skips the binding check. AuthorizationResult does not contain the transaction binding digest.",
+      "location": "src/lgae_v3/runtime/authority.py, commit() validation",
+      "fix_phase": 6,
+      "fix_approach": "Make binding mandatory (non-nullable). AuthorizationResult must contain transaction_hash. Commit requires exact equality."
+    },
+    {
+      "id": "D11-010",
+      "name": "fiber_gauge_evaluation_still_mutate_and_restore",
+      "severity": "P0",
+      "description": "Canonical evaluate() handles graph mutations via shadow evaluation, but fiber and gauge actions still use legacy mutate-and-restore patterns. Gauge evaluation directly changes raw_generators before capturing/restoring.",
+      "location": "src/lgae_v3/evolution.py, evaluate_fiber_action(), evaluate_gauge_action()",
+      "fix_phase": 5,
+      "fix_approach": "Build ShadowState for all components. Apply candidates to shadow only. Zero authoritative mutation during evaluation."
+    },
+    {
+      "id": "D11-011",
+      "name": "learn_uses_predicted_delta_as_realized_reward",
+      "severity": "P1",
+      "description": "learn() records predicted_delta as the learning signal via record_outcome(..., predicted_delta). This creates self-confirming learning. The correct signal is realized_delta = U_after - U_before.",
+      "location": "src/lgae_v3/runtime/canonical_runtime.py, learn()",
+      "fix_phase": 17,
+      "fix_approach": "Capture u_before during observation, u_after after commit. Use realized_delta = u_after - u_before for record_outcome."
+    },
+    {
+      "id": "D11-012",
+      "name": "calibration_compares_delta_prediction_against_absolute_utility",
+      "severity": "P1",
+      "description": "calibrator.update(predicted_delta, u_now) compares a delta prediction against an absolute utility level. Dimensionally incorrect. Should compare predicted_delta against realized_delta.",
+      "location": "src/lgae_v3/runtime/canonical_runtime.py, learn()",
+      "fix_phase": 17,
+      "fix_approach": "Use calibrator.update(predicted_delta, realized_delta) where both are deltas."
+    },
+    {
+      "id": "D11-013",
+      "name": "hierarchical_credit_not_connected",
+      "severity": "P1",
+      "description": "CreditAssignment only sets outcome_credit=float(u_now). The hierarchical credit fields (diagnostic, candidate, planner, action, governance, prediction) are not populated. Standalone credit modules exist but are not integrated into the canonical transition.",
+      "location": "src/lgae_v3/runtime/canonical_runtime.py, learn()",
+      "fix_phase": 18,
+      "fix_approach": "Populate all credit fields from actual subsystem outcomes. Make credit attribution observable and testable."
+    },
+    {
+      "id": "D11-014",
+      "name": "performance_measured_can_mean_nothing_executed",
+      "severity": "P1",
+      "description": "measure_tier() returns status=MEASURED even when all workload functions are None. Result can be 0ms latency with MEASURED status without measuring anything. No INVALID or PASS/FAIL statuses. No SLO thresholds.",
+      "location": "src/lgae_v3/runtime/performance_qualification.py",
+      "fix_phase": 21,
+      "fix_approach": "Add NOT_RUN, INVALID, PASS, FAIL statuses. Return INVALID when no workload executes. Add explicit SLO thresholds."
+    },
+    {
+      "id": "D11-015",
+      "name": "hypothesis_missing_from_dev_dependencies",
+      "severity": "P1",
+      "description": "pyproject.toml dev dependencies include pytest and pytest-cov but not hypothesis. Property-based tests (test_v510_metamorphic.py, test_v510_property_based.py) fail with ModuleNotFoundError. Clean pip install -e '.[dev]' cannot reproduce the advertised suite.",
+      "location": "pyproject.toml",
+      "fix_phase": 23,
+      "fix_approach": "Add hypothesis>=6 to [project.optional-dependencies] dev."
+    },
+    {
+      "id": "D11-016",
+      "name": "release_manifest_stale",
+      "severity": "P1",
+      "description": "Manifest verifier reports 'file count mismatch: manifest=169, actual=496'. The manifest has not been regenerated for v5.11. DEFECT-007 from v5.10 remains unresolved.",
+      "location": "qualification/ manifest files",
+      "fix_phase": 36,
+      "fix_approach": "Regenerate manifest from staged release tree. Every intentional file gets sha256+size entry."
+    },
+    {
+      "id": "D11-017",
+      "name": "build_report_remains_v5_9_719_tests",
+      "severity": "P1",
+      "description": "BUILD_REPORT.md still says 'LGAE v5.9.0 Build Report' and '719 tests'. Release provenance is internally inconsistent with the actual v5.11-dev build.",
+      "location": "BUILD_REPORT.md",
+      "fix_phase": 34,
+      "fix_approach": "Generate BUILD_REPORT_v5.11.0.md from machine-generated artifacts. Report actual files, tests, gates, and limitations."
+    },
+    {
+      "id": "D11-018",
+      "name": "final_qualification_asserts_symbols_not_invariants",
+      "severity": "P1",
+      "description": "test_v511_final_qualification.py uses assertions like 'assert CommitChannel is not None' for 'single authoritative mutation channel proven'. These are existence checks, not behavioral proofs. Method names say *_proven but assertions don't prove the properties.",
+      "location": "tests/integration/test_v511_final_qualification.py",
+      "fix_phase": 24,
+      "fix_approach": "Replace symbol existence checks with actual behavioral assertions. Call hostile integration tests or verify generated qualification artifacts."
+    },
+    {
+      "id": "D11-019",
+      "name": "four_real_graph_benchmarks_remain_synthetic_surrogates",
+      "severity": "P2",
+      "description": "Dolphin, Les Misérables, PolBooks, and Football are still synthetic BA approximations. File exposes is_real_data=False but enum/function name still says RealGraphBenchmark. Scientific qualification should treat these as surrogates, not real OOD evidence.",
+      "location": "src/lgae_v3/runtime/real_graph_benchmark.py (or equivalent)",
+      "fix_phase": 29,
+      "fix_approach": "Rename to *_SIZE_SURROGATE. Separately support canonical datasets with full provenance. Do not mix real and surrogate results."
+    }
+  ]
+}

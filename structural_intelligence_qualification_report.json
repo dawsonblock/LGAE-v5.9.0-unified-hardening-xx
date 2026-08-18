@@ -1,0 +1,104 @@
+{
+  "checks": {
+    "ensemble_members": true,
+    "epistemic_metrics_finite": true,
+    "finite_heldout_regret": true,
+    "heldout_cases_present": true,
+    "state_grouped_replay_populated": true,
+    "train_heldout_families_disjoint": true
+  },
+  "heldout": {
+    "beats_effective_resistance": false,
+    "cases": [
+      {
+        "effective_resistance_regret": 0.0020004172325134295,
+        "family": "small_world",
+        "learned_regret": 0.0020001192092895526,
+        "oracle_delta": 0.0
+      },
+      {
+        "effective_resistance_regret": 0.0,
+        "family": "scale_free",
+        "learned_regret": 0.0,
+        "oracle_delta": 0.12239566850662231
+      },
+      {
+        "effective_resistance_regret": 0.014459103345870972,
+        "family": "geometric",
+        "learned_regret": 0.014459103345870972,
+        "oracle_delta": 0.10461900043487549
+      },
+      {
+        "effective_resistance_regret": 0.0,
+        "family": "small_world",
+        "learned_regret": 0.06240454316139221,
+        "oracle_delta": 0.10332325506210327
+      },
+      {
+        "effective_resistance_regret": 0.011839628219604492,
+        "family": "scale_free",
+        "learned_regret": 0.11101958155632013,
+        "oracle_delta": 0.10655317115783686
+      },
+      {
+        "effective_resistance_regret": 0.004350334405899048,
+        "family": "geometric",
+        "learned_regret": 0.10614922642707825,
+        "oracle_delta": 0.1698732714653015
+      },
+      {
+        "effective_resistance_regret": 0.0,
+        "family": "small_world",
+        "learned_regret": 0.07942208647727966,
+        "oracle_delta": 0.07740316200256347
+      },
+      {
+        "effective_resistance_regret": 0.0,
+        "family": "scale_free",
+        "learned_regret": 0.0,
+        "oracle_delta": 0.07741272854804992
+      },
+      {
+        "effective_resistance_regret": 0.24052593111991877,
+        "family": "geometric",
+        "learned_regret": 0.02689272165298462,
+        "oracle_delta": 0.08571824836730957
+      }
+    ],
+    "families": [
+      "small_world",
+      "scale_free",
+      "geometric"
+    ],
+    "mean_effective_resistance_regret": 0.0303528238137563,
+    "mean_learned_regret": 0.04470526464780171,
+    "states": 9
+  },
+  "note": "PASS certifies the v5.8 qualification infrastructure and deterministic held-out evaluation path. Learned structural generalization is claimed only when scientific_generalization_status is PASS.",
+  "schema": "LGAE_STRUCTURAL_INTELLIGENCE_QUALIFICATION_V5_8_0",
+  "scientific_generalization_status": "NOT_YET_QUALIFIED",
+  "status": "PASS",
+  "training": {
+    "actions": 180,
+    "families": [
+      "erdos_renyi",
+      "block",
+      "tree"
+    ],
+    "last_step": {
+      "loss": 0.2627483010292053,
+      "ranking_loss": 0.6889216899871826,
+      "samples": 60,
+      "states": 6,
+      "value_loss": -0.25394296646118164
+    },
+    "states": 18
+  },
+  "uncertainty_calibration": {
+    "coverage_1sigma": 1.0,
+    "coverage_2sigma": 1.0,
+    "mean_abs_error": 0.10268058627843857,
+    "mean_predicted_std": 0.6676620244979858,
+    "normalized_error": 0.15799376368522644
+  }
+}

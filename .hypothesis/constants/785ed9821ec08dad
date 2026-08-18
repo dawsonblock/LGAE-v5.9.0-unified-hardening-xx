@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/observability.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0, '.', 'MetricsSink', 'a', 'buckets', 'count', 'counters', 'counts', 'events_written', 'gauges', 'histograms', 'mean', 'name', 'r', 'sum', 'utf-8', 'value']

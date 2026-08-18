@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/dataset.py
+# hypothesis_version: 6.151.4
+
+['%Y-%m-%dT%H:%M:%SZ', 'StructuralDataset', 'action_metadata', 'all', 'chosen_action', 'compute_cost', 'content_hash', 'created_at', 'delta_utility', 'description', 'executed', 'governance_decision', 'graph_family_split', 'metadata', 'n_committed', 'n_rejected', 'n_transitions', 'name', 'reward', 'runtime_version', 'schema_version', 'seed', 'split', 'state_after_hash', 'state_after_summary', 'state_after_version', 'state_before_hash', 'state_before_summary', 'state_before_version', 'step', 'timestamp', 'transition_id', 'transition_ids', 'transitions', 'utility_after', 'utility_before']

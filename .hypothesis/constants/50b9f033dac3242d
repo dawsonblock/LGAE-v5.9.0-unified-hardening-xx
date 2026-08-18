@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/operators.py
+# hypothesis_version: 6.151.4
+
+[-0.5, 0.0, 1e-12, 1e-06, 0.0001, 0.5, 1.0, 2.0, 256, 512, 1024, 2048, 4096, 'DualOperatorState', 'auto', 'eij,ej->ei', 'empty latent cloud', 'exact', 'exact_fallback', 'exact_small', 'fro', 'frobenius', 'ignore', 'inf', 'invalid gauge_dim', 'isolated_vertex', 'lobpcg', 'mean_l1', 'ortho', 'trivial']

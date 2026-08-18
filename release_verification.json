@@ -1,0 +1,40 @@
+{
+  "base": "5.11.0",
+  "hardening_source": "5.11.0",
+  "version": "5.11.0",
+  "schema": "LGAE_RELEASE_VERIFICATION_V5_11_0",
+  "status": "PASS",
+  "claim_boundary": "Transactional convergence release; no claim of learned policy superiority or universal Cayley speedup without held-out graph-family evidence.",
+  "full_pytest": {
+    "collected": 1978,
+    "passed": 1978,
+    "failed": 0
+  },
+  "reproducibility": {
+    "python_hash_seeds": [
+      0,
+      1,
+      2,
+      42,
+      123456
+    ],
+    "status": "PASS",
+    "tests": 23
+  },
+  "scientific_generalization_status": "NOT_YET_QUALIFIED",
+  "source_compile": "PASS",
+  "defects_repaired": 19,
+  "transactional_invariants": {
+    "authoritative_state_ownership": true,
+    "capability_gated_mutation": true,
+    "shadow_only_evaluation": true,
+    "mandatory_authorization_binding": true,
+    "exception_atomic_commit": true,
+    "compare_and_swap_semantics": true,
+    "wal_complete_serialization": true,
+    "wal_counter_restoration": true,
+    "no_python_hash_in_deterministic_paths": true,
+    "realized_delta_learning": true,
+    "hierarchical_credit_assignment": true
+  }
+}

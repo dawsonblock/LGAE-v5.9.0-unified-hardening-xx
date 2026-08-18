@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/models/mlp.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.01, 0.5, 1.0, 100, 'final_losses', 'mlp', 'mlp_clf', 'n_ensemble', 'n_samples', 'train', 'v1']

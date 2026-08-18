@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/benchmark/tasks.py
+# hypothesis_version: 6.151.4
+
+[-5.0, -3.0, -2.0, -1.0, 0.0, 0.01, 0.1, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0, 'A_bottleneck', 'B_rep_complexity', 'C_spurious_edge', 'D_gauge_mismatch', 'E_distribution_shift', 'F_noop', 'G_info_gain', 'add_edge', 'bottleneck_node', 'bridge', 'change_gauge', 'cluster1', 'cluster2', 'coupled_reweight', 'current_dim', 'heldout_bottleneck', 'initial_weights', 'needed_dim', 'no_op', 'optimal_edge_count', 'prune_edge', 'prune_fiber', 'reweight_affinity', 'reweight_length', 'rotation', 'seed', 'spawn_fiber', 'spurious_edge', 'task']

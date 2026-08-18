@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/candidate_retrieval.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1.0, 100.0, 1000.0, 'count', 'k', 'k must be positive', 'latency_ms', 'mean_latency_ms', 'mean_recall_at_k', 'memory_bytes', 'n_candidates', 'name', 'oracle_recall_at_k', 'per_query', 'recall_at_k', 'retrieval_regret', 'scores must be 1-D']

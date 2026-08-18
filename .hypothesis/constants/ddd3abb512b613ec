@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/wal.py
+# hypothesis_version: 6.151.4
+
+[0.0, ',', ':', 'WALRecord', 'a', 'abort', 'active_mask', 'active_txns', 'age', 'applied', 'authority_hash', 'base_hash', 'base_state_hash', 'begin', 'checkpoint', 'checkpoint_skip', 'commit', 'current_hash', 'data', 'fiber', 'fiber_state', 'fibers', 'gamma_ema', 'gate_logits', 'gauge', 'gauge_connections', 'gauge_raw', 'graph', 'kind', 'latent', 'lsn', 'new_hash', 'payload', 'previous_record_hash', 'r', 'reason', 'record_hash', 'record_type', 'shadow_graph_state', 'spawn_counter', 'state_aware_skip', 'timestamp', 'transaction_id', 'tx_prepare', 'txn_id', 'unknown', 'utf-8', 'utility_ema', 'wal_apply', 'write']

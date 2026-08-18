@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/benchmark/policy_qualification.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-06, 0.002, 0.25, 0.35, 0.5, 1.0, 101, 102, 103, 104, 105, 500, '-inf', 'G_info_gain']

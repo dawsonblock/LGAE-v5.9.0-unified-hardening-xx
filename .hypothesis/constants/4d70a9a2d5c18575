@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/reproducibility.py
+# hypothesis_version: 6.151.4
+
+[b'\x00', 'HEAD', 'PYTHONHASHSEED', 'ReproducibilityInfo', '__dict__', 'cpu', 'cuda', 'git', 'lgae-q-', 'none', 'random', 'rev-parse', 'scripts/**/*.py', 'src/**/*.py', 'tests/**/*.py', 'unknown']

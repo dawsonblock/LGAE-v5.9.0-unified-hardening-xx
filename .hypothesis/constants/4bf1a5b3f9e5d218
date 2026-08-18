@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/replayable_decisions.py
+# hypothesis_version: 6.151.4
+
+[',', ':', 'candidate_ids', 'candidate_scores', 'chosen_action', 'committed', 'committed_count', 'events', 'governance_decision', 'metadata', 'payload', 'phase', 'record_count', 'record_hash', 'records', 'rejected_count', 'state_hash_after', 'state_hash_before', 'step']

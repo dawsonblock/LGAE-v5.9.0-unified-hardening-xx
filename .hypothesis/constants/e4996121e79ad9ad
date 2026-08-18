@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/curvature/__init__.py
+# hypothesis_version: 6.151.4
+
+['af3_curvatures', 'af3_edge', 'crosscheck_lly', 'integral_lly_deficit', 'lly_half_idleness', 'lly_laplacian_lp', 'ollivier_curvatures', 'ollivier_edge', 'weak_entropic_graph', 'weak_entropic_node', 'weighted_af3_proxy', 'weighted_forman_edge']

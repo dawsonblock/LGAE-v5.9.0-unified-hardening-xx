@@ -1,0 +1,67 @@
+{
+  "audit_date": "2025-01-20",
+  "description": "Trace of the canonical runtime architecture showing the authority flow and bypass paths.",
+  "canonical_path": {
+    "step": "LGAERuntime.step()",
+    "phases": ["observe", "reason", "propose", "plan", "evaluate", "authorize", "commit", "learn"],
+    "commit_path": "CommitChannel.commit(transaction, authorization) → _apply() → engine mutation",
+    "validation_checks": [
+      "authorization.status == AUTHORIZED",
+      "transaction.authorization_id matches binding hash (if not None)",
+      "base_state_hash matches current engine hash",
+      "base_state_version matches current engine version",
+      "delta_hash matches recomputed hash",
+      "WAL availability in production"
+    ]
+  },
+  "bypass_paths": [
+    {
+      "path": "rt.engine.graph = new_graph",
+      "description": "Direct assignment to engine graph. Not physically prevented.",
+      "severity": "P0",
+      "defect": "D11-001"
+    },
+    {
+      "path": "rt.engine.evaluate_and_maybe_commit(mutation)",
+      "description": "Legacy engine method that evaluates and commits in one step. Bypasses CommitChannel.",
+      "severity": "P0",
+      "defect": "D11-002"
+    },
+    {
+      "path": "rt.engine.evaluate_fiber_action(...)",
+      "description": "Legacy fiber evaluation that mutates authoritative fibers during evaluation.",
+      "severity": "P0",
+      "defect": "D11-010"
+    },
+    {
+      "path": "rt.engine.evaluate_gauge_action(...)",
+      "description": "Legacy gauge evaluation that directly mutates raw_generators.",
+      "severity": "P0",
+      "defect": "D11-010"
+    },
+    {
+      "path": "rt.engine.graph.weight[...] = value",
+      "description": "Direct tensor mutation through public engine attribute.",
+      "severity": "P0",
+      "defect": "D11-001"
+    },
+    {
+      "path": "rt.engine.gauge_connections.raw_generators[...] = value",
+      "description": "Direct gauge mutation through public engine attribute.",
+      "severity": "P0",
+      "defect": "D11-001"
+    }
+  ],
+  "engine_exposure": {
+    "attribute": "rt.engine",
+    "is_public": true,
+    "should_be": "private (_engine) with read-only facade",
+    "defect": "D11-001"
+  },
+  "commit_channel_exclusivity": {
+    "logically_exclusive": true,
+    "physically_exclusive": false,
+    "defect": "D11-002",
+    "description": "Nothing prevents calling engine mutation methods directly. CommitChannel is the intended sole path but not the enforced sole path."
+  }
+}

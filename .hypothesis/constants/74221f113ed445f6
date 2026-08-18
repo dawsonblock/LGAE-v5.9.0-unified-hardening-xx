@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/performance_qualification.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.1, 1.0, 5.0, 10.0, 500.0, 1000.0, 2000.0, 5000.0, 10000.0, 30000.0, 60000.0, 300000.0, 600000.0, 1000, 10000, 100000, 1000000, 'L', 'M', 'S', 'XL', 'candidate_throughput', 'commit_latency_ms', 'explicitly skipped', 'fail', 'inf', 'invalid', 'measured', 'measured_tiers', 'measurements', 'metadata', 'n_nodes', 'not_measured', 'not_run', 'notes', 'pass', 'peak_memory_bytes', 'proposal_latency_ms', 'skipped', 'status', 'tier', 'xl_measured']

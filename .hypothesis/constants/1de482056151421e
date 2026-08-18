@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/contracts/learning.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'action_credit', 'authorization_status', 'calibration_updated', 'candidate_credit', 'credit', 'diagnostic_credit', 'governance_credit', 'hard_negatives_added', 'outcome_credit', 'planner_credit', 'post_state_hash', 'pre_state_hash', 'predicted_outcome', 'realized_outcome', 'replay_buffer_size', 'reward', 'selected_action', 'snapshot_id', 'state_hash', 'state_version', 'transition', 'transition_id']

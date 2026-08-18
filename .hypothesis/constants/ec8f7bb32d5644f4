@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/offline_rl.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.001, 0.99, 1.0, 100, 128, 'batch_size', 'config', 'cql_alpha', 'cql_penalty', 'gamma', 'hidden_dim', 'learning_rate', 'loss', 'n_actions', 'n_epochs', 'n_states', 'q_mean', 'training_log_size']

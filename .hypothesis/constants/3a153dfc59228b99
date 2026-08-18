@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/contracts/evaluation.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'candidate', 'certification_level', 'invariant_violations', 'passed', 'predicted_utility', 'shadow_state_hash', 'snapshot_id', 'state_hash', 'state_version']

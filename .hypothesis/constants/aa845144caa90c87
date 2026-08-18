@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/state/state_bundle.py
+# hypothesis_version: 6.151.4
+
+[b'calibration:', b'fibers:', b'gauges:', b'graph:', b'model:', b'none', b'version:', 'StateBundle', 'cache_epoch', 'controller_counters', 'cooldowns', 'evidence_sequence', 'governor_state', 'hexdigest', 'learning_state', 'none', 'optimizer_state_hash', 'quarantine', 'raw_generators', 'replay_cursor', 'rng_state', 'slot_generation', 'state_hash', 'step_index']

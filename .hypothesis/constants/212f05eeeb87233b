@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/models/uncertainty.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.1, 0.9, 1.0, 2.0, 100, 'bootstrap', 'bootstrap-ensemble', 'max_uncertainty', 'mean_uncertainty', 'median_uncertainty', 'method', 'min_uncertainty', 'n_bootstrap', 'n_predictions', 'n_samples', 'train', 'unknown']

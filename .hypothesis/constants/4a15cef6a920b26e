@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/encoders/collision.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.0001, 1000, 5000, ',', 'collision_groups', 'collision_rate', 'encoder_id', 'group_size', 'n_collision_groups', 'n_collisions', 'n_representations', 'n_unique', 'near_neighbor_rate', 'outcome_mean', 'outcome_variance']

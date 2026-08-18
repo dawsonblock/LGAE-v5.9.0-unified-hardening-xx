@@ -1,0 +1,30 @@
+seed: 0
+fiber:
+  gauge_orthogonality_penalty: 1.0e-6
+  sheaf_transport_norm_ratio: 1.0
+operator:
+  diagnostic_k: 32
+audit:
+  directed_gamma2_policy: symmetrize
+  spectral_solver: auto
+  min_lambda2: 1.0e-4
+  preserve_beta0: true
+  max_component_increase: 0
+mutation:
+  shadow_horizons: [1, 2, 4, 8, 16]
+  edge_cooldown_steps: 20
+  add_curvature_threshold: -0.20
+  deadband: 0.05
+  prune_curvature_threshold: 0.20
+  curvature_ema_enabled: true
+  curvature_ema_alpha: 0.10
+  curvature_variance_alpha: 0.10
+  curvature_hysteresis_min_samples: 3
+  curvature_sigma_guard: 1.0
+  equilibrium_barrier_enabled: true
+  equilibrium_delta_tol: 1.0e-3
+  equilibrium_required_steps: 3
+compile:
+  enabled: false
+  dynamic: false
+  edge_bucket_size: 256

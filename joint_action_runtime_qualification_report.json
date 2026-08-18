@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "cayley_special_orthogonal": true,
+    "paired_laplacian_psd": true,
+    "paired_laplacian_self_adjoint": true,
+    "runtime_measurement_finite": true,
+    "two_sided_credit_conservative": true
+  },
+  "claim_boundary": "PASS certifies Cayley SO(d) generation, paired self-adjoint connection-Laplacian assembly, two-sided Dirichlet credit conservation, and reproducible runtime measurement. It does not claim hardware-independent Cayley speedup or learned policy superiority.",
+  "metrics": {
+    "batch": 128,
+    "cayley_seconds_best_of_5": 0.00035298500000635613,
+    "credit_conservation_error": 4.6938657682904505e-09,
+    "gauge_dim": 8,
+    "laplacian_min_eigenvalue": -3.621120754360163e-07,
+    "laplacian_symmetry_error": 0.0,
+    "matrix_exp_over_cayley_ratio": 0.8009320509356049,
+    "matrix_exp_seconds_best_of_5": 0.0002827170000045953,
+    "max_det_error": 5.960464477539062e-07,
+    "max_orthogonality_error": 8.269619229395175e-07
+  },
+  "schema": "LGAE_JOINT_ACTION_RUNTIME_QUALIFICATION_V5_8_4",
+  "scientific_generalization_status": "NOT_YET_QUALIFIED",
+  "status": "PASS",
+  "version": "5.8.4"
+}

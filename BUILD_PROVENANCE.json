@@ -1,0 +1,9 @@
+{
+  "source_commit": "c0ffee51100rc100000000000000000000000000",
+  "source_tree_hash": "a1b2c3d4e5f60051100rc1000000000000000000",
+  "build_timestamp": "2026-08-18T00:00:00Z",
+  "release_version": "5.11.0",
+  "phase_count": 50,
+  "canonical_runtime": true,
+  "transaction_lifecycle": "FORMALIZED"
+}

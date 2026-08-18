@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/curriculum.py
+# hypothesis_version: 6.151.4
+
+[0.1, 0.3, 100, 1000, 'barbell', 'big', 'bipartite', 'complete', 'cycle', 'family', 'family_id', 'grid', 'held_out', 'k', 'm', 'n_nodes', 'p', 'params', 'path', 'random_ba', 'random_er', 'random_ws', 'seed', 'star', 'train', 'tree']

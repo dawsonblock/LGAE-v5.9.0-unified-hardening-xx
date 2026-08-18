@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/models/targets.py
+# hypothesis_version: 6.151.4
+
+[-0.1, -0.01, 0.0, 1e-06, 0.01, 0.1, 1.0, 'Aggregate risk score', 'Edge count change', 'Wall-clock time', 'candidate_rank', 'classification', 'complexity_increase', 'compute', 'cost', 'count', 'delta', 'description', 'edge_count_change', 'fraction', 'fragmentation_risk', 'instability_risk', 'lower_bound', 'name', 'normalized_delta', 'ood_risk', 'ranking', 'ranking_targets', 'realized_delta', 'regression', 'regression_targets', 'risk', 'rollback_risk', 'seconds', 'shadow_executions', 'sign_delta', 'target_type', 'units', 'upper_bound', 'utility', 'utility_bucket', 'wall_clock_seconds']

@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/model_registry.py
+# hypothesis_version: 6.151.4
+
+['approved', 'content_hash', 'from_level', 'gate_report', 'maturity', 'metadata', 'model_count', 'model_id', 'models', 'name', 'registered_at', 'timestamp', 'to_level', 'transition_count', 'transitions', 'utf-8', 'version']

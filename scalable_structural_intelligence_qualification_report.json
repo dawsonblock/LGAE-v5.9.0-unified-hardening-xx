@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "ann_1024_nonempty": true,
+    "ann_128_nonempty": true,
+    "ann_512_nonempty": true,
+    "approx_fosr_nonempty": true,
+    "calibration_improves_nll": true,
+    "contextual_beta_orders_risk": true,
+    "wl_permutation_invariant": true
+  },
+  "claim_boundary": "PASS certifies scalable retrieval/calibration/replay primitives and bounded scaling smoke tests. It does not certify learned superiority on unseen topologies.",
+  "metrics": {
+    "ann_1024_candidates": 32,
+    "ann_1024_seconds": 0.1686892559999933,
+    "ann_128_candidates": 32,
+    "ann_128_seconds": 0.018379719999984445,
+    "ann_512_candidates": 32,
+    "ann_512_seconds": 0.10668033399997512,
+    "approx_fosr_128_seconds": 0.004652561000000333,
+    "calibration_nll_after": -0.19302906095981598,
+    "calibration_nll_before": 10.19741439819336
+  },
+  "schema": "LGAE_SCALABLE_STRUCTURAL_INTELLIGENCE_QUALIFICATION_V5_8_2",
+  "status": "PASS"
+}

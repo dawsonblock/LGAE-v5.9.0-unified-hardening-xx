@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/manifold_action.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1.0, 'algebra_norm', 'dim', 'gl', 'group', 'so3', 'su2']

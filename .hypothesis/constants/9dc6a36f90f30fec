@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/encoders/learned_graph.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.01, 1.0, 'final', 'final_loss', 'fitted_train', 'frozen', 'layers', 'learned-graph', 'n_epochs', 'n_parameters', 'train', 'unfit', 'v1']

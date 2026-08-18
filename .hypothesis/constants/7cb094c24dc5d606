@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/mode_enforcement.py
+# hypothesis_version: 6.151.4
+
+['authorized_mutation', 'commit', 'evidence_persistence', 'invariant_coverage', 'is_production', 'mode', 'safety_gate', 'signed_receipts', 'violation_count', 'violations']

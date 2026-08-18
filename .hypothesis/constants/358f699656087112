@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/decision_trace.py
+# hypothesis_version: 6.151.4
+
+['authority_hash_after', 'chosen_action', 'decision', 'evidence_hash', 'invalidated', 'mutation_impact', 'n_candidates', 'payload', 'phase', 'receipt_hash', 'step', 'summary', 'utf-8', 'w']

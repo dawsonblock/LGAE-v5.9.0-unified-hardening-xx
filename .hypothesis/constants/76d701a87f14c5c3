@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/curvature/entropic.py
+# hypothesis_version: 6.151.4
+
+[-2.0, 0.0, 1e-10, 1.0, 2.0, 100, 'S2(z) is empty', 'SLSQP', 'empty_two_hop', 'eq', 'ftol', 'fun', 'inf', 'invalid_objective', 'invalid_two_hop', 'isolated', 'maxiter', 'nonfinite_curvature', 'ok', 'solver_exception', 'solver_failed', 'type']

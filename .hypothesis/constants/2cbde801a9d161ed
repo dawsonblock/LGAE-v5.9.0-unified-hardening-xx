@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/production_dynamics.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-12, 0.001, 0.01, 0.1, 0.5, 0.9, 0.95, 0.99, 1.0, 1.645, 1.96, 2.0, 2.576, 1024, '-inf', 'GraphFeatureBaseline', 'GraphHashBaseline', 'P', 'action', 'add', 'add_threshold', 'alpha', 'below_add_threshold', 'big', 'buckets', 'consecutive', 'count', 'counts', 'curvature_ema_warmup', 'delta_tol', 'edge', 'ema_alpha', 'ema_curvature', 'entries', 'equilibrated', 'fallback_count', 'fallback_ema', 'feature_dim', 'inf', 'last_relative_delta', 'min_samples', 'prune', 'prune_threshold', 'reason', 'required_consecutive', 'residual_tol', 'ridge_lambda', 'samples', 'sigma_curvature', 'sigma_guard', 'utf-8', 'values', 'variance_alpha', 'w']

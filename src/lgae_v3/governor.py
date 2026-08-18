@@ -1,0 +1,822 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+import math
+import networkx as nx
+import torch
+from torch import Tensor
+
+from .config import LGAEConfig
+from .curvature import (
+    af3_edge,
+    degree_weighted_af3_proxy,
+    weighted_af3_proxy,
+    weighted_forman_edge,
+    lly_laplacian_lp,
+    lly_half_idleness,
+    weighted_lly_laplacian_lp,
+    weighted_lly_half_idleness,
+    integral_lly_deficit,
+    weak_entropic_graph_detailed,
+    bakry_emery_curvature,
+    sampled_cde_prime_residual,
+    multiscale_ollivier_edge, OllivierNeighborhoodCache,
+    normalized_markov_generator, analytic_markov_generator,
+)
+from .metrics import edge_diffusion_metrics
+from .fibers import directed_so_matrices
+from .operators import (
+    actuation_operator,
+    actuation_markov_edges,
+    diagnostic_diffusion_operator,
+    DualOperatorState,
+    SparseDualOperatorState,
+    generator_from_markov,
+    sparse_laplacian_step,
+    spectral_gap_symmetric,
+    spectral_gap_graphbuffers,
+    actuation_markov_edges_with_slots,
+    sparse_laplacian_step_gauge,
+)
+from .topology import (
+    graphbuffers_to_networkx,
+    topology_signature,
+    topology_drift,
+    persistent_homology_signature,
+    persistent_homology_drift,
+    persistent_homology_bottleneck_drift,
+)
+from .types import AuditSnapshot, GraphBuffers, MutationDecision, MutationResult, CertificationLevel
+
+
+@dataclass(slots=True)
+class FastSignals:
+    gamma: Tensor
+    radius: Tensor
+    local_var: Tensor
+    edge_af3: dict[tuple[int, int], float]
+    edge_waf3_proxy: dict[tuple[int, int], float]
+
+
+class GeometryGovernor:
+    """Multi-timescale geometry governor with independent actuation/diagnostic operators."""
+
+    def __init__(self, cfg: LGAEConfig) -> None:
+        self.cfg = cfg
+        self._current_touched_nodes: list[int] | None = None
+        self.neighbor_index: object | None = None
+
+    def set_neighbor_index(self, index: object | None) -> None:
+        self.neighbor_index = index
+
+    def operators(self, graph: GraphBuffers, z: Tensor) -> "DualOperatorState | SparseDualOperatorState":
+        """Build dual operators.
+
+        For N <= diagnostic_full_kernel_max_nodes, uses the dense exact path.
+        For larger N, uses the sparse edge-based path to avoid O(N²) memory.
+        The sparse path is now used for ALL N above the threshold, not just
+        N > 2048, so the governor remains genuinely sparse throughout.
+        """
+        n = graph.num_nodes
+        if n <= self.cfg.operator.diagnostic_full_kernel_max_nodes:
+            pa = actuation_operator(
+                graph,
+                symmetric=self.cfg.operator.symmetric_actuation,
+                self_loop=self.cfg.operator.self_loop,
+            )
+            pd = diagnostic_diffusion_operator(
+                z,
+                k=self.cfg.operator.diagnostic_k,
+                epsilon_floor=self.cfg.operator.diagnostic_epsilon_floor,
+                full_kernel_max_nodes=self.cfg.operator.diagnostic_full_kernel_max_nodes,
+            )
+            return DualOperatorState(pa, pd)
+        # Sparse path for large N: avoid O(N²) allocation
+        return self._sparse_operators(graph, z)
+
+    def _sparse_operators(self, graph: GraphBuffers, z: Tensor) -> "SparseDualOperatorState":
+        """Return sparse dual operators for large N."""
+        return SparseDualOperatorState.from_graph_and_latent(
+            graph, z,
+            symmetric=self.cfg.operator.symmetric_actuation,
+            self_loop=self.cfg.operator.self_loop,
+            diagnostic_k=self.cfg.operator.diagnostic_k,
+            diagnostic_epsilon_floor=self.cfg.operator.diagnostic_epsilon_floor,
+            neighbor_index=self.neighbor_index,
+        )
+
+    def fast_signals(self, graph: GraphBuffers, z: Tensor) -> FastSignals:
+        src, dst, pw = actuation_markov_edges(
+            graph,
+            symmetric=self.cfg.operator.symmetric_actuation,
+            self_loop=self.cfg.operator.self_loop,
+        )
+        m = edge_diffusion_metrics(z, src, dst, pw, graph.num_nodes)
+        g = graphbuffers_to_networkx(graph)
+        # v4.1.1: candidate tier uses candidate_geometry_mode if set
+        candidate_mode = self.cfg.audit.candidate_geometry_mode or self.cfg.audit.curvature_weight_mode
+        if candidate_mode in ("weighted", "metric_measure"):
+            af = {(int(u), int(v)): weighted_forman_edge(g, int(u), int(v)) for u, v in g.edges()}
+        else:
+            af = {(int(u), int(v)): af3_edge(g, int(u), int(v)) for u, v in g.edges()}
+        waf = {(int(u), int(v)): degree_weighted_af3_proxy(g, int(u), int(v)) for u, v in g.edges()}
+        return FastSignals(m["gamma"], m["radius"], m["local_var"], af, waf)
+
+    def shadow_rollout(self, graph: GraphBuffers, z: Tensor, gauge_bank=None, *, steps: int | None = None, gauge_overrides: dict[int, Tensor] | None = None) -> Tensor:
+        """Run shadow diffusion rollout for ``steps`` steps (default: config shadow_steps)."""
+        out = z.detach().clone()
+        n_steps = int(self.cfg.mutation.shadow_steps) if steps is None else int(steps)
+        if n_steps <= 0:
+            return out
+        if gauge_bank is None or self.cfg.fiber.gauge_dim <= 0:
+            src, dst, pw = actuation_markov_edges(
+                graph, symmetric=self.cfg.operator.symmetric_actuation, self_loop=self.cfg.operator.self_loop,
+            )
+            for _ in range(n_steps):
+                out = sparse_laplacian_step(
+                    out, src, dst, pw, eta=float(self.cfg.mutation.shadow_eta), num_nodes=graph.num_nodes,
+                )
+                if not bool(torch.isfinite(out).all().item()):
+                    raise FloatingPointError("non-finite latent state during shadow rollout")
+            return out
+        src, dst, pw, slots, reverse = actuation_markov_edges_with_slots(
+            graph, symmetric=self.cfg.operator.symmetric_actuation, self_loop=self.cfg.operator.self_loop,
+        )
+        conn = directed_so_matrices(gauge_bank, slots, reverse)
+        if gauge_overrides:
+            conn = conn.clone()
+            for slot, matrix in gauge_overrides.items():
+                mask = slots == int(slot)
+                if bool(mask.any().item()):
+                    m = matrix.to(device=conn.device, dtype=conn.dtype)
+                    if m.shape != (gauge_bank.dim, gauge_bank.dim):
+                        raise ValueError("gauge override has incompatible shape")
+                    direct = m.expand(int(mask.sum().item()), -1, -1)
+                    rev = reverse[mask]
+                    conn[mask] = torch.where(rev[:, None, None], direct.transpose(-1, -2), direct)
+        for _ in range(n_steps):
+            out = sparse_laplacian_step_gauge(
+                out, src, dst, pw, conn, gauge_dim=self.cfg.fiber.gauge_dim,
+                eta=float(self.cfg.mutation.shadow_eta), num_nodes=graph.num_nodes,
+            )
+            if not bool(torch.isfinite(out).all().item()):
+                raise FloatingPointError("non-finite latent state during gauge shadow rollout")
+        return out
+
+    def audit(self, graph: GraphBuffers, z: Tensor, *, seed: int = 0) -> AuditSnapshot:
+        graph.validate()
+        if z.ndim != 2 or z.shape[0] != graph.num_nodes:
+            raise ValueError("z must have shape [num_nodes, D]")
+        if not bool(torch.isfinite(z).all().item()):
+            raise ValueError("latent state contains NaN/Inf")
+
+        ops = self.operators(graph, z)
+        g = graphbuffers_to_networkx(graph)
+        lam, spectral_method = spectral_gap_graphbuffers(
+            graph,
+            solver=self.cfg.audit.spectral_solver,
+            lobpcg_min_nodes=self.cfg.audit.spectral_lobpcg_min_nodes,
+            niter=self.cfg.audit.spectral_lobpcg_niter,
+            tol=self.cfg.audit.spectral_lobpcg_tol,
+            seed=self.cfg.audit.spectral_seed + seed,
+        )
+        # Compute discrepancy: use sparse path for large N
+        if isinstance(ops, SparseDualOperatorState):
+            discrepancy = float(ops.discrepancy(self.cfg.operator.operator_discrepancy).item())
+        else:
+            discrepancy = float(ops.discrepancy(self.cfg.operator.operator_discrepancy).item())
+        topo = topology_signature(g)
+        ph = persistent_homology_signature(z) if self.cfg.audit.persistent_homology_enabled else None
+        details: dict = {
+            "lly_complete": False,
+            "lly_crosscheck_max_error": None,
+            "entropic_nodes": 0,
+            "entropic_complete": True,
+            "entropic_failures": {},
+            "bakry_nodes": 0,
+            "cde_kind": "sampled_violation",
+            "curvature_weight_mode": self.cfg.audit.curvature_weight_mode,
+            "candidate_geometry_mode": self.cfg.audit.candidate_geometry_mode or self.cfg.audit.curvature_weight_mode,
+            "audit_geometry_mode": self.cfg.audit.audit_geometry_mode or self.cfg.audit.curvature_weight_mode,
+            "certificate_geometry_mode": self.cfg.audit.certificate_geometry_mode or self.cfg.audit.curvature_weight_mode,
+            "diagnostic_support_mode": (
+                "full_soft_kernel" if graph.num_nodes <= self.cfg.operator.diagnostic_full_kernel_max_nodes else "topk_support_approximation"
+            ),
+            "persistent_homology": ph,
+            "graph_version": int(graph.version),
+            "graph_state_hash": graph.state_hash(),
+            "spectral_solver_used": spectral_method,
+        }
+
+        edges = list(g.edges())
+        edges.sort(key=lambda e: af3_edge(g, *e))
+
+        # Explicit mesoscopic ORC diagnostic on the highest-priority local edges.
+        orc_edges = edges[: max(int(self.cfg.audit.orc_top_k), 0)]
+        orc_multi: dict[tuple[int, int], dict[int, float]] = {}
+        orc_cache = OllivierNeighborhoodCache(g) if orc_edges else None
+        for u, v in orc_edges:
+            orc_multi[(int(u), int(v))] = {
+                int(r): multiscale_ollivier_edge(
+                    g, int(u), int(v), radius=int(r),
+                    backend=self.cfg.audit.orc_backend,
+                    sinkhorn_epsilon=self.cfg.audit.sinkhorn_epsilon,
+                    sinkhorn_max_iter=self.cfg.audit.sinkhorn_max_iter,
+                    sinkhorn_tolerance=self.cfg.audit.sinkhorn_tolerance,
+                    cache=orc_cache,
+                )
+                for r in self.cfg.audit.orc_radii
+            }
+        details["multiscale_orc"] = orc_multi
+
+        max_exact = max(int(self.cfg.audit.exact_lly_top_k), 0)
+        target_edges = edges if len(edges) <= max_exact else edges[:max_exact]
+        lly: dict[tuple[int, int], float] = {}
+        cross_err = 0.0
+        role_deficit = 0.0
+        # v4.1.1: audit tier uses audit_geometry_mode if set
+        audit_mode = self.cfg.audit.audit_geometry_mode or self.cfg.audit.curvature_weight_mode
+        use_weighted = audit_mode in ("weighted", "metric_measure")
+        for u, v in target_edges:
+            if use_weighted:
+                a = weighted_lly_laplacian_lp(g, int(u), int(v))
+                b = weighted_lly_half_idleness(g, int(u), int(v))
+            else:
+                a = lly_laplacian_lp(g, int(u), int(v))
+                b = lly_half_idleness(g, int(u), int(v))
+            lly[(int(u), int(v))] = a
+            cross_err = max(cross_err, abs(a - b))
+            role = str(g[int(u)][int(v)].get("role", "generic"))
+            target = float(self.cfg.audit.role_lly_targets.get(role, self.cfg.audit.role_lly_targets.get("generic", 0.0)))
+            role_deficit += max(0.0, target - a)
+        details["lly_complete"] = len(target_edges) == len(edges)
+        details["lly_crosscheck_max_error"] = cross_err if target_edges else None
+        details["lly"] = lly
+        details["role_lly_deficit"] = role_deficit if target_edges else None
+        deficit = integral_lly_deficit(lly, self.cfg.audit.integral_lly_threshold) if target_edges else None
+
+        fast = self.fast_signals(graph, z)
+        order = torch.argsort(fast.gamma, descending=True).tolist()
+        ent_nodes = order[: min(self.cfg.audit.entropic_nodes, len(order))]
+        ent_detail = weak_entropic_graph_detailed(g, nodes=ent_nodes)
+        ent_values = {i: r.value for i, r in ent_detail.items() if r.value is not None}
+        ent_fail = {i: {"status": r.status, "message": r.message} for i, r in ent_detail.items() if r.value is None}
+        ent_min = min(ent_values.values()) if ent_values else None
+        details["entropic_nodes"] = len(ent_detail)
+        details["entropic_complete"] = not bool(ent_fail)
+        details["entropic_failures"] = ent_fail
+        details["entropic"] = ent_values
+        details["entropic_status"] = {i: r.status for i, r in ent_detail.items()}
+
+        # v4.1.3: Explicit analytic vertex selection policy.
+        # Select critical vertices as the union of:
+        #   - highest transport pressure (gamma)
+        #   - lowest LLY curvature (most negative)
+        #   - highest operator discrepancy contribution
+        #   - mutation-touched nodes (passed via seed metadata)
+        # This replaces the old `order[:bakry_nodes]` heuristic.
+        analytic_vertices = self._select_analytic_vertices(
+            graph, z, fast, lly, ops, order,
+        )
+        max_analytic = max(
+            int(self.cfg.audit.bakry_nodes), int(self.cfg.audit.cde_nodes),
+        )
+        analytic_vertices = analytic_vertices[:max_analytic]
+        details["analytic_vertices"] = analytic_vertices.tolist() if hasattr(analytic_vertices, 'tolist') else list(analytic_vertices)
+        be_nodes = analytic_vertices[: min(self.cfg.audit.bakry_nodes, len(analytic_vertices))].tolist()
+        cde_nodes = analytic_vertices[: min(self.cfg.audit.cde_nodes, len(analytic_vertices))].tolist()
+
+        # Bakry–Émery and CDE: use local dense extraction for sparse operators
+        # to avoid O(N²) allocation. For dense operators, use the full matrix.
+        if isinstance(ops, SparseDualOperatorState):
+            # Local BE/CDE: extract 2-hop neighborhoods for selected nodes
+            all_audit_nodes = torch.tensor(
+                sorted(set(be_nodes) | set(cde_nodes)),
+                dtype=torch.long, device=z.device,
+            ) if (be_nodes or cde_nodes) else torch.tensor([], dtype=torch.long, device=z.device)
+            if all_audit_nodes.numel() > 0:
+                local_P, node_idx, local_complete = ops.local_dense_diagnostic(all_audit_nodes, radius=2, max_local_nodes=256, return_complete=True)
+                details["analytic_local_complete"] = bool(local_complete)
+                if local_P.numel() > 0 and local_complete:
+                    Q, stationary_measure, generator_mode = analytic_markov_generator(
+                        local_P.to(torch.float64), directed_policy=self.cfg.audit.directed_gamma2_policy,
+                    )
+                    details["bakry_stationary_measure_min"] = float(stationary_measure.min().item())
+                    details["bakry_generator"] = generator_mode + "_local_sparse"
+                    # Map global node IDs to local indices
+                    idx_map = {int(g): i for i, g in enumerate(node_idx.tolist())}
+                    be = [
+                        bakry_emery_curvature(Q, idx_map[int(i)], dimension=self.cfg.audit.cde_dimension)
+                        for i in be_nodes if int(i) in idx_map
+                    ]
+                    be_min = min(be) if be else None
+                    details["bakry_nodes"] = len(be)
+                    details["bakry_values"] = be
+                    local_cde_nodes = [idx_map[int(i)] for i in cde_nodes if int(i) in idx_map]
+                    cde = (
+                        sampled_cde_prime_residual(
+                            Q,
+                            local_cde_nodes,
+                            dimension=self.cfg.audit.cde_dimension,
+                            samples=self.cfg.audit.cde_samples,
+                            seed=seed,
+                        )
+                        if local_cde_nodes
+                        else None
+                    )
+                else:
+                    be_min = None
+                    details["bakry_nodes"] = 0
+                    details["bakry_values"] = []
+                    cde = None
+                    if local_P.numel() > 0 and not local_complete:
+                        details["analytic_local_failure"] = "two_hop_neighborhood_exceeds_cap"
+            else:
+                be_min = None
+                details["bakry_nodes"] = 0
+                details["bakry_values"] = []
+                cde = None
+        else:
+            Q, stationary_measure, generator_mode = analytic_markov_generator(
+                ops.p_diagnostic.to(torch.float64), directed_policy=self.cfg.audit.directed_gamma2_policy,
+            )
+            details["bakry_stationary_measure_min"] = float(stationary_measure.min().item())
+            details["bakry_generator"] = generator_mode
+            be = [bakry_emery_curvature(Q, int(i), dimension=self.cfg.audit.cde_dimension) for i in be_nodes]
+            be_min = min(be) if be else None
+            details["bakry_nodes"] = len(be)
+            details["bakry_values"] = be
+            cde = (
+                sampled_cde_prime_residual(
+                    Q,
+                    cde_nodes,
+                    dimension=self.cfg.audit.cde_dimension,
+                    samples=self.cfg.audit.cde_samples,
+                    seed=seed,
+                )
+                if cde_nodes
+                else None
+            )
+        return AuditSnapshot(
+            lambda2=lam,
+            operator_discrepancy=discrepancy,
+            integral_lly_deficit=deficit,
+            weak_entropic_min=ent_min,
+            bakry_min=be_min,
+            cde_residual=cde,
+            topology_signature=topo,
+            details=details,
+        )
+
+    def _decide_transition(
+        self,
+        before: AuditSnapshot,
+        after: AuditSnapshot,
+        *,
+        transition_name: str,
+        metadata: dict | None = None,
+        gauge_bank=None,
+    ) -> MutationResult:
+        reasons: list[str] = []
+        hard_fail = False
+        uncertain = False
+        a = self.cfg.audit
+
+        if a.min_lambda2 is not None and after.lambda2 < float(a.min_lambda2) - 1e-9:
+            reasons.append("spectral_gap_below_min")
+            hard_fail = True
+        if a.max_operator_discrepancy is not None and after.operator_discrepancy > float(a.max_operator_discrepancy):
+            reasons.append("operator_discrepancy_above_max")
+            hard_fail = True
+
+        drift = topology_drift(before.topology_signature, after.topology_signature)
+        if a.max_topology_drift is not None and drift > float(a.max_topology_drift):
+            reasons.append("topology_drift_above_max")
+            hard_fail = True
+        beta0_inc = int(round(after.topology_signature.get("beta0", 0) - before.topology_signature.get("beta0", 0)))
+        if a.preserve_beta0 and beta0_inc > int(a.max_component_increase):
+            reasons.append("connected_component_increase")
+            hard_fail = True
+
+        if a.max_cde_residual is not None and after.cde_residual is not None and after.cde_residual > float(a.max_cde_residual):
+            reasons.append("sampled_cde_residual_above_max")
+            hard_fail = True
+
+        if a.entropic_require_success and not bool(after.details.get("entropic_complete", True)):
+            reasons.append("weak_entropic_solver_unqualified")
+            uncertain = True
+        if a.entropic_drop_tolerance is not None:
+            if before.weak_entropic_min is None or after.weak_entropic_min is None:
+                reasons.append("weak_entropic_comparison_unavailable")
+                uncertain = True
+            else:
+                delta = after.weak_entropic_min - before.weak_entropic_min
+                if delta < -float(a.entropic_drop_tolerance):
+                    reasons.append("weak_entropic_drop")
+                    hard_fail = True
+
+        if after.integral_lly_deficit is not None and a.max_integral_lly_deficit is not None:
+            if after.details.get("lly_complete", False):
+                if after.integral_lly_deficit > float(a.max_integral_lly_deficit):
+                    reasons.append("integral_lly_deficit_above_max")
+                    hard_fail = True
+            else:
+                uncertain = True
+                reasons.append("integral_lly_sampled_not_global")
+        elif after.integral_lly_deficit is not None and not after.details.get("lly_complete", False):
+            # Still disclose that the global deficit was not certified.
+            reasons.append("integral_lly_sampled_not_global")
+            uncertain = True
+
+        role_def = after.details.get("role_lly_deficit")
+        if a.max_role_lly_deficit is not None and role_def is not None:
+            if after.details.get("lly_complete", False):
+                if float(role_def) > float(a.max_role_lly_deficit):
+                    reasons.append("role_conditioned_lly_deficit_above_max")
+                    hard_fail = True
+            else:
+                reasons.append("role_conditioned_lly_sampled_not_global")
+                uncertain = True
+
+        cross = after.details.get("lly_crosscheck_max_error")
+        if a.require_lly_crosscheck and cross is not None and cross > float(a.max_lly_crosscheck_error):
+            reasons.append("lly_exact_paths_disagree")
+            hard_fail = True
+
+        ph_drift = persistent_homology_drift(
+            before.details.get("persistent_homology"), after.details.get("persistent_homology")
+        )
+        # v4.1.2: optional bottleneck distance drift (stricter than summary drift)
+        ph_bottleneck_drift = None
+        if a.use_bottleneck_ph_drift:
+            # Need the latent tensors for bottleneck; stored in audit metadata
+            z_before = before.details.get("latent_snapshot")
+            z_after = after.details.get("latent_snapshot")
+            if z_before is not None and z_after is not None:
+                ph_bottleneck_drift = persistent_homology_bottleneck_drift(z_before, z_after)
+        if a.require_persistent_homology and ph_drift is None:
+            reasons.append("persistent_homology_unavailable")
+            uncertain = True
+        if a.max_ph_drift is not None:
+            if ph_drift is None:
+                reasons.append("persistent_homology_comparison_unavailable")
+                uncertain = True
+            elif ph_drift > float(a.max_ph_drift):
+                reasons.append("persistent_homology_drift_above_max")
+                hard_fail = True
+        if a.use_bottleneck_ph_drift and a.max_ph_bottleneck_drift is not None:
+            if ph_bottleneck_drift is None:
+                reasons.append("persistent_homology_bottleneck_unavailable")
+                uncertain = True
+            elif ph_bottleneck_drift > float(a.max_ph_bottleneck_drift):
+                reasons.append("persistent_homology_bottleneck_drift_above_max")
+                hard_fail = True
+
+        if hard_fail:
+            decision = MutationDecision.REJECT
+        elif uncertain and self.cfg.mutation.quarantine_on_uncertainty:
+            decision = MutationDecision.QUARANTINE
+        else:
+            decision = MutationDecision.ACCEPT
+        if not reasons:
+            reasons = ["all_enabled_constraints_passed"]
+        # Explicitly report how much of the graph the expensive audit actually covered.
+        num_nodes = int(after.topology_signature.get("num_nodes", after.topology_signature.get("nodes", 0)))
+        num_edges = int(after.topology_signature.get("num_edges", after.topology_signature.get("edges", 0)))
+        curvature_edges_audited = int(a.exact_lly_top_k) if a.exact_lly_top_k else 0
+        bakry_audited = int(a.bakry_nodes) if a.bakry_nodes else 0
+        if num_edges > 0 and curvature_edges_audited >= num_edges and bakry_audited >= num_nodes:
+            cert_level = CertificationLevel.CERTIFIED_GLOBAL
+        elif curvature_edges_audited > 0 or bakry_audited > 0:
+            cert_level = CertificationLevel.SAMPLED_LOCAL
+        else:
+            cert_level = CertificationLevel.HEURISTIC_PROXY
+        meta = {
+            "mutation": transition_name,
+            "topology_drift": drift,
+            "beta0_increase": beta0_inc,
+            "persistent_homology_drift": ph_drift,
+            "persistent_homology_bottleneck_drift": ph_bottleneck_drift,
+            "certification_level": cert_level.value,
+            **(metadata or {}),
+        }
+        return MutationResult(decision, reasons, before=before, after=after, metadata=meta)
+
+    def _select_analytic_vertices(
+        self,
+        graph: GraphBuffers,
+        z: Tensor,
+        fast: "FastSignals",
+        lly: dict[tuple[int, int], float],
+        ops,
+        order: list[int],
+    ) -> Tensor:
+        """Select critical vertices for local BE/CDE analysis.
+
+        v4.1.3: Union of:
+        - highest transport pressure (top gamma)
+        - lowest LLY curvature (most negative)
+        - highest operator discrepancy contribution
+        - mutation-touched nodes (if available in graph metadata)
+
+        Returns a deduplicated, ordered tensor of vertex indices.
+        """
+        N = graph.num_nodes
+        max_count = max(
+            int(self.cfg.audit.bakry_nodes) + int(self.cfg.audit.cde_nodes),
+            20,
+        )
+        selected: set[int] = set()
+
+        # 1. Highest transport pressure
+        for i in order[:max_count]:
+            selected.add(int(i))
+            if len(selected) >= max_count:
+                break
+
+        # 2. Lowest LLY curvature (most negative edges → their endpoints)
+        if lly:
+            sorted_lly = sorted(lly.items(), key=lambda x: x[1])
+            for (u, v), _ in sorted_lly[:max_count]:
+                selected.add(int(u))
+                selected.add(int(v))
+                if len(selected) >= max_count * 2:
+                    break
+
+        # 3. Highest operator discrepancy contribution
+        # Use the per-node discrepancy from the sparse/dense operator
+        if isinstance(ops, SparseDualOperatorState):
+            # For sparse: use per-node edge count difference as a cheap proxy
+            # for discrepancy contribution. Full per-row L1 is O(n²) per node
+            # and too expensive for large N.
+            from collections import Counter
+            act_out_deg = Counter(ops.act_src.tolist())
+            diag_out_deg = Counter(ops.diag_src.tolist())
+            all_nodes_set = set(act_out_deg.keys()) | set(diag_out_deg.keys())
+            disc_proxy = [(abs(act_out_deg.get(i, 0) - diag_out_deg.get(i, 0)), i) for i in all_nodes_set]
+            disc_proxy.sort(reverse=True)
+            for _, i in disc_proxy[:max_count]:
+                selected.add(int(i))
+                if len(selected) >= max_count * 3:
+                    break
+        else:
+            # Dense: per-row L1 discrepancy
+            try:
+                diff = (ops.p_actuation - ops.p_diagnostic).abs().sum(dim=1)
+                disc_order = torch.argsort(diff, descending=True).tolist()
+                for i in disc_order[:max_count]:
+                    selected.add(int(i))
+                    if len(selected) >= max_count * 3:
+                        break
+            except Exception:
+                pass
+
+        # 4. Mutation-touched nodes (set by evaluate_mutation before calling audit)
+        touched = getattr(self, '_current_touched_nodes', None)
+        if touched is not None:
+            for i in touched:
+                selected.add(int(i))
+
+        return torch.tensor(sorted(selected), dtype=torch.long, device=z.device)
+
+    def _local_mutation_gate(self, graph: GraphBuffers, mutation) -> tuple[bool, str | None]:
+        """Cheap sub-complex gate before expensive global audits."""
+        if not self.cfg.audit.local_disconnect_gate:
+            return True, None
+        name = getattr(mutation, "name", "")
+        if name == "prune_edge" and self.cfg.audit.preserve_beta0:
+            u = int(getattr(mutation, "u")); v = int(getattr(mutation, "v"))
+            # Use the tensor-native Tarjan bridge detector for the common beta0-preservation check.
+            from .topology import find_bridges_buffers
+            if (min(u, v), max(u, v)) in find_bridges_buffers(graph):
+                return False, "local_bridge_prune_would_disconnect"
+            # Optional stronger exact edge-connectivity floor remains bounded to small graphs.
+            k_req = int(self.cfg.audit.min_edge_connectivity_after_prune)
+            if k_req > 1 and graph.num_nodes <= int(self.cfg.audit.edge_connectivity_exact_max_nodes):
+                g = graphbuffers_to_networkx(graph)
+                if g.has_edge(u, v):
+                    before_k = int(nx.edge_connectivity(g)) if g.number_of_nodes() > 1 else 0
+                    g2 = g.copy(); g2.remove_edge(u, v)
+                    after_k = int(nx.edge_connectivity(g2)) if g2.number_of_nodes() > 1 and nx.is_connected(g2) else 0
+                    floor = min(k_req, before_k)
+                    if after_k < floor:
+                        return False, "edge_connectivity_below_prune_floor"
+        return True, None
+
+    def evaluate_mutation(self, graph: GraphBuffers, z: Tensor, mutation, *, seed: int = 0, gauge_bank=None, gauge_overrides: dict[int, Tensor] | None = None) -> tuple[MutationResult, GraphBuffers]:
+        allowed, local_reason = self._local_mutation_gate(graph, mutation)
+        if not allowed:
+            reasons = [local_reason or "local_mutation_gate_failed"]
+            if local_reason == "local_bridge_prune_would_disconnect":
+                reasons.append("connected_component_increase")
+            return MutationResult(
+                MutationDecision.REJECT, reasons,
+                metadata={"mutation": getattr(mutation, "name", type(mutation).__name__), "local_gate": True},
+            ), graph.clone()
+        # v4.1.3: Pass mutation-touched nodes to audit for analytic vertex selection
+        touched = set()
+        for attr in ("u", "v"):
+            if hasattr(mutation, attr):
+                touched.add(int(getattr(mutation, attr)))
+        if hasattr(mutation, "curvatures"):
+            for (u, v) in mutation.curvatures:
+                touched.add(int(u)); touched.add(int(v))
+        self._current_touched_nodes = list(touched)
+        before = self.audit(graph, z, seed=seed)
+        self._current_touched_nodes = None
+        shadow = graph.clone()
+        try:
+            metadata = mutation.apply(shadow)
+            shadow.validate()
+            z_shadow = self.shadow_rollout(shadow, z, gauge_bank=gauge_bank, gauge_overrides=gauge_overrides)
+            after = self.audit(shadow, z_shadow, seed=seed)
+        except Exception as exc:
+            return (
+                MutationResult(
+                    MutationDecision.REJECT,
+                    [f"mutation_or_shadow_failed:{exc}"],
+                    before=before,
+                    metadata={"mutation": getattr(mutation, "name", type(mutation).__name__)},
+                ),
+                shadow,
+            )
+
+        # Multi-horizon shadow certification (v4.1).
+        # When shadow_horizons is configured, the mutation must remain
+        # admissible across ALL horizons. The final decision is the MAX
+        # severity across all horizons:
+        #   any REJECT → REJECT
+        #   else any QUARANTINE → QUARANTINE
+        #   else ACCEPT
+        horizons = self.cfg.mutation.shadow_horizons
+        horizon_results: list[dict] = []
+        horizon_decisions: list[tuple[int, MutationDecision, list[str]]] = []
+        if horizons:
+            for h in horizons:
+                if h == self.cfg.mutation.shadow_steps:
+                    # Already evaluated at this horizon via default shadow_steps
+                    default_result = self._decide_transition(
+                        before, after,
+                        transition_name=getattr(mutation, "name", type(mutation).__name__),
+                        metadata={"horizon": int(h)},
+                    )
+                    horizon_results.append({
+                        "horizon": int(h),
+                        "delta_norm": float(torch.linalg.vector_norm(z_shadow - z).item()),
+                        "decision": default_result.decision.value,
+                    })
+                    horizon_decisions.append((int(h), default_result.decision, default_result.reasons))
+                    continue
+                try:
+                    z_h = self.shadow_rollout(shadow, z, gauge_bank=gauge_bank, steps=int(h), gauge_overrides=gauge_overrides)
+                    after_h = self.audit(shadow, z_h, seed=seed)
+                    h_result = self._decide_transition(
+                        before, after_h,
+                        transition_name=getattr(mutation, "name", type(mutation).__name__),
+                        metadata={"horizon": int(h)},
+                    )
+                    horizon_results.append({
+                        "horizon": int(h),
+                        "delta_norm": float(torch.linalg.vector_norm(z_h - z).item()),
+                        "decision": h_result.decision.value,
+                    })
+                    horizon_decisions.append((int(h), h_result.decision, h_result.reasons))
+                except Exception as exc:
+                    # Shadow failure at any horizon is a REJECT
+                    return MutationResult(
+                        MutationDecision.REJECT,
+                        [f"multi_horizon_shadow_failed_at_H={h}:{exc}"],
+                        before=before,
+                        metadata={
+                            "mutation": getattr(mutation, "name", type(mutation).__name__),
+                            "multi_horizon": horizon_results,
+                        },
+                    ), shadow
+
+            # Aggregate: max severity across all horizons
+            severity = {MutationDecision.ACCEPT: 0, MutationDecision.QUARANTINE: 1, MutationDecision.REJECT: 2}
+            worst_h, worst_decision, worst_reasons = max(
+                horizon_decisions, key=lambda x: severity[x[1]]
+            )
+            metadata = {
+                **metadata,
+                "base_graph_version": int(graph.version),
+                "base_graph_hash": graph.state_hash(),
+                "shadow_graph_version": int(shadow.version),
+                "shadow_graph_hash": shadow.state_hash(),
+                "shadow_steps": int(self.cfg.mutation.shadow_steps),
+                "shadow_latent_delta_norm": float(torch.linalg.vector_norm(z_shadow - z).item()),
+                "multi_horizon": horizon_results,
+                "multi_horizon_worst": worst_h,
+            }
+            if worst_decision != MutationDecision.ACCEPT:
+                return MutationResult(
+                    worst_decision,
+                    [f"multi_horizon_{worst_decision.value}_at_H={worst_h}"] + worst_reasons,
+                    before=before,
+                    after=after,
+                    metadata=metadata,
+                ), shadow
+            # All horizons ACCEPT
+            return MutationResult(
+                MutationDecision.ACCEPT,
+                [],
+                before=before,
+                after=after,
+                metadata=metadata,
+            ), shadow
+
+        metadata = {
+            **metadata,
+            "base_graph_version": int(graph.version),
+            "base_graph_hash": graph.state_hash(),
+            "shadow_graph_version": int(shadow.version),
+            "shadow_graph_hash": shadow.state_hash(),
+            "shadow_steps": int(self.cfg.mutation.shadow_steps),
+            "shadow_latent_delta_norm": float(torch.linalg.vector_norm(z_shadow - z).item()),
+        }
+        if horizon_results:
+            metadata["multi_horizon"] = horizon_results
+        result = self._decide_transition(
+            before,
+            after,
+            transition_name=getattr(mutation, "name", type(mutation).__name__),
+            metadata=metadata,
+        )
+        return result, shadow
+
+    def evaluate_latent_transition(
+        self,
+        graph: GraphBuffers,
+        z_before: Tensor,
+        z_after: Tensor,
+        *,
+        name: str = "fiber_mutation",
+        seed: int = 0,
+        metadata: dict | None = None,
+        gauge_bank=None,
+    ) -> MutationResult:
+        before = self.audit(graph, z_before, seed=seed)
+        try:
+            z_shadow = self.shadow_rollout(graph, z_after, gauge_bank=gauge_bank)
+            after = self.audit(graph, z_shadow, seed=seed)
+        except Exception as exc:
+            return MutationResult(MutationDecision.REJECT, [f"latent_shadow_failed:{exc}"], before=before, metadata={"mutation": name})
+        meta = {
+            "base_graph_version": int(graph.version),
+            "base_graph_hash": graph.state_hash(),
+            "shadow_steps": int(self.cfg.mutation.shadow_steps),
+            "direct_latent_delta_norm": float(torch.linalg.vector_norm(z_after - z_before).item()),
+            "shadow_latent_delta_norm": float(torch.linalg.vector_norm(z_shadow - z_before).item()),
+            **(metadata or {}),
+        }
+
+        # v4.1.1: multi-horizon certification for fiber mutations
+        horizons = self.cfg.mutation.shadow_horizons
+        if horizons:
+            horizon_results: list[dict] = []
+            horizon_decisions: list[tuple[int, MutationDecision, list[str]]] = []
+            severity = {MutationDecision.ACCEPT: 0, MutationDecision.QUARANTINE: 1, MutationDecision.REJECT: 2}
+            for h in horizons:
+                if h == self.cfg.mutation.shadow_steps:
+                    default_result = self._decide_transition(
+                        before, after, transition_name=name, metadata={"horizon": int(h)},
+                    )
+                    horizon_results.append({
+                        "horizon": int(h),
+                        "decision": default_result.decision.value,
+                    })
+                    horizon_decisions.append((int(h), default_result.decision, default_result.reasons))
+                    continue
+                try:
+                    z_h = self.shadow_rollout(graph, z_after, gauge_bank=gauge_bank, steps=int(h))
+                    after_h = self.audit(graph, z_h, seed=seed)
+                    h_result = self._decide_transition(
+                        before, after_h, transition_name=name, metadata={"horizon": int(h)},
+                    )
+                    horizon_results.append({
+                        "horizon": int(h),
+                        "decision": h_result.decision.value,
+                    })
+                    horizon_decisions.append((int(h), h_result.decision, h_result.reasons))
+                except Exception as exc:
+                    return MutationResult(
+                        MutationDecision.REJECT,
+                        [f"multi_horizon_fiber_shadow_failed_at_H={h}:{exc}"],
+                        before=before,
+                        metadata={**meta, "multi_horizon": horizon_results},
+                    )
+            worst_h, worst_decision, worst_reasons = max(horizon_decisions, key=lambda x: severity[x[1]])
+            meta["multi_horizon"] = horizon_results
+            meta["multi_horizon_worst"] = worst_h
+            if worst_decision != MutationDecision.ACCEPT:
+                return MutationResult(
+                    worst_decision,
+                    [f"multi_horizon_{worst_decision.value}_at_H={worst_h}"] + worst_reasons,
+                    before=before,
+                    after=after,
+                    metadata=meta,
+                )
+            return MutationResult(MutationDecision.ACCEPT, [], before=before, after=after, metadata=meta)
+
+        return self._decide_transition(before, after, transition_name=name, metadata=meta)

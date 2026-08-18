@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/memory.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-12, 1e-06, 0.03, 0.05, 0.2, 0.75, 1.0, 2.0, 100000, 'CAUSED', 'PREDICTED', 'PROPOSED', 'VERIFIED_BY', 'accepted', 'access_count', 'action', 'authority', 'certificate', 'channel', 'confidence', 'decision', 'delta_utility', 'diagnosis', 'dst', 'edges', 'evidence', 'evidence_hash', 'failure', 'features', 'graph_hash', 'graph_hash_after', 'id', 'kind', 'nodes', 'outcome', 'payload', 'prediction', 'relation', 'src', 'state', 'target', 'weight']

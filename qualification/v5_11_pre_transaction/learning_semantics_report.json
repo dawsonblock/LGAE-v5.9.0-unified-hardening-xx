@@ -1,0 +1,28 @@
+{
+  "audit_date": "2025-01-20",
+  "description": "Report on learning semantics in the v5.11-dev build.",
+  "defects_referenced": ["D11-011", "D11-012", "D11-013"],
+  "learning_signal": {
+    "current": "predicted_delta used as learning reward via record_outcome(..., predicted_delta)",
+    "defect": "D11-011",
+    "problem": "Self-confirming learning. Policy learns from its own prediction, not from realized outcome.",
+    "required": "realized_delta = U_after - U_before. Capture u_before during observation, u_after after commit."
+  },
+  "calibration": {
+    "current": "calibrator.update(predicted_delta, u_now) — compares delta prediction against absolute utility",
+    "defect": "D11-012",
+    "problem": "Dimensionally incorrect. Comparing a change (delta) against a level (absolute utility).",
+    "required": "calibrator.update(predicted_delta, realized_delta) — both are deltas."
+  },
+  "credit_assignment": {
+    "current": "CreditAssignment(outcome_credit=float(u_now)) — only outcome_credit populated",
+    "defect": "D11-013",
+    "problem": "Hierarchical credit fields (diagnostic, candidate, planner, action, governance, prediction) are not populated.",
+    "required": "Populate all credit fields from actual subsystem outcomes. Make credit attribution observable and testable."
+  },
+  "learning_transition": {
+    "predicted_outcome": "set to predicted_delta (correct field, wrong value for reward)",
+    "realized_outcome": "set to u_now (absolute utility, not delta)",
+    "reward": "set to predicted_delta (should be realized_delta)"
+  }
+}

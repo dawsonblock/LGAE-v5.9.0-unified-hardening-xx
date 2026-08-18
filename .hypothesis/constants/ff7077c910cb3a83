@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/structural_loop.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-08, 1e-05, 0.01, 0.1, 0.25, 0.5, 0.99, 1.0, 10.0, 100, 1000, 'accept', 'action', 'add', 'advantage', 'authority_hash_after', 'channels', 'committed', 'conformal_interval', 'consolidation', 'credit', 'curvature_history', 'curvature_hysteresis', 'engine_bound', 'executive_experience', 'inf', 'lcb', 'magnitude', 'mean', 'missing_edge_target', 'mutation_reasons', 'no_op', 'node', 'ood_score', 'policy_supervision', 'predicted_delta_u', 'prune', 'quarantine', 'reason', 'reject', 'risk_target', 'std', 'step', 'target', 'timescales', 'u', 'ucb', 'uncertainty', 'v', 'version', 'width']

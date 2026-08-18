@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/runtime/transaction.py
+# hypothesis_version: 6.151.4
+
+['action', 'authorization_id', 'base_state_hash', 'base_state_version', 'candidate_id', 'delta_hash', 'deltas', 'fiber', 'fiber_hash', 'gauge', 'gauge_hash', 'graph', 'has_fiber_delta', 'has_gauge_delta', 'has_graph_delta', 'mutation_metadata', 'mutation_name', 'plan_id', 'shadow_graph_hash', 'state_hash', 'step', 'transaction_id']

@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/governance/authority_policy.py
+# hypothesis_version: 6.151.4
+
+[0.05, 0.1, 0.25, 1.0, 'is_high_impact', 'max_edge_fraction', 'touches_bridge']

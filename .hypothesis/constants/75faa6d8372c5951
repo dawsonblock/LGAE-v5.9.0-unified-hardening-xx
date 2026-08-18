@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/hard_negative_replay.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.3, 10.0, 100, 'difficulty', 'difficulty_threshold', 'gap', 'max_hard_negatives', 'predicted_utility', 'realized_utility', 'transition']

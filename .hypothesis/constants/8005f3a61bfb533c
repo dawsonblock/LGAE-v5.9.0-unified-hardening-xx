@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/fibers.py
+# hypothesis_version: 6.151.4
+
+[-1.0, 0.0, 1e-08, 0.01, 0.02, 0.5, 1.0, 'FiberStateSnapshot', 'active_mask', 'age', 'birth_cost', 'cayley', 'exp', 'fiber_loss', 'fro', 'gamma_ema', 'gate_l1', 'gate_logits', 'inactive_energy', 'latent', 'slot_generation', 'spawn_counter', 'state', 'utility_ema']

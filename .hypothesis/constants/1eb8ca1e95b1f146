@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/models/calibration.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1.0, 1.96, 'actual_coverage', 'bin_accuracies', 'bin_centers', 'bin_confidences', 'bin_counts', 'brier', 'details', 'ece', 'expected_coverage', 'ideal_mean', 'ideal_std', 'interval_coverage', 'metric', 'n_bins', 'n_samples', 'reliability_curve', 'residual_mean', 'residual_std', 'value', 'z']

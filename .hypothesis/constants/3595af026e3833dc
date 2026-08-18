@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/types.py
+# hypothesis_version: 6.151.4
+
+[1e-30, 1.0, 256, ',', ':', 'GraphBuffers', 'LGAE_GRAPH_STATE_V4', 'accept', 'bridge', 'causal', 'certified_global', 'cluster', 'dst', 'edges', 'generic', 'heuristic_proxy', 'hierarchy', 'length', 'memory', 'num_nodes', 'quarantine', 'reject', 'role', 'sampled_local', 'schema', 'slot_generation', 'src', 'state_hash', 'utf-8', 'valid', 'version', 'weight']

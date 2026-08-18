@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/reproducibility.py
+# hypothesis_version: 6.151.4
+
+['RunFingerprint', 'combined_hash', 'cudnn_deterministic', 'experiment_config', 'numpy_version', 'python_hash_seed', 'python_version', 'reproducibility', 'seed', 'torch_benchmark', 'torch_deterministic', 'torch_version']

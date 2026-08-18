@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/encoders/registry.py
+# hypothesis_version: 6.151.4
+
+['dataset_schema_hash', 'deterministic', 'dimension', 'encoder_id', 'encoder_schema_hash', 'encoder_version', 'feature_schema_hash', 'geometric', 'global', 'global-local', 'heldout_split_hash', 'hybrid', 'learned-graph', 'lifecycle', 'local-subgraph', 'minimal-control', 'name', 'normalization_hash', 'provenance_hash', 'requires_fit', 'schema_hash', 'semantic-action', 'spectral', 'train_split_hash', 'version']

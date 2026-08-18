@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/scientific_qualification.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'all_gates_passed', 'all_seeds_pass', 'best_baseline', 'direction', 'ig_correlation', 'ig_gate', 'learned', 'lower', 'mean', 'mean_passes', 'metadata', 'n_seeds', 'name', 'ood_gate', 'passed', 'regret_gate', 'sigma_id', 'sigma_ood', 'threshold', 'values_by_seed']

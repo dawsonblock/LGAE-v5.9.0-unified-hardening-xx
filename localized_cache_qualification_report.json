@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "authority_generation_advanced": true,
+    "global_dependency_flushes": true,
+    "missing_locality_fails_closed": true,
+    "radius2_exact_dirty_region": true,
+    "untouched_partition_preserved": true
+  },
+  "passed": true,
+  "schema": "LGAE_LOCALIZED_CACHE_QUALIFICATION_V5_6_3",
+  "version": "5.8.3"
+}

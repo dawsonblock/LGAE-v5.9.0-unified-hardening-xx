@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/sheaf_diffusion.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-12, 1e-10, 1e-08, 0.1, 1.0, 'adjacency', 'adjacency_variance', 'input_variance', 'laplacian', 'laplacian_variance']

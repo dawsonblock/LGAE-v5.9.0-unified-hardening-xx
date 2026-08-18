@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/sheaf.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-05, 'cycle_count', 'is_flat', 'max_inconsistency', 'mean_inconsistency']

@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/quality_report.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 0.8, 'action', 'action_distribution', 'candidate_set_size', 'counts', 'dominant_category', 'fractions', 'graph_family', 'histogram', 'histogram_edges', 'imbalance_flags', 'is_imbalanced', 'max', 'max_fraction', 'mean', 'median', 'min', 'n', 'n_counterfactual', 'n_observed', 'n_realized', 'n_records', 'n_shadow', 'name', 'p10', 'p25', 'p75', 'p90', 'p99', 'predicted_delta', 'prediction_error', 'provenance', 'realized_cost', 'realized_delta', 'realized_risk', 'sign_agreement', 'split', 'split_distribution', 'std', 'top1_agreement', 'total', 'warnings']

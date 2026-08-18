@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/reasoning_loop.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'accept', 'action', 'authority_hash', 'confidence', 'decision', 'engine', 'evidence_hash', 'executed', 'graph', 'graph_hash_after', 'hash', 'ig', 'mean', 'memory', 'memory_prior', 'mutation_outcome', 'no_op', 'payload', 'precheck', 'predicted_risk', 'predicted_std', 'ranked', 'reason', 'reasoning_evidence', 'reasoning_plan', 'reasoning_run_id', 'reject', 'risk', 'score', 'seed', 'selected', 'sha256', 'std', 'step_index', 'target', 'type', 'unmappable', 'utility_delta', 'z']

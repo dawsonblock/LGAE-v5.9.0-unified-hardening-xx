@@ -1,0 +1,82 @@
+{
+  "audit_date": "2025-01-20",
+  "description": "Report on authority bypass paths found in the v5.11-dev build.",
+  "defects_referenced": ["D11-001", "D11-002"],
+  "direct_mutation_sites": [
+    {
+      "file": "src/lgae_v3/evolution.py",
+      "line": 362,
+      "code": "self.graph = shadow",
+      "context": "evaluate_and_maybe_commit() — legacy path that evaluates and commits in one step",
+      "classification": "authorized-state mutation (bypasses CommitChannel)",
+      "severity": "P0"
+    },
+    {
+      "file": "src/lgae_v3/evolution.py",
+      "line": 552,
+      "code": "self.graph = item.shadow_graph",
+      "context": "commit_quarantine() — quarantine resolution path",
+      "classification": "authorized-state mutation (bypasses CommitChannel)",
+      "severity": "P0"
+    },
+    {
+      "file": "src/lgae_v3/evolution.py",
+      "line": 947,
+      "code": "self.graph = graph",
+      "context": "load_state() — restore from checkpoint",
+      "classification": "authorized-state mutation (bypasses CommitChannel)",
+      "severity": "P1"
+    },
+    {
+      "file": "src/lgae_v3/evolution.py",
+      "line": 1033,
+      "code": "self.graph = graph",
+      "context": "set_graph() — direct graph setter",
+      "classification": "authorized-state mutation (bypasses CommitChannel)",
+      "severity": "P0"
+    },
+    {
+      "file": "src/lgae_v3/evolution.py",
+      "line": 492,
+      "code": "self.gauge_connections.raw_generators[slot, 0, 1] += delta",
+      "context": "evaluate_gauge_action() — in-place gauge mutation during evaluation",
+      "classification": "authorized-state mutation during evaluation (mutate-and-restore)",
+      "severity": "P0"
+    },
+    {
+      "file": "src/lgae_v3/evolution.py",
+      "line": 493,
+      "code": "self.gauge_connections.raw_generators[slot, 1, 0] -= delta",
+      "context": "evaluate_gauge_action() — in-place gauge mutation during evaluation",
+      "classification": "authorized-state mutation during evaluation (mutate-and-restore)",
+      "severity": "P0"
+    },
+    {
+      "file": "src/lgae_v3/transactions.py",
+      "line": 20,
+      "code": "self.graph = graph",
+      "context": "TransactionContext.__init__()",
+      "classification": "initialization (not authoritative)",
+      "severity": "low"
+    },
+    {
+      "file": "src/lgae_v3/transactions.py",
+      "line": 99,
+      "code": "self.graph = graph",
+      "context": "TransactionContext.restore()",
+      "classification": "rollback (restoring pre-state)",
+      "severity": "medium"
+    }
+  ],
+  "public_engine_exposure": {
+    "file": "src/lgae_v3/runtime/canonical_runtime.py",
+    "line": 108,
+    "code": "self.engine = engine if engine is not None else LGAEEngine(graph, self.config)",
+    "issue": "Engine is a public attribute. All mutation methods are accessible.",
+    "fix": "Make _engine private. Return read-only facade for backward compat."
+  },
+  "capability_gating": {
+    "present": false,
+    "description": "No internal authority capability token exists. All mutation methods are callable by any code with a reference to the engine."
+  }
+}

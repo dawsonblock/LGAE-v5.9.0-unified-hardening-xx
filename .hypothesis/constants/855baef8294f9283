@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/curvature/lly.py
+# hypothesis_version: 6.151.4
+
+[-1.0, 0.0, 1e-07, 0.5, 1.0, 2.0, 'abs_error', 'edge', 'half_idleness', 'highs', 'laplacian', 'length', 'max_abs_error', 'ok', 'rows', 'weight']

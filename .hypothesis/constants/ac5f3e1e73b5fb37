@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/governance/invariants.py
+# hypothesis_version: 6.151.4
+
+[-1e-06, 0.0001, 'blocking', 'connections', 'engine', 'gauge_connections', 'gauge_orthogonal', 'graph', 'graph_buffers_finite', 'laplacian_psd', 'message', 'name', 'passed', 'receipt_chain_valid', 'receipt_path', 'severity', 'src', 'warning', 'weight']

@@ -1,0 +1,85 @@
+{
+  "version": "v5.11.0",
+  "description": "v5.11 regression repair evidence. Each entry maps a v5.10 defect to its v5.11 fix and the test that verifies the fix.",
+  "repairs": [
+    {
+      "defect_id": "DEFECT-001",
+      "defect_name": "fake_canonical_path",
+      "fix": "step() calls all 8 phase methods (observe, reason, propose, plan, evaluate, authorize, commit, learn) in canonical order.",
+      "fix_test": "tests/test_v510_baseline_phase_gap.py::test_step_calls_all_eight_phases",
+      "fix_test_assertion": "assert called_set == all_phases",
+      "status": "fixed"
+    },
+    {
+      "defect_id": "DEFECT-002",
+      "defect_name": "guard_mutability",
+      "fix": "guard.graph returns FrozenGraphView that defensively clones tensors and blocks __setattr__.",
+      "fix_test": "tests/test_v510_guard_mutability_regression.py::test_guard_graph_is_immutable",
+      "fix_test_assertion": "assert torch.equal(original_weight, graph.weight)",
+      "status": "fixed"
+    },
+    {
+      "defect_id": "DEFECT-003",
+      "defect_name": "production_failopen",
+      "fix": "Production mode requires require_signed_receipts, signing_key, evidence_path, receipt_path, deterministic_ordering.",
+      "fix_test": "tests/test_v510_production_failopen_regression.py::test_production_fails_without_evidence_store",
+      "fix_test_assertion": "with pytest.raises(ValueError, match='evidence_path')",
+      "status": "fixed"
+    },
+    {
+      "defect_id": "DEFECT-004",
+      "defect_name": "hash_seed_nondeterminism",
+      "fix": "SHA-256 replaces hash() in curriculum.py for deterministic seed derivation.",
+      "fix_test": "tests/test_v510_hash_seed_regression.py::test_curriculum_does_not_use_hash",
+      "fix_test_assertion": "assert 'hash(family.value)' not in source",
+      "status": "fixed"
+    },
+    {
+      "defect_id": "DEFECT-005",
+      "defect_name": "mpc_not_called",
+      "fix": "MPC.plan() is called during plan() when horizon > 1.",
+      "fix_test": "tests/test_v510_mpc_not_called_regression.py::test_mpc_is_called_in_step",
+      "fix_test_assertion": "assert mpc_called",
+      "status": "fixed"
+    },
+    {
+      "defect_id": "DEFECT-006",
+      "defect_name": "information_gain_not_used",
+      "fix": "IG/cost/risk computed from ensemble disagreement, action footprint, and uncertainty/OOD score.",
+      "fix_test": "tests/test_v510_information_gain_not_used_regression.py::test_ig_not_hardcoded_zero",
+      "fix_test_assertion": "assert 'information_gain=0.0' not in source",
+      "status": "fixed"
+    },
+    {
+      "defect_id": "DEFECT-007",
+      "defect_name": "manifest_mismatch",
+      "fix": "Manifest schema and version will be rebuilt for v5.11 in Phase 22.",
+      "fix_test": "pending",
+      "status": "pending"
+    },
+    {
+      "defect_id": "DEFECT-008",
+      "defect_name": "evaluate_commits_during_evaluation",
+      "fix": "evaluate() now calls governor.evaluate_mutation() (shadow-only) and builds a StructuralTransaction. commit() applies the transaction through CommitChannel.commit().",
+      "fix_test": "tests/test_v511_transaction_authority.py::TestShadowEvaluation::test_evaluate_does_not_mutate_state",
+      "fix_test_assertion": "assert hash_before == hash_after",
+      "status": "fixed"
+    },
+    {
+      "defect_id": "DEFECT-009",
+      "defect_name": "no_transaction_binding",
+      "fix": "StructuralTransaction with authorization_binding_hash() prevents transaction swap attacks after authorization.",
+      "fix_test": "tests/test_v511_transaction_authority.py::TestAuthorizationBinding::test_authorization_cannot_be_reused",
+      "fix_test_assertion": "with pytest.raises(AuthorizationBindingError)",
+      "status": "fixed"
+    },
+    {
+      "defect_id": "DEFECT-010",
+      "defect_name": "no_stale_transaction_detection",
+      "fix": "CommitChannel.commit() validates base_state_hash and base_state_version against current engine state.",
+      "fix_test": "tests/test_v511_transaction_authority.py::TestStaleTransactionRejection::test_stale_transaction_rejected",
+      "fix_test_assertion": "with pytest.raises(StaleTransactionError)",
+      "status": "fixed"
+    }
+  ]
+}

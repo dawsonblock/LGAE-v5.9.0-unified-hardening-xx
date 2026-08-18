@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/encoders/probes.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 0.01, 0.5, 1.0, 100, 'accuracy', 'baseline_value', 'candidate_rank', 'encoder_dimension', 'encoder_id', 'gain_over_baseline', 'metric', 'mutation_success', 'n_features', 'n_samples', 'results', 'risk_bucket', 'sign_delta_u', 'spearman', 'task', 'value']

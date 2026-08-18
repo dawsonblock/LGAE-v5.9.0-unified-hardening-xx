@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/contracts/reasoning.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'L0', 'confidence', 'curvature_anomalies', 'deficit_type', 'deficits', 'diagnostic_level', 'diagnostics', 'location', 'ood_score', 'severity', 'snapshot_id', 'spectral_anomalies', 'state_hash', 'state_version', 'topology_bottlenecks', 'transport_errors']

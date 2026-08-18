@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/gpu_path.py
+# hypothesis_version: 6.151.4
+
+[1.0, 'async_copy', 'auto', 'cpu', 'cuda', 'cuda_available', 'current_device', 'device', 'device_count', 'mps', 'mps_available', 'pin_memory']

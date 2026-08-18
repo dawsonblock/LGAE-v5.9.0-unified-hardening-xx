@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/benchmark/counterfactual.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.001, 0.1, 0.3, 0.5, 1.0, 2.0, 100, 128, 256, 999, 1000, 10000, 'barabasi_albert', 'big', 'caveman', 'complete_bipartite', 'cycle', 'grid', 'lollipop', 'path', 'random', 'star', 'utf-8', 'watts_strogatz', 'wheel']

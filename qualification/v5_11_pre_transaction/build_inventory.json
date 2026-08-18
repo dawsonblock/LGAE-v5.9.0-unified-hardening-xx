@@ -1,0 +1,23 @@
+{
+  "frozen_at_commit": "95c527c528652f52408c636c6f8dde0bba6f7789",
+  "frozen_at_timestamp": "2025-01-20",
+  "version": "5.11.0-dev",
+  "source_files": 133,
+  "test_files": 114,
+  "total_python_files": 267,
+  "total_files_in_archive": 498,
+  "schema_version": "LGAE_CANONICAL_CONVERGENCE_V5_11_0",
+  "manifest_schema": "LGAE_MANIFEST_V5_11_0",
+  "branch": "v5.10-canonical-runtime",
+  "description": "Pre-transaction repair freeze of the v5.11-dev build. This is the state before the transactional convergence repair prescribed by the 40-phase plan. All 19 known defects are recorded in known_defects.json.",
+  "test_count_last_measured": 1404,
+  "key_components": {
+    "canonical_runtime": "src/lgae_v3/runtime/canonical_runtime.py",
+    "commit_channel": "src/lgae_v3/runtime/authority.py",
+    "transaction": "src/lgae_v3/runtime/transaction.py",
+    "wal": "src/lgae_v3/runtime/wal.py",
+    "frozen_views": "src/lgae_v3/runtime/state/frozen_views.py",
+    "promotion": "src/lgae_v3/runtime/promotion.py",
+    "determinism": "src/lgae_v3/runtime/determinism.py"
+  }
+}

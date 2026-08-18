@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "commit_generation_advanced": true,
+    "overlapping_read_rejected": true,
+    "retry_after_writer": true,
+    "rollback_overlap_rejected": true,
+    "rollback_restores_state": true,
+    "writer_epoch_closed": true
+  },
+  "details": {
+    "mutation_epoch": 6,
+    "stable_generation": 1
+  },
+  "passed": true,
+  "schema": "LGAE_CONCURRENT_SNAPSHOT_QUALIFICATION_V5_6_3",
+  "version": "5.8.3"
+}

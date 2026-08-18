@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/feature_extraction.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1.0, 2.0, 'avg_clustering', 'bottleneck_score', 'bridge_likelihood', 'common_neighbors', 'degree_max', 'degree_mean', 'degree_std', 'density', 'diameter_estimate', 'dim', 'effective_resistance', 'fiber_count', 'fiber_width', 'field_names', 'forman_curvature_min', 'forman_curvature_std', 'gauge_dim', 'global', 'jaccard_coefficient', 'local', 'local_curvature', 'log_n_edges', 'log_n_nodes', 'log_spectral_gap', 'n_components', 'oversquashing_score', 'recent_success_rate', 'same_community', 'source_degree', 'spectral_gap', 'target_degree', 'vector']

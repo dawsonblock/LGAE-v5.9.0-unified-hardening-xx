@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/credit.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.99, 100, 1000, 'GraphFeatureBaseline', 'GraphHashBaseline', 'action', 'actual_return', 'advantage', 'baseline_estimator', 'baseline_return', 'baseline_type', 'baseline_utility', 'discounted_return', 'finalized', 'gamma', 'governance_decision', 'governance_reasons', 'graph_features', 'graph_hash_after', 'graph_hash_before', 'horizons', 'mean_advantage', 'mean_return', 'metadata', 'next_id', 'outcomes', 'pending', 'predicted_delta_u', 'prediction_error', 'receipt_id', 'receipts', 'retained', 'retention_rate', 'std_advantage', 'std_return', 'step', 'total_mutations', 'utility_at_100', 'utility_at_1000', 'utility_at_16', 'utility_by_horizon', 'utility_history', 'utility_samples', 'version', 'w']

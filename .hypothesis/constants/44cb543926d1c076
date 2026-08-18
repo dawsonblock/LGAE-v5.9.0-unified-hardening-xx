@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/authority.py
+# hypothesis_version: 6.151.4
+
+[0.0, '_boundary', '_component', '_engine', 'action', 'active_mask', 'adaptive_geometry', 'after_state_swap', 'after_wal_commit', 'age', 'ann_retrieval', 'base_state_hash', 'base_state_version', 'before_prepare', 'before_state_swap', 'clone', 'commit', 'delta_hash', 'effective_resistance', 'engine', 'exact_orc_lly', 'executive', 'fiber', 'fiber_hash', 'fiber_state', 'forman_flow', 'fosr', 'gamma_ema', 'gate_logits', 'gauge', 'gauge_connections', 'gauge_raw', 'governor', 'graph', 'graph_state_encoder', 'invariant_checker', 'kind', 'latent', 'memory_priors', 'mpc_planner', 'mutation_name', 'observation', 'proposal', 'reasoning_engine', 'shadow_graph_hash', 'shadow_graph_state', 'spawn_counter', 'structural_governor', 'tolist', 'transaction_commit', 'transaction_hash', 'transaction_id', 'transaction_manager', 'utility_ema', 'verification']

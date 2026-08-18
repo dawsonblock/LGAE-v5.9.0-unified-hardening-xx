@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/runtime/homeostasis.py
+# hypothesis_version: 6.151.4
+
+[-0.5, 0.0, 0.02, 0.05, 0.1, 0.2, 0.3, 0.5, 1.0, 'add', 'churn_penalty', 'complexity_penalty', 'delta_edges_penalty', 'oscillation_penalty', 'prune', 'remove', 'rew', 'sum', 'total_penalty', 'u', 'v', 'valid']

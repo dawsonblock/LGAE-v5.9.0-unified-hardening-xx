@@ -1,0 +1,56 @@
+{
+  "checks": {
+    "ann_cache_invalidated_on_rollback": true,
+    "counterfactual_advantage_credit": true,
+    "curvature_ema_hysteresis_persistent_signal": true,
+    "directed_gamma2_stationary_symmetrization": true,
+    "gauge_penalty_detects_drift": true,
+    "latent_equilibrium_barrier": true,
+    "sheaf_nonexpansive_external_map": true,
+    "transaction_atomic_rollback": true
+  },
+  "details": {
+    "ann_cache": {
+      "bound_graph_version": 0,
+      "dirty": true,
+      "generation": 1,
+      "reason": "transaction_rollback"
+    },
+    "credit": {
+      "advantage": 0.6,
+      "baseline": 0.4,
+      "return": 1.0
+    },
+    "curvature_hysteresis": {
+      "action": "add",
+      "add_threshold": -0.2,
+      "edge": [
+        0,
+        2
+      ],
+      "ema_curvature": -1.0,
+      "prune_threshold": 0.2,
+      "reason": "below_add_threshold",
+      "samples": 3,
+      "sigma_curvature": 0.0
+    },
+    "equilibrium": {
+      "consecutive": 2,
+      "delta_tol": 0.001,
+      "equilibrated": true,
+      "last_relative_delta": 0.0,
+      "required_consecutive": 2
+    },
+    "gamma2_mode": "stationary_measure_symmetrized_markov",
+    "sheaf_transported_norm": 1.0,
+    "stationary_measure": [
+      0.29629629629908744,
+      0.37037037036909465,
+      0.3333333333318179
+    ]
+  },
+  "passed": true,
+  "schema": "LGAE_QUALIFICATION_V5_6_3",
+  "suite": "production_dynamics",
+  "version": "5.6.3"
+}

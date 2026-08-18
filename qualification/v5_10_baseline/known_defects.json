@@ -1,0 +1,68 @@
+{
+  "version": "5.10.0",
+  "defects": [
+    {
+      "id": "DEFECT-001",
+      "name": "fake_canonical_path",
+      "description": "LGAERuntime.step() delegates all real work to StructuralLearningLoop.step(). The 8 phase methods (observe, reason, propose, plan, evaluate, authorize, commit, learn) exist but are never called during step(). They are decorative.",
+      "severity": "P0",
+      "file": "src/lgae_v3/runtime/canonical_runtime.py",
+      "line": 411,
+      "regression_test": "tests/test_v510_baseline_phase_gap.py::test_step_does_not_call_eight_phases"
+    },
+    {
+      "id": "DEFECT-002",
+      "name": "guard_mutability",
+      "description": "AuthoritativeStateGuard.graph returns raw mutable GraphBuffers. Callers can do guard.graph.weight[...] = ... to mutate authoritative state, bypassing the authority model.",
+      "severity": "P0",
+      "file": "src/lgae_v3/runtime/authority.py",
+      "line": 139,
+      "regression_test": "tests/test_v510_guard_mutability_regression.py::test_guard_graph_is_mutable"
+    },
+    {
+      "id": "DEFECT-003",
+      "name": "production_failopen",
+      "description": "Production mode only checks require_signed_receipts + signing_key. Does not check WAL, evidence store, checkpointing, qualification bundle. Can start without persistence.",
+      "severity": "P0",
+      "file": "src/lgae_v3/runtime/runtime_config.py",
+      "line": 56,
+      "regression_test": "tests/test_v510_production_failopen_regression.py::test_production_starts_without_wal"
+    },
+    {
+      "id": "DEFECT-004",
+      "name": "hash_seed_nondeterminism",
+      "description": "curriculum.py uses hash(family.value) which is non-deterministic across PYTHONHASHSEED values.",
+      "severity": "P1",
+      "file": "src/lgae_v3/runtime/curriculum.py",
+      "line": 272,
+      "regression_test": "tests/test_v510_hash_seed_regression.py::test_curriculum_hash_nondeterminism"
+    },
+    {
+      "id": "DEFECT-005",
+      "name": "mpc_not_called",
+      "description": "MPC planner is instantiated in __init__ when horizon > 1 but step() delegates to loop.step() which never uses it. MPC is dead code.",
+      "severity": "P1",
+      "file": "src/lgae_v3/runtime/canonical_runtime.py",
+      "line": 123,
+      "regression_test": "tests/test_v510_mpc_not_called_regression.py::test_mpc_not_used_in_step"
+    },
+    {
+      "id": "DEFECT-006",
+      "name": "information_gain_not_used",
+      "description": "structural_loop.py hardcodes information_gain=0.0, cost=0.0, risk=0.0. The IG module exists but is never wired into action selection.",
+      "severity": "P1",
+      "file": "src/lgae_v3/structural_loop.py",
+      "line": 263,
+      "regression_test": "tests/test_v510_information_gain_not_used_regression.py::test_ig_hardcoded_zero"
+    },
+    {
+      "id": "DEFECT-007",
+      "name": "manifest_mismatch",
+      "description": "MANIFEST.sha256.json still references v5.9.0 schema and does not cover new v5.10 files.",
+      "severity": "P2",
+      "file": "MANIFEST.sha256.json",
+      "line": 850,
+      "regression_test": "tests/test_v510_manifest_regression.py::test_manifest_version_mismatch"
+    }
+  ]
+}

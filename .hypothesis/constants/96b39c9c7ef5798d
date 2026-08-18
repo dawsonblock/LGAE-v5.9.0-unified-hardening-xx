@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/runtime/runtime_config.py
+# hypothesis_version: 6.151.4
+
+[0.1, 0.5, 1.0, 'benchmark', 'cost_weight', 'ensemble_size', 'evidence_path', 'max_candidates', 'mode', 'mpc_horizon', 'production', 'receipt_path', 'research', 'risk_weight']

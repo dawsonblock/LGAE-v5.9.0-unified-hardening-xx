@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/information_gain.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1.0, 2.0, 'candidate_id', 'chosen_candidate_id', 'estimate_count', 'estimates', 'exploration_bonus', 'ig_correlation', 'predicted_ig', 'total_score']

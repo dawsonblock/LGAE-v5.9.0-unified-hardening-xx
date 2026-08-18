@@ -1,0 +1,15 @@
+{
+  "candidates": 32,
+  "evidence_hash_present": true,
+  "evidence_ledger_verified": true,
+  "finite_scores": true,
+  "memory_attached": true,
+  "no_op_present": true,
+  "parallel_layer_width": 2,
+  "schema": "LGAE_REASONING_QUALIFICATION_V5_6_3",
+  "selected_action": "reweight_affinity",
+  "selected_channel": "affinity_down",
+  "status": "PASS",
+  "typed_reasoning_graph": true,
+  "version": "5.8.3"
+}

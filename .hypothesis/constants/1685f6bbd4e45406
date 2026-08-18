@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/cache_coherence.py
+# hypothesis_version: 6.151.4
+
+['MutationImpact', '__cache_name__', 'changes', 'commit_count', 'dependencies', 'fiber', 'fibers', 'gauge', 'gauges', 'generation', 'invalidate', 'invalidated', 'last_invalidations', 'latent', 'latents', 'lengths', 'mark_dirty', 'metric', 'reason', 'registered', 'role', 'roles', 'spared', 'topology', 'weights']

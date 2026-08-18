@@ -1,0 +1,69 @@
+{
+  "version": "v5.10.0",
+  "description": "Original v5.10 defect reproductions preserved as historical evidence. These tests documented the defects that existed in v5.10 before the v5.11 convergence repair. The tests were designed to PASS when the defect exists and FAIL when the defect is fixed. They have been replaced by v5.11 correctness tests, but the original assertions are preserved here as frozen fixtures.",
+  "defects": [
+    {
+      "id": "DEFECT-001",
+      "name": "fake_canonical_path",
+      "description": "step() delegates all real work to StructuralLearningLoop.step() instead of calling the 8 phase methods (observe, reason, propose, plan, evaluate, authorize, commit, learn) in sequence.",
+      "original_test": "tests/test_v510_baseline_phase_gap.py::test_step_does_not_call_eight_phases",
+      "original_assertion": "assert not all_eight_called, 'step() should NOT call all 8 phase methods (the defect)'",
+      "fix": "v5.11 Phase 2: step() now calls all 8 phase methods in canonical order.",
+      "fix_test": "tests/test_v510_baseline_phase_gap.py::test_step_calls_all_eight_phases"
+    },
+    {
+      "id": "DEFECT-002",
+      "name": "guard_mutability",
+      "description": "AuthoritativeStateGuard.graph returns raw mutable GraphBuffers. Callers can do guard.graph.weight[...] = x to mutate authoritative state.",
+      "original_test": "tests/test_v510_guard_mutability_regression.py::test_guard_graph_is_mutable",
+      "original_assertion": "assert isinstance(guard.graph, GraphBuffers), 'guard.graph should return raw GraphBuffers (the defect)'",
+      "fix": "v5.11 Phase 3: guard.graph returns FrozenGraphView that defensively clones tensors.",
+      "fix_test": "tests/test_v510_guard_mutability_regression.py::test_guard_graph_is_immutable"
+    },
+    {
+      "id": "DEFECT-003",
+      "name": "production_failopen",
+      "description": "Production mode starts without WAL, evidence store, receipt store, or signing key when require_signed_receipts=False.",
+      "original_test": "tests/test_v510_production_failopen_regression.py::test_production_starts_without_wal",
+      "original_assertion": "config = RuntimeConfig(mode=RuntimeMode.PRODUCTION); assert config.is_production",
+      "fix": "v5.11 Phase 11: production mode requires all persistence stores and signing key.",
+      "fix_test": "tests/test_v510_production_failopen_regression.py::test_production_fails_without_evidence_store"
+    },
+    {
+      "id": "DEFECT-004",
+      "name": "hash_seed_nondeterminism",
+      "description": "curriculum.py uses hash(family.value) for seed derivation, which is non-deterministic across PYTHONHASHSEED values.",
+      "original_test": "tests/test_v510_hash_seed_regression.py::test_curriculum_uses_hash",
+      "original_assertion": "assert 'hash(family.value)' in source, 'curriculum.py should use hash() (the defect)'",
+      "fix": "v5.11 Phase 14: SHA-256 replaces hash() for deterministic seed derivation.",
+      "fix_test": "tests/test_v510_hash_seed_regression.py::test_curriculum_does_not_use_hash"
+    },
+    {
+      "id": "DEFECT-005",
+      "name": "mpc_not_called",
+      "description": "MPC planner is instantiated when horizon > 1 but never called during step().",
+      "original_test": "tests/test_v510_mpc_not_called_regression.py::test_mpc_not_used_in_step",
+      "original_assertion": "assert not mpc_called, 'Expected MPC.plan to NOT be called during step() (the defect)'",
+      "fix": "v5.11 Phase 2: MPC is now called during plan() when horizon > 1.",
+      "fix_test": "tests/test_v510_mpc_not_called_regression.py::test_mpc_is_called_in_step"
+    },
+    {
+      "id": "DEFECT-006",
+      "name": "information_gain_not_used",
+      "description": "structural_loop.py hardcodes information_gain=0.0, cost=0.0, risk=0.0 in the ActionProposal constructor.",
+      "original_test": "tests/test_v510_information_gain_not_used_regression.py::test_ig_hardcoded_zero",
+      "original_assertion": "assert 'information_gain=0.0' in source, 'IG should be hardcoded to 0.0 (the defect)'",
+      "fix": "v5.11 Phase 8: IG/cost/risk computed from ensemble disagreement, action footprint, and uncertainty.",
+      "fix_test": "tests/test_v510_information_gain_not_used_regression.py::test_ig_not_hardcoded_zero"
+    },
+    {
+      "id": "DEFECT-007",
+      "name": "manifest_mismatch",
+      "description": "v5.10 manifest still reports schema LGAE_MANIFEST_V5_9_0 and version 5.9.0 after the code version was updated to 5.10.0.",
+      "original_test": "tests/test_v510_manifest_regression.py",
+      "original_assertion": "assert manifest['schema'] == 'LGAE_MANIFEST_V5_9_0'",
+      "fix": "v5.11 Phase 22: manifest schema and version will be rebuilt for v5.11.",
+      "fix_test": "pending"
+    }
+  ]
+}

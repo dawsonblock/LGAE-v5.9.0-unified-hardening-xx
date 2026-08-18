@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/encoders/protocol.py
+# hypothesis_version: 6.151.4
+
+[-20.0, -0.999, 0.0, 1e-10, 1.0, ',', 'ADD_EDGE', 'CHANGE_GAUGE', 'NO_OP', 'PRUNE_FIBER', 'REMOVE_EDGE', 'REWEIGHT_AFFINITY', 'SPAWN_FIBER', 'UPDATE_WEIGHT', 'action_feature_hash', 'action_type', 'dimension', 'encoder_id', 'encoder_version', 'fitted_train', 'frozen', 'metadata', 'missing_mask', 'mutation_types', 'n_types', 'normalization_hash', 'schema_hash', 'state_feature_hash', 'unfit', 'vector', 'version']

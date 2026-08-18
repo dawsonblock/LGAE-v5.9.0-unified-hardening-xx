@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "commit_generation_monotonic": true,
+    "rollback_cache_unchanged": true,
+    "rollback_no_commit_event": true,
+    "rollback_state_restored": true,
+    "selective_weight_invalidation": true,
+    "unaffected_cache_generation_advanced": true
+  },
+  "details": {
+    "generation": 1,
+    "topology_cache": {
+      "bound_generation": 1,
+      "dirty": false
+    },
+    "weight_cache": {
+      "bound_generation": 1,
+      "dirty": true
+    }
+  },
+  "passed": true,
+  "schema": "LGAE_CACHE_COHERENCE_QUALIFICATION_V5_6_3",
+  "version": "5.8.3"
+}

@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/contracts/planning.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'candidate_values', 'cost', 'expected_utility', 'horizon', 'information_gain', 'mpc_plan', 'planner', 'risk', 'selected_candidate', 'single_step', 'snapshot_id', 'state_hash', 'state_version', 'total_score']

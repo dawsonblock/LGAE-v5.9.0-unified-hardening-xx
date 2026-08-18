@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/adaptive_geometry.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-05, 0.001, 0.2, 0.75, 0.95, 1.0, 1000.0, 'forman', 'fro', 'healthy', 'lly', 'ollivier_exact', 'ollivier_sinkhorn', 'persistent_homology', 'repaired', 'sheaf_transport', 'spectral_gap', 'warn']

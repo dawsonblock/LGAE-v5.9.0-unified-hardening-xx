@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "ambiguous_escalates": true,
+    "forman_radius_1": true,
+    "high_risk_exact": true,
+    "ollivier_radius_2": true,
+    "spectral_global": true,
+    "threshold_repair": true
+  },
+  "schema": "LGAE_ADAPTIVE_GEOMETRY_QUALIFICATION_V5_7_0",
+  "status": "PASS"
+}

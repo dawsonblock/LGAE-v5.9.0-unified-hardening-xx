@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/neighbor_index.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 0.0001, 0.1, 2.0, 512, '_bound_graph_version', '_cache_dirty', '_cache_generation', '_commit_dependencies', '_dirty_reason', 'bound_graph_version', 'dirty', 'generation', 'inf', 'reason', 'structural_commit', 'unbuilt']

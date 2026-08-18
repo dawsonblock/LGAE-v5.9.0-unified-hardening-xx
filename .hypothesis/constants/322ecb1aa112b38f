@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/consolidation.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.01, 0.1, 0.5, 1.0, 100, 'budget', 'inf', 'mature', 'max_budget', 'new', 'probation', 'protected', 'protected_fibers', 'prune_candidates', 'stage_counts', 'total_edges', 'total_fiber_dim', 'total_fibers', 'unused', 'version']

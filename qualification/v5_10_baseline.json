@@ -1,0 +1,142 @@
+{
+  "schema": "LGAE_V5_10_BASELINE_V1",
+  "baseline_version": "5.9.0",
+  "target_version": "5.10.0",
+  "created": "2026-08-17",
+  "frozen": true,
+  "environment": {
+    "python": "3.12.0",
+    "torch": "2.10.0",
+    "numpy": "2.4.6",
+    "scipy": "1.17.0",
+    "networkx": "3.6.1",
+    "cuda_available": false,
+    "mps_available": true,
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "processor": "arm",
+    "machine": "arm64",
+    "cpu_brand": "Apple M2 Pro",
+    "cpu_cores": "12"
+  },
+  "source": {
+    "manifest_file_count": 169,
+    "source_hash": "0f746531e727b34e536cca597ab9075f819ece92796dead44d2ca6c346374374",
+    "manifest_integrity": "ALL_VALID (169/169 files present, hashes match; --check script reports 168 due to pre-existing .gitignore exclude-schema drift)"
+  },
+  "tests": {
+    "full_pytest": {
+      "collected": 719,
+      "passed": 719,
+      "failed": 0,
+      "status": "PASS"
+    },
+    "reproducibility": {
+      "seeds": [
+        0,
+        1,
+        2,
+        42,
+        123456
+      ],
+      "tests_per_seed": 23,
+      "per_seed": {
+        "0": {
+          "status": "PASS",
+          "summary": "23 passed in 2.68s"
+        },
+        "1": {
+          "status": "PASS",
+          "summary": "23 passed in 1.85s"
+        },
+        "2": {
+          "status": "PASS",
+          "summary": "23 passed in 1.88s"
+        },
+        "42": {
+          "status": "PASS",
+          "summary": "23 passed in 2.47s"
+        },
+        "123456": {
+          "status": "PASS",
+          "summary": "23 passed in 1.89s"
+        }
+      },
+      "status": "PASS"
+    }
+  },
+  "benchmarks": {
+    "compile_eager_n2048_d64_e20000": {
+      "ms_per_step": 8.644527045544237
+    },
+    "memory_eager_n2048_d64_e20000": {
+      "device": "cpu",
+      "cold_ms": 27.648000046610832,
+      "warm_ms": 4.517295805271715
+    },
+    "full_pytest_wall_seconds": 19.07
+  },
+  "qualification": {
+    "core_qualify": {
+      "pass": true,
+      "checks": {
+        "bakry_p4_schur_oracle": true,
+        "bakry_k2_oracle": true,
+        "entropic_empty_two_hop_is_inf": true,
+        "sinkhorn_log_small_eps_large_diameter": true,
+        "reversible_volume_measure": true,
+        "so_connection_invariants": true,
+        "lobpcg_matches_exact": true,
+        "ricci_flow_weight_positivity": true,
+        "local_bridge_gate": true
+      }
+    },
+    "policy": {
+      "passed": true,
+      "policy_qualification": {
+        "diagnosis_accuracy": 0.8333333333333334,
+        "heldout_seeds": [
+          101,
+          102,
+          103,
+          104,
+          105
+        ],
+        "mean_regret": 0.01760586102803548,
+        "per_seed_accuracy": {
+          "101": 0.8333333333333334,
+          "102": 0.8333333333333334,
+          "103": 0.8333333333333334,
+          "104": 0.8333333333333334,
+          "105": 0.8333333333333334
+        },
+        "per_seed_regret": {
+          "101": 0.01760586102803548,
+          "102": 0.01760586102803548,
+          "103": 0.01760586102803548,
+          "104": 0.01760586102803548,
+          "105": 0.01760586102803548
+        },
+        "train_samples": 864
+      },
+      "schema": "LGAE_QUALIFICATION_V5_6_3",
+      "thresholds": {
+        "diagnosis_accuracy_min": 0.8,
+        "mean_regret_max": 0.35
+      },
+      "version": "5.6.3"
+    },
+    "structural_intelligence": {
+      "status": "PASS",
+      "scientific_generalization_status": "NOT_YET_QUALIFIED"
+    },
+    "scalable_structural_intelligence": {
+      "status": "PASS"
+    },
+    "joint_action_runtime": {
+      "status": "PASS",
+      "scientific_generalization_status": "NOT_YET_QUALIFIED"
+    }
+  },
+  "scientific_status": "NOT_YET_QUALIFIED (per v5.9.0 claim boundary: learned structural policy superiority over strong reference heuristics on unseen topology families is not yet established)",
+  "control_note": "This artifact is the frozen control. Do not modify after creation. Every later phase is compared against it. No regression in test count, reproducibility, manifest integrity, or qualification pass status is permitted."
+}

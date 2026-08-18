@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/promotion.py
+# hypothesis_version: 6.151.4
+
+['current_level', 'evidence', 'fail', 'gates', 'name', 'noop', 'not_run', 'pass', 'passed', 'performance', 'promotion_approved', 'ran', 'safety', 'scientific', 'signed_checkpoint', 'status', 'target_level']

@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/uncertainty.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.001, 0.02, 0.1, 0.25, 0.5, 0.8, 1.0, 4096, 'accept', 'backend', 'bootstrap_ensemble', 'cost', 'delta_u', 'ensemble', 'ensemble_size', 'ig', 'predictions', 'quarantine', 'reject', 'risk']

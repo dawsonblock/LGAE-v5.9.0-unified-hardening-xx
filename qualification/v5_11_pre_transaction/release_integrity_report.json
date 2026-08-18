@@ -1,0 +1,36 @@
+{
+  "audit_date": "2025-01-20",
+  "description": "Report on release integrity in the v5.11-dev build.",
+  "defects_referenced": ["D11-016", "D11-017", "D11-018"],
+  "manifest": {
+    "defect": "D11-016",
+    "status": "STALE",
+    "manifest_file_count": 169,
+    "actual_file_count": 496,
+    "mismatch": true,
+    "issue": "Manifest has not been regenerated for v5.11. Still contains v5.9/v5.10 era entries."
+  },
+  "build_report": {
+    "defect": "D11-017",
+    "status": "STALE",
+    "current_content": "LGAE v5.9.0 Build Report, 719 tests",
+    "actual_version": "5.11.0-dev",
+    "actual_test_count": 1404,
+    "issue": "Release provenance is internally inconsistent."
+  },
+  "final_qualification": {
+    "defect": "D11-018",
+    "status": "WEAK",
+    "issue": "test_v511_final_qualification.py uses symbol existence checks (assert X is not None) instead of behavioral proofs.",
+    "examples": [
+      "assert CommitChannel is not None — for 'single authoritative mutation channel proven'",
+      "assert StructuralTransaction is not None — for 'shadow-only evaluation proven'",
+      "assert replay_committed_transactions is not None — for 'crash-safe recovery is proven'"
+    ],
+    "required": "Replace with actual behavioral assertions that call hostile integration tests."
+  },
+  "build_metadata": {
+    "present": false,
+    "required": "BUILD_METADATA.json with version, build_id, source_commit, source_tree_sha256, manifest_sha256, test_count, qualification_bundle_sha256, python_version, schema_version"
+  }
+}

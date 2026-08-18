@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/metrics.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 'adaptation_speed', 'all', 'by_split', 'calibration', 'correlation', 'count', 'direction', 'edges_per_node', 'failure_rate', 'fraction', 'held_out', 'higher', 'lower', 'max', 'mean', 'median', 'min', 'mutation_count', 'n', 'n_measurements', 'name', 'ood_generalization', 'per_seed', 'ratio', 'seed', 'split', 'std', 'steps', 'topology_complexity', 'train', 'units', 'validation', 'value']

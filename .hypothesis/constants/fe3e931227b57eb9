@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/determinism.py
+# hypothesis_version: 6.151.4
+
+[',', '-Inf', ':', 'Inf', 'NaN', 'None', '_', '__dict__', 'big', 'dst', 'length', 'role', 'src', 'to_dict', 'utf-8', 'valid', 'value', 'weight', '|']

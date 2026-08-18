@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/runtime/state/frozen_views.py
+# hypothesis_version: 6.151.4
+
+['_cache', '_fiber_fn', '_gauge', '_graph', 'active_mask', 'capacity', 'dim', 'dst', 'effective_mask', 'latent', 'length', 'none', 'num_nodes', 'role', 'slot_gen', 'snapshot', 'src', 'state_hash', 'valid', 'version', 'weight', 'z']

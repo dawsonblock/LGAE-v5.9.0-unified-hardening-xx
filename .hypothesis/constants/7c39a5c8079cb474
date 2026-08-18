@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/joint_structural_action.py
+# hypothesis_version: 6.151.4
+
+[-1.0, 0.0, 1e-12, 1e-08, 0.05, 0.5, 1.0, 2.0, 'W_uv must be square', 'br,rij->bij', 'dim', 'exp', 'fro', 'joint_gauge_slot', 'joint_generator_norm', 'reject', 'u', 'v']

@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/transition_recorder.py
+# hypothesis_version: 6.151.4
+
+[0.0, '%Y-%m-%dT%H:%M:%SZ', 'action_metadata', 'authority_hash', 'chosen_action', 'compute_cost', 'delta_utility', 'evaluation', 'executed', 'generation', 'governance_decision', 'mean_delta_utility', 'n_committed', 'n_rejected', 'n_transitions', 'planning', 'reward', 'runtime_version', 'seed', 'state_after_hash', 'state_after_summary', 'state_after_version', 'state_before_hash', 'state_before_summary', 'state_before_version', 'state_version', 'step', 'timestamp', 'total_compute_cost', 'transition_id', 'utility_after', 'utility_before']

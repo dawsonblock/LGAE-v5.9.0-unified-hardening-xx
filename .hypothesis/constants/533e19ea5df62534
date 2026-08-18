@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/baselines.py
+# hypothesis_version: 6.151.4
+
+[-1.0, -0.5, 0.0, 0.1, 1.0, 2.0, 100, '-inf', 'add', 'baseline_name', 'borf', 'compute_cost', 'curvature_only', 'effective_resistance', 'final_n_edges', 'final_n_nodes', 'final_utility', 'fixed_topology', 'fosr', 'full_v511', 'greedy', 'horizon', 'ig_weight', 'inf', 'metadata', 'mpc', 'mpc_with_ig', 'n_mutations', 'n_rejected', 'n_steps', 'prune', 'random_rewiring', 'runtime_config', 'utility_history']

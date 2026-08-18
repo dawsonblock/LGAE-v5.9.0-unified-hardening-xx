@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/runtime/structural_diagnosis.py
+# hypothesis_version: 6.151.4
+
+[-0.3, 0.0, 0.1, 0.15, 0.2, 0.3, 0.4, 0.75, 0.8, 0.85, 0.9, 1.0, 'EXCESSIVE_DENSITY', 'HUB_OVERLOAD', 'OVERSQUASHING', 'REDUNDANT_PATHS', 'SPECTRAL_DEGRADATION', 'affected_edges', 'affected_nodes', 'confidence', 'density', 'diagnosis_type', 'evidence', 'ricci_min', 'severity', 'spectral_gap', 'sum', 'valid']

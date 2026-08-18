@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening/src/lgae_v3/training/core.py
+# hypothesis_version: 6.151.4
+
+[0.001, 'fiber_loss', 'gamma', 'gauge_loss', 'lap_loss', 'local_var', 'loss', 'radius', 'residual_error', 'spawn_score', 'task_loss', 'z']
