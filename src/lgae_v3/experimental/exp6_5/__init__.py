@@ -22,7 +22,8 @@ from .observable_features import (
     OBSERVABLE_FEATURE_DIM,
 )
 from .decomposed_model import (
-    DecomposedModel, MultiHeadModel, get_decomposed_model_ladder,
+    DecomposedModel, ScalarMLP, MultiHeadModel, EnsembleScalarMLP,
+    get_decomposed_model_ladder,
 )
 from .adaptive_beam import (
     adaptive_beam_search, AdaptiveBeamResult,

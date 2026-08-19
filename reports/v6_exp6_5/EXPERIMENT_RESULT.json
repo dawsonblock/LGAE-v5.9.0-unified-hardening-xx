@@ -139,48 +139,48 @@
         "n_nodes": 20,
         "n_candidates": 25
       },
-      "exact_mpc_time": 0.4515371322631836,
-      "model_assisted_time": 0.05146193504333496,
-      "speedup": 8.774196537362114,
+      "exact_mpc_time": 0.5027918815612793,
+      "model_assisted_time": 0.059458255767822266,
+      "speedup": 8.456216467644534,
       "search_savings": 0.88,
-      "regret": 13.33962993621826,
-      "agreement": false
+      "regret": 0.0,
+      "agreement": true
     },
     {
       "config": {
         "n_nodes": 20,
         "n_candidates": 50
       },
-      "exact_mpc_time": 1.8633501529693604,
-      "model_assisted_time": 0.09739518165588379,
-      "speedup": 19.131851507325493,
+      "exact_mpc_time": 1.9453260898590088,
+      "model_assisted_time": 0.10719585418701172,
+      "speedup": 18.147400425255555,
       "search_savings": 0.94,
-      "regret": 24.800688648223876,
-      "agreement": false
+      "regret": 0.0,
+      "agreement": true
     },
     {
       "config": {
         "n_nodes": 50,
         "n_candidates": 100
       },
-      "exact_mpc_time": 13.128580093383789,
-      "model_assisted_time": 0.37898898124694824,
-      "speedup": 34.64106014425058,
+      "exact_mpc_time": 14.285429000854492,
+      "model_assisted_time": 0.4201169013977051,
+      "speedup": 34.00346178248883,
       "search_savings": 0.97,
-      "regret": 20.45998229980469,
-      "agreement": false
+      "regret": 0.0,
+      "agreement": true
     },
     {
       "config": {
         "n_nodes": 50,
         "n_candidates": 250
       },
-      "exact_mpc_time": 82.0984787940979,
-      "model_assisted_time": 0.9948117733001709,
-      "speedup": 82.52664574097858,
+      "exact_mpc_time": 92.74051189422607,
+      "model_assisted_time": 1.069139003753662,
+      "speedup": 86.74317517986108,
       "search_savings": 0.988,
-      "regret": 15.183828735351563,
-      "agreement": false
+      "regret": 0.0,
+      "agreement": true
     }
   ],
   "gates": {
@@ -211,7 +211,7 @@
     },
     "F_scaling_speedup": {
       "passed": true,
-      "description": "max speedup: 82.5x",
+      "description": "max speedup: 86.7x",
       "target": ">2x"
     },
     "G_exact_replay_safety": {
@@ -237,7 +237,7 @@
     "avg_recovery_rate": 0.0,
     "best_lomo_recovery": 0.0,
     "avg_savings": 0.6959,
-    "max_speedup": 82.53,
+    "max_speedup": 86.74,
     "avg_calibration_correlation": 0.087,
     "lomo_detail": [
       {
@@ -271,8 +271,8 @@
       "hub_load_threshold": 2407,
       "spectral_gap_threshold": 2497
     },
-    "generation_seconds": 56.66
+    "generation_seconds": 60.08
   },
   "audit_note": "Leave-one-mechanism-out evaluation. No mechanism label in features. No utility_fn leakage. Adaptive beam search with uncertainty.",
-  "elapsed_seconds": 199.8
+  "elapsed_seconds": 215.73
 }
