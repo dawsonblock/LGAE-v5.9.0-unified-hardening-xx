@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp5/evaluation.py
+# hypothesis_version: 6.151.4
+
+[-10.0, 0.0, 1e-10, 1e-08, 1.0, 2.0, 'counterfactual', 'degree_mean', 'episode_id', 'held_out', 'heldout_metrics', 'horizons', 'mae_by_horizon', 'mean_error', 'mean_uncertainty', 'n_heldout', 'n_nodes', 'n_samples', 'n_train', 'n_trajectories', 'n_validation', 'provenance', 'r2_by_horizon', 'rmse_by_horizon', 'rollout_report', 'split', 'step_id', 'test_b_metrics', 'train', 'train_metrics', 'unknown', 'validation', 'validation_metrics', 'value']

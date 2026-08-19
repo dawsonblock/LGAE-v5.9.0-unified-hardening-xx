@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/models/model_registry.py
+# hypothesis_version: 6.151.4
+
+['; ', 'deterministic', 'feature_schema_hash', 'global_mean', 'linear', 'logistic', 'mlp', 'mlp_clf', 'model_id', 'model_type', 'mutation_type_mean', 'nearest_experience', 'normalization_hash', 'pairwise_rank', 'pointwise_rank', 'requires_fit', 'ridge', 'target_schema_hash', 'train_split_hash', 'tree', 'unknown', 'unknown mismatch', 'version']

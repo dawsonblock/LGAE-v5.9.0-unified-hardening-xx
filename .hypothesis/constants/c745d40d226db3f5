@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_3/split_utility.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1.0, 10.0, 20.0, 30.0, 50.0, 100.0, 'BonusPredictor_Ridge', 'ZeroBonus', 'exact_bonus', 'state_features']

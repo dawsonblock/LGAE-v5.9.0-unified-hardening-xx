@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_4/procedural_tasks.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.3, 0.8, 0.9, 1.0, 1.2, 25.0, 30.0, 45.0, 200, 500, 100000, 'X', 'add_edge', 'weight', 'y_bonus', 'y_delta_comp', 'y_threshold']

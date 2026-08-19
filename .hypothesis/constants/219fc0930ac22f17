@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp5/dynamics.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 0.0001, 0.001, 0.01, 1.0, 2.0, 100, 1000, 'A', 'B', 'W1', 'W2', 'action_dim', 'b1', 'b2', 'base_type', 'c', 'dynamics', 'ensemble_dynamics', 'fitted', 'hidden_dim', 'horizon', 'linear', 'linear_dynamics', 'lr', 'mae', 'members', 'mlp', 'mlp_dynamics', 'model_type', 'n_epochs', 'n_members', 'n_samples', 'per_dim_rmse', 'r2', 'regularization', 'rmse', 'seed', 'state_dim', 'train', 'v6.0-exp5', 'version']

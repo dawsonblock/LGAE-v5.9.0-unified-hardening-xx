@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp4_2/cf_real.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'accuracy', 'counterfactual', 'counterfactual_only', 'freeze', 'gap_cf_to_real_rmse', 'heldout_metrics', 'mixed', 'n_train', 'predict', 'predict_proba', 'realized', 'realized_only', 'regime', 'results', 'rmse', 'spearman', 'train', 'train_metrics', 'validation_metrics']

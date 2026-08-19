@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/models/artifact.py
+# hypothesis_version: 6.151.4
+
+['%Y-%m-%dT%H:%M:%SZ', '_in_dim', '_n_features', '_n_samples', 'artifact_hash', 'ascii', 'created_at', 'dataset_schema_hash', 'description', 'encoder_id', 'encoder_schema_hash', 'feature_schema_hash', 'get_state', 'has_model_state', 'hyperparameter_hash', 'hyperparameters', 'metrics', 'model_id', 'model_state', 'model_state_hash', 'model_type', 'n_features', 'n_train_samples', 'normalization_hash', 'predictor_type', 'predictor_version', 'seed', 'target_schema_hash', 'train_split_hash', 'unknown', 'v6.0-exp4.1', 'version']

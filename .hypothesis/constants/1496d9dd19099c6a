@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp5/state_encoding.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1.0, 2.0, 'ADD_EDGE', 'ADD_FIBER', 'GAUGE_TRANSFORM', 'REMOVE_EDGE', 'REMOVE_FIBER', 'REWIRE', 'action_schema', 'action_type', 'avg_clustering', 'degree_mean', 'degree_std', 'density', 'dim', 'edge_exists', 'fiber_count', 'fiber_width', 'fields', 'gauge_dim', 'log_density', 'log_spectral_gap', 'mutation_types', 'n_components', 'n_edges', 'n_nodes', 'same_component', 'schema_hash', 'spectral_gap', 'state_schema', 'target_features', 'u', 'u_degree_proxy', 'u_normalized', 'v', 'v_degree_proxy', 'v_normalized', 'vector']

@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp4_2/report_generator.py
+# hypothesis_version: 6.151.4
+
+[0.0, '## 1. Question', '## 10. Limitations', '## 2. Hypotheses', '## 4. Dataset', '## 8. Calibration', '## 9. Conclusion', '## Conclusion', '## Decision', '## Limitations', '%Y-%m-%dT%H:%M:%SZ', 'CF-Real Gap', 'CONCLUSION.json', 'Catastrophic Rate', 'DATASET_FREEZE.json', 'EXECUTIVE_SUMMARY.md', 'Encoder', 'FINALISTS.json', 'Held RMSE', 'Held Sign Acc', 'Held Spearman', 'Latency ms', 'Mean Regret', 'N Params', 'P90 Regret', 'Predictor', 'RAW_RESULTS.json', 'SCIENTIFIC_REPORT.md', 'Target', 'Unc-Error Corr', 'Val Score', 'Val Score Std', 'Val Spearman', 'accuracy', 'an unseen graph?', 'conclusion', 'generated_at', 'mean_regret', 'p90_regret', 'results', 'rmse', 'spearman', 'w']

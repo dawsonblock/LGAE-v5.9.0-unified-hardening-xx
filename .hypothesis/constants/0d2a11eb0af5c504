@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp5/training.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 0.0001, 0.01, 1.0, 2.0, 100, 'config', 'degree_mean', 'dynamics_type', 'elapsed_seconds', 'hidden_dim', 'linear', 'lr', 'n_epochs', 'n_nodes', 'n_parameters', 'n_train', 'realized_cost', 'realized_delta', 'realized_risk', 'regularization', 'seed', 'split', 'train', 'train_metrics']

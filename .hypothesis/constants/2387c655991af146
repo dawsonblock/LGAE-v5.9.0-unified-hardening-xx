@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp5/joint_model.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.0001, 0.01, 1.0, 100, 'config', 'cost_rmse', 'dynamics', 'dynamics_hyperparams', 'dynamics_state', 'dynamics_type', 'fitted', 'hidden_dim', 'joint_world_model', 'linear', 'lr', 'metadata', 'mlp', 'model_type', 'n_epochs', 'n_samples', 'outcome_W', 'outcome_b', 'outcome_mae', 'outcome_r2', 'outcome_rmse', 'outcome_type', 'predicted_cost', 'predicted_next_state', 'predicted_risk', 'probability_positive', 'regularization', 'residual_std', 'risk_rmse', 'seed', 'train', 'v6.0-exp5', 'version']

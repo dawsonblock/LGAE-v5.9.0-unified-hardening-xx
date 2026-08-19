@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/models/tree.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.1, 1.0, 2.0, 'feature', 'inf', 'initial_value', 'learning_rate', 'left_value', 'max_depth', 'model_type', 'n_estimators', 'n_features', 'n_samples', 'residual_quantiles', 'residual_std', 'right_value', 'seed', 'stumps', 'threshold', 'train', 'tree', 'v1', 'version']

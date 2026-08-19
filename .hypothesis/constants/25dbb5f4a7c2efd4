@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp4_2/experiment_config.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.75, 0.9, 0.95, 1.0, 1000.0, 123, 456, 789, 1000, 1024, '%Y-%m-%dT%H:%M:%SZ', 'bootstrap_confidence', 'bootstrap_samples', 'config_hash', 'cost', 'coverage_levels', 'created_at', 'deterministic', 'dimension', 'encoder_id', 'encoders', 'experiment_id', 'finalists', 'hyperparameters', 'locked_at', 'model_type', 'n_ensemble', 'n_epochs', 'normalization_hash', 'predictor_id', 'predictors', 'realized_delta', 'requires_fit', 'risk', 'schema_hash', 'seeds', 'selection_weights', 'sign_delta', 'targets', 'version', 'w', 'w_ece', 'w_latency_penalty', 'w_ndcg', 'w_ood_proxy', 'w_regret', 'w_sign_accuracy', 'w_spearman']
