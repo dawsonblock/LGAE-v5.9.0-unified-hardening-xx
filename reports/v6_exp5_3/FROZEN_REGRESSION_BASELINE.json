@@ -1,0 +1,93 @@
+{
+  "artifact_type": "frozen_regression_baseline",
+  "release": "v6.0-exp5.3",
+  "commit": "8f85e7f",
+  "date": "2026-08-19",
+  "description": "Frozen exp5.3 results. These are permanent regression targets. Future changes must not silently erase this capability.",
+
+  "representation": {
+    "name": "R1_graphlet",
+    "dim": 8,
+    "features": [
+      "avg_clustering", "transitivity", "triangle_count_norm",
+      "wedge_count_norm", "four_cycle_count_norm", "three_star_count_norm",
+      "degree_entropy", "assortativity"
+    ]
+  },
+
+  "zero_shot_test_b": {
+    "delta_r2": -0.0458,
+    "zero_delta_r2": -0.4551,
+    "beats_zero_delta": true,
+    "n_samples": 60
+  },
+
+  "loo_results": {
+    "grid": {"delta_r2": 0.1689, "beats_zero_delta": true},
+    "cycle": {"delta_r2": 0.0468, "beats_zero_delta": true},
+    "path": {"delta_r2": -0.1985, "beats_zero_delta": false},
+    "barbell": {"delta_r2": -2.6544, "beats_zero_delta": false},
+    "random_ba": {"delta_r2": -1.8549, "beats_zero_delta": false},
+    "random_er": {"delta_r2": -1.6383, "beats_zero_delta": false},
+    "star": {"delta_r2": -1.6245, "beats_zero_delta": false}
+  },
+
+  "five_shot_scale_offset_regression_targets": {
+    "description": "These 4 results are permanent regression targets. Future changes must not silently erase this capability.",
+    "wheel": {"delta_r2": 0.9069, "n_eval": 15},
+    "circular_ladder": {"delta_r2": 0.8046, "n_eval": 15},
+    "hypercube": {"delta_r2": 0.6236, "n_eval": 15},
+    "ladder": {"delta_r2": 0.2215, "n_eval": 15}
+  },
+
+  "five_shot_bias_only": {
+    "wheel": {"delta_r2": 0.0888},
+    "circular_ladder": {"delta_r2": 0.1557},
+    "hypercube": {"delta_r2": 0.3284},
+    "ladder": {"delta_r2": 0.1882}
+  },
+
+  "dynamics_ood": {
+    "corr_dynamics_ood_error": 0.3045,
+    "spearman_dynamics_ood_error": 0.3835,
+    "family_distances": {
+      "circular_ladder": 2.4978,
+      "hypercube": 3.0447,
+      "ladder": 2.4097,
+      "wheel": 4.9707
+    }
+  },
+
+  "methodology_corrections": [
+    "Train and evaluate on REALIZED records only",
+    "Primary metric: delta R2 on invariant dimensions",
+    "Always compare against zero-delta baseline",
+    "State decomposed into invariant/context/derived"
+  ],
+
+  "architecture": {
+    "model": "delta_z = alpha_G * F_theta(z, a) + beta_G",
+    "global_prior": "F_theta trained on all training families (graphlet representation)",
+    "local_correction": "alpha_G (scale) + beta_G (offset), 2d parameters",
+    "adaptation_samples": 5,
+    "adaptation_type": "scale_offset"
+  },
+
+  "exp6_authorized": true,
+  "exp6_variant": "adaptive_model_assisted_mpc",
+  "exp6_constraints": [
+    "Learned model assists candidate reduction only",
+    "Exact counterfactual execution remains authoritative",
+    "Every final action verified through v5.11 CommitChannel",
+    "Trust gates required before model-assisted planning",
+    "TEST-C must be used for final generalization claims"
+  ],
+
+  "exp6_success_gates": {
+    "A_adaptation": "80% of TEST-C reaches delta R2 > 0 within k <= 5",
+    "B_pruning": "5x reduction in exact evaluations with high oracle recall",
+    "C_regret": "Materially reduced regret vs random/heuristic filtering",
+    "D_calibration": "Uncertainty positively associated with error on TEST-C",
+    "E_safety": "Every action still exactly verified through v5.11"
+  }
+}

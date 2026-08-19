@@ -5,7 +5,7 @@
     ".gitignore",
     "MANIFEST.sha256.json"
   ],
-  "file_count": 838,
+  "file_count": 848,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -1770,12 +1770,12 @@
     {
       "path": ".hypothesis/unicode_data/15.0.0/codec-utf-8.json.gz",
       "bytes": 60,
-      "sha256": "8fb7559f69ebbc301e54d55605092877a8780e22666e5bcf72c209aecaaef7b6"
+      "sha256": "f5e962f53cc56af7c4efe80ebaa4e7c5af12ebeffd6207301281e05838c09d53"
     },
     {
       "path": ".pytest_report.xml",
       "bytes": 294870,
-      "sha256": "7706b4dc2acb2e1aa53a38693feb67da84a4891873c307a88aecc7656e68f9ae"
+      "sha256": "671290a1f6ca367c81add1dd7f82fa04536b25a88dc4d40015dd0eedec0d0e06"
     },
     {
       "path": "BASELINE_v5.11_CANONICAL_CONVERGENCE.md",
@@ -2039,8 +2039,8 @@
     },
     {
       "path": "qualification_summary.json",
-      "bytes": 319,
-      "sha256": "5c6d9a00f35885cf003755d7d2e4e515cdeff2714560ad7890eefcbf2bcc0c0f"
+      "bytes": 318,
+      "sha256": "f0cf09ae417b6393f2b47475daf4a10f460842fa489e03767588503b082faa18"
     },
     {
       "path": "reasoning_qualification_report.json",
@@ -2193,6 +2193,11 @@
       "sha256": "ba46f2309f95a26f185add5062b369348364aa33da66585e464dc91bb5f925ce"
     },
     {
+      "path": "reports/v6_exp5_3/FROZEN_REGRESSION_BASELINE.json",
+      "bytes": 3337,
+      "sha256": "41a4c3fd98844f2382b7ab7c1989b293be6e70d5cb5d84a1181347248c21e5ee"
+    },
+    {
       "path": "reports/v6_exp5_3/RESULTS.json",
       "bytes": 44543,
       "sha256": "c098cbae418b61bf521d7ded4f681c3a07c1a84770d457a77430f4b1fc400eab"
@@ -2201,6 +2206,16 @@
       "path": "reports/v6_exp5_3/SCIENTIFIC_REPORT.md",
       "bytes": 8859,
       "sha256": "cef999b90c897f8a849b398281711cc5950bf113b2d119501507b09214f6d125"
+    },
+    {
+      "path": "reports/v6_exp6/RESULTS.json",
+      "bytes": 7720,
+      "sha256": "1970b251b9c813cfc833d9c46c962e5f021281b0672378093226f1a0ccdee46f"
+    },
+    {
+      "path": "reports/v6_exp6/SCIENTIFIC_REPORT.md",
+      "bytes": 2285,
+      "sha256": "ecb26d2671cac44d0f59e9fa65c9d202471b047112747eeb22a1c42765c73d91"
     },
     {
       "path": "requirements-verified.txt",
@@ -2331,6 +2346,11 @@
       "path": "scripts/run_exp5_experiment.py",
       "bytes": 11772,
       "sha256": "6ddf07b5b5b17ea0a5b4d782c3303916c71bab32741c3467034448acb9c20748"
+    },
+    {
+      "path": "scripts/run_exp6_experiment.py",
+      "bytes": 12957,
+      "sha256": "df5a1deffb2355eb6c97ca880edfa105392451c81c4aef50e58901db879a0125"
     },
     {
       "path": "scripts/run_real_experiment.py",
@@ -2781,6 +2801,36 @@
       "path": "src/lgae_v3/experimental/exp5_3/representations.py",
       "bytes": 12292,
       "sha256": "5ec8321a7002cf3c5c1cff5e309f39d27826b459effea5de2c019baf366ba8ce"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6/__init__.py",
+      "bytes": 1754,
+      "sha256": "a1c17744657af7d29469fc8855f36548a98b3d46aad07ab0c8f585f5228bcf00"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6/calibration.py",
+      "bytes": 8664,
+      "sha256": "1f533aa23db6046f5135783333d293e9ee4adad621eff304497f8a9e6afbeeae"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6/calibration_controller.py",
+      "bytes": 11330,
+      "sha256": "8be9152c4dd35d2ade0323a1beb95fbd945a88d7e151df75cb2a521049fabb6a"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6/experiment_runner.py",
+      "bytes": 11200,
+      "sha256": "7da426f98b9821fc66031cdd7b6e07df0a412c6a1541451a1fb5f1692b4d7606"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6/prefilter.py",
+      "bytes": 7032,
+      "sha256": "784342c39f6109bf981fcf7954cbd0dbe066afbca5aab77dc9468266a43f53cf"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6/trust.py",
+      "bytes": 6239,
+      "sha256": "49ae5436d3195535db45ac0f78fc8368ab133832821e70faeed047b36a236055"
     },
     {
       "path": "src/lgae_v3/experimental/experiment_registry.py",

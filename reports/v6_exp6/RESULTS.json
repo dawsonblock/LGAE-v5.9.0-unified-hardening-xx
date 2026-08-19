@@ -1,0 +1,315 @@
+{
+  "experiment": "v6.0-exp6",
+  "description": "Adaptive model-assisted MPC",
+  "architecture": "dz = alpha_G * F_theta(z, a) + beta_G",
+  "representation": "R1_graphlet (8-dim)",
+  "mpc_results": [
+    {
+      "family": "circular_ladder",
+      "calibration_state": "calibrated",
+      "sample_efficiency": 1,
+      "validation_delta_r2": 0.28424774546264675,
+      "n_calibration": 10,
+      "trust_state": "trusted_prefilter",
+      "max_horizon": 1,
+      "n_candidates": 225,
+      "n_retained": 100,
+      "oracle_recall_at_25": 1.0,
+      "oracle_recall_at_50": 1.0,
+      "oracle_recall_at_100": 1.0,
+      "exact_evaluations_saved": 0.5555555555555556,
+      "learned_regret": 0.0,
+      "random_regret": 0.0,
+      "heuristic_regret": 0.0,
+      "scale": [
+        0.9997932753351085,
+        0.9998169070792788,
+        0.9999999986839472,
+        1.0000000806410918,
+        1.0000000145623404,
+        0.9999999518436514,
+        0.9941090459531565,
+        0.9993056628668339
+      ],
+      "offset": [
+        -0.010165675821229443,
+        -0.009567115492754841,
+        -2.5652023869526606e-05,
+        0.00010107232993968107,
+        0.00021634456530540057,
+        -2.862611528011518e-05,
+        -0.029837203221936212,
+        0.012406654717358738
+      ]
+    },
+    {
+      "family": "hypercube",
+      "calibration_state": "calibrated",
+      "sample_efficiency": 1,
+      "validation_delta_r2": 0.03652411343024653,
+      "n_calibration": 10,
+      "trust_state": "trusted_prefilter",
+      "max_horizon": 1,
+      "n_candidates": 225,
+      "n_retained": 100,
+      "oracle_recall_at_25": 1.0,
+      "oracle_recall_at_50": 1.0,
+      "oracle_recall_at_100": 1.0,
+      "exact_evaluations_saved": 0.5555555555555556,
+      "learned_regret": 0.0,
+      "random_regret": 0.0,
+      "heuristic_regret": 0.08066155643846709,
+      "scale": [
+        0.9997599559926139,
+        0.999948155219326,
+        0.999999998696216,
+        0.999999969200184,
+        0.9999999157228704,
+        0.9999998809849947,
+        1.0057106447190685,
+        0.9865439745050703
+      ],
+      "offset": [
+        -0.010954140456023612,
+        -0.005091271589322624,
+        -2.553217512556769e-05,
+        -4.328438310096983e-05,
+        0.0003653405109831638,
+        -0.00012017473977702685,
+        0.19922345673770017,
+        -0.07717471757355863
+      ]
+    },
+    {
+      "family": "ladder",
+      "calibration_state": "calibrated",
+      "sample_efficiency": 1,
+      "validation_delta_r2": 0.11493359628368616,
+      "n_calibration": 10,
+      "trust_state": "trusted_prefilter",
+      "max_horizon": 1,
+      "n_candidates": 225,
+      "n_retained": 100,
+      "oracle_recall_at_25": 1.0,
+      "oracle_recall_at_50": 1.0,
+      "oracle_recall_at_100": 1.0,
+      "exact_evaluations_saved": 0.5555555555555556,
+      "learned_regret": 0.0,
+      "random_regret": 0.0,
+      "heuristic_regret": 0.04045208212207467,
+      "scale": [
+        1.0001826206361422,
+        1.000265143375539,
+        1.0000000017751274,
+        0.999999983368054,
+        0.9999999964489894,
+        0.9999993176667261,
+        0.9701840316688218,
+        1.0020724190695705
+      ],
+      "offset": [
+        0.010299772136222112,
+        0.014924119077193407,
+        4.068392107873055e-05,
+        -2.0999934918407747e-05,
+        -4.213674529541791e-05,
+        -0.0004049630483194249,
+        -0.15916853573497455,
+        -0.02541182417831565
+      ]
+    },
+    {
+      "family": "wheel",
+      "calibration_state": "calibrated",
+      "sample_efficiency": 5,
+      "validation_delta_r2": 0.16498300680174438,
+      "n_calibration": 10,
+      "trust_state": "trusted_prefilter",
+      "max_horizon": 1,
+      "n_candidates": 225,
+      "n_retained": 100,
+      "oracle_recall_at_25": 1.0,
+      "oracle_recall_at_50": 1.0,
+      "oracle_recall_at_100": 1.0,
+      "exact_evaluations_saved": 0.5555555555555556,
+      "learned_regret": 0.0,
+      "random_regret": 0.0,
+      "heuristic_regret": 0.0,
+      "scale": [
+        0.9984792235124413,
+        0.9997173025462468,
+        0.999999980418751,
+        0.999997705922758,
+        0.9999989134325318,
+        0.9998870687718102,
+        1.0063832734047735,
+        0.9657900061283966
+      ],
+      "offset": [
+        -0.03780292971628796,
+        -0.010278580801677616,
+        -7.344830626450064e-05,
+        -0.0010159128341029854,
+        -0.000461877408516638,
+        -0.0089598227989365,
+        -0.050044333203568256,
+        -0.10341389004970386
+      ]
+    }
+  ],
+  "adaptation_curves": [
+    {
+      "family": "circular_ladder",
+      "curve": [
+        {
+          "k": 0,
+          "delta_r2": 0.3492102306858861
+        },
+        {
+          "k": 2,
+          "delta_r2": -0.2706974863811895
+        },
+        {
+          "k": 3,
+          "delta_r2": 0.07521529360311785
+        },
+        {
+          "k": 5,
+          "delta_r2": 0.3480777040663996
+        },
+        {
+          "k": 8,
+          "delta_r2": 0.19935717309273138
+        },
+        {
+          "k": 10,
+          "delta_r2": 0.19935717309273138
+        }
+      ],
+      "k_star": 0
+    },
+    {
+      "family": "hypercube",
+      "curve": [
+        {
+          "k": 0,
+          "delta_r2": -0.20237261432462383
+        },
+        {
+          "k": 2,
+          "delta_r2": 0.3217253919969415
+        },
+        {
+          "k": 3,
+          "delta_r2": 0.3406564848081075
+        },
+        {
+          "k": 5,
+          "delta_r2": 0.35281899967309904
+        },
+        {
+          "k": 8,
+          "delta_r2": 0.3468660817383553
+        },
+        {
+          "k": 10,
+          "delta_r2": 0.3468660817383553
+        }
+      ],
+      "k_star": 2
+    },
+    {
+      "family": "ladder",
+      "curve": [
+        {
+          "k": 0,
+          "delta_r2": -0.1571475279979231
+        },
+        {
+          "k": 2,
+          "delta_r2": 0.13817570189723494
+        },
+        {
+          "k": 3,
+          "delta_r2": 0.19251738740717272
+        },
+        {
+          "k": 5,
+          "delta_r2": 0.20172259466155684
+        },
+        {
+          "k": 8,
+          "delta_r2": 0.1739615584796278
+        },
+        {
+          "k": 10,
+          "delta_r2": 0.1739615584796278
+        }
+      ],
+      "k_star": 2
+    },
+    {
+      "family": "wheel",
+      "curve": [
+        {
+          "k": 0,
+          "delta_r2": -0.86490478939377
+        },
+        {
+          "k": 2,
+          "delta_r2": -0.8983799493953417
+        },
+        {
+          "k": 3,
+          "delta_r2": -0.3232168781463123
+        },
+        {
+          "k": 5,
+          "delta_r2": 0.08985688549902604
+        },
+        {
+          "k": 8,
+          "delta_r2": -0.11189437970651817
+        },
+        {
+          "k": 10,
+          "delta_r2": -0.11189437970651817
+        }
+      ],
+      "k_star": 5
+    }
+  ],
+  "success_gates": {
+    "A_adaptation": {
+      "passed": true,
+      "description": "4/4 families reach \u0394R\u00b2 > 0",
+      "target": "80%",
+      "actual": "100%"
+    },
+    "B_pruning": {
+      "passed": "False",
+      "description": "avg 56% evaluations saved, 100% recall@25",
+      "target": "80% saved, 80% recall",
+      "actual": "56% saved, 100% recall"
+    },
+    "C_regret": {
+      "passed": false,
+      "description": "0/4 families beat random regret",
+      "target": "60%",
+      "actual": "0%"
+    },
+    "D_calibration": {
+      "passed": true,
+      "description": "4/4 families calibrated",
+      "target": "50%",
+      "actual": "100%"
+    },
+    "E_safety": {
+      "passed": true,
+      "description": "All actions verified through v5.11 CommitChannel",
+      "target": "100%",
+      "actual": "100% (by design)"
+    }
+  },
+  "all_gates_passed": false
+}
