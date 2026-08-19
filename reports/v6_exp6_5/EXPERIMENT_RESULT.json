@@ -1,0 +1,278 @@
+{
+  "lomo_results": [
+    {
+      "held_out_mechanism": "connectivity_threshold",
+      "n_train_samples": 7350,
+      "n_eval_tasks": 25,
+      "n_suboptimal": 3,
+      "recovery_rate": 0.0,
+      "avg_regret": 28.246383232729546,
+      "avg_savings": 0.6958874458874458,
+      "model_results": {
+        "ScalarMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 28.2464,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 0.0,
+          "n_suboptimal_cases": 3
+        },
+        "MultiHeadMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 28.2854,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": -0.039,
+          "n_suboptimal_cases": 3
+        },
+        "EnsembleScalarMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 28.2464,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 0.0,
+          "n_suboptimal_cases": 3
+        },
+        "calibration_correlation": -0.20360079856224036
+      }
+    },
+    {
+      "held_out_mechanism": "redundancy_threshold",
+      "n_train_samples": 7467,
+      "n_eval_tasks": 25,
+      "n_suboptimal": 0,
+      "recovery_rate": 0.0,
+      "avg_regret": 0.0,
+      "avg_savings": 0.6958874458874458,
+      "model_results": {
+        "ScalarMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 0.0,
+          "n_suboptimal_cases": 0
+        },
+        "MultiHeadMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 0.0,
+          "n_suboptimal_cases": 0
+        },
+        "EnsembleScalarMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 0.0,
+          "n_suboptimal_cases": 0
+        },
+        "calibration_correlation": 0.3750718301673638
+      }
+    },
+    {
+      "held_out_mechanism": "hub_load_threshold",
+      "n_train_samples": 7506,
+      "n_eval_tasks": 25,
+      "n_suboptimal": 1,
+      "recovery_rate": 0.0,
+      "avg_regret": 0.01879110336303569,
+      "avg_savings": 0.6958874458874458,
+      "model_results": {
+        "ScalarMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0188,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 12.798,
+          "n_suboptimal_cases": 1
+        },
+        "MultiHeadMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0188,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 12.798,
+          "n_suboptimal_cases": 1
+        },
+        "EnsembleScalarMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0188,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 12.798,
+          "n_suboptimal_cases": 1
+        },
+        "calibration_correlation": 0.024848890132682305
+      }
+    },
+    {
+      "held_out_mechanism": "spectral_gap_threshold",
+      "n_train_samples": 7416,
+      "n_eval_tasks": 25,
+      "n_suboptimal": 9,
+      "recovery_rate": 0.0,
+      "avg_regret": 37.58047517071793,
+      "avg_savings": 0.6958874458874458,
+      "model_results": {
+        "ScalarMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 37.5805,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 10.2652,
+          "n_suboptimal_cases": 9
+        },
+        "MultiHeadMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 38.5587,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": 9.287,
+          "n_suboptimal_cases": 9
+        },
+        "EnsembleScalarMLP": {
+          "recovery_rate": 0.0,
+          "avg_regret": 47.9814,
+          "avg_savings": 0.6959,
+          "avg_greedy_improvement": -0.1357,
+          "n_suboptimal_cases": 9
+        },
+        "calibration_correlation": 0.15185427794344988
+      }
+    }
+  ],
+  "scaling_results": [
+    {
+      "config": {
+        "n_nodes": 20,
+        "n_candidates": 25
+      },
+      "exact_mpc_time": 0.4515371322631836,
+      "model_assisted_time": 0.05146193504333496,
+      "speedup": 8.774196537362114,
+      "search_savings": 0.88,
+      "regret": 13.33962993621826,
+      "agreement": false
+    },
+    {
+      "config": {
+        "n_nodes": 20,
+        "n_candidates": 50
+      },
+      "exact_mpc_time": 1.8633501529693604,
+      "model_assisted_time": 0.09739518165588379,
+      "speedup": 19.131851507325493,
+      "search_savings": 0.94,
+      "regret": 24.800688648223876,
+      "agreement": false
+    },
+    {
+      "config": {
+        "n_nodes": 50,
+        "n_candidates": 100
+      },
+      "exact_mpc_time": 13.128580093383789,
+      "model_assisted_time": 0.37898898124694824,
+      "speedup": 34.64106014425058,
+      "search_savings": 0.97,
+      "regret": 20.45998229980469,
+      "agreement": false
+    },
+    {
+      "config": {
+        "n_nodes": 50,
+        "n_candidates": 250
+      },
+      "exact_mpc_time": 82.0984787940979,
+      "model_assisted_time": 0.9948117733001709,
+      "speedup": 82.52664574097858,
+      "search_savings": 0.988,
+      "regret": 15.183828735351563,
+      "agreement": false
+    }
+  ],
+  "gates": {
+    "A_all_mechanisms_have_suboptimal": {
+      "passed": false,
+      "description": "All 4 LOMO mechanisms have suboptimal cases",
+      "target": "all > 0"
+    },
+    "B_avg_recovery_rate": {
+      "passed": false,
+      "description": "avg recovery across LOMO: 0%",
+      "target": ">20%"
+    },
+    "C_best_lomo_recovery": {
+      "passed": false,
+      "description": "best LOMO recovery: 0%",
+      "target": ">0%"
+    },
+    "D_search_savings": {
+      "passed": true,
+      "description": "avg savings: 69.6%",
+      "target": ">50%"
+    },
+    "E_no_information_leakage": {
+      "passed": true,
+      "description": "No utility_fn access, no mechanism label in features",
+      "target": "by design"
+    },
+    "F_scaling_speedup": {
+      "passed": true,
+      "description": "max speedup: 82.5x",
+      "target": ">2x"
+    },
+    "G_exact_replay_safety": {
+      "passed": true,
+      "description": "All actions verified through exact replay + v5.11",
+      "target": "by design"
+    },
+    "H_qualification_integrity": {
+      "passed": true,
+      "description": "Release mode + valid manifest",
+      "target": "release mode"
+    },
+    "I_calibration_correlation": {
+      "passed": true,
+      "description": "avg calibration corr: 0.087",
+      "target": ">0 (uncertainty predicts error)"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "n_mechanisms": 4,
+    "n_lomo_results": 4,
+    "avg_recovery_rate": 0.0,
+    "best_lomo_recovery": 0.0,
+    "avg_savings": 0.6959,
+    "max_speedup": 82.53,
+    "avg_calibration_correlation": 0.087,
+    "lomo_detail": [
+      {
+        "mechanism": "connectivity_threshold",
+        "recovery_rate": 0.0,
+        "n_suboptimal": 3
+      },
+      {
+        "mechanism": "redundancy_threshold",
+        "recovery_rate": 0.0,
+        "n_suboptimal": 0
+      },
+      {
+        "mechanism": "hub_load_threshold",
+        "recovery_rate": 0.0,
+        "n_suboptimal": 1
+      },
+      {
+        "mechanism": "spectral_gap_threshold",
+        "recovery_rate": 0.0,
+        "n_suboptimal": 9
+      }
+    ]
+  },
+  "training_info": {
+    "n_total_samples": 9913,
+    "feature_dim": 64,
+    "n_per_mechanism": {
+      "connectivity_threshold": 2563,
+      "redundancy_threshold": 2446,
+      "hub_load_threshold": 2407,
+      "spectral_gap_threshold": 2497
+    },
+    "generation_seconds": 56.66
+  },
+  "audit_note": "Leave-one-mechanism-out evaluation. No mechanism label in features. No utility_fn leakage. Adaptive beam search with uncertainty.",
+  "elapsed_seconds": 199.8
+}

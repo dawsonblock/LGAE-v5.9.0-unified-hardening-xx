@@ -321,11 +321,13 @@ def run_exp6_5(
     # === Phase 3: Scaling benchmark ===
     print("\n=== Phase 3: Scaling benchmark ===")
 
-    # Train a model on all data for scaling.
-    X_all = all_data["X"]
-    y_all = all_data["y_residual"]
+    # Train a connectivity-only model for scaling (scaling uses connectivity threshold).
+    conn_mask = all_data["mechanism"] == "connectivity_threshold"
+    X_conn = all_data["X"][conn_mask]
+    y_conn = all_data["y_residual"][conn_mask]
     scaling_model = ScalarMLP(hidden_dim=64, n_epochs=300)
-    scaling_model.fit(X_all, y_all)
+    scaling_model.fit(X_conn, y_conn)
+    print(f"  Trained scaling model on {len(X_conn)} connectivity samples")
 
     scaling_configs = [
         ScalingConfig(n_nodes=20, n_candidates=25, seed=200),
