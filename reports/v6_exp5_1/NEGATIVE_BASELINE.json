@@ -1,0 +1,93 @@
+{
+  "artifact_type": "scientific_baseline",
+  "release": "v6.0-exp5.1",
+  "commit": "693cc2f",
+  "date": "2026-08-19",
+  "description": "Frozen negative baseline for cross-family generalization. Future changes must beat these metrics honestly. The previous apparent R²=0.9 was invalid due to a state-extraction bug that made all states zero.",
+
+  "dataset": {
+    "train_families": ["path", "cycle", "star", "grid", "barbell", "random_er", "random_ba"],
+    "validation_families": ["random_ws", "bipartite"],
+    "test_a_families": ["complete", "tree"],
+    "test_b_families": ["wheel", "ladder", "circular_ladder", "hypercube"],
+    "n_nodes": 20,
+    "n_seeds_per_family": 3,
+    "base_seed": 42,
+    "train_records": 735,
+    "validation_records": 210,
+    "test_a_records": 165,
+    "test_b_records": 420,
+    "mutation_types": {
+      "ADD_EDGE": 450,
+      "REMOVE_EDGE": 495,
+      "add_edge": 165
+    }
+  },
+
+  "model_config": {
+    "best_variant": "linear",
+    "dynamics_type": "linear",
+    "parameters": 459,
+    "training_epochs": 200,
+    "regularization": 0.001
+  },
+
+  "metrics": {
+    "test_b_one_step_r2": -2.6443,
+    "test_b_one_step_rmse": 2.1824,
+    "test_b_outcome_r2": -1.1464,
+    "validation_one_step_r2": -1.2766,
+    "rollout_val_r2_h1": 0.9997,
+    "rollout_val_r2_h3": 0.9983,
+    "rollout_val_nrmse_h1": 0.2425,
+    "rollout_val_nrmse_h3": 0.4562,
+    "rollout_test_b_nrmse_h1": 0.1938,
+    "rollout_test_b_nrmse_h3": 0.2460,
+    "calibration_corr_uncertainty_error": 0.0,
+    "calibration_spearman_uncertainty_error": null,
+    "ensemble_calibration_corr_uncertainty_error": 0.4213,
+    "ensemble_calibration_spearman_uncertainty_error": 0.3650,
+    "trust_score": 0.0,
+    "recommended_horizon": 2,
+    "exact_verification_fraction": 1.0
+  },
+
+  "ensemble_config": {
+    "n_members": 5,
+    "base_type": "linear",
+    "parameters": 1971,
+    "bootstrap_method": "row_bootstrap",
+    "test_b_one_step_r2": -2.7073
+  },
+
+  "scientific_status": "PRELIMINARY_SIGNAL_DETECTED",
+  "exp6_authorized": false,
+  "exp6_blockers": [
+    "Cross-family generalization failed: R²=-2.64 on TEST-B (unseen topology families)",
+    "One-step quality is negative on OOD families",
+    "Trust score is 0 due to negative one-step R²",
+    "Model may be learning family identity instead of structural dynamics"
+  ],
+
+  "positive_signals": [
+    "Ensemble uncertainty correlates with error: corr=0.4213, spearman=0.3650",
+    "Rollout mechanics are functioning correctly with real state variation",
+    "State extraction is now correct (n_edges, density, spectral_gap change across steps)",
+    "Per-prediction uncertainty varies with input (not constant)"
+  ],
+
+  "gates_for_future": {
+    "test_b_or_loo_r2": "must be > 0 (preferably materially positive)",
+    "spearman": "> 0.5 for ranking tasks",
+    "calibration_corr": "> 0.3 with CIs excluding zero",
+    "rollout_h3": "error acceptable, no catastrophic divergence",
+    "trust": "above threshold only on calibrated states"
+  },
+
+  "provenance": {
+    "state_extraction_bug_fixed": true,
+    "state_extraction_bug_description": "_extract_state_summary() returned all zeros because it only had snapshot hashes, not the actual graph. Fixed by passing graph_before/graph_after to _extract_observed_record().",
+    "previous_invalid_r2": 0.9155,
+    "previous_invalid_r2_cause": "Model learned to predict zero-change from zero-state. State extraction returned n_edges=0->0 for all steps."
+  }
+}
