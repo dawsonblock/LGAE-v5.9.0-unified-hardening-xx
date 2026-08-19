@@ -24,12 +24,23 @@ from lgae_v3.version import VERSION, SCHEMA_VERSION
 
 
 def run_test_suite() -> dict:
-    """Run pytest with junitxml or summary to collect real execution counts."""
+    """Run pytest with junitxml or summary to collect real execution counts.
+
+    Optimizations:
+    - Uses pytest-xdist with all CPU cores for parallel execution
+    - Skips the self-referential meta-test that re-runs integration tests
+      (redundant when pytest is already running the full suite)
+    """
+    import os
     xml_path = ROOT / ".pytest_report.xml"
-    print("Running pytest to collect qualification metadata...")
+    n_workers = os.cpu_count() or 4
+    print(f"Running pytest with {n_workers} workers to collect qualification metadata...")
     start_t = time.time()
     res = subprocess.run(
-        [sys.executable, "-m", "pytest", f"--junitxml={xml_path}", "-q"],
+        [sys.executable, "-m", "pytest", f"--junitxml={xml_path}", "-q",
+         f"-n={n_workers}",
+         "--deselect=tests/integration/test_v511_final_qualification.py::TestV511Qualification::test_all_integration_tests_pass",
+         ],
         cwd=str(ROOT),
         capture_output=True,
         text=True,
