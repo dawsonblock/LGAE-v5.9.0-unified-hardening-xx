@@ -5,7 +5,7 @@
     ".gitignore",
     "MANIFEST.sha256.json"
   ],
-  "file_count": 855,
+  "file_count": 860,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -1770,12 +1770,12 @@
     {
       "path": ".hypothesis/unicode_data/15.0.0/codec-utf-8.json.gz",
       "bytes": 60,
-      "sha256": "5cdd9d89901efb0b74948c747b7d5ea7376e3ec6c3961c09eda6dacb38d82bf9"
+      "sha256": "5e8f2d8389cbe9fa2a62f60a3a6bed36650d26ab103fbf50fbaf450f2246cc3d"
     },
     {
       "path": ".pytest_report.xml",
-      "bytes": 294870,
-      "sha256": "96ff9531aa446a908c45dc503ce4a98180e68a7b69a184809e842853d541f3fc"
+      "bytes": 294874,
+      "sha256": "4dc0340d81dfb9fbea80fc4ea251c5728d585acf5a9048077a31fd9f3e50ae39"
     },
     {
       "path": "BASELINE_v5.11_CANONICAL_CONVERGENCE.md",
@@ -2039,8 +2039,8 @@
     },
     {
       "path": "qualification_summary.json",
-      "bytes": 318,
-      "sha256": "d423507b2fdb7e2936f282a9e80f19d4e07a51958dec9857bf8bc5489a1a79b6"
+      "bytes": 319,
+      "sha256": "da2410acabc0f9f5a12a84ead6923edcd0a315ceef09361a2b43d1ea0cbc0ede"
     },
     {
       "path": "reasoning_qualification_report.json",
@@ -2228,6 +2228,16 @@
       "sha256": "491ce5b9cd48134d248073b9c14757562b08cade6c505d7a6d64190b385025e2"
     },
     {
+      "path": "reports/v6_exp6_2/RESULTS.json",
+      "bytes": 119563,
+      "sha256": "8fcdd46f1fb17876977249be8b4ba5927e325ee843ef553ad87ee2f6f2388400"
+    },
+    {
+      "path": "reports/v6_exp6_2/SCIENTIFIC_REPORT.md",
+      "bytes": 3485,
+      "sha256": "4bf6ec47046ed5f24af97f5a443a868b56c5dfa997b2e9eea137e1b47b0475a0"
+    },
+    {
       "path": "requirements-verified.txt",
       "bytes": 152,
       "sha256": "0c421822af99aa7beabd8824fc7696836379a6da8fd48fd19d795262c5eae7df"
@@ -2361,6 +2371,11 @@
       "path": "scripts/run_exp6_1_experiment.py",
       "bytes": 15701,
       "sha256": "026501dbdae17274b056564e7be68a55e02a123a11e9e93c66bf1a38fa768aeb"
+    },
+    {
+      "path": "scripts/run_exp6_2_experiment.py",
+      "bytes": 18340,
+      "sha256": "8dbc8ce7bfb5c0f5b165ede33cc588a34f3b8247e233528590dd8382a1a51e55"
     },
     {
       "path": "scripts/run_exp6_experiment.py",
@@ -2823,6 +2838,11 @@
       "sha256": "c9d7941f8b84f0675074fe2b19ccfc252b6707dd88d1b7d2356b9cbd08f1623d"
     },
     {
+      "path": "src/lgae_v3/experimental/exp6/analytical_utility.py",
+      "bytes": 6017,
+      "sha256": "d735a0473967bf32214712f5ecc1a7af65415bf7c71d929a842a631127bc0b7c"
+    },
+    {
       "path": "src/lgae_v3/experimental/exp6/calibration.py",
       "bytes": 8664,
       "sha256": "1f533aa23db6046f5135783333d293e9ee4adad621eff304497f8a9e6afbeeae"
@@ -2861,6 +2881,11 @@
       "path": "src/lgae_v3/experimental/exp6/test_c.py",
       "bytes": 7784,
       "sha256": "682d3600825225dae91964a91bc4a7ea35f0b9277b05a593bc291d17d0d243ee"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6/test_d.py",
+      "bytes": 7914,
+      "sha256": "f88a761c353e81cef8c90f7b7488f50a2e4a9fc4b0fc61d684eb55043d2c79e7"
     },
     {
       "path": "src/lgae_v3/experimental/exp6/trust.py",
