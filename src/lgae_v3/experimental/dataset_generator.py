@@ -884,11 +884,97 @@ class DatasetGenerator:
         deg_mean = float(np.mean(degrees)) if degrees else 0.0
         deg_std = float(np.std(degrees)) if degrees else 0.0
 
+        # Build adjacency for graphlet/clustering computation.
+        adj: dict[int, set[int]] = {i: set() for i in range(n)}
+        for i in range(graph.src.shape[0]):
+            if valid[i]:
+                s = int(graph.src[i].item())
+                d = int(graph.dst[i].item())
+                if s < n and d < n:
+                    adj[s].add(d)
+                    adj[d].add(s)
+
+        # Compute graphlet counts.
+        triangle_count = 0
+        wedge_count = 0
+        three_star_count = 0
+        four_cycle_count = 0
+        for u in range(n):
+            du = len(adj.get(u, set()))
+            wedge_count += du * (du - 1) // 2
+            if du >= 3:
+                three_star_count += du * (du - 1) * (du - 2) // 6
+            for v in adj.get(u, set()):
+                if v > u:
+                    for w in adj.get(u, set()):
+                        if w > v and w in adj.get(v, set()):
+                            triangle_count += 1
+        # 4-cycle count (approximate).
+        nodes = list(range(n))
+        for i, u in enumerate(nodes):
+            for v in nodes[i+1:]:
+                common = len(adj.get(u, set()) & adj.get(v, set()))
+                if common >= 2:
+                    four_cycle_count += common * (common - 1) // 2
+
+        # Average clustering coefficient.
+        clustering_sum = 0.0
+        for u in range(n):
+            nu = adj.get(u, set())
+            du = len(nu)
+            if du >= 2:
+                links = sum(1 for a in nu for b in nu if a < b and b in adj.get(a, set()))
+                clustering_sum += 2.0 * links / (du * (du - 1))
+        avg_clustering = clustering_sum / max(n, 1)
+
+        # Transitivity = 3 * triangles / wedges.
+        transitivity = 3.0 * triangle_count / max(wedge_count, 1)
+
+        # Degree entropy.
+        from collections import Counter
+        deg_counts = Counter(degrees)
+        deg_entropy = 0.0
+        for count in deg_counts.values():
+            p = count / max(n, 1)
+            if p > 0:
+                import math
+                deg_entropy -= p * math.log2(p)
+
+        # Assortativity proxy.
+        src_degs, dst_degs = [], []
+        for u in adj:
+            for v in adj[u]:
+                if v > u:
+                    src_degs.append(degrees[u] if u < len(degrees) else 0)
+                    dst_degs.append(degrees[v] if v < len(degrees) else 0)
+        assortativity = 0.0
+        if len(src_degs) >= 2:
+            src_arr = np.array(src_degs, dtype=float)
+            dst_arr = np.array(dst_degs, dtype=float)
+            if np.std(src_arr) > 1e-10 and np.std(dst_arr) > 1e-10:
+                assortativity = float(np.corrcoef(src_arr, dst_arr)[0, 1])
+
         # State hash.
         try:
             state_hash = graph.state_hash()
         except Exception:
             state_hash = ""
+
+        # Store graphlet features in extra dict.
+        n3 = max(n ** 3, 1)
+        extra = {
+            "triangle_count": triangle_count,
+            "wedge_count": wedge_count,
+            "four_cycle_count": four_cycle_count,
+            "three_star_count": three_star_count,
+            "triangle_count_norm": triangle_count / n3,
+            "wedge_count_norm": wedge_count / n3,
+            "four_cycle_count_norm": four_cycle_count / n3,
+            "three_star_count_norm": three_star_count / n3,
+            "transitivity": transitivity,
+            "degree_entropy": deg_entropy,
+            "assortativity": assortativity,
+        }
 
         return StructuralStateSummary(
             n_nodes=n,
@@ -898,12 +984,13 @@ class DatasetGenerator:
             degree_mean=deg_mean,
             degree_std=deg_std,
             n_components=1,  # assume connected for generated graphs
-            avg_clustering=0.0,
+            avg_clustering=avg_clustering,
             fiber_count=1,
             fiber_width=int(self.config.fiber.d_base),
             gauge_dim=int(self.config.fiber.gauge_dim),
             state_hash=state_hash,
             graph_version=int(graph.version),
+            extra=extra,
         )
 
 

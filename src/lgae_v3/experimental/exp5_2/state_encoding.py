@@ -178,8 +178,9 @@ def encode_normalized_state(
 
     Args:
         state: A StructuralStateSummary with n_nodes, n_edges, density, etc.
+            The `extra` dict may contain graphlet features.
         graph: Optional GraphBuffers for computing graphlet frequencies.
-            If not provided, graphlet counts will be 0.
+            If not provided, graphlet counts come from the state's extra dict.
 
     Returns:
         NormalizedStateVector of dimension NORM_STATE_DIM.
@@ -204,23 +205,21 @@ def encode_normalized_state(
     log_spectral_gap = math.log1p(max(abs(spectral_gap), 1e-10))
     fiber_count_normalized = fiber_count / max(n_nodes, 1.0)
 
-    # Degree entropy (topology-invariant).
-    degree_entropy = 0.0
-    # Graphlet frequencies (topology-invariant).
-    triangle_count_norm = 0.0
-    wedge_count_norm = 0.0
-    four_cycle_count_norm = 0.0
-    three_star_count_norm = 0.0
-    assortativity_proxy = 0.0
-    transitivity = 0.0
-    modularity_proxy = 0.0
-    diameter_proxy = 0.0
-    avg_path_length_proxy = 0.0
+    # Graphlet features from extra dict (populated by dataset generator).
+    extra = getattr(state, "extra", {}) or {}
 
+    degree_entropy = float(extra.get("degree_entropy", 0.0))
+    triangle_count_norm = float(extra.get("triangle_count_norm", 0.0))
+    wedge_count_norm = float(extra.get("wedge_count_norm", 0.0))
+    four_cycle_count_norm = float(extra.get("four_cycle_count_norm", 0.0))
+    three_star_count_norm = float(extra.get("three_star_count_norm", 0.0))
+    assortativity_proxy = float(extra.get("assortativity", 0.0))
+    transitivity = float(extra.get("transitivity", 0.0))
+
+    # If graph is provided, compute directly (overrides extra).
     if graph is not None:
         n = int(graph.num_nodes)
         valid = graph.valid.bool()
-        # Build adjacency.
         adj: dict[int, set[int]] = {i: set() for i in range(n)}
         degrees = [0] * n
         for i in range(graph.src.shape[0]):
@@ -234,40 +233,30 @@ def encode_normalized_state(
                     degrees[d] += 1
 
         degree_entropy = _compute_degree_entropy(degrees)
-
-        # Graphlet counts (normalized by n_nodes^3 for scale invariance).
         n3 = max(n ** 3, 1)
         triangle_count = _count_triangles(adj, n)
         wedge_count = _count_wedges(adj, n)
         three_star_count = _count_3_stars(adj, n)
         four_cycle_count = _count_4_cycles(adj, n)
-
         triangle_count_norm = triangle_count / n3
         wedge_count_norm = wedge_count / n3
         four_cycle_count_norm = four_cycle_count / n3
         three_star_count_norm = three_star_count / n3
-
-        # Assortativity.
         assortativity_proxy = _assortativity_proxy(degrees, adj)
+        transitivity = 3.0 * triangle_count / max(wedge_count, 1)
 
-        # Transitivity = 3 * triangles / wedges.
-        transitivity = (3.0 * triangle_count / max(wedge_count, 1))
+    # Modularity proxy.
+    modularity_proxy = max(0.0, 1.0 - avg_clustering)
 
-        # Modularity proxy: 1 - avg_clustering (higher for modular graphs).
-        modularity_proxy = max(0.0, 1.0 - avg_clustering)
-
-        # Diameter and path length proxies (avoid expensive BFS).
-        # Use 1 / spectral_gap as a proxy for diameter.
-        if spectral_gap > 1e-10:
-            diameter_proxy = 1.0 / spectral_gap
-            avg_path_length_proxy = 1.0 / (2.0 * spectral_gap)
-        else:
-            diameter_proxy = float(n)
-            avg_path_length_proxy = float(n) / 2.0
-
-        # Normalize by n_nodes.
-        diameter_proxy /= max(n, 1)
-        avg_path_length_proxy /= max(n, 1)
+    # Diameter and path length proxies.
+    if spectral_gap > 1e-10:
+        diameter_proxy = 1.0 / spectral_gap
+        avg_path_length_proxy = 1.0 / (2.0 * spectral_gap)
+    else:
+        diameter_proxy = float(n_nodes)
+        avg_path_length_proxy = float(n_nodes) / 2.0
+    diameter_proxy /= max(n_nodes, 1)
+    avg_path_length_proxy /= max(n_nodes, 1)
 
     vec = np.array([
         density,

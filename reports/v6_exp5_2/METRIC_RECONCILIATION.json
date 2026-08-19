@@ -1,0 +1,51 @@
+{
+  "artifact_type": "metric_reconciliation",
+  "release": "v6.0-exp5.2",
+  "commit": "a2ef872",
+  "date": "2026-08-19",
+  "description": "Reconciliation of the apparent contradiction between one-step TEST-B R²=-2.609 and rollout R²=0.978.",
+
+  "contradiction": {
+    "one_step_test_b_r2": -2.6091,
+    "rollout_test_b_h1_r2": 0.9784,
+    "apparent_contradiction": "How can one-step prediction be worse than mean predictor while multi-step rollout is near-perfect?"
+  },
+
+  "root_cause": {
+    "one_step_evaluation": "Used ALL 420 TEST-B records (60 realized + 360 counterfactual)",
+    "rollout_evaluation": "Used ONLY realized records (48 at h=1) with trajectory filtering",
+    "counterfactual_contamination": "360 counterfactual records have delta magnitude 3.517 (35x larger than realized at 0.110)",
+    "training_contamination": "735 training records = 105 realized + 630 counterfactual"
+  },
+
+  "reconciliation": {
+    "all_test_b_r2": -2.6091,
+    "realized_only_r2": 0.9816,
+    "counterfactual_only_r2": -3.1784,
+    "realized_matches_rollout": true,
+    "explanation": "The one-step R² was contaminated by counterfactual records. On realized records only, one-step R²=0.982 matches rollout R²=0.978."
+  },
+
+  "deeper_finding": {
+    "zero_delta_baseline_r2": 0.9274,
+    "model_r2": 0.9824,
+    "delta_r2": -0.2419,
+    "implication": "The high absolute R² is inflated by low variance of state changes. The zero-delta predictor (predict no change) already gets R²=0.927. The model's delta predictions are worse than mean-delta (delta R²=-0.24). The absolute R² is NOT a meaningful metric for this task.",
+    "correct_metric": "Delta R² on invariant dimensions only, compared against zero-delta baseline"
+  },
+
+  "per_family_realized": {
+    "circular_ladder": {"r2": 0.9884, "zero_delta_r2": 0.4978, "n": 15},
+    "hypercube": {"r2": 0.7238, "zero_delta_r2": 0.4013, "n": 15},
+    "ladder": {"r2": 0.9718, "zero_delta_r2": 0.4776, "n": 15},
+    "wheel": {"r2": 0.8850, "zero_delta_r2": 0.4956, "n": 15}
+  },
+
+  "methodology_corrections": {
+    "training": "Train on REALIZED records only (not counterfactual)",
+    "evaluation": "Evaluate on REALIZED records only",
+    "primary_metric": "Delta R² on invariant dimensions, not absolute R²",
+    "baseline_comparison": "Always compare against zero-delta predictor",
+    "state_decomposition": "Split state into invariant/context/derived and evaluate Δz_invariant separately"
+  }
+}
