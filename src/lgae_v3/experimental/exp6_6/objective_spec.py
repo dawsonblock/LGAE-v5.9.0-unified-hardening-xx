@@ -59,8 +59,8 @@ OBJECTIVE_SPECS: dict[str, ObjectiveSpec] = {
         name="hub_load_threshold",
         observable="hub_load",
         direction="minimize",  # minimize variance
-        threshold=5.0,
-        magnitude=25.0,
+        threshold=1.0,  # target_var = 1/n, very tight
+        magnitude=30.0,
         reward_shape="threshold",
     ),
     "spectral_gap_threshold": ObjectiveSpec(

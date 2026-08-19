@@ -131,25 +131,66 @@ def _make_graph_from_config(config: MechanismTaskConfig) -> tuple[GraphBuffers, 
     graph, z, _ = make_procedural_graph(proc_config)
 
     # For redundancy and hub_load, add extra within-component edges
-    # to create degree variation that enables delayed value.
+    # to raise most nodes to degree 2, leaving only 2 nodes at
+    # degree 1 across the entire graph. This creates a scenario where
+    # the threshold bonus (all nodes degree >= 2) is reachable in H=2
+    # but requires non-greedy actions to raise the remaining low-degree nodes.
     if config.mechanism in ("redundancy_threshold", "hub_load_threshold"):
         import random as pyrandom
         rng = pyrandom.Random(config.seed + 1)
-        from ..exp6_4.structural_features import compute_component_info
-        comp_info = compute_component_info(graph, config.n_nodes)
 
-        # Add edges within each component to create degree imbalance.
+        # Compute current degrees.
+        n = config.n_nodes
+        degrees = np.zeros(n)
+        valid = graph.valid.bool()
+        for j in range(graph.src.shape[0]):
+            if valid[j]:
+                s, d = int(graph.src[j].item()), int(graph.dst[j].item())
+                if s < n: degrees[s] += 1
+                if d < n: degrees[d] += 1
+
+        # Find all degree-1 nodes.
+        deg1_nodes = [i for i in range(n) if degrees[i] <= 1]
+
+        # We want to leave exactly 2 degree-1 nodes for delayed value.
+        # Pair up the rest by adding edges between them.
+        from ..exp6_4.structural_features import compute_component_info
+        comp_info = compute_component_info(graph, n)
+
+        rng.shuffle(deg1_nodes)
+        n_to_fix = max(0, len(deg1_nodes) - 2)  # leave 2 unpaired
+
+        existing_edges = set()
+        for j in range(graph.src.shape[0]):
+            if valid[j]:
+                s, d = int(graph.src[j].item()), int(graph.dst[j].item())
+                existing_edges.add((min(s, d), max(s, d)))
+
         extra_edges: list[tuple[int, int]] = []
-        for comp_id in range(comp_info.n_components):
-            nodes_in_comp = [i for i in range(config.n_nodes)
-                             if comp_info.component_ids[i] == comp_id]
-            if len(nodes_in_comp) < 3:
-                continue
-            # Add a few extra edges to create hubs and low-degree nodes.
-            n_extra = min(len(nodes_in_comp) // 2, 3)
-            for _ in range(n_extra):
-                u, v = rng.sample(nodes_in_comp, 2)
-                extra_edges.append((u, v))
+        fixed = 0
+        for j in range(len(deg1_nodes)):
+            if fixed >= n_to_fix:
+                break
+            u = deg1_nodes[j]
+            if degrees[u] >= 2:
+                continue  # already fixed
+            # Find another degree-1 node in the same component to pair with.
+            u_comp = int(comp_info.component_ids[u])
+            for k in range(j + 1, len(deg1_nodes)):
+                v = deg1_nodes[k]
+                if degrees[v] >= 2:
+                    continue
+                v_comp = int(comp_info.component_ids[v])
+                if u_comp != v_comp:
+                    continue
+                edge = (min(u, v), max(u, v))
+                if edge not in existing_edges:
+                    extra_edges.append((u, v))
+                    existing_edges.add(edge)
+                    degrees[u] += 1
+                    degrees[v] += 1
+                    fixed += 2
+                    break
 
         if extra_edges:
             from ...types import make_graph_buffers

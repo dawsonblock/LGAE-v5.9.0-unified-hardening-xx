@@ -44,14 +44,19 @@ class TestFConfig:
 def utility_redundancy_threshold(graph: GraphBuffers, z: torch.Tensor,
                                   lambda_bonus: float = 25.0,
                                   threshold: int = 2) -> float:
-    """Bonus when enough nodes have degree >= threshold.
+    """Bonus when ALL nodes have degree >= threshold.
 
-    U = U_additive + lambda * max(0, n_nodes_with_degree_ge_threshold - target_count)
+    U = U_additive + lambda * n * I(min_degree >= threshold)
 
-    Delayed value: adding edges to low-degree nodes has negative immediate
-    additive utility (cross-cluster) but increases the count of nodes
-    meeting the degree threshold. The bonus triggers when enough nodes
-    reach the threshold, creating a delayed-value structure.
+    This is a true threshold bonus: 0 until every node reaches the
+    degree threshold, then a large bonus. The delayed value comes
+    from needing to add edges to multiple low-degree nodes before
+    the bonus triggers. A single edge to one low-degree node doesn't
+    help if other nodes are still below threshold.
+
+    The greedy action (maximizing additive utility) may prefer
+    within-cluster edges, while the optimal H=2 action may need to
+    first raise a low-degree node, then another, to trigger the bonus.
     """
     u_add = compute_additive_utility(graph, z)
     n = int(graph.num_nodes)
@@ -63,24 +68,31 @@ def utility_redundancy_threshold(graph: GraphBuffers, z: torch.Tensor,
             d = int(graph.dst[i].item())
             if s < n: degrees[s] += 1
             if d < n: degrees[d] += 1
-    n_above = int(np.sum(degrees >= threshold))
-    # Target: at least 60% of nodes with degree >= threshold.
-    target = int(n * 0.6)
-    bonus = lambda_bonus * max(0, n_above - target)
+    min_degree = int(np.min(degrees))
+    # Step bonus: only when ALL nodes meet the threshold.
+    if min_degree >= threshold:
+        bonus = lambda_bonus * n
+    else:
+        bonus = 0.0
     return u_add + bonus
 
 
 def utility_hub_load_threshold(graph: GraphBuffers, z: torch.Tensor,
                                 lambda_bonus: float = 25.0,
-                                threshold: int = 5) -> float:
-    """Bonus when degree variance is low (balanced graph).
+                                threshold: int = 2) -> float:
+    """Bonus when degree variance is below threshold (balanced graph).
 
-    U = U_additive + lambda * max(0, target_variance - degree_variance)
+    U = U_additive + lambda * n * I(variance < target_variance)
 
-    Delayed value: adding edges to low-degree nodes has negative immediate
-    additive utility (cross-cluster) but reduces degree variance, moving
-    toward a balanced graph. The bonus triggers when variance drops below
-    the threshold, creating delayed value from balance-promoting actions.
+    This is a true threshold bonus: 0 until degree variance drops
+    below the target, then a large bonus. With add_edge actions,
+    adding edges to low-degree nodes reduces variance. The delayed
+    value: you need to add edges to several low-degree nodes before
+    variance drops below the threshold.
+
+    The greedy action may prefer high-utility edges, while the
+    optimal H=2 action may need to first balance one low-degree node,
+    then another, to trigger the bonus.
     """
     u_add = compute_additive_utility(graph, z)
     n = int(graph.num_nodes)
@@ -92,11 +104,14 @@ def utility_hub_load_threshold(graph: GraphBuffers, z: torch.Tensor,
             d = int(graph.dst[i].item())
             if s < n: degrees[s] += 1
             if d < n: degrees[d] += 1
-    mean_deg = float(np.mean(degrees))
     var_deg = float(np.var(degrees))
-    # Target: variance below threshold/n (normalized).
-    target_var = threshold / max(n, 1)
-    bonus = lambda_bonus * max(0, target_var - var_deg) * n
+    # Target variance: threshold^2 / n (scales with graph size).
+    target_var = (threshold ** 2) / max(n, 1)
+    # Step bonus: only when variance is below target.
+    if var_deg < target_var:
+        bonus = lambda_bonus * n
+    else:
+        bonus = 0.0
     return u_add + bonus
 
 

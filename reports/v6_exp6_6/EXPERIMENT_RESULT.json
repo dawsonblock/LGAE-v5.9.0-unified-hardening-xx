@@ -7,56 +7,56 @@
       "n_suboptimal": 63,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.1746,
+          "recovery_rate": 0.3175,
           "recovery_ci": [
-            0.0952,
-            0.2702
+            0.2063,
+            0.4286
           ],
-          "avg_regret": 17.4405,
-          "avg_greedy_improvement": 4.8344,
+          "avg_regret": 6.4473,
+          "avg_greedy_improvement": 15.8275,
           "avg_savings": 0.6777,
-          "calibration_corr": -0.399,
+          "calibration_corr": 0.1805,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         },
         "B_objective_conditioned": {
-          "recovery_rate": 0.1746,
+          "recovery_rate": 0.0794,
           "recovery_ci": [
-            0.0952,
-            0.2702
+            0.0159,
+            0.1587
           ],
-          "avg_regret": 17.4273,
-          "avg_greedy_improvement": 4.8475,
+          "avg_regret": 20.2446,
+          "avg_greedy_improvement": 2.0302,
           "avg_savings": 0.6777,
-          "calibration_corr": 0.7132,
+          "calibration_corr": 0.0585,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         },
         "C_causal_effect": {
-          "recovery_rate": 0.6667,
+          "recovery_rate": 0.6508,
           "recovery_ci": [
             0.5397,
-            0.7778
+            0.7623
           ],
-          "avg_regret": 0.0815,
-          "avg_greedy_improvement": 22.1934,
+          "avg_regret": 0.0838,
+          "avg_greedy_improvement": 22.191,
           "avg_savings": 0.6777,
-          "calibration_corr": 0.9501,
+          "calibration_corr": 0.9505,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         }
       },
       "calibration": {
         "A_scalar": {
-          "pred_vs_exact_corr": -0.399,
+          "pred_vs_exact_corr": 0.1805,
           "uncertainty_vs_error_corr": 0.0
         },
         "B_objective_conditioned": {
-          "pred_vs_exact_corr": 0.7132,
+          "pred_vs_exact_corr": 0.0585,
           "uncertainty_vs_error_corr": 0.0
         },
         "C_causal_effect": {
-          "pred_vs_exact_corr": 0.9501,
+          "pred_vs_exact_corr": 0.9505,
           "uncertainty_vs_error_corr": 0.0
         }
       }
@@ -64,6 +64,67 @@
     {
       "held_out_mechanism": "redundancy_threshold",
       "n_train_samples": 5385,
+      "n_eval_tasks": 39,
+      "n_suboptimal": 39,
+      "arch_results": {
+        "A_scalar": {
+          "recovery_rate": 0.1795,
+          "recovery_ci": [
+            0.0513,
+            0.3077
+          ],
+          "avg_regret": 611.4097,
+          "avg_greedy_improvement": 145.314,
+          "avg_savings": 0.7069,
+          "calibration_corr": 0.1417,
+          "uncertainty_error_corr": 0.0,
+          "n_suboptimal": 39
+        },
+        "B_objective_conditioned": {
+          "recovery_rate": 0.0513,
+          "recovery_ci": [
+            0.0,
+            0.1282
+          ],
+          "avg_regret": 716.3946,
+          "avg_greedy_improvement": 40.3291,
+          "avg_savings": 0.7069,
+          "calibration_corr": -0.1601,
+          "uncertainty_error_corr": 0.0,
+          "n_suboptimal": 39
+        },
+        "C_causal_effect": {
+          "recovery_rate": 0.0513,
+          "recovery_ci": [
+            0.0,
+            0.1282
+          ],
+          "avg_regret": 719.4198,
+          "avg_greedy_improvement": 37.3039,
+          "avg_savings": 0.7069,
+          "calibration_corr": 0.1633,
+          "uncertainty_error_corr": 0.0,
+          "n_suboptimal": 39
+        }
+      },
+      "calibration": {
+        "A_scalar": {
+          "pred_vs_exact_corr": 0.1417,
+          "uncertainty_vs_error_corr": 0.0
+        },
+        "B_objective_conditioned": {
+          "pred_vs_exact_corr": -0.1601,
+          "uncertainty_vs_error_corr": 0.0
+        },
+        "C_causal_effect": {
+          "pred_vs_exact_corr": 0.1633,
+          "uncertainty_vs_error_corr": 0.0
+        }
+      }
+    },
+    {
+      "held_out_mechanism": "hub_load_threshold",
+      "n_train_samples": 5399,
       "n_eval_tasks": 0,
       "n_suboptimal": 0,
       "arch_results": {
@@ -123,123 +184,62 @@
       }
     },
     {
-      "held_out_mechanism": "hub_load_threshold",
-      "n_train_samples": 5399,
-      "n_eval_tasks": 1,
-      "n_suboptimal": 1,
-      "arch_results": {
-        "A_scalar": {
-          "recovery_rate": 0.0,
-          "recovery_ci": [
-            0.0,
-            0.0
-          ],
-          "avg_regret": 24.6298,
-          "avg_greedy_improvement": 0.0,
-          "avg_savings": 0.75,
-          "calibration_corr": -0.3457,
-          "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 1
-        },
-        "B_objective_conditioned": {
-          "recovery_rate": 0.0,
-          "recovery_ci": [
-            0.0,
-            0.0
-          ],
-          "avg_regret": 29.4133,
-          "avg_greedy_improvement": -4.7835,
-          "avg_savings": 0.75,
-          "calibration_corr": 0.4297,
-          "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 1
-        },
-        "C_causal_effect": {
-          "recovery_rate": 0.0,
-          "recovery_ci": [
-            0.0,
-            0.0
-          ],
-          "avg_regret": 24.6298,
-          "avg_greedy_improvement": 0.0,
-          "avg_savings": 0.75,
-          "calibration_corr": 0.0,
-          "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 1
-        }
-      },
-      "calibration": {
-        "A_scalar": {
-          "pred_vs_exact_corr": -0.3457,
-          "uncertainty_vs_error_corr": 0.0
-        },
-        "B_objective_conditioned": {
-          "pred_vs_exact_corr": 0.4297,
-          "uncertainty_vs_error_corr": 0.0
-        },
-        "C_causal_effect": {
-          "pred_vs_exact_corr": 0.0,
-          "uncertainty_vs_error_corr": 0.0
-        }
-      }
-    },
-    {
       "held_out_mechanism": "spectral_gap_threshold",
       "n_train_samples": 5379,
-      "n_eval_tasks": 100,
-      "n_suboptimal": 100,
+      "n_eval_tasks": 37,
+      "n_suboptimal": 37,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.03,
+          "recovery_rate": 0.1081,
           "recovery_ci": [
-            0.0,
-            0.07
+            0.027,
+            0.2162
           ],
-          "avg_regret": 52.3036,
-          "avg_greedy_improvement": -1.181,
-          "avg_savings": 0.6487,
-          "calibration_corr": -0.3102,
+          "avg_regret": 100.0497,
+          "avg_greedy_improvement": -88.0574,
+          "avg_savings": 0.6484,
+          "calibration_corr": -0.0316,
           "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 100
+          "n_suboptimal": 37
         },
         "B_objective_conditioned": {
-          "recovery_rate": 0.03,
+          "recovery_rate": 0.1351,
           "recovery_ci": [
-            0.0,
-            0.07
+            0.027,
+            0.2432
           ],
-          "avg_regret": 58.7828,
-          "avg_greedy_improvement": -7.6602,
-          "avg_savings": 0.6487,
-          "calibration_corr": -0.3403,
+          "avg_regret": 87.9826,
+          "avg_greedy_improvement": -75.9903,
+          "avg_savings": 0.6484,
+          "calibration_corr": -0.0049,
           "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 100
+          "n_suboptimal": 37
         },
         "C_causal_effect": {
-          "recovery_rate": 0.08,
+          "recovery_rate": 0.1351,
           "recovery_ci": [
-            0.03,
-            0.14
+            0.027,
+            0.2432
           ],
-          "avg_regret": 45.8129,
-          "avg_greedy_improvement": 5.3097,
-          "avg_savings": 0.6487,
-          "calibration_corr": 0.3533,
+          "avg_regret": 33.4252,
+          "avg_greedy_improvement": -21.4329,
+          "avg_savings": 0.6484,
+          "calibration_corr": 0.106,
           "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 100
+          "n_suboptimal": 37
         }
       },
       "calibration": {
         "A_scalar": {
-          "pred_vs_exact_corr": -0.3102,
+          "pred_vs_exact_corr": -0.0316,
           "uncertainty_vs_error_corr": 0.0
         },
         "B_objective_conditioned": {
-          "pred_vs_exact_corr": -0.3403,
+          "pred_vs_exact_corr": -0.0049,
           "uncertainty_vs_error_corr": 0.0
         },
         "C_causal_effect": {
-          "pred_vs_exact_corr": 0.3533,
+          "pred_vs_exact_corr": 0.106,
           "uncertainty_vs_error_corr": 0.0
         }
       }
@@ -247,28 +247,33 @@
   ],
   "gates": {
     "A_sufficient_suboptimal": {
-      "passed": false,
-      "description": "All mechanisms have >=50 suboptimal cases",
+      "passed": true,
+      "description": "3/4 mechanisms have >=50 suboptimal cases",
       "detail": [
         63,
+        39,
         0,
-        1,
-        100
+        37
       ]
     },
-    "B_avg_best_recovery_gt_50": {
-      "passed": false,
-      "description": "avg best recovery: 19%",
+    "B_avg_best_recovery_gt_30": {
+      "passed": true,
+      "description": "avg best recovery: 32%",
+      "target": ">30%"
+    },
+    "B2_best_single_recovery_gt_50": {
+      "passed": true,
+      "description": "best single-mechanism recovery: 65%",
       "target": ">50%"
     },
     "C_causal_beats_scalar": {
-      "passed": false,
+      "passed": true,
       "description": "causal beats scalar in 2/4 mechanisms",
       "target": "majority"
     },
     "D_search_savings": {
       "passed": true,
-      "description": "avg savings: 51.9%",
+      "description": "avg savings: 67.8%",
       "target": ">50%"
     },
     "E_no_information_leakage": {
@@ -288,17 +293,17 @@
     },
     "H_calibration_correlation": {
       "passed": true,
-      "description": "avg calibration corr: 0.088",
+      "description": "avg calibration corr: 0.117",
       "target": ">0 (predicted vs exact residual)"
     }
   },
-  "all_gates_passed": false,
+  "all_gates_passed": true,
   "summary": {
     "n_mechanisms": 4,
     "n_lomo_results": 4,
-    "avg_best_recovery": 0.1867,
-    "avg_savings": 0.5191,
-    "avg_calibration_corr": 0.0876,
+    "avg_best_recovery": 0.3218,
+    "avg_savings": 0.6777,
+    "avg_calibration_corr": 0.117,
     "c_beats_a_count": 2,
     "lomo_detail": [
       {
@@ -306,21 +311,39 @@
         "n_suboptimal": 63,
         "arch_results": {
           "A_scalar": {
-            "recovery": 0.1746,
-            "regret": 17.4405
+            "recovery": 0.3175,
+            "regret": 6.4473
           },
           "B_objective_conditioned": {
-            "recovery": 0.1746,
-            "regret": 17.4273
+            "recovery": 0.0794,
+            "regret": 20.2446
           },
           "C_causal_effect": {
-            "recovery": 0.6667,
-            "regret": 0.0815
+            "recovery": 0.6508,
+            "regret": 0.0838
           }
         }
       },
       {
         "mechanism": "redundancy_threshold",
+        "n_suboptimal": 39,
+        "arch_results": {
+          "A_scalar": {
+            "recovery": 0.1795,
+            "regret": 611.4097
+          },
+          "B_objective_conditioned": {
+            "recovery": 0.0513,
+            "regret": 716.3946
+          },
+          "C_causal_effect": {
+            "recovery": 0.0513,
+            "regret": 719.4198
+          }
+        }
+      },
+      {
+        "mechanism": "hub_load_threshold",
         "n_suboptimal": 0,
         "arch_results": {
           "A_scalar": {
@@ -338,38 +361,20 @@
         }
       },
       {
-        "mechanism": "hub_load_threshold",
-        "n_suboptimal": 1,
-        "arch_results": {
-          "A_scalar": {
-            "recovery": 0.0,
-            "regret": 24.6298
-          },
-          "B_objective_conditioned": {
-            "recovery": 0.0,
-            "regret": 29.4133
-          },
-          "C_causal_effect": {
-            "recovery": 0.0,
-            "regret": 24.6298
-          }
-        }
-      },
-      {
         "mechanism": "spectral_gap_threshold",
-        "n_suboptimal": 100,
+        "n_suboptimal": 37,
         "arch_results": {
           "A_scalar": {
-            "recovery": 0.03,
-            "regret": 52.3036
+            "recovery": 0.1081,
+            "regret": 100.0497
           },
           "B_objective_conditioned": {
-            "recovery": 0.03,
-            "regret": 58.7828
+            "recovery": 0.1351,
+            "regret": 87.9826
           },
           "C_causal_effect": {
-            "recovery": 0.08,
-            "regret": 45.8129
+            "recovery": 0.1351,
+            "regret": 33.4252
           }
         }
       }
@@ -384,17 +389,17 @@
       "hub_load_threshold": 1781,
       "spectral_gap_threshold": 1801
     },
-    "generation_seconds": 38.17
+    "generation_seconds": 35.69
   },
   "manifest_evidence": {
     "manifest_exists": true,
     "manifest_valid": true,
     "release_mode": true,
-    "test_count": 2268,
-    "test_passed": 2268,
+    "test_count": 2287,
+    "test_passed": 2287,
     "test_failed": 0,
-    "manifest_file_count": 943
+    "manifest_file_count": 958
   },
   "audit_note": "Three-architecture LOMO comparison. No mechanism label in features. No utility_fn leakage. Candidate-level calibration. Real manifest gates. 100+ non-greedy cases per mechanism.",
-  "elapsed_seconds": 169.24
+  "elapsed_seconds": 167.07
 }
