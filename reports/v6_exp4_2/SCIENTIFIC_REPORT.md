@@ -1,7 +1,7 @@
 # v6.0-exp4.2 — Held-Out Structural Prediction Study
 
 **Experiment ID:** v6.0-exp4.2
-**Generated at:** 2026-08-19T02:16:18Z
+**Generated at:** 2026-08-19T03:29:36Z
 
 ## 1. Question
 
@@ -36,23 +36,29 @@ accessed during any selection decision.
 
 ## 5. Models and Encoders
 
-Total combinations evaluated: 6
+Total combinations evaluated: 12
 
 | Encoder | Predictor | Target | Val Score | Held Spearman |
 |---------|-----------|--------|-----------|---------------|
-| global-local | tree | realized_delta | 0.0000 | 0.4557 |
-| geometric | tree | realized_delta | 0.0000 | 0.4557 |
-| global-local | mlp | realized_delta | 0.0000 | 0.5923 |
-| global-local | tree | sign_delta | 0.0000 | 0.6335 |
-| geometric | tree | sign_delta | 0.0000 | 0.6335 |
-| minimal-control | tree | sign_delta | 0.0000 | 0.6454 |
+| global-local | linear | realized_delta | 0.1325 | 0.7099 |
+| global-local | ridge | realized_delta | 0.1325 | 0.7099 |
+| geometric | linear | realized_delta | 0.1325 | 0.7099 |
+| minimal-control | tree | sign_delta | 0.1142 | 0.5062 |
+| global | tree | sign_delta | 0.1142 | 0.5062 |
+| learned-graph | tree | sign_delta | 0.1142 | 0.5062 |
+| minimal-control | global_mean | realized_delta | 0.0241 | -0.3044 |
+| minimal-control | mutation_type_mean | realized_delta | 0.0241 | -0.3044 |
+| minimal-control | nearest_experience | realized_delta | 0.1113 | 0.6013 |
+| minimal-control | global_mean | sign_delta | 0.0948 | -0.0226 |
+| minimal-control | mutation_type_mean | sign_delta | 0.0000 | -0.0226 |
+| minimal-control | nearest_experience | sign_delta | 0.0000 | 0.5627 |
 
 ## 6. Held-Out Results
 
-- Best held-out Spearman: 0.6454
-- Best held-out regret: 0.0667
-- Best encoder: minimal-control
-- Best predictor: tree
+- Best held-out Spearman: 0.7099
+- Best held-out regret: 0.0052
+- Best encoder: global-local
+- Best predictor: linear
 
 ## 7. Counterfactual Transfer
 
@@ -64,13 +70,16 @@ Total combinations evaluated: 6
 
 ## 9. Conclusion
 
-**Status:** QUALIFIED_SIMPLE
+**Status:** PRELIMINARY_SIGNAL_DETECTED
 
 **exp5 authorized:** True
 
 ## 10. Limitations
 
 - Uncertainty does not correlate with error — trust signal is weak.
+- Dataset is synthetic with limited mutation type diversity.
+- Multi-step rollout quality is not yet validated for MPC use.
+- Risk target is near-constant — risk prediction is not scientifically tested.
 
 ## 11. Decision on exp5
 

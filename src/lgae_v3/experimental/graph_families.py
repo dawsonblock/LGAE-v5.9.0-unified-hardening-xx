@@ -92,11 +92,35 @@ FROZEN_HELD_OUT_FAMILIES: tuple[GraphFamily, ...] = (
     GraphFamily.TREE,
 )
 
-# The frozen split instance.
+# v6.0-exp5.1: TEST-B — untouched external split.
+# These families were NEVER used during exp4.2 or exp5 development.
+# They are only opened once for the final exp5.1 qualification.
+# The old held-out (COMPLETE, TREE) is now TEST-A / development data
+# for exp5, since exp5 used it for model selection (linear vs MLP).
+FROZEN_TEST_B_FAMILIES: tuple[GraphFamily, ...] = (
+    GraphFamily.WHEEL,
+    GraphFamily.LADDER,
+    GraphFamily.CIRCULAR_LADDER,
+    GraphFamily.HYPERCUBE,
+)
+
+# The frozen split instance (original exp4.2 split).
 FROZEN_SPLIT = GraphFamilySplit(
     train=FROZEN_TRAIN_FAMILIES,
     validation=FROZEN_VALIDATION_FAMILIES,
     held_out=FROZEN_HELD_OUT_FAMILIES,
+    n_nodes=20,
+    n_seeds=3,
+    base_seed=42,
+)
+
+# v6.0-exp5.1: Extended split with TEST-B.
+# The old held_out is now "test_a" (development data for exp5).
+# test_b is the untouched final external split.
+FROZEN_SPLIT_V5_1 = GraphFamilySplit(
+    train=FROZEN_TRAIN_FAMILIES,
+    validation=FROZEN_VALIDATION_FAMILIES,
+    held_out=FROZEN_TEST_B_FAMILIES,  # TEST-B replaces old held-out
     n_nodes=20,
     n_seeds=3,
     base_seed=42,
@@ -114,6 +138,18 @@ class FrozenGraphFamilyRegistry:
     def __init__(self, split: GraphFamilySplit | None = None) -> None:
         self.split = split or FROZEN_SPLIT
         self._generator = CurriculumGenerator(seed=self.split.base_seed)
+
+    def test_b_entries(self) -> list[CurriculumEntry]:
+        """Curriculum entries for the TEST-B split (v6.0-exp5.1).
+
+        These families were never used during exp4.2 or exp5.
+        They are only opened once for final exp5.1 qualification.
+        """
+        return self._generator.generate_curriculum(
+            n_nodes=self.split.n_nodes,
+            families=list(FROZEN_TEST_B_FAMILIES),
+            n_seeds=self.split.n_seeds,
+        )
 
     def train_entries(self) -> list[CurriculumEntry]:
         """Curriculum entries for the train split."""

@@ -1,16 +1,17 @@
 {
-  "content_hash": "16eb2ac1b1da1be307502d60280ee2d4a594b16d65bc90c26308fe1ef47126c7",
+  "content_hash": "2a97da363f20ef2b9296171e9907b2aecc7a1b42b96f37ce7571147033b74aaf",
   "graph_family_distribution": {
-    "complete": 15,
-    "tree": 60
+    "complete": 60,
+    "tree": 105
   },
   "mutation_distribution": {
     "ADD_EDGE": 45,
+    "REMOVE_EDGE": 90,
     "add_edge": 30
   },
-  "n_counterfactual": 45,
+  "n_counterfactual": 135,
   "n_realized": 30,
-  "n_records": 75,
+  "n_records": 165,
   "n_shadow": 0,
   "split": "held_out"
 }

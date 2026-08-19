@@ -1,7 +1,7 @@
 # v6.0-exp4.2 — Executive Summary
 
 **Experiment ID:** v6.0-exp4.2
-**Generated at:** 2026-08-19T02:16:18Z
+**Generated at:** 2026-08-19T03:29:36Z
 
 ## Scientific Question
 
@@ -9,14 +9,14 @@
 
 ## Conclusion
 
-**Status:** `QUALIFIED_SIMPLE`
+**Status:** `PRELIMINARY_SIGNAL_DETECTED`
 
 - Structural signal detected: **True**
 - Generalizes to held-out: **True**
-- Best encoder: **minimal-control**
-- Best predictor: **tree**
-- Best held-out Spearman: **0.6454**
-- Best held-out regret: **0.0667**
+- Best encoder: **global-local**
+- Best predictor: **linear**
+- Best held-out Spearman: **0.7099**
+- Best held-out regret: **0.0052**
 - CF→Real transfer OK: **True**
 - Uncertainty useful: **False**
 - **exp5 authorized: True**
@@ -26,6 +26,9 @@
 ## Limitations
 
 - Uncertainty does not correlate with error — trust signal is weak.
+- Dataset is synthetic with limited mutation type diversity.
+- Multi-step rollout quality is not yet validated for MPC use.
+- Risk target is near-constant — risk prediction is not scientifically tested.
 
 ## Decision
 

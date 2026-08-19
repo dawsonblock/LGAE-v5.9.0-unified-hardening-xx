@@ -29,6 +29,8 @@ class EvaluationResult:
     n_train: int = 0
     n_validation: int = 0
     n_heldout: int = 0
+    # v6.0-exp5.1: TEST-B metrics (fresh, untouched external split).
+    test_b_metrics: JointModelMetrics | None = None
 
     def to_log(self) -> dict[str, Any]:
         return {
@@ -39,6 +41,7 @@ class EvaluationResult:
             "n_train": int(self.n_train),
             "n_validation": int(self.n_validation),
             "n_heldout": int(self.n_heldout),
+            "test_b_metrics": self.test_b_metrics.to_log() if self.test_b_metrics else None,
         }
 
 
@@ -103,7 +106,14 @@ def rollout_evaluation(
     """Evaluate multi-step rollout accuracy.
 
     Groups records by episode and evaluates how prediction error
-    grows with rollout horizon.
+    grows with rollout horizon. Only uses REALIZED records (not
+    counterfactuals) to form trajectories, since counterfactuals
+    share the same episode_id and step_id but represent alternative
+    actions.
+
+    Uses per-feature normalized RMSE to avoid domination by
+    high-variance dimensions, and clips R² to a sane range to
+    avoid absurd values when feature variance is near-zero.
 
     Args:
         model: A fitted JointWorldModel.
@@ -114,24 +124,53 @@ def rollout_evaluation(
     Returns:
         RolloutReport with metrics per horizon.
     """
-    # Group records by episode.
+    # Group REALIZED records by episode (exclude counterfactuals).
+    from ..transition_record import TransitionProvenance
     episodes: dict[str, list[Any]] = {}
     for r in records:
         if getattr(r, "split", "") != split:
             continue
         if r.structural_state_after is None:
             continue
+        # Only use REALIZED records for trajectory construction.
+        prov = getattr(r, "provenance", None)
+        if prov is not None and hasattr(prov, "value"):
+            if "counterfactual" in prov.value.lower():
+                continue
+        elif isinstance(prov, str) and "counterfactual" in prov.lower():
+            continue
         ep = getattr(r, "episode_id", "unknown")
         episodes.setdefault(ep, []).append(r)
 
-    # Sort each episode by step_id.
+    # Sort each episode by step_id and deduplicate by step.
     for ep in episodes:
         episodes[ep].sort(key=lambda r: getattr(r, "step_id", 0))
+        # Keep only one record per step_id (the first/realized one).
+        seen_steps: set[int] = set()
+        unique: list[Any] = []
+        for r in episodes[ep]:
+            step = getattr(r, "step_id", 0)
+            if step not in seen_steps:
+                seen_steps.add(step)
+                unique.append(r)
+        episodes[ep] = unique
 
     report = RolloutReport(
         horizons=list(range(1, max_horizon + 1)),
         n_trajectories=len(episodes),
     )
+
+    # Compute per-feature normalization scales from the actual states.
+    all_actual_states: list[np.ndarray] = []
+    for ep_records in episodes.values():
+        for r in ep_records:
+            all_actual_states.append(encode_state(r.structural_state_before).vector)
+    if all_actual_states:
+        all_states_arr = np.array(all_actual_states)
+        feat_std = np.std(all_states_arr, axis=0)
+        feat_std[feat_std < 1e-8] = 1.0  # avoid division by zero
+    else:
+        feat_std = np.ones(STATE_DIM)
 
     for horizon in range(1, max_horizon + 1):
         all_preds = []
@@ -160,7 +199,10 @@ def rollout_evaluation(
                         z[np.newaxis, :], a.vector[np.newaxis, :]
                     )[0]
 
-                # Compare with actual state after horizon steps.
+                # Compare with actual state at the target step.
+                # ep_records[start_idx + horizon].structural_state_before
+                # is the state AFTER applying the action at step
+                # start_idx + horizon - 1, which is what we want.
                 r_actual = ep_records[start_idx + horizon]
                 z_actual = encode_state(r_actual.structural_state_before).vector
 
@@ -170,10 +212,21 @@ def rollout_evaluation(
         if all_preds:
             preds = np.array(all_preds)
             actuals = np.array(all_actuals)
-            metrics = compute_dynamics_metrics(preds, actuals, horizon=horizon)
-            report.rmse_by_horizon.append(metrics.rmse)
-            report.mae_by_horizon.append(metrics.mae)
-            report.r2_by_horizon.append(metrics.r2)
+            # Normalized RMSE (per-feature, then averaged).
+            norm_diff = (preds - actuals) / feat_std
+            norm_rmse = float(np.sqrt(np.mean(norm_diff ** 2)))
+            norm_mae = float(np.mean(np.abs(norm_diff)))
+            # R² with clipping to avoid absurd values.
+            diff = preds - actuals
+            ss_res = float(np.sum(diff ** 2))
+            ss_tot = float(np.sum((actuals - actuals.mean(axis=0)) ** 2))
+            if ss_tot < 1e-10:
+                r2 = 0.0  # near-constant target → R² undefined
+            else:
+                r2 = max(-10.0, min(1.0, 1.0 - ss_res / ss_tot))
+            report.rmse_by_horizon.append(norm_rmse)
+            report.mae_by_horizon.append(norm_mae)
+            report.r2_by_horizon.append(r2)
         else:
             report.rmse_by_horizon.append(0.0)
             report.mae_by_horizon.append(0.0)

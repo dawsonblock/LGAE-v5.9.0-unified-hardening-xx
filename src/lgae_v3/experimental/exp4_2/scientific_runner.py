@@ -85,6 +85,7 @@ class ScientificResult:
     encoding_latency_ms: float = 0.0
     prediction_latency_ms: float = 0.0
     artifact_hash: str = ""
+    is_control: bool = False  # True for scientific controls
 
     def to_log(self) -> dict[str, Any]:
         return {
@@ -107,6 +108,7 @@ class ScientificResult:
             "encoding_latency_ms": float(self.encoding_latency_ms),
             "prediction_latency_ms": float(self.prediction_latency_ms),
             "artifact_hash": self.artifact_hash,
+            "is_control": bool(self.is_control),
         }
 
 
@@ -127,6 +129,8 @@ class ScientificConclusion:
     cf_real_transfer_ok: bool = False
     uncertainty_useful: bool = False
     limitations: list[str] = field(default_factory=list)
+    per_target_summary: dict[str, Any] = field(default_factory=dict)
+    baseline_spearman: float = 0.0  # best control spearman on best target
 
     def to_log(self) -> dict[str, Any]:
         return {
@@ -144,6 +148,8 @@ class ScientificConclusion:
             "cf_real_transfer_ok": bool(self.cf_real_transfer_ok),
             "uncertainty_useful": bool(self.uncertainty_useful),
             "limitations": list(self.limitations),
+            "per_target_summary": dict(self.per_target_summary),
+            "baseline_spearman": float(self.baseline_spearman),
         }
 
     def to_json(self) -> str:
@@ -383,8 +389,27 @@ class ScientificRunner:
         self.state.lock_finalists(lock.config_hash)
         return lock
 
+    # Scientific controls that MUST always be evaluated on held-out,
+    # regardless of validation pruning. These are not competitors —
+    # they are immutable scientific controls.
+    SCIENTIFIC_CONTROLS = (
+        "global_mean",
+        "mutation_type_mean",
+        "nearest_experience",
+    )
+
     def open_heldout(self) -> list[ScientificResult]:
-        """Phase 29: One-shot held-out evaluation. No retraining."""
+        """Phase 29: One-shot held-out evaluation. No retraining.
+
+        Always evaluates:
+        1. All locked finalists.
+        2. Scientific controls (global_mean, mutation_type_mean,
+           nearest_experience) on every target, regardless of
+           whether they were validation finalists.
+
+        Controls are NOT subject to validation pruning. They are
+        scientific baselines that must be beaten on held-out.
+        """
         # Transition to HELDOUT_OPENED if not already.
         if self.state.state == "MODEL_LOCKED":
             self.state.transition_to("HELDOUT_OPENED", action="open_heldout")
@@ -394,14 +419,34 @@ class ScientificRunner:
         held_recs = [r for r in self._records if getattr(r, "split", "") == "held_out"]
 
         results = []
+
+        # 1. Evaluate locked finalists.
+        finalist_keys: set[tuple[str, str, str]] = set()
         for f in self._finalist_lock.finalists if self._finalist_lock else []:
             enc_id = f["encoder_id"]
             pred_id = f["predictor_id"]
             target = f["target"]
+            finalist_keys.add((enc_id, pred_id, target))
 
             result = self._evaluate_heldout(enc_id, pred_id, target, held_recs)
             if result is not None:
                 results.append(result)
+
+        # 2. Evaluate scientific controls on every target.
+        #    Use the minimal-control encoder for controls (simplest
+        #    representation), so the control is "simple stats on
+        #    simple features."
+        for target in self.config.targets:
+            for ctrl_pred in self.SCIENTIFIC_CONTROLS:
+                key = ("minimal-control", ctrl_pred, target)
+                if key in finalist_keys:
+                    continue  # already evaluated as a finalist
+                result = self._evaluate_heldout(
+                    "minimal-control", ctrl_pred, target, held_recs,
+                    is_control=True,
+                )
+                if result is not None:
+                    results.append(result)
 
         self._heldout_results = results
         return results
@@ -412,8 +457,20 @@ class ScientificRunner:
         pred_id: str,
         target: str,
         held_recs: list[Any],
+        *,
+        is_control: bool = False,
     ) -> ScientificResult | None:
-        """Evaluate one finalist on held-out data."""
+        """Evaluate one finalist or control on held-out data.
+
+        Args:
+            enc_id: Encoder identifier.
+            pred_id: Predictor identifier.
+            target: Target name.
+            held_recs: Held-out records.
+            is_control: If True, this is a scientific control (not a
+                competitor). Controls are always evaluated regardless
+                of validation pruning.
+        """
         from ..encoders import EncoderRegistry
         from ..models.model_registry import ModelRegistry
         from ..models.evaluator import (
@@ -493,14 +550,29 @@ class ScientificRunner:
         except Exception:
             cf_log = {}
 
+        # Carry forward validation metrics from training results.
+        val_metrics: dict[str, Any] = {}
+        mean_val_score = 0.0
+        std_val_score = 0.0
+        for tr in self._train_results:
+            if tr.encoder_id == enc_id and tr.predictor_id == pred_id and tr.target == target:
+                val_metrics = tr.validation_metrics
+                mean_val_score = tr.mean_validation_score
+                std_val_score = tr.std_validation_score
+                break
+
         return ScientificResult(
             encoder_id=enc_id,
             predictor_id=pred_id,
             target=target,
+            validation_metrics=val_metrics,
             heldout_metrics=held_m,
+            mean_validation_score=mean_val_score,
+            std_validation_score=std_val_score,
             regret=regret_report.to_log() if regret_report else {},
             uncertainty_correlation=unc_corr.to_log() if unc_corr else {},
             cf_real=cf_log,
+            is_control=is_control,
         )
 
     def finalize(self) -> ScientificConclusion:
@@ -517,24 +589,51 @@ class ScientificRunner:
         return conclusion
 
     def _compute_conclusion(self) -> ScientificConclusion:
-        """Compute the scientific conclusion from held-out results."""
-        # Find best model by held-out spearman.
+        """Compute the scientific conclusion from held-out results.
+
+        Separate conclusions are computed for each task category
+        (regression, classification, ranking). The overall conclusion
+        uses the best non-control model that materially outperforms
+        the best scientific control on the same target.
+        """
+        # Separate results into controls and competitors.
+        controls = [r for r in self._heldout_results if r.is_control]
+        competitors = [r for r in self._heldout_results if not r.is_control]
+
+        # Find best competitor by held-out spearman, per target.
+        best_per_target: dict[str, ScientificResult] = {}
+        for r in competitors:
+            sp = r.heldout_metrics.get("spearman", 0.0)
+            if r.target not in best_per_target or sp > best_per_target[r.target].heldout_metrics.get("spearman", 0.0):
+                best_per_target[r.target] = r
+
+        # Find best control per target.
+        best_control_per_target: dict[str, ScientificResult] = {}
+        for r in controls:
+            sp = r.heldout_metrics.get("spearman", 0.0)
+            if r.target not in best_control_per_target or sp > best_control_per_target[r.target].heldout_metrics.get("spearman", 0.0):
+                best_control_per_target[r.target] = r
+
+        # Determine the best overall competitor (highest held-out spearman).
         best = None
         best_sp = -1.0
-        for r in self._heldout_results:
+        for r in competitors:
             sp = r.heldout_metrics.get("spearman", 0.0)
             if sp > best_sp:
                 best_sp = sp
                 best = r
 
-        # Baseline comparison: does any model beat simple baselines?
+        # Baseline comparison: does the best competitor beat the best
+        # control on the SAME target?
         baseline_sp = 0.0
-        for r in self._heldout_results:
-            if r.predictor_id in ("global_mean", "mutation_type_mean"):
-                baseline_sp = max(baseline_sp, r.heldout_metrics.get("spearman", 0.0))
+        if best:
+            target_controls = [r for r in controls if r.target == best.target]
+            if target_controls:
+                baseline_sp = max(r.heldout_metrics.get("spearman", 0.0) for r in target_controls)
 
         # Check if signal detected.
         signal = best_sp > 0.3 if best else False
+        # Generalization requires materially outperforming controls.
         generalizes = (best_sp - baseline_sp) > 0.1 if best else False
 
         # Check CF-to-real transfer.
@@ -550,8 +649,10 @@ class ScientificRunner:
             unc_useful = corr > 0.1
 
         # Determine status and exp5 authorization.
+        # Downgraded from QUALIFIED_SIMPLE to PRELIMINARY_SIGNAL_DETECTED
+        # until controls are beaten and multi-step rollout is validated.
         if signal and generalizes:
-            status = "QUALIFIED_GRAPH_NATIVE" if best and "learned" in best.encoder_id else "QUALIFIED_SIMPLE"
+            status = "PRELIMINARY_SIGNAL_DETECTED"
             exp5_auth = True
             # Recommend architecture based on winning encoder.
             if best and best.encoder_id in ("learned-graph", "hybrid"):
@@ -578,13 +679,37 @@ class ScientificRunner:
                 if status not in ("FAILED_GENERALIZATION", "FAILED_CF_REAL_TRANSFER"):
                     status = "INCONCLUSIVE"
 
+        # Build per-target summary.
+        per_target_summary: dict[str, Any] = {}
+        for target, br in best_per_target.items():
+            bc = best_control_per_target.get(target)
+            per_target_summary[target] = {
+                "best_competitor": {
+                    "encoder": br.encoder_id,
+                    "predictor": br.predictor_id,
+                    "heldout_spearman": br.heldout_metrics.get("spearman", 0.0),
+                    "heldout_regret": br.regret.get("mean_regret", 0.0) if br.regret else 0.0,
+                },
+                "best_control": {
+                    "predictor": bc.predictor_id if bc else "none",
+                    "heldout_spearman": bc.heldout_metrics.get("spearman", 0.0) if bc else 0.0,
+                } if bc else None,
+                "beats_control": (
+                    br.heldout_metrics.get("spearman", 0.0) - (bc.heldout_metrics.get("spearman", 0.0) if bc else 0.0)
+                ) > 0.1 if bc else False,
+            }
+
         limitations = []
         if not generalizes:
-            limitations.append("No model materially outperformed baselines on held-out.")
+            limitations.append("No model materially outperformed scientific controls on held-out.")
         if not cf_ok:
             limitations.append("Counterfactual-to-real transfer gap is too large.")
         if not unc_useful:
             limitations.append("Uncertainty does not correlate with error — trust signal is weak.")
+        # Add dataset limitations.
+        limitations.append("Dataset is synthetic with limited mutation type diversity.")
+        limitations.append("Multi-step rollout quality is not yet validated for MPC use.")
+        limitations.append("Risk target is near-constant — risk prediction is not scientifically tested.")
 
         return ScientificConclusion(
             scientific_status=status,
@@ -600,6 +725,8 @@ class ScientificRunner:
             cf_real_transfer_ok=cf_ok,
             uncertainty_useful=unc_useful,
             limitations=limitations,
+            per_target_summary=per_target_summary,
+            baseline_spearman=baseline_sp,
         )
 
     # ------------------------------------------------------------------

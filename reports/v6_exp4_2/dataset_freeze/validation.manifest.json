@@ -1,16 +1,17 @@
 {
-  "content_hash": "7a115a15e3e9ee6ed5efeb9359ba82b3ea9dc48fe44ef83a0e3ba0bf54a29a6c",
+  "content_hash": "634ed4365327eba07b0ed626de9e00b44b0755fa6f4c7167e69f5b5f12b48ae9",
   "graph_family_distribution": {
-    "bipartite": 60,
-    "random_ws": 60
+    "bipartite": 105,
+    "random_ws": 105
   },
   "mutation_distribution": {
     "ADD_EDGE": 90,
+    "REMOVE_EDGE": 90,
     "add_edge": 30
   },
-  "n_counterfactual": 90,
+  "n_counterfactual": 180,
   "n_realized": 30,
-  "n_records": 120,
+  "n_records": 210,
   "n_shadow": 0,
   "split": "validation"
 }

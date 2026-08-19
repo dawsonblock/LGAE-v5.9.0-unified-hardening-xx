@@ -1,18 +1,50 @@
 {
-  "best_encoder": "minimal-control",
-  "best_heldout_regret": 0.06666666666666667,
-  "best_heldout_spearman": 0.6453769559032716,
-  "best_model": "tree",
-  "best_validation_score": 0.0,
+  "baseline_spearman": 0.6013009911041061,
+  "best_encoder": "global-local",
+  "best_heldout_regret": 0.005196206954618295,
+  "best_heldout_spearman": 0.7098682980258062,
+  "best_model": "linear",
+  "best_validation_score": 0.13253669503357704,
   "cf_real_transfer_ok": true,
   "exp5_authorized": true,
   "experiment": "v6.0-exp4.2",
   "generalizes_to_heldout": true,
   "limitations": [
-    "Uncertainty does not correlate with error \u2014 trust signal is weak."
+    "Uncertainty does not correlate with error \u2014 trust signal is weak.",
+    "Dataset is synthetic with limited mutation type diversity.",
+    "Multi-step rollout quality is not yet validated for MPC use.",
+    "Risk target is near-constant \u2014 risk prediction is not scientifically tested."
   ],
+  "per_target_summary": {
+    "realized_delta": {
+      "beats_control": true,
+      "best_competitor": {
+        "encoder": "global-local",
+        "heldout_regret": 0.005196206954618295,
+        "heldout_spearman": 0.7098682980258062,
+        "predictor": "linear"
+      },
+      "best_control": {
+        "heldout_spearman": 0.6013009911041061,
+        "predictor": "nearest_experience"
+      }
+    },
+    "sign_delta": {
+      "beats_control": false,
+      "best_competitor": {
+        "encoder": "minimal-control",
+        "heldout_regret": 0.03333333333333333,
+        "heldout_spearman": 0.5062431544359256,
+        "predictor": "tree"
+      },
+      "best_control": {
+        "heldout_spearman": 0.5626612881681939,
+        "predictor": "nearest_experience"
+      }
+    }
+  },
   "recommended_exp5_architecture": "lightweight_latent_dynamics",
-  "scientific_status": "QUALIFIED_SIMPLE",
+  "scientific_status": "PRELIMINARY_SIGNAL_DETECTED",
   "structural_signal_detected": true,
   "uncertainty_useful": false
 }

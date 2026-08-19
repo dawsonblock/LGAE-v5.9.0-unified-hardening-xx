@@ -23,7 +23,21 @@ from .joint_model import JointWorldModel, JointModelConfig
 
 @dataclass
 class WorldModelTrustReport:
-    """Trust report for the lightweight world model."""
+    """Trust report for the lightweight world model.
+
+    v6.0-exp5.1: Multi-factor trust score. No longer uses the
+    simplistic 0.5 + R²/2 formula. Instead combines:
+    - one_step_error: held-out one-step prediction error
+    - rollout_error: multi-step rollout degradation
+    - calibration: uncertainty-error correlation
+    - ood_distance: distance to training distribution
+    - tail_regret: worst-case regret
+    - failure_rate: fraction of predictions with catastrophic error
+
+    The trust score is conservative: it is bounded by the weakest
+    factor. If any factor is critically weak, trust is low regardless
+    of other factors being strong.
+    """
     model_name: str = "lightweight_world_model"
     mean_prediction_error: float = 0.0
     ood_distance: float = 0.0
@@ -31,6 +45,12 @@ class WorldModelTrustReport:
     trust_score: float = 0.0
     recommended_horizon: int = 1
     recommended_exact_verification_fraction: float = 1.0
+    # v6.0-exp5.1: Multi-factor components.
+    one_step_r2: float = 0.0
+    rollout_r2: float = 0.0
+    rollout_degradation: float = 0.0  # how much worse rollout is vs one-step
+    tail_regret: float = 0.0
+    failure_rate: float = 0.0
     metadata: dict[str, Any] = field(default_factory=dict)
 
     def to_model_trust_report(self) -> ModelTrustReport:
@@ -44,6 +64,88 @@ class WorldModelTrustReport:
             recommended_exact_verification_fraction=float(self.recommended_exact_verification_fraction),
             metadata=dict(self.metadata),
         )
+
+
+def compute_multi_factor_trust(
+    *,
+    one_step_r2: float,
+    rollout_r2: float,
+    rollout_degradation: float,
+    calibration_correlation: float,
+    tail_regret: float,
+    failure_rate: float,
+    ood_distance: float = 0.0,
+) -> WorldModelTrustReport:
+    """Compute a multi-factor trust score.
+
+    The trust score is the minimum of several factor scores,
+    ensuring that no single strong factor can mask a weak one.
+
+    Factors:
+    - one_step_quality: f(one_step_r2) — one-step prediction quality
+    - rollout_quality: f(rollout_r2, degradation) — multi-step stability
+    - calibration_quality: f(calibration_correlation) — uncertainty usefulness
+    - tail_safety: f(tail_regret, failure_rate) — worst-case behavior
+    - ood_safety: f(ood_distance) — distribution shift robustness
+
+    The final trust score is:
+        trust = min(one_step_quality, rollout_quality, calibration_quality, tail_safety, ood_safety)
+
+    All factors are bounded to [0, 1].
+    """
+    # One-step quality: R² mapped to [0, 1].
+    one_step_quality = max(0.0, min(1.0, one_step_r2))
+
+    # Rollout quality: penalized by degradation.
+    rollout_quality = max(0.0, min(1.0, rollout_r2 - rollout_degradation * 0.5))
+
+    # Calibration quality: correlation mapped to [0, 1].
+    calibration_quality = max(0.0, min(1.0, calibration_correlation))
+
+    # Tail safety: penalized by tail regret and failure rate.
+    tail_safety = max(0.0, min(1.0, 1.0 - tail_regret - failure_rate * 2.0))
+
+    # OOD safety: penalized by distance.
+    ood_safety = max(0.0, min(1.0, 1.0 - ood_distance))
+
+    # Trust is the minimum factor — conservative.
+    trust = min(one_step_quality, rollout_quality, calibration_quality, tail_safety, ood_safety)
+
+    # Recommended horizon: 1 if rollout is poor, 2 if moderate, 3 if good.
+    if rollout_quality < 0.3:
+        recommended_horizon = 1
+    elif rollout_quality < 0.6:
+        recommended_horizon = 2
+    else:
+        recommended_horizon = 3
+
+    # Exact verification: always 1.0 until trust is very high.
+    if trust > 0.8:
+        exact_frac = 0.9  # even high trust keeps 90% verification
+    else:
+        exact_frac = 1.0
+
+    return WorldModelTrustReport(
+        trust_score=trust,
+        recommended_horizon=recommended_horizon,
+        recommended_exact_verification_fraction=exact_frac,
+        one_step_r2=one_step_r2,
+        rollout_r2=rollout_r2,
+        rollout_degradation=rollout_degradation,
+        calibration_correlation=calibration_correlation,
+        tail_regret=tail_regret,
+        failure_rate=failure_rate,
+        ood_distance=ood_distance,
+        mean_prediction_error=0.0,  # set by caller if available
+        metadata={
+            "one_step_quality": one_step_quality,
+            "rollout_quality": rollout_quality,
+            "calibration_quality": calibration_quality,
+            "tail_safety": tail_safety,
+            "ood_safety": ood_safety,
+            "trust_formula": "min(factors)",
+        },
+    )
 
 
 class LightweightWorldModel(WorldModelInterface):

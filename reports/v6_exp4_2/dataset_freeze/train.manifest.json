@@ -1,21 +1,22 @@
 {
-  "content_hash": "7e2c15a735ad172443d43dcd88fb1b7ebf4ea40c484d17a098649eac3a4c18c5",
+  "content_hash": "d1145e7133f4653c822418199c2e1c91abb18458e8c457dd2838a603858dd63c",
   "graph_family_distribution": {
-    "barbell": 60,
-    "cycle": 60,
-    "grid": 60,
-    "path": 60,
-    "random_ba": 60,
-    "random_er": 60,
-    "star": 60
+    "barbell": 105,
+    "cycle": 105,
+    "grid": 105,
+    "path": 105,
+    "random_ba": 105,
+    "random_er": 105,
+    "star": 105
   },
   "mutation_distribution": {
     "ADD_EDGE": 315,
+    "REMOVE_EDGE": 315,
     "add_edge": 105
   },
-  "n_counterfactual": 315,
+  "n_counterfactual": 630,
   "n_realized": 105,
-  "n_records": 420,
+  "n_records": 735,
   "n_shadow": 0,
   "split": "train"
 }

@@ -1,60 +1,63 @@
 {
   "dataset_schema_hash": "7aa6fee506ef1fa4",
   "feature_schema_hash": "7215ed4551bc0804",
-  "freeze_hash": "7bf94897d9b9bb50",
-  "frozen_at": "2026-08-19T02:07:50Z",
+  "freeze_hash": "4647d6c6d5c98dad",
+  "frozen_at": "2026-08-19T03:03:46Z",
   "graph_family_registry_hash": "901f46beb65d205f",
   "heldout": {
-    "content_hash": "16eb2ac1b1da1be307502d60280ee2d4a594b16d65bc90c26308fe1ef47126c7",
+    "content_hash": "2a97da363f20ef2b9296171e9907b2aecc7a1b42b96f37ce7571147033b74aaf",
     "graph_family_distribution": {
-      "complete": 15,
-      "tree": 60
+      "complete": 60,
+      "tree": 105
     },
     "mutation_distribution": {
       "ADD_EDGE": 45,
+      "REMOVE_EDGE": 90,
       "add_edge": 30
     },
-    "n_counterfactual": 45,
+    "n_counterfactual": 135,
     "n_realized": 30,
-    "n_records": 75,
+    "n_records": 165,
     "n_shadow": 0,
     "split": "held_out"
   },
   "seed": 42,
   "train": {
-    "content_hash": "7e2c15a735ad172443d43dcd88fb1b7ebf4ea40c484d17a098649eac3a4c18c5",
+    "content_hash": "d1145e7133f4653c822418199c2e1c91abb18458e8c457dd2838a603858dd63c",
     "graph_family_distribution": {
-      "barbell": 60,
-      "cycle": 60,
-      "grid": 60,
-      "path": 60,
-      "random_ba": 60,
-      "random_er": 60,
-      "star": 60
+      "barbell": 105,
+      "cycle": 105,
+      "grid": 105,
+      "path": 105,
+      "random_ba": 105,
+      "random_er": 105,
+      "star": 105
     },
     "mutation_distribution": {
       "ADD_EDGE": 315,
+      "REMOVE_EDGE": 315,
       "add_edge": 105
     },
-    "n_counterfactual": 315,
+    "n_counterfactual": 630,
     "n_realized": 105,
-    "n_records": 420,
+    "n_records": 735,
     "n_shadow": 0,
     "split": "train"
   },
   "validation": {
-    "content_hash": "7a115a15e3e9ee6ed5efeb9359ba82b3ea9dc48fe44ef83a0e3ba0bf54a29a6c",
+    "content_hash": "634ed4365327eba07b0ed626de9e00b44b0755fa6f4c7167e69f5b5f12b48ae9",
     "graph_family_distribution": {
-      "bipartite": 60,
-      "random_ws": 60
+      "bipartite": 105,
+      "random_ws": 105
     },
     "mutation_distribution": {
       "ADD_EDGE": 90,
+      "REMOVE_EDGE": 90,
       "add_edge": 30
     },
-    "n_counterfactual": 90,
+    "n_counterfactual": 180,
     "n_realized": 30,
-    "n_records": 120,
+    "n_records": 210,
     "n_shadow": 0,
     "split": "validation"
   }

@@ -107,8 +107,8 @@ for identical state, observation, configuration, models, and deterministic rando
 ## Test breakdown
 
 - Unit tests: ~1300
-- Integration tests: ~360
-- Total: 1659 passed, 0 failed
+- Integration tests: ~889
+- Total: 2189 passed, 0 failed
 
 ## Dependencies
 

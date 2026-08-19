@@ -43,6 +43,11 @@ class GraphFamily(str, Enum):
     COMPLETE = "complete"
     TREE = "tree"
     BIPARTITE = "bipartite"
+    # v6.0-exp5.1: New families for untouched TEST-B split.
+    WHEEL = "wheel"
+    LADDER = "ladder"
+    CIRCULAR_LADDER = "circular_ladder"
+    HYPERCUBE = "hypercube"
 
 
 @dataclass(frozen=True, slots=True)
@@ -213,6 +218,70 @@ def _edges_random_ws(n: int, seed: int = 0, k: int = 4, p: float = 0.1) -> list[
     return clean if clean else [(0, 1)] if n >= 2 else []
 
 
+def _edges_wheel(n: int) -> list[tuple[int, int]]:
+    """Wheel graph: a cycle of n-1 nodes plus a hub connected to all."""
+    if n < 4:
+        return _edges_cycle(n)
+    hub = 0
+    edges: list[tuple[int, int]] = []
+    # Rim cycle (nodes 1..n-1).
+    for i in range(1, n):
+        edges.append((i, (i % (n - 1)) + 1 if i < n - 1 else 1))
+    # Spokes from hub to rim.
+    for i in range(1, n):
+        edges.append((hub, i))
+    return edges
+
+
+def _edges_ladder(n: int) -> list[tuple[int, int]]:
+    """Ladder graph: two paths connected by rungs."""
+    if n < 4:
+        return _edges_path(n)
+    rungs = n // 2
+    edges: list[tuple[int, int]] = []
+    for i in range(rungs):
+        # Rung.
+        edges.append((2 * i, 2 * i + 1))
+        # Rails.
+        if i + 1 < rungs:
+            edges.append((2 * i, 2 * (i + 1)))
+            edges.append((2 * i + 1, 2 * (i + 1) + 1))
+    # Leftover node.
+    if 2 * rungs < n:
+        edges.append((n - 2, n - 1))
+    return edges
+
+
+def _edges_circular_ladder(n: int) -> list[tuple[int, int]]:
+    """Circular ladder (prism) graph."""
+    if n < 6:
+        return _edges_ladder(n)
+    rungs = n // 2
+    edges: list[tuple[int, int]] = []
+    for i in range(rungs):
+        # Rung.
+        edges.append((2 * i, 2 * i + 1))
+        # Rails (circular).
+        next_i = (i + 1) % rungs
+        edges.append((2 * i, 2 * next_i))
+        edges.append((2 * i + 1, 2 * next_i + 1))
+    return edges
+
+
+def _edges_hypercube(n: int) -> list[tuple[int, int]]:
+    """Hypercube graph (dimension d where 2^d <= n)."""
+    import math
+    d = max(1, int(math.log2(max(n, 2))))
+    n_actual = min(n, 2 ** d)
+    edges: list[tuple[int, int]] = []
+    for u in range(n_actual):
+        for bit in range(d):
+            v = u ^ (1 << bit)
+            if v < n_actual and u < v:
+                edges.append((u, v))
+    return edges if edges else [(0, 1)] if n >= 2 else []
+
+
 _EDGE_GENERATORS = {
     GraphFamily.PATH: _edges_path,
     GraphFamily.CYCLE: _edges_cycle,
@@ -221,6 +290,10 @@ _EDGE_GENERATORS = {
     GraphFamily.BARBELL: _edges_barbell,
     GraphFamily.COMPLETE: _edges_complete,
     GraphFamily.TREE: _edges_tree,
+    GraphFamily.WHEEL: _edges_wheel,
+    GraphFamily.LADDER: _edges_ladder,
+    GraphFamily.CIRCULAR_LADDER: _edges_circular_ladder,
+    GraphFamily.HYPERCUBE: _edges_hypercube,
 }
 
 

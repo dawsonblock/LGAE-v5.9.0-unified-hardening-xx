@@ -55,6 +55,7 @@ from .evaluation import (
 from .world_model_impl import (
     LightweightWorldModel,
     WorldModelTrustReport,
+    compute_multi_factor_trust,
 )
 
 __all__ = [
@@ -84,4 +85,5 @@ __all__ = [
     "RolloutReport",
     "LightweightWorldModel",
     "WorldModelTrustReport",
+    "compute_multi_factor_trust",
 ]
