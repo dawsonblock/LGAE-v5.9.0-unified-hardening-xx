@@ -6,8 +6,8 @@
   "status": "PASS",
   "claim_boundary": "Transactional convergence release; no claim of learned policy superiority or universal Cayley speedup without held-out graph-family evidence.",
   "full_pytest": {
-    "collected": 2234,
-    "passed": 2234,
+    "collected": 2255,
+    "passed": 2255,
     "failed": 0
   },
   "reproducibility": {
