@@ -30,6 +30,22 @@ from .prefilter import (
 from .experiment_runner import (
     FamilyMPCResult, run_family_mpc, run_adaptation_curve,
 )
+from .candidate_generator import (
+    StructuralCandidate, generate_candidates, evaluate_candidates_exact,
+    apply_candidate, compute_exact_utility,
+)
+from .metrics import (
+    RecallMetrics, RegretDistribution,
+    compute_oracle_recall, compute_near_oracle_recall,
+    compute_regret_distribution, compute_pruning_ratio_metrics,
+    compare_filtering_strategies,
+)
+from .test_c import (
+    TestCFamilyConfig, generate_test_c_configs, generate_test_c_graph,
+)
+from .exp6_1_runner import (
+    FamilyResult, run_family_experiment,
+)
 
 __all__ = [
     "TopologyCalibration", "fit_calibration", "identity_calibration",
@@ -42,4 +58,12 @@ __all__ = [
     "Candidate", "PrefilterResult",
     "score_candidates", "prefilter_candidates", "compute_oracle_recall",
     "FamilyMPCResult", "run_family_mpc", "run_adaptation_curve",
+    "StructuralCandidate", "generate_candidates", "evaluate_candidates_exact",
+    "apply_candidate", "compute_exact_utility",
+    "RecallMetrics", "RegretDistribution",
+    "compute_oracle_recall", "compute_near_oracle_recall",
+    "compute_regret_distribution", "compute_pruning_ratio_metrics",
+    "compare_filtering_strategies",
+    "TestCFamilyConfig", "generate_test_c_configs", "generate_test_c_graph",
+    "FamilyResult", "run_family_experiment",
 ]
