@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_5/scaling_benchmark.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-06, 0.9, 1.0, 30.0, 100, 101, 102, 103, 104, 105, 250, 500, 'add_edge', 'weight']

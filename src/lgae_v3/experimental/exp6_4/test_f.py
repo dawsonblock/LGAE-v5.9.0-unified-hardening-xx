@@ -44,12 +44,14 @@ class TestFConfig:
 def utility_redundancy_threshold(graph: GraphBuffers, z: torch.Tensor,
                                   lambda_bonus: float = 25.0,
                                   threshold: int = 2) -> float:
-    """Bonus when minimum degree >= threshold.
+    """Bonus when enough nodes have degree >= threshold.
 
-    U = U_additive + lambda * max(0, min_degree - threshold + 1) * n_nodes_above_threshold
+    U = U_additive + lambda * max(0, n_nodes_with_degree_ge_threshold - target_count)
 
     Delayed value: adding edges to low-degree nodes has negative immediate
-    utility but increases min degree toward the threshold.
+    additive utility (cross-cluster) but increases the count of nodes
+    meeting the degree threshold. The bonus triggers when enough nodes
+    reach the threshold, creating a delayed-value structure.
     """
     u_add = compute_additive_utility(graph, z)
     n = int(graph.num_nodes)
@@ -61,21 +63,24 @@ def utility_redundancy_threshold(graph: GraphBuffers, z: torch.Tensor,
             d = int(graph.dst[i].item())
             if s < n: degrees[s] += 1
             if d < n: degrees[d] += 1
-    min_degree = int(np.min(degrees))
     n_above = int(np.sum(degrees >= threshold))
-    bonus = lambda_bonus * max(0, min_degree - threshold + 1) * n_above / n
+    # Target: at least 60% of nodes with degree >= threshold.
+    target = int(n * 0.6)
+    bonus = lambda_bonus * max(0, n_above - target)
     return u_add + bonus
 
 
 def utility_hub_load_threshold(graph: GraphBuffers, z: torch.Tensor,
                                 lambda_bonus: float = 25.0,
                                 threshold: int = 5) -> float:
-    """Bonus when max degree <= threshold (penalize hubs).
+    """Bonus when degree variance is low (balanced graph).
 
-    U = U_additive + lambda * max(0, threshold - max_degree + 1)
+    U = U_additive + lambda * max(0, target_variance - degree_variance)
 
-    Delayed value: removing hub edges has negative immediate utility
-    but reduces max degree toward the threshold.
+    Delayed value: adding edges to low-degree nodes has negative immediate
+    additive utility (cross-cluster) but reduces degree variance, moving
+    toward a balanced graph. The bonus triggers when variance drops below
+    the threshold, creating delayed value from balance-promoting actions.
     """
     u_add = compute_additive_utility(graph, z)
     n = int(graph.num_nodes)
@@ -87,8 +92,11 @@ def utility_hub_load_threshold(graph: GraphBuffers, z: torch.Tensor,
             d = int(graph.dst[i].item())
             if s < n: degrees[s] += 1
             if d < n: degrees[d] += 1
-    max_degree = int(np.max(degrees))
-    bonus = lambda_bonus * max(0, threshold - max_degree + 1)
+    mean_deg = float(np.mean(degrees))
+    var_deg = float(np.var(degrees))
+    # Target: variance below threshold/n (normalized).
+    target_var = threshold / max(n, 1)
+    bonus = lambda_bonus * max(0, target_var - var_deg) * n
     return u_add + bonus
 
 
