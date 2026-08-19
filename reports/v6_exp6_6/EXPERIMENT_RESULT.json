@@ -2,68 +2,68 @@
   "lomo_results": [
     {
       "held_out_mechanism": "connectivity_threshold",
-      "n_train_samples": 4036,
+      "n_train_samples": 5377,
       "n_eval_tasks": 63,
       "n_suboptimal": 63,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.0952,
+          "recovery_rate": 0.1746,
           "recovery_ci": [
-            0.0317,
-            0.1746
+            0.0952,
+            0.2702
           ],
-          "avg_regret": 19.5119,
-          "avg_greedy_improvement": 2.763,
+          "avg_regret": 17.4405,
+          "avg_greedy_improvement": 4.8344,
           "avg_savings": 0.6777,
-          "calibration_corr": -0.4306,
+          "calibration_corr": -0.399,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         },
         "B_objective_conditioned": {
-          "recovery_rate": 0.0,
+          "recovery_rate": 0.1746,
           "recovery_ci": [
-            0.0,
-            0.0
+            0.0952,
+            0.2702
           ],
-          "avg_regret": 22.2748,
-          "avg_greedy_improvement": 0.0,
+          "avg_regret": 17.4273,
+          "avg_greedy_improvement": 4.8475,
           "avg_savings": 0.6777,
-          "calibration_corr": -0.8409,
+          "calibration_corr": 0.7132,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         },
         "C_causal_effect": {
-          "recovery_rate": 0.2698,
+          "recovery_rate": 0.6667,
           "recovery_ci": [
-            0.1746,
-            0.381
+            0.5397,
+            0.7778
           ],
-          "avg_regret": 16.0726,
-          "avg_greedy_improvement": 6.2022,
+          "avg_regret": 0.0815,
+          "avg_greedy_improvement": 22.1934,
           "avg_savings": 0.6777,
-          "calibration_corr": 0.453,
+          "calibration_corr": 0.9501,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         }
       },
       "calibration": {
         "A_scalar": {
-          "pred_vs_exact_corr": -0.4306,
+          "pred_vs_exact_corr": -0.399,
           "uncertainty_vs_error_corr": 0.0
         },
         "B_objective_conditioned": {
-          "pred_vs_exact_corr": -0.8409,
+          "pred_vs_exact_corr": 0.7132,
           "uncertainty_vs_error_corr": 0.0
         },
         "C_causal_effect": {
-          "pred_vs_exact_corr": 0.453,
+          "pred_vs_exact_corr": 0.9501,
           "uncertainty_vs_error_corr": 0.0
         }
       }
     },
     {
       "held_out_mechanism": "redundancy_threshold",
-      "n_train_samples": 4056,
+      "n_train_samples": 5385,
       "n_eval_tasks": 0,
       "n_suboptimal": 0,
       "arch_results": {
@@ -124,9 +124,9 @@
     },
     {
       "held_out_mechanism": "hub_load_threshold",
-      "n_train_samples": 4064,
-      "n_eval_tasks": 0,
-      "n_suboptimal": 0,
+      "n_train_samples": 5399,
+      "n_eval_tasks": 1,
+      "n_suboptimal": 1,
       "arch_results": {
         "A_scalar": {
           "recovery_rate": 0.0,
@@ -134,12 +134,12 @@
             0.0,
             0.0
           ],
-          "avg_regret": 0.0,
+          "avg_regret": 24.6298,
           "avg_greedy_improvement": 0.0,
-          "avg_savings": 0.0,
-          "calibration_corr": 0.0,
+          "avg_savings": 0.75,
+          "calibration_corr": -0.3457,
           "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 0
+          "n_suboptimal": 1
         },
         "B_objective_conditioned": {
           "recovery_rate": 0.0,
@@ -147,12 +147,12 @@
             0.0,
             0.0
           ],
-          "avg_regret": 0.0,
-          "avg_greedy_improvement": 0.0,
-          "avg_savings": 0.0,
-          "calibration_corr": 0.0,
+          "avg_regret": 29.4133,
+          "avg_greedy_improvement": -4.7835,
+          "avg_savings": 0.75,
+          "calibration_corr": 0.4297,
           "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 0
+          "n_suboptimal": 1
         },
         "C_causal_effect": {
           "recovery_rate": 0.0,
@@ -160,21 +160,21 @@
             0.0,
             0.0
           ],
-          "avg_regret": 0.0,
+          "avg_regret": 24.6298,
           "avg_greedy_improvement": 0.0,
-          "avg_savings": 0.0,
+          "avg_savings": 0.75,
           "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
-          "n_suboptimal": 0
+          "n_suboptimal": 1
         }
       },
       "calibration": {
         "A_scalar": {
-          "pred_vs_exact_corr": 0.0,
+          "pred_vs_exact_corr": -0.3457,
           "uncertainty_vs_error_corr": 0.0
         },
         "B_objective_conditioned": {
-          "pred_vs_exact_corr": 0.0,
+          "pred_vs_exact_corr": 0.4297,
           "uncertainty_vs_error_corr": 0.0
         },
         "C_causal_effect": {
@@ -185,7 +185,7 @@
     },
     {
       "held_out_mechanism": "spectral_gap_threshold",
-      "n_train_samples": 4065,
+      "n_train_samples": 5379,
       "n_eval_tasks": 100,
       "n_suboptimal": 100,
       "arch_results": {
@@ -195,51 +195,51 @@
             0.0,
             0.07
           ],
-          "avg_regret": 52.0914,
-          "avg_greedy_improvement": -0.9688,
+          "avg_regret": 52.3036,
+          "avg_greedy_improvement": -1.181,
           "avg_savings": 0.6487,
-          "calibration_corr": -0.2702,
+          "calibration_corr": -0.3102,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 100
         },
         "B_objective_conditioned": {
-          "recovery_rate": 0.02,
+          "recovery_rate": 0.03,
           "recovery_ci": [
             0.0,
-            0.05
+            0.07
           ],
-          "avg_regret": 50.8237,
-          "avg_greedy_improvement": 0.2989,
+          "avg_regret": 58.7828,
+          "avg_greedy_improvement": -7.6602,
           "avg_savings": 0.6487,
-          "calibration_corr": -0.0917,
+          "calibration_corr": -0.3403,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 100
         },
         "C_causal_effect": {
-          "recovery_rate": 0.0,
+          "recovery_rate": 0.08,
           "recovery_ci": [
-            0.0,
-            0.0
+            0.03,
+            0.14
           ],
-          "avg_regret": 51.1226,
-          "avg_greedy_improvement": 0.0,
+          "avg_regret": 45.8129,
+          "avg_greedy_improvement": 5.3097,
           "avg_savings": 0.6487,
-          "calibration_corr": 0.0,
+          "calibration_corr": 0.3533,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 100
         }
       },
       "calibration": {
         "A_scalar": {
-          "pred_vs_exact_corr": -0.2702,
+          "pred_vs_exact_corr": -0.3102,
           "uncertainty_vs_error_corr": 0.0
         },
         "B_objective_conditioned": {
-          "pred_vs_exact_corr": -0.0917,
+          "pred_vs_exact_corr": -0.3403,
           "uncertainty_vs_error_corr": 0.0
         },
         "C_causal_effect": {
-          "pred_vs_exact_corr": 0.0,
+          "pred_vs_exact_corr": 0.3533,
           "uncertainty_vs_error_corr": 0.0
         }
       }
@@ -252,23 +252,23 @@
       "detail": [
         63,
         0,
-        0,
+        1,
         100
       ]
     },
     "B_avg_best_recovery_gt_50": {
       "passed": false,
-      "description": "avg best recovery: 7%",
+      "description": "avg best recovery: 19%",
       "target": ">50%"
     },
     "C_causal_beats_scalar": {
       "passed": false,
-      "description": "causal beats scalar in 1/4 mechanisms",
+      "description": "causal beats scalar in 2/4 mechanisms",
       "target": "majority"
     },
     "D_search_savings": {
-      "passed": false,
-      "description": "avg savings: 33.2%",
+      "passed": true,
+      "description": "avg savings: 51.9%",
       "target": ">50%"
     },
     "E_no_information_leakage": {
@@ -287,8 +287,8 @@
       "target": "manifest valid + 0 test failures"
     },
     "H_calibration_correlation": {
-      "passed": false,
-      "description": "avg calibration corr: -0.098",
+      "passed": true,
+      "description": "avg calibration corr: 0.088",
       "target": ">0 (predicted vs exact residual)"
     }
   },
@@ -296,26 +296,26 @@
   "summary": {
     "n_mechanisms": 4,
     "n_lomo_results": 4,
-    "avg_best_recovery": 0.0749,
-    "avg_savings": 0.3316,
-    "avg_calibration_corr": -0.0984,
-    "c_beats_a_count": 1,
+    "avg_best_recovery": 0.1867,
+    "avg_savings": 0.5191,
+    "avg_calibration_corr": 0.0876,
+    "c_beats_a_count": 2,
     "lomo_detail": [
       {
         "mechanism": "connectivity_threshold",
         "n_suboptimal": 63,
         "arch_results": {
           "A_scalar": {
-            "recovery": 0.0952,
-            "regret": 19.5119
+            "recovery": 0.1746,
+            "regret": 17.4405
           },
           "B_objective_conditioned": {
-            "recovery": 0.0,
-            "regret": 22.2748
+            "recovery": 0.1746,
+            "regret": 17.4273
           },
           "C_causal_effect": {
-            "recovery": 0.2698,
-            "regret": 16.0726
+            "recovery": 0.6667,
+            "regret": 0.0815
           }
         }
       },
@@ -339,19 +339,19 @@
       },
       {
         "mechanism": "hub_load_threshold",
-        "n_suboptimal": 0,
+        "n_suboptimal": 1,
         "arch_results": {
           "A_scalar": {
             "recovery": 0.0,
-            "regret": 0.0
+            "regret": 24.6298
           },
           "B_objective_conditioned": {
             "recovery": 0.0,
-            "regret": 0.0
+            "regret": 29.4133
           },
           "C_causal_effect": {
             "recovery": 0.0,
-            "regret": 0.0
+            "regret": 24.6298
           }
         }
       },
@@ -361,30 +361,30 @@
         "arch_results": {
           "A_scalar": {
             "recovery": 0.03,
-            "regret": 52.0914
+            "regret": 52.3036
           },
           "B_objective_conditioned": {
-            "recovery": 0.02,
-            "regret": 50.8237
+            "recovery": 0.03,
+            "regret": 58.7828
           },
           "C_causal_effect": {
-            "recovery": 0.0,
-            "regret": 51.1226
+            "recovery": 0.08,
+            "regret": 45.8129
           }
         }
       }
     ]
   },
   "training_info": {
-    "n_total_samples": 5407,
+    "n_total_samples": 7180,
     "feature_dim": 64,
     "n_per_mechanism": {
-      "connectivity_threshold": 1371,
-      "redundancy_threshold": 1351,
-      "hub_load_threshold": 1343,
-      "spectral_gap_threshold": 1342
+      "connectivity_threshold": 1803,
+      "redundancy_threshold": 1795,
+      "hub_load_threshold": 1781,
+      "spectral_gap_threshold": 1801
     },
-    "generation_seconds": 30.84
+    "generation_seconds": 38.17
   },
   "manifest_evidence": {
     "manifest_exists": true,
@@ -396,5 +396,5 @@
     "manifest_file_count": 943
   },
   "audit_note": "Three-architecture LOMO comparison. No mechanism label in features. No utility_fn leakage. Candidate-level calibration. Real manifest gates. 100+ non-greedy cases per mechanism.",
-  "elapsed_seconds": 163.67
+  "elapsed_seconds": 169.24
 }

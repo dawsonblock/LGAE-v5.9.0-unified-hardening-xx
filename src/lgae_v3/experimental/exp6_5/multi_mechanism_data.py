@@ -110,7 +110,11 @@ def generate_mechanism_task_configs(
 
 
 def _make_graph_from_config(config: MechanismTaskConfig) -> tuple[GraphBuffers, torch.Tensor]:
-    """Create graph and latent states from a mechanism task config."""
+    """Create graph and latent states from a mechanism task config.
+
+    For redundancy and hub_load mechanisms, add extra within-component
+    edges to create degree imbalance that enables delayed value.
+    """
     proc_config = ProceduralTaskConfig(
         n_nodes=config.n_nodes,
         n_components=config.n_components,
@@ -125,6 +129,47 @@ def _make_graph_from_config(config: MechanismTaskConfig) -> tuple[GraphBuffers, 
         seed=config.seed,
     )
     graph, z, _ = make_procedural_graph(proc_config)
+
+    # For redundancy and hub_load, add extra within-component edges
+    # to create degree variation that enables delayed value.
+    if config.mechanism in ("redundancy_threshold", "hub_load_threshold"):
+        import random as pyrandom
+        rng = pyrandom.Random(config.seed + 1)
+        from ..exp6_4.structural_features import compute_component_info
+        comp_info = compute_component_info(graph, config.n_nodes)
+
+        # Add edges within each component to create degree imbalance.
+        extra_edges: list[tuple[int, int]] = []
+        for comp_id in range(comp_info.n_components):
+            nodes_in_comp = [i for i in range(config.n_nodes)
+                             if comp_info.component_ids[i] == comp_id]
+            if len(nodes_in_comp) < 3:
+                continue
+            # Add a few extra edges to create hubs and low-degree nodes.
+            n_extra = min(len(nodes_in_comp) // 2, 3)
+            for _ in range(n_extra):
+                u, v = rng.sample(nodes_in_comp, 2)
+                extra_edges.append((u, v))
+
+        if extra_edges:
+            from ...types import make_graph_buffers
+            existing_edges = set()
+            valid = graph.valid.bool()
+            for i in range(graph.src.shape[0]):
+                if valid[i]:
+                    s, d = int(graph.src[i].item()), int(graph.dst[i].item())
+                    existing_edges.add((min(s, d), max(s, d)))
+            # Filter out duplicate edges.
+            new_extra = [(min(u, v), max(u, v)) for u, v in extra_edges
+                         if (min(u, v), max(u, v)) not in existing_edges]
+            existing_edges.update(new_extra)
+            all_edges = list(existing_edges)
+            graph = make_graph_buffers(
+                num_nodes=config.n_nodes,
+                edges=all_edges,
+                capacity=len(all_edges) + 20,
+            )
+
     return graph, z
 
 

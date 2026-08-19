@@ -5,7 +5,7 @@
     ".gitignore",
     "MANIFEST.sha256.json"
   ],
-  "file_count": 943,
+  "file_count": 958,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -688,6 +688,11 @@
       "sha256": "9f3742b0d577829358bc993964fea1c1e28247a3579a4ba5c30b6cb72f16e13e"
     },
     {
+      "path": ".hypothesis/constants/584a8654e2bd71b7",
+      "bytes": 1165,
+      "sha256": "3c479e9a93d035ae70c58fa724be68bd9cd6f4cc83af6290f5123adbe7c4f94d"
+    },
+    {
       "path": ".hypothesis/constants/5b28eb0141698128",
       "bytes": 921,
       "sha256": "fb75bde7c14dfe06b0ea9216bc65a22c62c3bdd932f41721764137b2bc910eec"
@@ -801,6 +806,11 @@
       "path": ".hypothesis/constants/67c659dcc84e3c57",
       "bytes": 732,
       "sha256": "f43d1b6f4cbf5fb8e18a20a26d062f84322893b78d32655cedd17e91ced60859"
+    },
+    {
+      "path": ".hypothesis/constants/682107dc7686aa29",
+      "bytes": 331,
+      "sha256": "3a0aa751234b40e3fd801fe95ccaf25a7aee6ea163e96a58ece0060f7894097b"
     },
     {
       "path": ".hypothesis/constants/68d44763cc15fbb2",
@@ -1046,6 +1056,11 @@
       "path": ".hypothesis/constants/80a652daa0747ed7",
       "bytes": 1303,
       "sha256": "2fd65637ccb9d8cd2e0cd66184592349e6de6e932ea38aaece63e4d3ee1b758f"
+    },
+    {
+      "path": ".hypothesis/constants/80da488758e31f0e",
+      "bytes": 232,
+      "sha256": "886d26968d22219abd3fb843d8a7b4fbcb59cacb662a99e23388c1e9d913b077"
     },
     {
       "path": ".hypothesis/constants/8109edfd77e332c0",
@@ -1603,6 +1618,11 @@
       "sha256": "b5619b3a26c04c47078bcc0eee86a783718584bb8810445761f7bb7e27e06ea6"
     },
     {
+      "path": ".hypothesis/constants/d74bf50e2a17b338",
+      "bytes": 372,
+      "sha256": "6f428acb552a59925ebc8893e704dc80e45929be384900cf99c928881256b627"
+    },
+    {
       "path": ".hypothesis/constants/d768d1be1e93fe96",
       "bytes": 376,
       "sha256": "321fe85221a2d34d70cb415e45f09d3e16af14079d261f3500a2bf32d25db201"
@@ -1678,6 +1698,11 @@
       "sha256": "cc63e252f550573c928e81fb10fac4c7dffac6e02fbcc80932e680ba9df8d955"
     },
     {
+      "path": ".hypothesis/constants/e145586db8859a59",
+      "bytes": 343,
+      "sha256": "fe00048f2ef9bed1644c9609da73aab8a672efb0607c2568f15ac46cea19d547"
+    },
+    {
       "path": ".hypothesis/constants/e1a396d013d659ef",
       "bytes": 438,
       "sha256": "7743f32a5d6a39f0fe9cbae701f47d22bc0cc9afa17f389976ef389ede146faa"
@@ -1716,6 +1741,11 @@
       "path": ".hypothesis/constants/e7eceb00a966e656",
       "bytes": 154,
       "sha256": "370aa2b4ab62d5911c8ce559dc3c474551e75cf6b7b0f33dfe1401e2b4d0e2e6"
+    },
+    {
+      "path": ".hypothesis/constants/e7f70909814f564e",
+      "bytes": 396,
+      "sha256": "ba28fe5addc9266949096b1e9be3630783fca7eceba61725b68c297dc3becc00"
     },
     {
       "path": ".hypothesis/constants/e9176922b71a2b1f",
@@ -1910,12 +1940,12 @@
     {
       "path": ".hypothesis/unicode_data/15.0.0/codec-utf-8.json.gz",
       "bytes": 60,
-      "sha256": "75bdf68d43c13bb1cb9fa469e019b370071e57cc632a4f0698994fdce2b86ade"
+      "sha256": "88b018ae8767fe835b9d60881a4333a20a3a5d7adf7256f51a28b4405a42726b"
     },
     {
       "path": ".pytest_report.xml",
-      "bytes": 293531,
-      "sha256": "1bdcdd1feb4c642ce965bccf8a892cdc3db955acedb50ae8baf8193ea3254922"
+      "bytes": 295646,
+      "sha256": "152d84a102eb2054fc38820f7fe92890f1e3de32d2d144af5936fb9d6a24747f"
     },
     {
       "path": "AUDIT_exp6.3_information_leakage.md",
@@ -1935,7 +1965,7 @@
     {
       "path": "BUILD_REPORT.md",
       "bytes": 5722,
-      "sha256": "59d0562e0c1ab9ce4835e6f2d2de40c97fc8c200870cba60fa711700c91ab146"
+      "sha256": "cda4a637e2dc321dc0a96a03413e2b48fd707875639055532435ca93502640b3"
     },
     {
       "path": "CHANGELOG.md",
@@ -2194,8 +2224,8 @@
     },
     {
       "path": "qualification_summary.json",
-      "bytes": 575,
-      "sha256": "15a410e2b51ef9ad582bc28e5ffbaed5eb5054b0b337a2a3d51f108f60c39237"
+      "bytes": 574,
+      "sha256": "4cafd30073815cd21f00b67ce4ee9f380048f2c8d5a0ea575a010e6d338b27ae"
     },
     {
       "path": "reasoning_qualification_report.json",
@@ -2205,7 +2235,7 @@
     {
       "path": "release_verification.json",
       "bytes": 1143,
-      "sha256": "8d1002103391ff2ac0d5af35bb4e3a0e19f4e1e52547c34d5349e05a68789fcb"
+      "sha256": "192da100c19b72757536815a956dce6b7bc9e58fce19340be6c91ed2a5af989e"
     },
     {
       "path": "reports/v6_exp4_2/COMPETITION_TABLE.csv",
@@ -2433,6 +2463,16 @@
       "sha256": "4538fdd6e9bc3166e00205fb310c68fc1105c96837e4323dde5309fe7bb4734d"
     },
     {
+      "path": "reports/v6_exp6_6/EXPERIMENT_RESULT.json",
+      "bytes": 10688,
+      "sha256": "7796def9ec9e148519b7c1f88bc53d9471f58d99cba48682707a6b9a758e8c30"
+    },
+    {
+      "path": "reports/v6_exp6_6/SCIENTIFIC_REPORT.md",
+      "bytes": 4479,
+      "sha256": "5575af4d436381c7d0d8250b5936cc2d60ab130e57b3a6fb1be7fedcdea83d27"
+    },
+    {
       "path": "requirements-verified.txt",
       "bytes": 152,
       "sha256": "0c421822af99aa7beabd8824fc7696836379a6da8fd48fd19d795262c5eae7df"
@@ -2601,6 +2641,11 @@
       "path": "scripts/run_exp6_5_experiment.py",
       "bytes": 1987,
       "sha256": "3eda4456977ca4d366f8b79de9f2c5372dae7454ef754aa87ba1f923705a34c1"
+    },
+    {
+      "path": "scripts/run_exp6_6_experiment.py",
+      "bytes": 1836,
+      "sha256": "9288ba401075c57588fc8b9985c2eef786071631d75a5363ae46284662def30b"
     },
     {
       "path": "scripts/run_exp6_experiment.py",
@@ -3244,8 +3289,8 @@
     },
     {
       "path": "src/lgae_v3/experimental/exp6_4/test_f.py",
-      "bytes": 8024,
-      "sha256": "742736a5449fdda55c411f5355cb015cc01d8b6c3f15decad3491e0009e13c97"
+      "bytes": 8513,
+      "sha256": "de11492686f7244a01f99e0f43b5751f659d50afe0b87fc83ca81605c2d26ff1"
     },
     {
       "path": "src/lgae_v3/experimental/exp6_5/__init__.py",
@@ -3269,8 +3314,8 @@
     },
     {
       "path": "src/lgae_v3/experimental/exp6_5/multi_mechanism_data.py",
-      "bytes": 10765,
-      "sha256": "60c06e7fd36b712a7884859fef71b75b3b48cea871a9b685fd2c6769e99ac2d8"
+      "bytes": 12783,
+      "sha256": "23e1765666892f7df0b64df1b907a6bd24581aad837c6c95aa149abf7e4e0b25"
     },
     {
       "path": "src/lgae_v3/experimental/exp6_5/observable_features.py",
@@ -3281,6 +3326,31 @@
       "path": "src/lgae_v3/experimental/exp6_5/scaling_benchmark.py",
       "bytes": 6484,
       "sha256": "3ac97e595be5ff2ca3fa45ba5bd7f7f10eb537a6020fd9695abe3462e2158a7a"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_6/__init__.py",
+      "bytes": 1310,
+      "sha256": "a86035fd41b9d76b1f47f8fc578c20359895390366fb190fd4464ee89386f78c"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_6/causal_effect_model.py",
+      "bytes": 14591,
+      "sha256": "efc897511d00a08c5e2bce3a872b0a564c5bb34b463df0c03af48134150d136c"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_6/experiment_runner.py",
+      "bytes": 25331,
+      "sha256": "dfffa5f5bed54750ca649484e56811134e451d197178eff5cf599513014e6c8b"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_6/honest_beam_v3.py",
+      "bytes": 4880,
+      "sha256": "0d589182561aede3d373d2810ef241cd7d33c9b91449bc5bce8bbd512ca6d4cf"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_6/objective_spec.py",
+      "bytes": 4064,
+      "sha256": "9c8ba9b2ae962ade0ea7adba2438d3ea39530afbdd882b0743d70f7e80ea494b"
     },
     {
       "path": "src/lgae_v3/experimental/experiment_registry.py",
@@ -4721,6 +4791,11 @@
       "path": "tests/test_v6_exp6_5.py",
       "bytes": 5633,
       "sha256": "190f338fd81958a59cb4941eefbe50688d79b23c8d2776b3443ec694f24de746"
+    },
+    {
+      "path": "tests/test_v6_exp6_6.py",
+      "bytes": 7942,
+      "sha256": "e9fbfd317e0f22b16fb2c2dad59caf22a7617c783c1848632d1275a934390e82"
     }
   ]
 }
