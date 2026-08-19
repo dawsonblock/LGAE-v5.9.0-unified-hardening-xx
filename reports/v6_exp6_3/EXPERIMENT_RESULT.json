@@ -1,0 +1,1306 @@
+{
+  "n_tasks": 5,
+  "n_suboptimal_h2": 4,
+  "n_suboptimal_h3": 5,
+  "family_results": [
+    {
+      "task_name": "delayed_bridge",
+      "n_actions": 6,
+      "greedy_first_action": [
+        "add_edge",
+        0,
+        2
+      ],
+      "exact_h1": {
+        "first_action": [
+          "add_edge",
+          0,
+          2
+        ],
+        "total_value": -0.10942459106445312,
+        "nodes_expanded": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "add_edge",
+          3,
+          8
+        ],
+        "total_value": 17.549940204620363,
+        "nodes_expanded": 36,
+        "all_first_action_values": {
+          "add_edge_3_4": 16.937836360931396,
+          "add_edge_7_8": 14.502564048767091,
+          "add_edge_3_8": 17.549940204620363,
+          "add_edge_0_2": -0.20790672302246094,
+          "add_edge_4_6": -2.3347549438476562,
+          "add_edge_8_10": -0.465301513671875
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "add_edge",
+          3,
+          8
+        ],
+        "total_value": 17.461307830810547,
+        "nodes_expanded": 216,
+        "all_first_action_values": {
+          "add_edge_3_4": 16.84920398712158,
+          "add_edge_7_8": 14.413930130004884,
+          "add_edge_3_8": 17.461307830810547,
+          "add_edge_0_2": 15.685521593093872,
+          "add_edge_4_6": 13.55867491722107,
+          "add_edge_8_10": 15.428128433227542
+        }
+      },
+      "greedy_is_suboptimal_h2": true,
+      "greedy_is_suboptimal_h3": true,
+      "model_results": {
+        "V0_zero_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  2,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.757846927642824,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw3": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  4,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V0_zero_bw5": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  4,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V1_type_mean_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  2,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.757846927642824,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw3": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  4,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V1_type_mean_bw5": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  4,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V2_linear_bw2": {
+          "first_action": [
+            "add_edge",
+            8,
+            10
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  8,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 10,  8,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 18.015241718292238,
+          "search_savings": 0.5,
+          "greedy_improvement": -0.25739479064941406
+        },
+        "V2_linear_bw3": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  4,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V2_linear_bw5": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  4,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V3_ridge_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  0,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  2,  8,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.757846927642824,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V3_ridge_bw3": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  8,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V3_ridge_bw5": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  8,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V5_mlp_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  0,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  2,  8,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.757846927642824,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V5_mlp_bw3": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  8,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 17.757846927642824
+        },
+        "V5_mlp_bw5": {
+          "first_action": [
+            "add_edge",
+            3,
+            8
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11,  8,  8,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.757846927642824
+        }
+      }
+    },
+    {
+      "task_name": "staged_community_bridge",
+      "n_actions": 6,
+      "greedy_first_action": [
+        "add_edge",
+        5,
+        7
+      ],
+      "exact_h1": {
+        "first_action": [
+          "add_edge",
+          5,
+          7
+        ],
+        "total_value": -0.3438701629638672,
+        "nodes_expanded": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "add_edge",
+          4,
+          10
+        ],
+        "total_value": 11.66301212310791,
+        "nodes_expanded": 36,
+        "all_first_action_values": {
+          "add_edge_4_5": 3.802008056640627,
+          "add_edge_9_10": 10.388700675964355,
+          "add_edge_4_10": 11.66301212310791,
+          "add_edge_0_2": -1.3287321090698243,
+          "add_edge_5_7": -0.6533533096313477,
+          "add_edge_10_12": -1.8871713638305665
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "add_edge",
+          4,
+          10
+        ],
+        "total_value": 11.384477291107178,
+        "nodes_expanded": 216,
+        "all_first_action_values": {
+          "add_edge_4_5": 3.5234747695922874,
+          "add_edge_9_10": 10.110165843963623,
+          "add_edge_4_10": 11.384477291107178,
+          "add_edge_0_2": 9.477461948394776,
+          "add_edge_5_7": 10.152842292785646,
+          "add_edge_10_12": 8.919024238586427
+        }
+      },
+      "greedy_is_suboptimal_h2": true,
+      "greedy_is_suboptimal_h3": true,
+      "model_results": {
+        "V0_zero_bw2": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw3": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw5": {
+          "first_action": [
+            "add_edge",
+            4,
+            10
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  4,  9,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14, 10, 10,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 12.316365432739257
+        },
+        "V1_type_mean_bw2": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw3": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw5": {
+          "first_action": [
+            "add_edge",
+            4,
+            10
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  4,  9,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14, 10, 10,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 12.316365432739257
+        },
+        "V2_linear_bw2": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  4,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7, 10,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw3": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  4,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7, 10,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw5": {
+          "first_action": [
+            "add_edge",
+            4,
+            10
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  4,  9,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14, 10, 10,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 12.316365432739257
+        },
+        "V3_ridge_bw2": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V3_ridge_bw3": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V3_ridge_bw5": {
+          "first_action": [
+            "add_edge",
+            4,
+            10
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  4,  4,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14, 10,  5,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 12.316365432739257
+        },
+        "V5_mlp_bw2": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V5_mlp_bw3": {
+          "first_action": [
+            "add_edge",
+            5,
+            7
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14,  7,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 12.316365432739257,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V5_mlp_bw5": {
+          "first_action": [
+            "add_edge",
+            4,
+            10
+          ],
+          "total_value": "GraphBuffers(num_nodes=15, src=tensor([ 0,  1,  2,  3,  5,  6,  7,  8, 10, 11, 12, 13,  4,  9,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  6,  7,  8,  9, 11, 12, 13, 14, 10, 10,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 12.316365432739257
+        }
+      }
+    },
+    {
+      "task_name": "hub_decomposition",
+      "n_actions": 6,
+      "greedy_first_action": [
+        "add_edge",
+        0,
+        2
+      ],
+      "exact_h1": {
+        "first_action": [
+          "add_edge",
+          0,
+          2
+        ],
+        "total_value": -0.30416297912597656,
+        "nodes_expanded": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "add_edge",
+          0,
+          2
+        ],
+        "total_value": -0.5779096603393554,
+        "nodes_expanded": 36,
+        "all_first_action_values": {
+          "add_edge_3_4": -2.1834671020507814,
+          "add_edge_7_8": -4.583712768554688,
+          "add_edge_11_12": -7.349591445922852,
+          "add_edge_0_2": -0.5779096603393554,
+          "add_edge_5_7": -1.7793925285339356,
+          "add_edge_9_11": -1.281294059753418
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "add_edge",
+          3,
+          4
+        ],
+        "total_value": 12.779877300262452,
+        "nodes_expanded": 216,
+        "all_first_action_values": {
+          "add_edge_3_4": 12.779877300262452,
+          "add_edge_7_8": 12.539852733612062,
+          "add_edge_11_12": 12.014332695007326,
+          "add_edge_0_2": -0.8242809009552001,
+          "add_edge_5_7": -2.0257637691497803,
+          "add_edge_9_11": -1.5276653003692626
+        }
+      },
+      "greedy_is_suboptimal_h2": false,
+      "greedy_is_suboptimal_h3": true,
+      "model_results": {
+        "V0_zero_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw3": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw5": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw3": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw5": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  3,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  4,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw3": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  3,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  4,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw5": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  3,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  4,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True,  True, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 0.0
+        },
+        "V3_ridge_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V3_ridge_bw3": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V3_ridge_bw5": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 0.0
+        },
+        "V5_mlp_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V5_mlp_bw3": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V5_mlp_bw5": {
+          "first_action": [
+            "add_edge",
+            0,
+            2
+          ],
+          "total_value": "GraphBuffers(num_nodes=16, src=tensor([ 0,  1,  2,  4,  5,  6,  8,  9, 10, 12, 13, 14,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  5,  6,  7,  9, 10, 11, 13, 14, 15,  2,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 0.0
+        }
+      }
+    },
+    {
+      "task_name": "bottleneck_repair",
+      "n_actions": 6,
+      "greedy_first_action": [
+        "add_edge",
+        7,
+        9
+      ],
+      "exact_h1": {
+        "first_action": [
+          "add_edge",
+          7,
+          9
+        ],
+        "total_value": -0.017052650451660156,
+        "nodes_expanded": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "add_edge",
+          5,
+          6
+        ],
+        "total_value": 3.296004676818848,
+        "nodes_expanded": 36,
+        "all_first_action_values": {
+          "add_edge_5_6": 3.296004676818848,
+          "add_edge_12_0": 1.925059127807618,
+          "add_edge_12_6": -1.618977737426757,
+          "add_edge_0_2": -0.5310620307922364,
+          "add_edge_7_9": -0.03239917755126953,
+          "add_edge_12_13": -4.417629146575928
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "add_edge",
+          5,
+          6
+        ],
+        "total_value": 3.2821928024291998,
+        "nodes_expanded": 216,
+        "all_first_action_values": {
+          "add_edge_5_6": 3.2821928024291998,
+          "add_edge_12_0": 1.9112472534179694,
+          "add_edge_12_6": -1.6327896118164056,
+          "add_edge_0_2": 2.450691108703613,
+          "add_edge_7_9": 2.9493524169921885,
+          "add_edge_12_13": -1.4358782386779794
+        }
+      },
+      "greedy_is_suboptimal_h2": true,
+      "greedy_is_suboptimal_h3": true,
+      "model_results": {
+        "V0_zero_bw2": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw3": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw5": {
+          "first_action": [
+            "add_edge",
+            5,
+            6
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  5, 12,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  6,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 3.3284038543701175
+        },
+        "V1_type_mean_bw2": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw3": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw5": {
+          "first_action": [
+            "add_edge",
+            5,
+            6
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  5, 12,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  6,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 3.3284038543701175
+        },
+        "V2_linear_bw2": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  6,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw3": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7,  5,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  6,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw5": {
+          "first_action": [
+            "add_edge",
+            5,
+            6
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  5, 12,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  6,  6,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 3.3284038543701175
+        },
+        "V3_ridge_bw2": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7, 12,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  6,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V3_ridge_bw3": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7, 12,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  6,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V3_ridge_bw5": {
+          "first_action": [
+            "add_edge",
+            5,
+            6
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  5, 12,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  6,  6,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 3.3284038543701175
+        },
+        "V5_mlp_bw2": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V5_mlp_bw3": {
+          "first_action": [
+            "add_edge",
+            7,
+            9
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  7,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  9,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 1.0000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 3.3284038543701175,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V5_mlp_bw5": {
+          "first_action": [
+            "add_edge",
+            5,
+            6
+          ],
+          "total_value": "GraphBuffers(num_nodes=14, src=tensor([ 0,  1,  2,  3,  4,  6,  7,  8,  9, 10, 12,  5, 12,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  3,  4,  5,  7,  8,  9, 10, 11, 13,  6,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True,  True,  True, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 3.3284038543701175
+        }
+      }
+    },
+    {
+      "task_name": "redundancy_then_shortcut",
+      "n_actions": 6,
+      "greedy_first_action": [
+        "add_edge",
+        3,
+        5
+      ],
+      "exact_h1": {
+        "first_action": [
+          "add_edge",
+          3,
+          5
+        ],
+        "total_value": -0.8944973945617676,
+        "nodes_expanded": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "add_edge",
+          2,
+          3
+        ],
+        "total_value": 15.997728443145753,
+        "nodes_expanded": 36,
+        "all_first_action_values": {
+          "add_edge_2_3": 15.997728443145753,
+          "add_edge_6_7": 15.442397975921633,
+          "add_edge_2_7": 10.13317098617554,
+          "add_edge_0_1": -1.8306023597717287,
+          "add_edge_3_5": -1.6995446205139162,
+          "add_edge_8_10": -1.9501397132873537
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "add_edge",
+          2,
+          3
+        ],
+        "total_value": 15.273184394836427,
+        "nodes_expanded": 216,
+        "all_first_action_values": {
+          "add_edge_2_3": 15.273184394836427,
+          "add_edge_6_7": 14.717853927612307,
+          "add_edge_2_7": 9.408626937866213,
+          "add_edge_0_1": 13.372397632598878,
+          "add_edge_3_5": 13.503456916809084,
+          "add_edge_8_10": 13.252863540649416
+        }
+      },
+      "greedy_is_suboptimal_h2": true,
+      "greedy_is_suboptimal_h3": true,
+      "model_results": {
+        "V0_zero_bw2": {
+          "first_action": [
+            "add_edge",
+            3,
+            5
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  3,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  5,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.69727306365967,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw3": {
+          "first_action": [
+            "add_edge",
+            3,
+            5
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  3,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  5,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 17.69727306365967,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V0_zero_bw5": {
+          "first_action": [
+            "add_edge",
+            2,
+            3
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  6,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.69727306365967
+        },
+        "V1_type_mean_bw2": {
+          "first_action": [
+            "add_edge",
+            3,
+            5
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  3,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  5,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.69727306365967,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw3": {
+          "first_action": [
+            "add_edge",
+            3,
+            5
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  3,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  5,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 2., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 17.69727306365967,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V1_type_mean_bw5": {
+          "first_action": [
+            "add_edge",
+            2,
+            3
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  6,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.69727306365967
+        },
+        "V2_linear_bw2": {
+          "first_action": [
+            "add_edge",
+            3,
+            5
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  3,  2,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  5,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.69727306365967,
+          "search_savings": 0.5,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw3": {
+          "first_action": [
+            "add_edge",
+            3,
+            5
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  3,  2,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  5,  3,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 17.69727306365967,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": 0.0
+        },
+        "V2_linear_bw5": {
+          "first_action": [
+            "add_edge",
+            2,
+            3
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  2,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.69727306365967
+        },
+        "V3_ridge_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            1
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  7,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([0.5000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.82833080291748,
+          "search_savings": 0.5,
+          "greedy_improvement": -0.1310577392578125
+        },
+        "V3_ridge_bw3": {
+          "first_action": [
+            "add_edge",
+            0,
+            1
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  7,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([0.5000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 17.82833080291748,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": -0.1310577392578125
+        },
+        "V3_ridge_bw5": {
+          "first_action": [
+            "add_edge",
+            2,
+            3
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  2,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.69727306365967
+        },
+        "V5_mlp_bw2": {
+          "first_action": [
+            "add_edge",
+            0,
+            1
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  7,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([0.5000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 18,
+          "first_action_agreement": false,
+          "planning_regret": 17.82833080291748,
+          "search_savings": 0.5,
+          "greedy_improvement": -0.1310577392578125
+        },
+        "V5_mlp_bw3": {
+          "first_action": [
+            "add_edge",
+            0,
+            1
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  7,  0,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([2., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([0.5000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000,\n        1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000,\n        0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 24,
+          "first_action_agreement": false,
+          "planning_regret": 17.82833080291748,
+          "search_savings": 0.33333333333333337,
+          "greedy_improvement": -0.1310577392578125
+        },
+        "V5_mlp_bw5": {
+          "first_action": [
+            "add_edge",
+            2,
+            3
+          ],
+          "total_value": "GraphBuffers(num_nodes=12, src=tensor([ 0,  1,  3,  4,  5,  7,  8,  9, 10,  2,  2,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), dst=tensor([ 1,  2,  4,  5,  6,  8,  9, 10, 11,  3,  7,  0,  0,  0,  0,  0,  0,  0,\n         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]), weight=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), valid=tensor([ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,\n         True, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False, False, False, False, False,\n        False, False, False, False, False, False]), length=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0.,\n        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]), role=tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), slot_generation=tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), version=2)",
+          "nodes_expanded": 36,
+          "first_action_agreement": true,
+          "planning_regret": 0.0,
+          "search_savings": 0.0,
+          "greedy_improvement": 17.69727306365967
+        }
+      }
+    }
+  ],
+  "gates": {
+    "A_benchmark_validity": {
+      "passed": true,
+      "description": "4/5 tasks have greedy suboptimal at H=2",
+      "target": "\u226520%"
+    },
+    "B_first_action_agreement": {
+      "passed": true,
+      "description": "best model (V0_zero_bw5) agreement: 100%",
+      "target": ">50% on suboptimal cases"
+    },
+    "C_search_savings": {
+      "passed": true,
+      "description": "best model savings: 50.0%",
+      "target": "\u226550%"
+    },
+    "D_exact_replay_safety": {
+      "passed": true,
+      "description": "All actions verified through exact replay + v5.11",
+      "target": "100% (by design)"
+    },
+    "E_model_beats_greedy": {
+      "passed": true,
+      "description": "4/4 model beats greedy",
+      "target": "\u226530%"
+    },
+    "F_qualification_integrity": {
+      "passed": true,
+      "description": "Qualification mode and manifest verified separately",
+      "target": "release mode + valid manifest"
+    }
+  },
+  "all_gates_passed": true,
+  "summary": {
+    "n_tasks": 5,
+    "n_suboptimal_h2": 4,
+    "n_suboptimal_h3": 5,
+    "best_model": "V0_zero_bw5",
+    "best_agreement": 1.0,
+    "best_savings": 0.5,
+    "n_model_beats_greedy": 4,
+    "n_comparisons": 4
+  },
+  "elapsed_seconds": 2.84
+}

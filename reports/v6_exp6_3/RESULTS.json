@@ -1,0 +1,577 @@
+{
+  "experiment": "v6.0-exp6.3",
+  "description": "Long-horizon structural value",
+  "scientific_question": "Can a learned dynamics/value model recover the same first action as exact multi-step MPC while evaluating far fewer future branches?",
+  "architecture": "Exact immediate \u0394U (analytical) + Learned future value V(S') \u2192 MPC search \u2192 exact replay \u2192 governance",
+  "n_tasks": 5,
+  "tasks": [
+    {
+      "task_name": "bridge_now_unlock_later",
+      "description": "Adding a direct bridge between distant clusters has negative immediate utility but enables high-utility future connections.",
+      "n_nodes": 12,
+      "n_actions": 6,
+      "optimal_first_action": [
+        "add_edge",
+        0,
+        5
+      ],
+      "greedy_first_action": [
+        "add_edge",
+        4,
+        5
+      ],
+      "greedy_failure_reason": "Greedy picks the shortest bridge (4-5) which has the least negative immediate utility, but the long bridge (0-5) combined with a second step creates a much better global structure.",
+      "greedy": {
+        "first_action": [
+          "add_edge",
+          1,
+          6
+        ],
+        "total_utility": -0.8098254203796387,
+        "n_evaluations": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "add_edge",
+          1,
+          6
+        ],
+        "total_utility": -1.5386682987213134,
+        "n_evaluations": 36,
+        "all_first_action_utilities": {
+          "add_edge_0_5": -2.4929330587387084,
+          "add_edge_3_6": -3.065992736816406,
+          "add_edge_4_5": -5.068008089065552,
+          "add_edge_4_10": -7.21507420539856,
+          "add_edge_1_6": -1.5386682987213134,
+          "add_edge_2_7": -6.941134595870972
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "add_edge",
+          1,
+          6
+        ],
+        "total_utility": -2.1946268892288208,
+        "n_evaluations": 216,
+        "all_first_action_utilities": {
+          "add_edge_0_5": -3.148891649246216,
+          "add_edge_3_6": -3.7219513273239135,
+          "add_edge_4_5": -5.72396667957306,
+          "add_edge_4_10": -7.871032795906068,
+          "add_edge_1_6": -2.1946268892288208,
+          "add_edge_2_7": -7.59709318637848
+        }
+      },
+      "greedy_is_suboptimal_h2": false,
+      "greedy_is_suboptimal_h3": false,
+      "learned_h2": {
+        "first_action": [
+          "add_edge",
+          1,
+          6
+        ],
+        "total_utility": -1.080856336431019,
+        "n_evaluations": 36,
+        "predicted_values": {
+          "add_edge_0_5": -2.0799150927109733,
+          "add_edge_3_6": -2.561581940615708,
+          "add_edge_4_5": -4.653530581037748,
+          "add_edge_4_10": -6.767101603542846,
+          "add_edge_1_6": -1.080856336431019,
+          "add_edge_2_7": -6.443963808458791
+        }
+      },
+      "metrics_h2": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": 0.0
+      },
+      "learned_h3": {
+        "first_action": [
+          "add_edge",
+          1,
+          6
+        ],
+        "total_utility": -1.7842004074358615,
+        "n_evaluations": 222,
+        "predicted_values": {
+          "add_edge_0_5": -2.7787797640895606,
+          "add_edge_3_6": -3.2687237239068514,
+          "add_edge_4_5": -5.352541210394843,
+          "add_edge_4_10": -7.468599567399491,
+          "add_edge_1_6": -1.7842004074358615,
+          "add_edge_2_7": -7.151243754418815
+        }
+      },
+      "metrics_h3": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": -0.02777777777777768
+      }
+    },
+    {
+      "task_name": "remove_useful_reroute",
+      "description": "Removing a high-utility edge (0,1) has negative immediate utility but enables adding a better alternative path.",
+      "n_nodes": 10,
+      "n_actions": 6,
+      "optimal_first_action": [
+        "remove_edge",
+        0,
+        1
+      ],
+      "greedy_first_action": [
+        "add_edge",
+        1,
+        3
+      ],
+      "greedy_failure_reason": "Greedy adds a shortcut (1-3) for immediate gain, but removing the high-utility edge (0-1) and replacing it with a weighted alternative (0-3) gives higher total utility over 2 steps.",
+      "greedy": {
+        "first_action": [
+          "remove_edge",
+          4,
+          5
+        ],
+        "total_utility": 5.0487060546875,
+        "n_evaluations": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "remove_edge",
+          4,
+          5
+        ],
+        "total_utility": 6.803198301792145,
+        "n_evaluations": 36,
+        "all_first_action_utilities": {
+          "remove_edge_0_1": 6.493271279335022,
+          "add_edge_1_3": 2.956899809837341,
+          "add_edge_0_5": 3.284675407409668,
+          "add_edge_2_8": -1.2455398559570314,
+          "add_edge_4_9": 2.405523586273193,
+          "remove_edge_4_5": 6.803198301792145
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "remove_edge",
+          4,
+          5
+        ],
+        "total_utility": 6.803198301792145,
+        "n_evaluations": 216,
+        "all_first_action_utilities": {
+          "remove_edge_0_1": 6.493271279335022,
+          "add_edge_1_3": 4.535942832231521,
+          "add_edge_0_5": 4.863718429803848,
+          "add_edge_2_8": 0.33350316643714906,
+          "add_edge_4_9": 3.9845666086673734,
+          "remove_edge_4_5": 6.803198301792145
+        }
+      },
+      "greedy_is_suboptimal_h2": false,
+      "greedy_is_suboptimal_h3": false,
+      "learned_h2": {
+        "first_action": [
+          "remove_edge",
+          4,
+          5
+        ],
+        "total_utility": 7.243395930795649,
+        "n_evaluations": 36,
+        "predicted_values": {
+          "remove_edge_0_1": 6.933468908338527,
+          "add_edge_1_3": 3.341882019971516,
+          "add_edge_0_5": 3.7826376947698837,
+          "add_edge_2_8": -0.6922014087795185,
+          "add_edge_4_9": 2.7706525093178893,
+          "remove_edge_4_5": 7.243395930795649
+        }
+      },
+      "metrics_h2": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": 0.0
+      },
+      "learned_h3": {
+        "first_action": [
+          "remove_edge",
+          4,
+          5
+        ],
+        "total_utility": 7.1993761678952986,
+        "n_evaluations": 222,
+        "predicted_values": {
+          "remove_edge_0_1": 6.889449145438176,
+          "add_edge_1_3": 4.946806971559813,
+          "add_edge_0_5": 5.303096485237046,
+          "add_edge_2_8": 0.9016534507479896,
+          "add_edge_4_9": 4.389220927484721,
+          "remove_edge_4_5": 7.1993761678952986
+        }
+      },
+      "metrics_h3": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": -0.02777777777777768
+      }
+    },
+    {
+      "task_name": "hub_decomposition",
+      "description": "Removing hub edges has negative immediate utility but enables better distributed connectivity.",
+      "n_nodes": 15,
+      "n_actions": 6,
+      "optimal_first_action": [
+        "remove_edge",
+        0,
+        7
+      ],
+      "greedy_first_action": [
+        "add_edge",
+        11,
+        0
+      ],
+      "greedy_failure_reason": "Greedy connects orphans to the hub for immediate gain, but breaking hub edges and creating lateral connections distributes load better over 3 steps.",
+      "greedy": {
+        "first_action": [
+          "remove_edge",
+          0,
+          7
+        ],
+        "total_utility": 1.9558976888656616,
+        "n_evaluations": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "remove_edge",
+          0,
+          7
+        ],
+        "total_utility": 3.304020142555237,
+        "n_evaluations": 36,
+        "all_first_action_utilities": {
+          "remove_edge_0_7": 3.304020142555237,
+          "add_edge_11_0": -0.03954170942306523,
+          "add_edge_11_1": -0.6126786351203919,
+          "add_edge_12_3": 0.3249006390571594,
+          "add_edge_14_10": 0.8822561621665954,
+          "remove_edge_0_5": 3.258221757411957
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "remove_edge",
+          0,
+          7
+        ],
+        "total_utility": 3.304020142555237,
+        "n_evaluations": 216,
+        "all_first_action_utilities": {
+          "remove_edge_0_7": 3.304020142555237,
+          "add_edge_11_0": 1.1737684988975525,
+          "add_edge_11_1": 0.6006315732002259,
+          "add_edge_12_3": 1.5382108473777771,
+          "add_edge_14_10": 2.095566370487213,
+          "remove_edge_0_5": 3.258221757411957
+        }
+      },
+      "greedy_is_suboptimal_h2": false,
+      "greedy_is_suboptimal_h3": false,
+      "learned_h2": {
+        "first_action": [
+          "remove_edge",
+          0,
+          7
+        ],
+        "total_utility": 4.636660280102967,
+        "n_evaluations": 36,
+        "predicted_values": {
+          "remove_edge_0_7": 4.636660280102967,
+          "add_edge_11_0": 1.4257944668096245,
+          "add_edge_11_1": 0.7301006447238434,
+          "add_edge_12_3": 1.6915264410498532,
+          "add_edge_14_10": 2.263032309741492,
+          "remove_edge_0_5": 4.590861894959687
+        }
+      },
+      "metrics_h2": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": 0.0
+      },
+      "learned_h3": {
+        "first_action": [
+          "remove_edge",
+          0,
+          7
+        ],
+        "total_utility": 4.503396266348194,
+        "n_evaluations": 222,
+        "predicted_values": {
+          "remove_edge_0_7": 4.503396266348194,
+          "add_edge_11_0": 2.4272685261947693,
+          "add_edge_11_1": 1.7437221985860578,
+          "add_edge_12_3": 2.7047119061993117,
+          "add_edge_14_10": 3.2781917175888644,
+          "remove_edge_0_5": 4.457597881204914
+        }
+      },
+      "metrics_h3": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": -0.02777777777777768
+      }
+    },
+    {
+      "task_name": "community_bridge_sequence",
+      "description": "Building community bridges in the right order creates better global structure than greedy shortcuts.",
+      "n_nodes": 16,
+      "n_actions": 6,
+      "optimal_first_action": [
+        "add_edge",
+        4,
+        10
+      ],
+      "greedy_first_action": [
+        "add_edge",
+        2,
+        7
+      ],
+      "greedy_failure_reason": "Greedy picks a within-cluster shortcut for immediate gain, but connecting communities in sequence builds a globally optimal structure.",
+      "greedy": {
+        "first_action": [
+          "add_edge",
+          2,
+          7
+        ],
+        "total_utility": -0.6669159531593323,
+        "n_evaluations": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "add_edge",
+          2,
+          7
+        ],
+        "total_utility": -1.2671403110027315,
+        "n_evaluations": 36,
+        "all_first_action_utilities": {
+          "add_edge_4_10": -3.7240611135959627,
+          "add_edge_2_7": -1.2671403110027315,
+          "add_edge_4_5": -2.0042087852954866,
+          "add_edge_9_10": -2.572212439775467,
+          "add_edge_0_15": -1.6524566233158113,
+          "add_edge_14_15": -1.8785607635974886
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "add_edge",
+          2,
+          7
+        ],
+        "total_utility": -1.8073422330617905,
+        "n_evaluations": 216,
+        "all_first_action_utilities": {
+          "add_edge_4_10": -4.264263035655022,
+          "add_edge_2_7": -1.8073422330617905,
+          "add_edge_4_5": -2.5444107073545457,
+          "add_edge_9_10": -3.112414361834526,
+          "add_edge_0_15": -2.1926585453748704,
+          "add_edge_14_15": -2.4187626856565476
+        }
+      },
+      "greedy_is_suboptimal_h2": false,
+      "greedy_is_suboptimal_h3": false,
+      "learned_h2": {
+        "first_action": [
+          "add_edge",
+          2,
+          7
+        ],
+        "total_utility": -0.5172891002855564,
+        "n_evaluations": 36,
+        "predicted_values": {
+          "add_edge_4_10": -3.0488552673812017,
+          "add_edge_2_7": -0.5172891002855564,
+          "add_edge_4_5": -1.2797647859926236,
+          "add_edge_9_10": -1.8693647080187272,
+          "add_edge_0_15": -0.9201934956198922,
+          "add_edge_14_15": -1.1567751114511955
+        }
+      },
+      "metrics_h2": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": 0.0
+      },
+      "learned_h3": {
+        "first_action": [
+          "add_edge",
+          2,
+          7
+        ],
+        "total_utility": -1.1330845261180391,
+        "n_evaluations": 222,
+        "predicted_values": {
+          "add_edge_4_10": -3.6571889264900532,
+          "add_edge_2_7": -1.1330845261180391,
+          "add_edge_4_5": -1.8930194906836748,
+          "add_edge_9_10": -2.480462555681777,
+          "add_edge_0_15": -1.5342301131502492,
+          "add_edge_14_15": -1.769763981426591
+        }
+      },
+      "metrics_h3": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": -0.02777777777777768
+      }
+    },
+    {
+      "task_name": "temporary_density",
+      "description": "Adding a temporary edge with negative utility enables a better permanent structure.",
+      "n_nodes": 10,
+      "n_actions": 6,
+      "optimal_first_action": [
+        "add_edge",
+        2,
+        7
+      ],
+      "greedy_first_action": [
+        "add_edge",
+        3,
+        6
+      ],
+      "greedy_failure_reason": "Greedy picks the shortest cross-cluster edge for less negative utility, but the longer bridge creates a better foundation for the second step.",
+      "greedy": {
+        "first_action": [
+          "add_edge",
+          2,
+          5
+        ],
+        "total_utility": -0.7925063371658325,
+        "n_evaluations": 6
+      },
+      "exact_h2": {
+        "first_action": [
+          "add_edge",
+          2,
+          5
+        ],
+        "total_utility": -1.5057620406150818,
+        "n_evaluations": 36,
+        "all_first_action_utilities": {
+          "add_edge_2_7": -3.475861370563507,
+          "add_edge_3_6": -2.0888590216636658,
+          "add_edge_4_5": -3.7725055813789368,
+          "add_edge_1_8": -1.7210920453071594,
+          "add_edge_0_9": -2.0464916825294495,
+          "add_edge_2_5": -1.5057620406150818
+        }
+      },
+      "exact_h3": {
+        "first_action": [
+          "add_edge",
+          2,
+          5
+        ],
+        "total_utility": -2.147692173719406,
+        "n_evaluations": 216,
+        "all_first_action_utilities": {
+          "add_edge_2_7": -4.117791503667831,
+          "add_edge_3_6": -2.73078915476799,
+          "add_edge_4_5": -4.414435714483261,
+          "add_edge_1_8": -2.3630221784114838,
+          "add_edge_0_9": -2.688421815633774,
+          "add_edge_2_5": -2.147692173719406
+        }
+      },
+      "greedy_is_suboptimal_h2": false,
+      "greedy_is_suboptimal_h3": false,
+      "learned_h2": {
+        "first_action": [
+          "add_edge",
+          2,
+          5
+        ],
+        "total_utility": -1.2124025688288873,
+        "n_evaluations": 36,
+        "predicted_values": {
+          "add_edge_2_7": -3.1335849167273753,
+          "add_edge_3_6": -1.8184544444101665,
+          "add_edge_4_5": -3.5230071714179676,
+          "add_edge_1_8": -1.4226351321665887,
+          "add_edge_0_9": -1.8047729737167568,
+          "add_edge_2_5": -1.2124025688288873
+        }
+      },
+      "metrics_h2": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": 0.0
+      },
+      "learned_h3": {
+        "first_action": [
+          "add_edge",
+          2,
+          5
+        ],
+        "total_utility": -1.8851563471409272,
+        "n_evaluations": 222,
+        "predicted_values": {
+          "add_edge_2_7": -3.8095149812748232,
+          "add_edge_3_6": -2.4874122555473184,
+          "add_edge_4_5": -4.191374843547485,
+          "add_edge_1_8": -2.0958986581945585,
+          "add_edge_0_9": -2.4723626757314463,
+          "add_edge_2_5": -1.8851563471409272
+        }
+      },
+      "metrics_h3": {
+        "first_action_agreement": true,
+        "planning_regret": 0.0,
+        "search_savings": -0.02777777777777768
+      }
+    }
+  ],
+  "success_gates": {
+    "benchmark_valid": {
+      "passed": false,
+      "description": "0/5 tasks have greedy suboptimal at H=2",
+      "target": "\u22651 task with greedy suboptimal"
+    },
+    "first_action_agreement": {
+      "passed": "True",
+      "description": "avg agreement: H=2=100%, H=3=100%",
+      "target": ">50% agreement with exact MPC"
+    },
+    "search_savings": {
+      "passed": "False",
+      "description": "avg savings: H=2=0.0%, H=3=-2.8%",
+      "target": ">50% evaluations saved"
+    },
+    "planning_regret": {
+      "passed": true,
+      "description": "max regret: H=2=0.0000, H=3=0.0000",
+      "target": "regret < 5.0"
+    },
+    "safety": {
+      "passed": true,
+      "description": "All actions verified through v5.11 CommitChannel",
+      "target": "100% (by design)"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "n_suboptimal_h2": 0,
+    "n_suboptimal_h3": 0,
+    "avg_agreement_h2": 1.0,
+    "avg_agreement_h3": 1.0,
+    "avg_savings_h2": 0.0,
+    "avg_savings_h3": -0.02777777777777768,
+    "max_regret_h2": 0.0,
+    "max_regret_h3": 0.0
+  }
+}
