@@ -30,23 +30,24 @@ This is a scientific repair release, not exp6 MPC.
 
 | Variant | Dynamics R² | Outcome R² | Risk RMSE | Cost RMSE |
 |---------|-------------|------------|-----------|-----------|
-| linear | 0.6932 | -1.1464 | 0.033640 | 0.076029 |
-| mlp | -1.2112 | -1.1464 | 0.033640 | 0.076029 |
+| linear | -2.6443 | -1.1464 | 0.033647 | 0.076028 |
+| mlp | -22.9435 | -1.1464 | 0.033647 | 0.076028 |
+| ensemble | -2.7073 | -1.1464 | 0.033647 | 0.076028 |
 
 ### Multi-Step Rollout (Validation, Normalized RMSE)
 
 | Horizon | Linear RMSE | MLP RMSE | Linear R² | MLP R² |
 |---------|-------------|----------|-----------|--------|
-| h=1 | 0.0003 | 2.1420 | 0.0000 | 0.0000 |
-| h=2 | 0.0003 | 2.7071 | 0.0000 | 0.0000 |
-| h=3 | 0.0003 | 7.9871 | 0.0000 | 0.0000 |
+| h=1 | 0.2425 | 3.0216 | 0.9997 | -9.3869 |
+| h=2 | 0.3537 | 3.0626 | 0.9991 | -9.9406 |
+| h=3 | 0.4562 | 3.1085 | 0.9983 | -10.0000 |
 
 ### Multi-Factor Trust Scores
 
 | Factor | Linear | MLP |
 |--------|--------|-----|
-| one_step_quality | 0.6932 | 0.0000 |
-| rollout_quality | 0.0000 | 0.0000 |
+| one_step_quality | 0.0000 | 0.0000 |
+| rollout_quality | 0.5578 | 0.0000 |
 | calibration_quality | 0.0000 | 0.0000 |
 | tail_safety | 0.7600 | 0.7600 |
 | ood_safety | 1.0000 | 1.0000 |
@@ -57,7 +58,7 @@ This is a scientific repair release, not exp6 MPC.
 
 **Best variant:** `linear`
 **Trust score:** 0.0000
-**Recommended planning horizon:** 1
+**Recommended planning horizon:** 2
 **Exact verification fraction:** 1.0
 
 ## 6. Readiness for exp6 MPC

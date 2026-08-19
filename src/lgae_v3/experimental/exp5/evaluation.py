@@ -233,3 +233,79 @@ def rollout_evaluation(
             report.r2_by_horizon.append(0.0)
 
     return report
+
+
+def evaluate_calibration(
+    model: JointWorldModel,
+    records: list[Any],
+    *,
+    split: str = "held_out",
+) -> dict[str, Any]:
+    """Evaluate uncertainty calibration.
+
+    Computes the correlation between per-prediction uncertainty
+    (ensemble disagreement) and actual prediction error. A positive
+    correlation means uncertainty is useful for abstention.
+
+    Returns:
+        dict with:
+        - corr_uncertainty_error: Pearson correlation
+        - spearman_uncertainty_error: Spearman correlation
+        - n_samples: number of evaluated records
+        - mean_uncertainty: average uncertainty
+        - mean_error: average absolute error
+    """
+    from .dynamics import EnsembleDynamics
+
+    # Extract data for this split.
+    z_t, a_t, z_next, y = extract_training_data(records, split=split)
+    if len(z_t) == 0:
+        return {
+            "corr_uncertainty_error": 0.0,
+            "spearman_uncertainty_error": 0.0,
+            "n_samples": 0,
+            "mean_uncertainty": 0.0,
+            "mean_error": 0.0,
+        }
+
+    # Get predictions.
+    preds = model.predict_dynamics_batch(z_t, a_t)
+    errors = np.sqrt(np.sum((preds - z_next) ** 2, axis=1))
+
+    # Get per-prediction uncertainty.
+    if isinstance(model._dynamics, EnsembleDynamics):
+        uncs = model._dynamics.predict_uncertainty_batch(z_t, a_t)
+    else:
+        # Constant uncertainty — correlation will be ~0.
+        uncs = np.full(len(z_t), model._residual_std)
+
+    # Pearson correlation.
+    if len(uncs) > 1 and np.std(uncs) > 1e-10 and np.std(errors) > 1e-10:
+        corr = float(np.corrcoef(uncs, errors)[0, 1])
+    else:
+        corr = 0.0
+
+    # Spearman correlation (rank-based).
+    if len(uncs) > 1:
+        from scipy.stats import spearmanr
+        try:
+            sp, _ = spearmanr(uncs, errors)
+            sp = float(sp)
+        except Exception:
+            # Manual Spearman.
+            rank_u = np.argsort(np.argsort(uncs)).astype(float)
+            rank_e = np.argsort(np.argsort(errors)).astype(float)
+            if np.std(rank_u) > 1e-10 and np.std(rank_e) > 1e-10:
+                sp = float(np.corrcoef(rank_u, rank_e)[0, 1])
+            else:
+                sp = 0.0
+    else:
+        sp = 0.0
+
+    return {
+        "corr_uncertainty_error": corr,
+        "spearman_uncertainty_error": sp,
+        "n_samples": int(len(z_t)),
+        "mean_uncertainty": float(np.mean(uncs)),
+        "mean_error": float(np.mean(errors)),
+    }

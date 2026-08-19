@@ -19,12 +19,13 @@ from .dynamics import compute_dynamics_metrics
 @dataclass(frozen=True, slots=True)
 class TrainingConfig:
     """Configuration for world model training (frozen)."""
-    dynamics_type: str = "linear"
+    dynamics_type: str = "linear"  # "linear", "mlp", or "ensemble"
     hidden_dim: int = 32
     lr: float = 0.01
     n_epochs: int = 100
     seed: int = 42
     regularization: float = 1e-4
+    n_ensemble_members: int = 5
 
     def to_log(self) -> dict[str, Any]:
         return {
@@ -34,6 +35,7 @@ class TrainingConfig:
             "n_epochs": int(self.n_epochs),
             "seed": int(self.seed),
             "regularization": float(self.regularization),
+            "n_ensemble_members": int(self.n_ensemble_members),
         }
 
 
@@ -148,6 +150,7 @@ def train_world_model(
         n_epochs=config.n_epochs,
         seed=config.seed,
         regularization=config.regularization,
+        n_ensemble_members=config.n_ensemble_members,
     )
     model = JointWorldModel(config=joint_config)
 

@@ -43,6 +43,7 @@ from lgae_v3.experimental.exp5 import (
     compute_multi_factor_trust,
     JointWorldModel,
 )
+from lgae_v3.experimental.exp5.evaluation import evaluate_calibration
 
 
 def main() -> int:
@@ -87,21 +88,23 @@ def main() -> int:
     print(f"  Elapsed: {time.time() - t0:.1f}s")
 
     # ------------------------------------------------------------------
-    # Step 3: Train both variants on train only.
+    # Step 3: Train three variants on train only.
     # ------------------------------------------------------------------
     results = {}
-    for variant_name, dyn_type, hidden_dim, n_epochs in [
-        ("linear", "linear", 0, 200),
-        ("mlp", "mlp", 32, 100),
+    for variant_name, dyn_type, hidden_dim, n_epochs, n_members in [
+        ("linear", "linear", 0, 200, 0),
+        ("mlp", "mlp", 32, 100, 0),
+        ("ensemble", "ensemble", 0, 200, 5),
     ]:
         print(f"\n[3/6] Training {variant_name} dynamics model...")
         config = TrainingConfig(
             dynamics_type=dyn_type,
             hidden_dim=hidden_dim,
             n_epochs=n_epochs,
-            lr=0.01 if dyn_type == "linear" else 0.005,
+            lr=0.01 if dyn_type in ("linear", "ensemble") else 0.005,
             seed=42,
             regularization=1e-3,
+            n_ensemble_members=n_members,
         )
         t0 = time.time()
         result = train_world_model(all_records, config)
@@ -170,6 +173,18 @@ def main() -> int:
     # ------------------------------------------------------------------
     print("\n[5/6] Computing multi-factor trust scores...")
 
+    # Evaluate calibration on TEST-B for each variant.
+    calibration_results = {}
+    for variant_name, result in results.items():
+        cal = evaluate_calibration(result.model, test_b_records, split="held_out")
+        calibration_results[variant_name] = cal
+        print(f"\n  Calibration ({variant_name}, TEST-B):")
+        print(f"    corr(uncertainty, error): {cal['corr_uncertainty_error']:.4f}")
+        print(f"    spearman(unc, error):     {cal['spearman_uncertainty_error']:.4f}")
+        print(f"    n_samples:                {cal['n_samples']}")
+        print(f"    mean_uncertainty:         {cal['mean_uncertainty']:.6f}")
+        print(f"    mean_error:               {cal['mean_error']:.6f}")
+
     trust_reports = {}
     for variant_name, result in results.items():
         eval_r = eval_results[variant_name]
@@ -188,12 +203,12 @@ def main() -> int:
         h3_rmse = rollout_rmse[2] if len(rollout_rmse) >= 3 else h1_rmse
         degradation = max(0.0, (h3_rmse - h1_rmse) / max(h1_rmse, 1e-6))
 
-        # Calibration: from exp4.2, uncertainty is not useful.
-        calibration_corr = 0.0  # exp4.2 found uncertainty_useful=False
+        # Calibration: now using actual measured correlation.
+        calibration_corr = calibration_results[variant_name]["corr_uncertainty_error"]
 
         # Tail regret and failure rate: conservative defaults.
-        tail_regret = 0.1  # from exp4.2 catastrophic rate
-        failure_rate = 0.07  # from exp4.2
+        tail_regret = 0.1
+        failure_rate = 0.07
 
         trust = compute_multi_factor_trust(
             one_step_r2=one_step_r2,
@@ -202,7 +217,7 @@ def main() -> int:
             calibration_correlation=calibration_corr,
             tail_regret=tail_regret,
             failure_rate=failure_rate,
-            ood_distance=0.0,  # same synthetic distribution
+            ood_distance=0.0,
         )
         trust_reports[variant_name] = trust
 

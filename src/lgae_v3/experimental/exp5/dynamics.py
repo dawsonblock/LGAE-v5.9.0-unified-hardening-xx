@@ -379,6 +379,157 @@ class MLPDynamics(DynamicsModel):
 
 
 # ---------------------------------------------------------------------------
+# Ensemble dynamics (for calibrated uncertainty).
+# ---------------------------------------------------------------------------
+
+class EnsembleDynamics(DynamicsModel):
+    """Ensemble of dynamics models for epistemic uncertainty estimation.
+
+    Trains N models with different seeds on the same data. The
+    disagreement (std) across ensemble members at prediction time
+    provides a per-prediction uncertainty estimate that correlates
+    with prediction error.
+
+    This is the key fix for the calibration issue: the previous
+    constant residual_std did not vary per prediction, so
+    corr(uncertainty, error) was always ~0.
+    """
+
+    model_type = "ensemble_dynamics"
+    deterministic = True  # deterministic given seeds
+
+    def __init__(
+        self,
+        *,
+        base_type: str = "linear",
+        n_members: int = 5,
+        lr: float = 0.01,
+        n_epochs: int = 100,
+        seed: int = 42,
+        regularization: float = 1e-4,
+        hidden_dim: int = 32,
+    ) -> None:
+        self.base_type = base_type
+        self.n_members = int(n_members)
+        self.lr = float(lr)
+        self.n_epochs = int(n_epochs)
+        self.seed = int(seed)
+        self.regularization = float(regularization)
+        self.hidden_dim = int(hidden_dim)
+        self._members: list[DynamicsModel] = []
+        self._fitted = False
+        self._n_samples = 0
+
+    def _create_member(self, member_seed: int) -> DynamicsModel:
+        if self.base_type == "mlp":
+            return MLPDynamics(
+                hidden_dim=self.hidden_dim,
+                lr=self.lr,
+                n_epochs=self.n_epochs,
+                seed=member_seed,
+            )
+        return LinearDynamics(
+            lr=self.lr,
+            n_epochs=self.n_epochs,
+            seed=member_seed,
+            regularization=self.regularization,
+        )
+
+    def _fit(
+        self,
+        z_t: np.ndarray,
+        a_t: np.ndarray,
+        z_next: np.ndarray,
+    ) -> None:
+        n = len(z_t)
+        self._members = []
+        for i in range(self.n_members):
+            member = self._create_member(self.seed + i * 1000)
+            # Bootstrap sample for diversity.
+            if n > 0:
+                rng = np.random.RandomState(self.seed + i * 1000)
+                indices = rng.randint(0, n, size=n)
+                member._fit(z_t[indices], a_t[indices], z_next[indices])
+            else:
+                member._fit(z_t, a_t, z_next)
+            self._members.append(member)
+        self._fitted = True
+        self._n_samples = n
+
+    def predict(self, z_t: np.ndarray, a_t: np.ndarray) -> np.ndarray:
+        """Mean prediction across ensemble."""
+        if not self._fitted or not self._members:
+            return z_t.copy()
+        preds = np.array([m.predict(z_t, a_t) for m in self._members])
+        return preds.mean(axis=0)
+
+    def predict_batch(
+        self,
+        z_t: np.ndarray,
+        a_t: np.ndarray,
+    ) -> np.ndarray:
+        if not self._fitted or not self._members:
+            return z_t.copy()
+        preds = np.array([m.predict_batch(z_t, a_t) for m in self._members])
+        return preds.mean(axis=0)
+
+    def predict_uncertainty_batch(
+        self,
+        z_t: np.ndarray,
+        a_t: np.ndarray,
+    ) -> np.ndarray:
+        """Per-prediction uncertainty (ensemble disagreement).
+
+        Returns: (n,) array of uncertainty values.
+        Higher disagreement → higher uncertainty.
+        """
+        if not self._fitted or not self._members:
+            return np.zeros(len(z_t))
+        preds = np.array([m.predict_batch(z_t, a_t) for m in self._members])
+        # Std across members, averaged over state dimensions.
+        stds = preds.std(axis=0).mean(axis=1)
+        return stds
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "base_type": self.base_type,
+            "n_members": self.n_members,
+            "members": [m.get_state() for m in self._members],
+            "fitted": self._fitted,
+            "n_samples": self._n_samples,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self.base_type = state.get("base_type", "linear")
+        self.n_members = state.get("n_members", 5)
+        self._fitted = state.get("fitted", False)
+        self._n_samples = state.get("n_samples", 0)
+        self._members = []
+        for ms in state.get("members", []):
+            m = self._create_member(0)
+            m.set_state(ms)
+            self._members.append(m)
+
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type,
+            "version": self.version,
+            "state_dim": STATE_DIM,
+            "action_dim": ACTION_DIM,
+            "base_type": self.base_type,
+            "n_members": self.n_members,
+            "lr": self.lr,
+            "n_epochs": self.n_epochs,
+            "seed": self.seed,
+            "regularization": self.regularization,
+        }
+
+    @property
+    def n_parameters(self) -> int:
+        return sum(m.n_parameters for m in self._members)
+
+
+# ---------------------------------------------------------------------------
 # Dynamics metrics.
 # ---------------------------------------------------------------------------
 

@@ -24,19 +24,23 @@ import math
 import numpy as np
 
 from .state_encoding import STATE_DIM, ACTION_DIM, state_action_schema_hash
-from .dynamics import DynamicsModel, LinearDynamics, MLPDynamics, DynamicsMetrics, compute_dynamics_metrics
+from .dynamics import (
+    DynamicsModel, LinearDynamics, MLPDynamics, EnsembleDynamics,
+    DynamicsMetrics, compute_dynamics_metrics,
+)
 
 
 @dataclass(frozen=True, slots=True)
 class JointModelConfig:
     """Configuration for the joint world model (frozen)."""
-    dynamics_type: str = "linear"  # "linear" or "mlp"
+    dynamics_type: str = "linear"  # "linear", "mlp", or "ensemble"
     outcome_type: str = "linear"   # "linear" or "mlp"
     hidden_dim: int = 32
     lr: float = 0.01
     n_epochs: int = 100
     seed: int = 42
     regularization: float = 1e-4
+    n_ensemble_members: int = 5  # for ensemble type
 
     def to_log(self) -> dict[str, Any]:
         return {
@@ -47,6 +51,7 @@ class JointModelConfig:
             "n_epochs": int(self.n_epochs),
             "seed": int(self.seed),
             "regularization": float(self.regularization),
+            "n_ensemble_members": int(self.n_ensemble_members),
         }
 
 
@@ -118,6 +123,15 @@ class JointWorldModel:
         self._n_samples = 0
 
     def _create_dynamics(self) -> DynamicsModel:
+        if self.config.dynamics_type == "ensemble":
+            return EnsembleDynamics(
+                base_type="linear",
+                n_members=self.config.n_ensemble_members,
+                lr=self.config.lr,
+                n_epochs=self.config.n_epochs,
+                seed=self.config.seed,
+                regularization=self.config.regularization,
+            )
         if self.config.dynamics_type == "mlp":
             return MLPDynamics(
                 hidden_dim=self.config.hidden_dim,
@@ -233,7 +247,16 @@ class JointWorldModel:
         delta_u = float(outcome[0])
         risk = float(outcome[1])
         cost = float(outcome[2])
-        unc = self._residual_std
+
+        # Per-prediction uncertainty from ensemble disagreement.
+        if isinstance(self._dynamics, EnsembleDynamics):
+            unc_arr = self._dynamics.predict_uncertainty_batch(
+                z_t[np.newaxis, :], a_t[np.newaxis, :]
+            )
+            unc = float(unc_arr[0]) if len(unc_arr) > 0 else self._residual_std
+        else:
+            unc = self._residual_std
+
         prob_pos = 1.0 / (1.0 + math.exp(-delta_u)) if abs(delta_u) < 50 else (1.0 if delta_u > 0 else 0.0)
 
         return WorldModelPrediction(

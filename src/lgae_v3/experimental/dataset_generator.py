@@ -375,8 +375,14 @@ class DatasetGenerator:
         records: list[TransitionRecord] = []
 
         for step in range(n_steps):
+            # Capture graph BEFORE the step.
+            graph_before = runtime._engine.graph
+
             # Run one step.
             result = runtime.step()
+
+            # Capture graph AFTER the step.
+            graph_after = runtime._engine.graph
 
             # Extract the observed transition.
             observed = self._extract_observed_record(
@@ -387,6 +393,8 @@ class DatasetGenerator:
                 graph_family=entry.family.value,
                 split=split,
                 seed=seed,
+                graph_before=graph_before,
+                graph_after=graph_after,
             )
             records.append(observed)
 
@@ -414,11 +422,19 @@ class DatasetGenerator:
         graph_family: str,
         split: str,
         seed: int,
+        graph_before: Any = None,
+        graph_after: Any = None,
     ) -> TransitionRecord:
         """Extract an observed (REALIZED) transition record from a runtime step."""
-        # Extract state summaries.
-        state_before = self._extract_state_summary(result.snapshot_before)
-        state_after = self._extract_state_summary(result.snapshot_after)
+        # Extract state summaries from the actual graphs.
+        if graph_before is not None:
+            state_before = self._extract_state_summary_from_graph(graph_before)
+        else:
+            state_before = self._extract_state_summary(result.snapshot_before)
+        if graph_after is not None:
+            state_after = self._extract_state_summary_from_graph(graph_after)
+        else:
+            state_after = self._extract_state_summary(result.snapshot_after)
 
         # Authority identity.
         auth_before = AuthorityIdentity(
