@@ -60,8 +60,15 @@ def _qual_cfg():
 class TestV511Qualification:
     """Final qualification: every capability is proven by tests."""
 
+    @pytest.mark.meta
     def test_all_integration_tests_pass(self):
-        """All integration tests pass (excluding this self-referential test)."""
+        """All integration tests pass (excluding this self-referential test).
+
+        Marked as 'meta' because it re-executes the integration suite as a
+        subprocess. This is redundant when pytest is already running the full
+        suite. Excluded via '-m "not meta"' during qualification to avoid
+        duplicated work (~192s saved).
+        """
         result = subprocess.run(
             [sys.executable, "-m", "pytest", "tests/integration/",
              "--ignore=tests/integration/test_v511_final_qualification.py",

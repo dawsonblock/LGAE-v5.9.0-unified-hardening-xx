@@ -27,6 +27,8 @@ import textwrap
 from pathlib import Path
 
 import pytest
+
+pytestmark = [pytest.mark.crash_recovery]
 import torch
 
 from lgae_v3 import ResearchConfig, make_graph_buffers, MutationDecision

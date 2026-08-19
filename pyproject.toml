@@ -39,3 +39,7 @@ filterwarnings = [
   "error",
   "ignore:.*Sparse invariant checks.*:UserWarning",
 ]
+markers = [
+  "meta: tests that re-execute other tests (excluded from parallel qualification runs)",
+  "crash_recovery: tests that exercise crash recovery, cross-process determinism, or subprocess isolation (excluded from fast qualification)",
+]

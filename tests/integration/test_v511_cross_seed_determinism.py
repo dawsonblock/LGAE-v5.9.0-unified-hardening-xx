@@ -5,6 +5,8 @@ import os
 import subprocess
 import sys
 import pytest
+
+pytestmark = [pytest.mark.crash_recovery]
 from pathlib import Path
 
 SEEDS = [0, 1, 2, 42, 123456]

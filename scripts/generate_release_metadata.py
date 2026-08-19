@@ -23,23 +23,36 @@ if str(SRC) not in sys.path:
 from lgae_v3.version import VERSION, SCHEMA_VERSION
 
 
-def run_test_suite() -> dict:
+def run_test_suite(mode: str = "release") -> dict:
     """Run pytest with junitxml or summary to collect real execution counts.
+
+    Modes:
+    - "release": full suite, parallel, meta-tests excluded by marker.
+      Runs all substantive tests including crash/recovery and cross-process.
+    - "fast": unit + integration, parallel, meta and slow tests excluded.
+      For development iteration only — NOT a release qualification.
 
     Optimizations:
     - Uses pytest-xdist with all CPU cores for parallel execution
-    - Skips the self-referential meta-test that re-runs integration tests
-      (redundant when pytest is already running the full suite)
+    - Excludes meta-tests (self-referential tests that re-run other tests)
+      via the explicit 'meta' pytest marker
     """
     import os
     xml_path = ROOT / ".pytest_report.xml"
     n_workers = os.cpu_count() or 4
-    print(f"Running pytest with {n_workers} workers to collect qualification metadata...")
+
+    if mode == "fast":
+        marker_expr = "not meta and not crash_recovery"
+        print(f"Running FAST qualification (unit + integration, no crash/recovery) with {n_workers} workers...")
+    else:
+        marker_expr = "not meta"
+        print(f"Running RELEASE qualification (full suite, crash/recovery included) with {n_workers} workers...")
+
     start_t = time.time()
     res = subprocess.run(
         [sys.executable, "-m", "pytest", f"--junitxml={xml_path}", "-q",
          f"-n={n_workers}",
-         "--deselect=tests/integration/test_v511_final_qualification.py::TestV511Qualification::test_all_integration_tests_pass",
+         f"-m={marker_expr}",
          ],
         cwd=str(ROOT),
         capture_output=True,
@@ -93,6 +106,10 @@ def run_test_suite() -> dict:
         "skipped": skipped,
         "returncode": res.returncode,
         "elapsed_seconds": round(elapsed, 2),
+        "qualification_mode": mode,
+        "parallel_workers": n_workers,
+        "meta_tests_excluded": 1 if mode in ("release", "fast") else 0,
+        "marker_expression": marker_expr,
     }
 
 
@@ -146,6 +163,10 @@ def write_qualification_summary(test_results: dict) -> Path:
         "version": VERSION,
         "schema_version": SCHEMA_VERSION,
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "qualification_mode": test_results.get("qualification_mode", "release"),
+        "parallel_workers": test_results.get("parallel_workers", 1),
+        "meta_tests_excluded": test_results.get("meta_tests_excluded", 0),
+        "marker_expression": test_results.get("marker_expression", ""),
         "test_results": test_results,
         "status": "QUALIFIED" if test_results["failed"] == 0 and test_results["errors"] == 0 else "UNQUALIFIED",
     }
@@ -181,11 +202,16 @@ def update_build_report(test_results: dict) -> Path:
 
 
 def main() -> int:
-    test_results = run_test_suite()
+    # Accept mode as command-line argument: "release" (default) or "fast".
+    mode = "release"
+    if len(sys.argv) > 1 and sys.argv[1] == "--fast":
+        mode = "fast"
+
+    test_results = run_test_suite(mode=mode)
     write_release_verification(test_results)
     write_qualification_summary(test_results)
     update_build_report(test_results)
-    print(f"Metadata generation complete. Status: {'PASS' if test_results['failed'] == 0 else 'FAIL'}")
+    print(f"Metadata generation complete. Mode: {mode}. Status: {'PASS' if test_results['failed'] == 0 else 'FAIL'}")
     return test_results["returncode"]
 
 
