@@ -6,6 +6,8 @@ The registry allows:
 
 No model should be loadable against an incompatible encoder or dataset
 without an explicit compatibility failure.
+
+Fix 3: Compatibility checks include split/normalization/feature/target identity.
 """
 from __future__ import annotations
 
@@ -88,6 +90,8 @@ class ModelRegistry:
         dataset_schema_hash: str,
         train_split_hash: str = "",
         normalization_hash: str = "",
+        feature_schema_hash: str = "",
+        target_schema_hash: str = "",
         metrics: dict[str, Any] | None = None,
         description: str = "",
     ) -> ModelArtifact:
@@ -99,6 +103,8 @@ class ModelRegistry:
             dataset_schema_hash=dataset_schema_hash,
             train_split_hash=train_split_hash,
             normalization_hash=normalization_hash,
+            feature_schema_hash=feature_schema_hash,
+            target_schema_hash=target_schema_hash,
             metrics=metrics,
             description=description,
         )
@@ -110,17 +116,61 @@ class ModelRegistry:
         *,
         encoder_schema_hash: str,
         dataset_schema_hash: str,
+        train_split_hash: str = "",
+        normalization_hash: str = "",
+        feature_schema_hash: str = "",
+        target_schema_hash: str = "",
+        strict: bool = False,
     ) -> None:
-        """Verify that an artifact is compatible with the given encoder and dataset.
+        """Verify full compatibility with encoder, dataset, split, and normalization.
+
+        Fix 3: Checks all identity fields, not just schema.
+        Phase 1 (exp4.2): ``strict=True`` requires all fields to exist and
+        match exactly. No wildcards. This is the only mode permitted in
+        scientific runs.
 
         Raises:
             CompatibilityError: If the artifact is not compatible.
         """
-        if not artifact.is_compatible_with(encoder_schema_hash, dataset_schema_hash):
+        if not artifact.is_compatible_with(
+            encoder_schema_hash=encoder_schema_hash,
+            dataset_schema_hash=dataset_schema_hash,
+            train_split_hash=train_split_hash,
+            normalization_hash=normalization_hash,
+            feature_schema_hash=feature_schema_hash,
+            target_schema_hash=target_schema_hash,
+            strict=strict,
+        ):
+            # Build a detailed error message listing all mismatches.
+            mismatches = []
+            if artifact.encoder_schema_hash != encoder_schema_hash:
+                mismatches.append(
+                    f"encoder_schema_hash: artifact={artifact.encoder_schema_hash!r} "
+                    f"expected={encoder_schema_hash!r}"
+                )
+            if artifact.dataset_schema_hash != dataset_schema_hash:
+                mismatches.append(
+                    f"dataset_schema_hash: artifact={artifact.dataset_schema_hash!r} "
+                    f"expected={dataset_schema_hash!r}"
+                )
+            if strict:
+                for name, av, qv in [
+                    ("train_split_hash", artifact.train_split_hash, train_split_hash),
+                    ("normalization_hash", artifact.normalization_hash, normalization_hash),
+                    ("feature_schema_hash", artifact.feature_schema_hash, feature_schema_hash),
+                    ("target_schema_hash", artifact.target_schema_hash, target_schema_hash),
+                ]:
+                    if not av or not qv:
+                        mismatches.append(f"{name}: missing (artifact={av!r}, expected={qv!r})")
+                    elif av != qv:
+                        mismatches.append(f"{name}: artifact={av!r} expected={qv!r}")
+            elif artifact.train_split_hash and train_split_hash and artifact.train_split_hash != train_split_hash:
+                mismatches.append(
+                    f"train_split_hash: artifact={artifact.train_split_hash!r} "
+                    f"expected={train_split_hash!r}"
+                )
+            detail = "; ".join(mismatches) if mismatches else "unknown mismatch"
             raise CompatibilityError(
-                f"Model artifact {artifact.model_id} is not compatible. "
-                f"Expected encoder_schema={encoder_schema_hash}, "
-                f"got {artifact.encoder_schema_hash}. "
-                f"Expected dataset_schema={dataset_schema_hash}, "
-                f"got {artifact.dataset_schema_hash}."
+                f"Model artifact {artifact.model_id} is not compatible "
+                f"(strict={strict}): {detail}"
             )

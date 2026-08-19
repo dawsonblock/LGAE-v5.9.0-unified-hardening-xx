@@ -1,0 +1,21 @@
+{
+  "content_hash": "7e2c15a735ad172443d43dcd88fb1b7ebf4ea40c484d17a098649eac3a4c18c5",
+  "graph_family_distribution": {
+    "barbell": 60,
+    "cycle": 60,
+    "grid": 60,
+    "path": 60,
+    "random_ba": 60,
+    "random_er": 60,
+    "star": 60
+  },
+  "mutation_distribution": {
+    "ADD_EDGE": 315,
+    "add_edge": 105
+  },
+  "n_counterfactual": 315,
+  "n_realized": 105,
+  "n_records": 420,
+  "n_shadow": 0,
+  "split": "train"
+}

@@ -1,0 +1,57 @@
+{
+  "config_hash": "d06a19bc44774903",
+  "finalists": [
+    {
+      "encoder_id": "global-local",
+      "mean_validation_score": 0.06945273977359538,
+      "predictor_id": "tree",
+      "std_validation_score": 0.0,
+      "target": "realized_delta"
+    },
+    {
+      "encoder_id": "geometric",
+      "mean_validation_score": 0.06945273977359538,
+      "predictor_id": "tree",
+      "std_validation_score": 0.0,
+      "target": "realized_delta"
+    },
+    {
+      "encoder_id": "global-local",
+      "mean_validation_score": 0.046323529411764694,
+      "predictor_id": "mlp",
+      "std_validation_score": 0.00291079241614001,
+      "target": "realized_delta"
+    },
+    {
+      "encoder_id": "global-local",
+      "mean_validation_score": 0.07779533300923674,
+      "predictor_id": "tree",
+      "std_validation_score": 0.0,
+      "target": "sign_delta"
+    },
+    {
+      "encoder_id": "geometric",
+      "mean_validation_score": 0.07779533300923674,
+      "predictor_id": "tree",
+      "std_validation_score": 0.0,
+      "target": "sign_delta"
+    },
+    {
+      "encoder_id": "minimal-control",
+      "mean_validation_score": 0.07400513924578095,
+      "predictor_id": "tree",
+      "std_validation_score": 0.0,
+      "target": "sign_delta"
+    }
+  ],
+  "locked_at": "2026-08-19T02:16:17Z",
+  "selection_weights": {
+    "w_ece": 0.1,
+    "w_latency_penalty": 0.05,
+    "w_ndcg": 0.15,
+    "w_ood_proxy": 0.15,
+    "w_regret": 0.2,
+    "w_sign_accuracy": 0.1,
+    "w_spearman": 0.25
+  }
+}

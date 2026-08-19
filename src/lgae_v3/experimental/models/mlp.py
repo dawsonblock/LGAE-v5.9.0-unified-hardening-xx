@@ -136,6 +136,39 @@ class MLPRegressor:
             calibration_state=self._lifecycle,
         ) for i in range(len(X))]
 
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "hidden_dim": self.hidden_dim,
+            "n_layers": self.n_layers, "n_ensemble": self.n_ensemble,
+            "lr": self.lr, "n_epochs": self.n_epochs,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "ensemble_states": [
+                m.state_dict() for m in self._models
+            ],
+            "in_dim": self._in_dim,
+            "hidden_dim": self.hidden_dim,
+            "n_layers": self.n_layers,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._in_dim = int(state["in_dim"])
+        self._models = []
+        for sd in state["ensemble_states"]:
+            model = SmallMLP(
+                self._in_dim, int(state["hidden_dim"]),
+                1, int(state["n_layers"]),
+            )
+            model.load_state_dict(sd)
+            model.eval()
+            for p in model.parameters():
+                p.requires_grad = False
+            self._models.append(model)
+        self._lifecycle = ModelLifecycle.FROZEN
+
 
 class MLPClassifier:
     """Small MLP classification predictor with ensemble uncertainty."""
@@ -229,3 +262,37 @@ class MLPClassifier:
             model_id=self.model_id,
             calibration_state=self._lifecycle,
         ) for i in range(len(X))]
+
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "hidden_dim": self.hidden_dim,
+            "n_layers": self.n_layers, "n_ensemble": self.n_ensemble,
+            "lr": self.lr, "n_epochs": self.n_epochs,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "ensemble_states": [
+                {k: v.tolist() for k, v in m.state_dict().items()}
+                for m in self._models
+            ],
+            "in_dim": self._in_dim,
+            "hidden_dim": self.hidden_dim,
+            "n_layers": self.n_layers,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._in_dim = int(state["in_dim"])
+        self._models = []
+        for sd in state["ensemble_states"]:
+            model = SmallMLP(
+                self._in_dim, int(state["hidden_dim"]),
+                1, int(state["n_layers"]),
+            )
+            model.load_state_dict({k: torch.tensor(v) for k, v in sd.items()})
+            model.eval()
+            for p in model.parameters():
+                p.requires_grad = False
+            self._models.append(model)
+        self._lifecycle = ModelLifecycle.FROZEN

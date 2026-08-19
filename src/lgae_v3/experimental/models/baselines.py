@@ -67,6 +67,18 @@ class GlobalMeanPredictor:
             calibration_state=self._lifecycle,
         ) for _ in range(n)]
 
+    def hyperparameters(self) -> dict[str, Any]:
+        return {"model_type": self.model_type, "version": self.version, "seed": self.seed}
+
+    def get_state(self) -> dict[str, Any]:
+        return {"mean": self._mean, "std": self._std, "n_samples": self._n_samples}
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._mean = float(state["mean"])
+        self._std = float(state["std"])
+        self._n_samples = int(state["n_samples"])
+        self._lifecycle = ModelLifecycle.FROZEN
+
 
 class MutationTypeMeanPredictor:
     """Predicts the mean target conditioned on mutation type.
@@ -152,6 +164,30 @@ class MutationTypeMeanPredictor:
             ))
         return results
 
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "n_action_types": self.n_action_types,
+            "action_offset": self.action_offset,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "type_means": dict(self._type_means),
+            "type_stds": dict(self._type_stds),
+            "global_mean": self._global_mean,
+            "global_std": self._global_std,
+            "n_samples": self._n_samples,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._type_means = dict(state["type_means"])
+        self._type_stds = dict(state["type_stds"])
+        self._global_mean = float(state["global_mean"])
+        self._global_std = float(state["global_std"])
+        self._n_samples = int(state["n_samples"])
+        self._lifecycle = ModelLifecycle.FROZEN
+
 
 class NearestExperiencePredictor:
     """Predicts based on the nearest structural experience in the training set.
@@ -219,3 +255,21 @@ class NearestExperiencePredictor:
                 metadata={"nearest_distance": nearest_dist},
             ))
         return results
+
+    def hyperparameters(self) -> dict[str, Any]:
+        return {"model_type": self.model_type, "version": self.version, "seed": self.seed}
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "X_train": self._X_train.tolist() if self._X_train is not None else None,
+            "y_train": self._y_train.tolist() if self._y_train is not None else None,
+            "global_mean": self._global_mean,
+            "global_std": self._global_std,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._X_train = np.array(state["X_train"], dtype=np.float64) if state["X_train"] else None
+        self._y_train = np.array(state["y_train"], dtype=np.float64) if state["y_train"] else None
+        self._global_mean = float(state["global_mean"])
+        self._global_std = float(state["global_std"])
+        self._lifecycle = ModelLifecycle.FROZEN

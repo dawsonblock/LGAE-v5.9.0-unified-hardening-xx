@@ -87,6 +87,29 @@ class LinearRegressionPredictor:
             calibration_state=self._lifecycle,
         ) for m in means]
 
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "lr": self.lr, "n_epochs": self.n_epochs,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "weights": self._weights.tolist() if self._weights is not None else None,
+            "bias": self._bias,
+            "residual_std": self._residual_std,
+            "n_samples": self._n_samples,
+            "n_features": self._n_features,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._weights = np.array(state["weights"], dtype=np.float64) if state["weights"] else None
+        self._bias = float(state["bias"])
+        self._residual_std = float(state["residual_std"])
+        self._n_samples = int(state["n_samples"])
+        self._n_features = int(state["n_features"])
+        self._lifecycle = ModelLifecycle.FROZEN
+
 
 class RidgeRegressionPredictor:
     """Ridge regression (L2-regularized linear regression)."""
@@ -166,6 +189,30 @@ class RidgeRegressionPredictor:
             calibration_state=self._lifecycle,
         ) for m in means]
 
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "alpha": self.alpha, "lr": self.lr,
+            "n_epochs": self.n_epochs,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "weights": self._weights.tolist() if self._weights is not None else None,
+            "bias": self._bias,
+            "residual_std": self._residual_std,
+            "n_samples": self._n_samples,
+            "n_features": self._n_features,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._weights = np.array(state["weights"], dtype=np.float64) if state["weights"] else None
+        self._bias = float(state["bias"])
+        self._residual_std = float(state["residual_std"])
+        self._n_samples = int(state["n_samples"])
+        self._n_features = int(state["n_features"])
+        self._lifecycle = ModelLifecycle.FROZEN
+
 
 class LogisticRegressionPredictor:
     """Logistic regression for sign/success classification."""
@@ -231,3 +278,20 @@ class LogisticRegressionPredictor:
             model_id=self.model_id,
             calibration_state=self._lifecycle,
         ) for p in probs]
+
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "lr": self.lr, "n_epochs": self.n_epochs,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "weights": self._weights.tolist() if self._weights is not None else None,
+            "bias": self._bias,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._weights = np.array(state["weights"], dtype=np.float64) if state["weights"] else None
+        self._bias = float(state["bias"])
+        self._lifecycle = ModelLifecycle.FROZEN

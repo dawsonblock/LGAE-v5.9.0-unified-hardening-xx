@@ -61,6 +61,11 @@ from .evaluator import (
 )
 from .artifact import ModelArtifact, CompatibilityError, create_artifact
 from .model_registry import ModelRegistry
+from .competition import (
+    CompetitionEntry, CompetitionReport,
+    ExtractedData, extract_competition_data,
+    run_competition, DEFAULT_ENCODERS, DEFAULT_PREDICTORS,
+)
 
 __all__ = [
     # Protocol
@@ -102,4 +107,8 @@ __all__ = [
     "ModelArtifact", "CompatibilityError", "create_artifact",
     # Registry
     "ModelRegistry",
+    # Competition
+    "CompetitionEntry", "CompetitionReport",
+    "ExtractedData", "extract_competition_data",
+    "run_competition", "DEFAULT_ENCODERS", "DEFAULT_PREDICTORS",
 ]

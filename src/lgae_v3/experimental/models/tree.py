@@ -153,3 +153,44 @@ class GradientBoostedTreePredictor:
             lower=float(m + q10),
             upper=float(m + q90),
         ) for m in means]
+
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "n_estimators": self.n_estimators,
+            "learning_rate": self.learning_rate, "max_depth": self.max_depth,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "stumps": [
+                {
+                    "feature": int(s.feature),
+                    "threshold": float(s.threshold),
+                    "left_value": float(s.left_value),
+                    "right_value": float(s.right_value),
+                }
+                for s in self._stumps
+            ],
+            "initial_value": self._initial_value,
+            "residual_quantiles": list(self._residual_quantiles),
+            "residual_std": self._residual_std,
+            "n_samples": self._n_samples,
+            "n_features": self._n_features,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._stumps = []
+        for s in state["stumps"]:
+            stump = DecisionStump()
+            stump.feature = int(s["feature"])
+            stump.threshold = float(s["threshold"])
+            stump.left_value = float(s["left_value"])
+            stump.right_value = float(s["right_value"])
+            self._stumps.append(stump)
+        self._initial_value = float(state["initial_value"])
+        self._residual_quantiles = tuple(state["residual_quantiles"])
+        self._residual_std = float(state["residual_std"])
+        self._n_samples = int(state["n_samples"])
+        self._n_features = int(state["n_features"])
+        self._lifecycle = ModelLifecycle.FROZEN

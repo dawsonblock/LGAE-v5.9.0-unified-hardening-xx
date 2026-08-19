@@ -1,0 +1,16 @@
+{
+  "content_hash": "16eb2ac1b1da1be307502d60280ee2d4a594b16d65bc90c26308fe1ef47126c7",
+  "graph_family_distribution": {
+    "complete": 15,
+    "tree": 60
+  },
+  "mutation_distribution": {
+    "ADD_EDGE": 45,
+    "add_edge": 30
+  },
+  "n_counterfactual": 45,
+  "n_realized": 30,
+  "n_records": 75,
+  "n_shadow": 0,
+  "split": "held_out"
+}

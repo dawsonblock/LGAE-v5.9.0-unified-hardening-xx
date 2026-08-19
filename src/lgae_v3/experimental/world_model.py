@@ -40,25 +40,56 @@ from torch import Tensor
 class ModelPrediction:
     """A prediction from a learned model.
 
-    For outcome models: (ΔÛ, R̂, Ĉ, σ)
+    For outcome models: (ΔÛ, R̂, Ĉ, σ, P(ΔU > 0))
     For world models: (Ŝ_{t+1}, σ)
 
     This unified container supports both use cases.
+
+    Fix 4: Unified with exp4 outcome terminology.
+    - ``predicted_reward`` → ``predicted_risk`` (exp4 uses risk, not reward)
+    - Added ``probability_positive`` for sign/success classification
+    - ``predicted_reward`` retained as deprecated alias for backward compat
     """
     predicted_delta_utility: float | None = None
-    predicted_reward: float | None = None
+    predicted_risk: float | None = None
     predicted_cost: float | None = None
     predicted_uncertainty: float | None = None
+    probability_positive: float | None = None
     predicted_next_state: Tensor | None = None
     predicted_next_state_hash: str | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
 
+    # Deprecated alias for backward compatibility.
+    # Phase 2 (exp4.2): reward and risk are semantically opposite.
+    # This alias emits a DeprecationWarning and is scheduled for deletion
+    # before exp5. It must NOT be used by any new code or exp4.2 runner.
+    @property
+    def predicted_reward(self) -> float | None:
+        """Deprecated. Use ``predicted_risk`` instead.
+
+        .. deprecated::
+            ``predicted_reward`` is semantically incorrect as an alias for
+            ``predicted_risk`` (reward and risk are opposites). It is retained
+            only for backward compatibility with legacy callers and will be
+            removed before exp5. Use ``predicted_risk`` directly.
+        """
+        import warnings
+        warnings.warn(
+            "ModelPrediction.predicted_reward is deprecated and semantically "
+            "incorrect (reward != risk). Use predicted_risk instead. "
+            "This alias will be removed before exp5.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.predicted_risk
+
     def to_log(self) -> dict[str, Any]:
         return {
             "predicted_delta_utility": self.predicted_delta_utility,
-            "predicted_reward": self.predicted_reward,
+            "predicted_risk": self.predicted_risk,
             "predicted_cost": self.predicted_cost,
             "predicted_uncertainty": self.predicted_uncertainty,
+            "probability_positive": self.probability_positive,
             "predicted_next_state_hash": self.predicted_next_state_hash,
             "metadata": self.metadata,
         }
@@ -150,13 +181,18 @@ class OutcomeModelInterface(abc.ABC):
     """Abstract interface for learned outcome models.
 
     The narrower problem:
-        f_θ(S, a) → (ΔÛ, R̂, Ĉ, σ)
+        f_θ(S, a) → (ΔÛ, R̂, Ĉ, σ, P(ΔU > 0))
 
     Predicts:
     - ΔÛ: predicted utility delta.
-    - R̂: predicted reward.
+    - R̂: predicted risk (instability, constraint margin, OOD, fragmentation, rollback).
     - Ĉ: predicted compute cost.
     - σ: predicted uncertainty (epistemic + aleatoric).
+    - P(ΔU > 0): probability that the action improves utility (sign/success).
+
+    Fix 4: Unified with exp4 outcome terminology.
+    - ``reward`` → ``risk`` (exp4 uses risk components, not a scalar reward)
+    - Added ``probability_positive`` for sign/success classification
 
     This is advisory-only. It is used for candidate pruning and cheap
     evaluation. It NEVER mutates authoritative state.

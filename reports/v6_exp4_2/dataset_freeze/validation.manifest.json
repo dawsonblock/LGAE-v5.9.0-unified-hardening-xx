@@ -1,0 +1,16 @@
+{
+  "content_hash": "7a115a15e3e9ee6ed5efeb9359ba82b3ea9dc48fe44ef83a0e3ba0bf54a29a6c",
+  "graph_family_distribution": {
+    "bipartite": 60,
+    "random_ws": 60
+  },
+  "mutation_distribution": {
+    "ADD_EDGE": 90,
+    "add_edge": 30
+  },
+  "n_counterfactual": 90,
+  "n_realized": 30,
+  "n_records": 120,
+  "n_shadow": 0,
+  "split": "validation"
+}

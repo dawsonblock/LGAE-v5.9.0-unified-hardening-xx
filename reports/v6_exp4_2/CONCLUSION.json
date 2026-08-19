@@ -1,0 +1,18 @@
+{
+  "best_encoder": "minimal-control",
+  "best_heldout_regret": 0.06666666666666667,
+  "best_heldout_spearman": 0.6453769559032716,
+  "best_model": "tree",
+  "best_validation_score": 0.0,
+  "cf_real_transfer_ok": true,
+  "exp5_authorized": true,
+  "experiment": "v6.0-exp4.2",
+  "generalizes_to_heldout": true,
+  "limitations": [
+    "Uncertainty does not correlate with error \u2014 trust signal is weak."
+  ],
+  "recommended_exp5_architecture": "lightweight_latent_dynamics",
+  "scientific_status": "QUALIFIED_SIMPLE",
+  "structural_signal_detected": true,
+  "uncertainty_useful": false
+}

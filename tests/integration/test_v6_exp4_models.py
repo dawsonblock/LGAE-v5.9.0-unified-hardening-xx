@@ -621,7 +621,10 @@ class TestModelArtifact:
             dataset_schema_hash="ds_hash",
             train_split_hash="train_hash",
             normalization_hash="norm_hash",
+            feature_schema_hash="feat_hash",
+            target_schema_hash="tgt_hash",
             hyperparameter_hash="hp_hash",
+            model_state_hash="ms_hash",
             seed=42,
             training_code_version="v6.0-exp4",
             n_train_samples=100,
@@ -634,13 +637,17 @@ class TestModelArtifact:
         a1 = ModelArtifact(
             model_id="test", predictor_type="linear", predictor_version="v1",
             encoder_id="global", encoder_schema_hash="h1", dataset_schema_hash="h2",
-            train_split_hash="h3", normalization_hash="h4", hyperparameter_hash="h5",
+            train_split_hash="h3", normalization_hash="h4",
+            feature_schema_hash="f1", target_schema_hash="t1",
+            hyperparameter_hash="h5", model_state_hash="ms",
             seed=42, training_code_version="v6", n_train_samples=10, n_features=5,
         )
         a2 = ModelArtifact(
             model_id="test", predictor_type="linear", predictor_version="v1",
             encoder_id="global", encoder_schema_hash="h1", dataset_schema_hash="h2",
-            train_split_hash="h3", normalization_hash="h4", hyperparameter_hash="h5",
+            train_split_hash="h3", normalization_hash="h4",
+            feature_schema_hash="f1", target_schema_hash="t1",
+            hyperparameter_hash="h5", model_state_hash="ms",
             seed=42, training_code_version="v6", n_train_samples=10, n_features=5,
         )
         assert a1.artifact_hash == a2.artifact_hash
@@ -650,17 +657,25 @@ class TestModelArtifact:
             model_id="test", predictor_type="linear", predictor_version="v1",
             encoder_id="global", encoder_schema_hash="enc_hash",
             dataset_schema_hash="ds_hash",
-            train_split_hash="", normalization_hash="", hyperparameter_hash="",
+            train_split_hash="", normalization_hash="",
+            feature_schema_hash="", target_schema_hash="",
+            hyperparameter_hash="", model_state_hash="",
             seed=42, training_code_version="v6", n_train_samples=10, n_features=5,
         )
-        assert artifact.is_compatible_with("enc_hash", "ds_hash")
-        assert not artifact.is_compatible_with("wrong", "ds_hash")
+        assert artifact.is_compatible_with(
+            encoder_schema_hash="enc_hash", dataset_schema_hash="ds_hash",
+        )
+        assert not artifact.is_compatible_with(
+            encoder_schema_hash="wrong", dataset_schema_hash="ds_hash",
+        )
 
     def test_artifact_to_log(self):
         artifact = ModelArtifact(
             model_id="test", predictor_type="linear", predictor_version="v1",
             encoder_id="global", encoder_schema_hash="h1", dataset_schema_hash="h2",
-            train_split_hash="h3", normalization_hash="h4", hyperparameter_hash="h5",
+            train_split_hash="h3", normalization_hash="h4",
+            feature_schema_hash="f1", target_schema_hash="t1",
+            hyperparameter_hash="h5", model_state_hash="ms",
             seed=42, training_code_version="v6", n_train_samples=10, n_features=5,
         )
         log = artifact.to_log()
@@ -738,7 +753,9 @@ class TestModelRegistry:
             model_id="test", predictor_type="linear", predictor_version="v1",
             encoder_id="global", encoder_schema_hash="enc_hash",
             dataset_schema_hash="ds_hash",
-            train_split_hash="", normalization_hash="", hyperparameter_hash="",
+            train_split_hash="", normalization_hash="",
+            feature_schema_hash="", target_schema_hash="",
+            hyperparameter_hash="", model_state_hash="",
             seed=42, training_code_version="v6", n_train_samples=10, n_features=5,
         )
         with pytest.raises(CompatibilityError):
@@ -857,7 +874,9 @@ class TestSerialization:
         artifact = ModelArtifact(
             model_id="test", predictor_type="linear", predictor_version="v1",
             encoder_id="global", encoder_schema_hash="h1", dataset_schema_hash="h2",
-            train_split_hash="h3", normalization_hash="h4", hyperparameter_hash="h5",
+            train_split_hash="h3", normalization_hash="h4",
+            feature_schema_hash="f1", target_schema_hash="t1",
+            hyperparameter_hash="h5", model_state_hash="ms",
             seed=42, training_code_version="v6", n_train_samples=10, n_features=5,
         )
         data = artifact.to_json()

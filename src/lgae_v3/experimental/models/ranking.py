@@ -98,6 +98,23 @@ class PointwiseRankingModel:
             model_id=self.model_id,
         )
 
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "lr": self.lr, "n_epochs": self.n_epochs,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "weights": self._weights.tolist() if self._weights is not None else None,
+            "bias": self._bias,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._weights = np.array(state["weights"], dtype=np.float64) if state["weights"] else None
+        self._bias = float(state["bias"])
+        self._lifecycle = ModelLifecycle.FROZEN
+
 
 class PairwiseRankingModel:
     """Pairwise ranking: trains on pairwise comparisons.
@@ -212,3 +229,20 @@ class PairwiseRankingModel:
             ranked_indices=tuple(int(i) for i in ranked),
             model_id=self.model_id,
         )
+
+    def hyperparameters(self) -> dict[str, Any]:
+        return {
+            "model_type": self.model_type, "version": self.version,
+            "seed": self.seed, "lr": self.lr, "n_epochs": self.n_epochs,
+        }
+
+    def get_state(self) -> dict[str, Any]:
+        return {
+            "weights": self._weights.tolist() if self._weights is not None else None,
+            "bias": self._bias,
+        }
+
+    def set_state(self, state: dict[str, Any]) -> None:
+        self._weights = np.array(state["weights"], dtype=np.float64) if state["weights"] else None
+        self._bias = float(state["bias"])
+        self._lifecycle = ModelLifecycle.FROZEN

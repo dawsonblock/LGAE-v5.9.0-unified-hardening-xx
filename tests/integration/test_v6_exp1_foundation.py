@@ -597,13 +597,15 @@ class TestWorldModelInterfaces:
     def test_model_prediction_dataclass(self):
         pred = ModelPrediction(
             predicted_delta_utility=0.1,
-            predicted_reward=0.1,
+            predicted_risk=0.1,
             predicted_cost=5.0,
             predicted_uncertainty=0.2,
         )
         assert pred.predicted_delta_utility == 0.1
+        assert pred.predicted_risk == 0.1
         log = pred.to_log()
         assert log["predicted_delta_utility"] == 0.1
+        assert log["predicted_risk"] == 0.1
 
     def test_model_trust_report_dataclass(self):
         report = ModelTrustReport(
