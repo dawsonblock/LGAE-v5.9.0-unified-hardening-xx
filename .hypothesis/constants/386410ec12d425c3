@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_6/causal_effect_model.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.01, 2.0, 300, 'A_scalar', 'C_causal_effect', 'StructuralEffect', 'hub_load', 'minimize', 'n_components', 'redundancy', 'spectral_gap', 'threshold']

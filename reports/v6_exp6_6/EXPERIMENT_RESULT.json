@@ -12,10 +12,10 @@
             0.2063,
             0.4286
           ],
-          "avg_regret": 6.4473,
-          "avg_greedy_improvement": 15.8275,
+          "avg_regret": 69.1674,
+          "avg_greedy_improvement": 91.157,
           "avg_savings": 0.6777,
-          "calibration_corr": 0.1805,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         },
@@ -25,38 +25,38 @@
             0.0159,
             0.1587
           ],
-          "avg_regret": 20.2446,
-          "avg_greedy_improvement": 2.0302,
+          "avg_regret": 6.9076,
+          "avg_greedy_improvement": 20.3059,
           "avg_savings": 0.6777,
-          "calibration_corr": 0.0585,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         },
         "C_causal_effect": {
-          "recovery_rate": 0.6508,
+          "recovery_rate": 0.0635,
           "recovery_ci": [
-            0.5397,
-            0.7623
+            0.0159,
+            0.127
           ],
-          "avg_regret": 0.0838,
-          "avg_greedy_improvement": 22.191,
+          "avg_regret": 21.0678,
+          "avg_greedy_improvement": 0.9218,
           "avg_savings": 0.6777,
-          "calibration_corr": 0.9505,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 63
         }
       },
       "calibration": {
         "A_scalar": {
-          "pred_vs_exact_corr": 0.1805,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         },
         "B_objective_conditioned": {
-          "pred_vs_exact_corr": 0.0585,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         },
         "C_causal_effect": {
-          "pred_vs_exact_corr": 0.9505,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         }
       }
@@ -73,10 +73,10 @@
             0.0513,
             0.3077
           ],
-          "avg_regret": 611.4097,
-          "avg_greedy_improvement": 145.314,
+          "avg_regret": 682.1368,
+          "avg_greedy_improvement": 74.2605,
           "avg_savings": 0.7069,
-          "calibration_corr": 0.1417,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 39
         },
@@ -86,38 +86,38 @@
             0.0,
             0.1282
           ],
-          "avg_regret": 716.3946,
-          "avg_greedy_improvement": 40.3291,
+          "avg_regret": 662.6904,
+          "avg_greedy_improvement": 93.7068,
           "avg_savings": 0.7069,
-          "calibration_corr": -0.1601,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 39
         },
         "C_causal_effect": {
-          "recovery_rate": 0.0513,
+          "recovery_rate": 0.0,
           "recovery_ci": [
             0.0,
-            0.1282
+            0.0
           ],
-          "avg_regret": 719.4198,
-          "avg_greedy_improvement": 37.3039,
+          "avg_regret": 756.7238,
+          "avg_greedy_improvement": -0.3265,
           "avg_savings": 0.7069,
-          "calibration_corr": 0.1633,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 39
         }
       },
       "calibration": {
         "A_scalar": {
-          "pred_vs_exact_corr": 0.1417,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         },
         "B_objective_conditioned": {
-          "pred_vs_exact_corr": -0.1601,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         },
         "C_causal_effect": {
-          "pred_vs_exact_corr": 0.1633,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         }
       }
@@ -195,10 +195,10 @@
             0.027,
             0.2162
           ],
-          "avg_regret": 100.0497,
-          "avg_greedy_improvement": -88.0574,
+          "avg_regret": 368.8265,
+          "avg_greedy_improvement": -139.867,
           "avg_savings": 0.6484,
-          "calibration_corr": -0.0316,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 37
         },
@@ -208,38 +208,38 @@
             0.027,
             0.2432
           ],
-          "avg_regret": 87.9826,
-          "avg_greedy_improvement": -75.9903,
+          "avg_regret": 371.759,
+          "avg_greedy_improvement": -142.7995,
           "avg_savings": 0.6484,
-          "calibration_corr": -0.0049,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 37
         },
         "C_causal_effect": {
-          "recovery_rate": 0.1351,
+          "recovery_rate": 0.2432,
           "recovery_ci": [
-            0.027,
-            0.2432
+            0.1081,
+            0.3784
           ],
-          "avg_regret": 33.4252,
-          "avg_greedy_improvement": -21.4329,
+          "avg_regret": 353.2641,
+          "avg_greedy_improvement": -124.3046,
           "avg_savings": 0.6484,
-          "calibration_corr": 0.106,
+          "calibration_corr": 0.0,
           "uncertainty_error_corr": 0.0,
           "n_suboptimal": 37
         }
       },
       "calibration": {
         "A_scalar": {
-          "pred_vs_exact_corr": -0.0316,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         },
         "B_objective_conditioned": {
-          "pred_vs_exact_corr": -0.0049,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         },
         "C_causal_effect": {
-          "pred_vs_exact_corr": 0.106,
+          "pred_vs_exact_corr": 0.0,
           "uncertainty_vs_error_corr": 0.0
         }
       }
@@ -257,18 +257,18 @@
       ]
     },
     "B_avg_best_recovery_gt_30": {
-      "passed": true,
-      "description": "avg best recovery: 32%",
+      "passed": false,
+      "description": "avg best recovery: 25%",
       "target": ">30%"
     },
     "B2_best_single_recovery_gt_50": {
-      "passed": true,
-      "description": "best single-mechanism recovery: 65%",
+      "passed": false,
+      "description": "best single-mechanism recovery: 32%",
       "target": ">50%"
     },
     "C_causal_beats_scalar": {
-      "passed": true,
-      "description": "causal beats scalar in 2/4 mechanisms",
+      "passed": false,
+      "description": "causal beats scalar in 1/4 mechanisms",
       "target": "majority"
     },
     "D_search_savings": {
@@ -292,19 +292,19 @@
       "target": "manifest valid + 0 test failures"
     },
     "H_calibration_correlation": {
-      "passed": true,
-      "description": "avg calibration corr: 0.117",
+      "passed": false,
+      "description": "avg calibration corr: 0.000",
       "target": ">0 (predicted vs exact residual)"
     }
   },
-  "all_gates_passed": true,
+  "all_gates_passed": false,
   "summary": {
     "n_mechanisms": 4,
     "n_lomo_results": 4,
-    "avg_best_recovery": 0.3218,
+    "avg_best_recovery": 0.2467,
     "avg_savings": 0.6777,
-    "avg_calibration_corr": 0.117,
-    "c_beats_a_count": 2,
+    "avg_calibration_corr": 0.0,
+    "c_beats_a_count": 1,
     "lomo_detail": [
       {
         "mechanism": "connectivity_threshold",
@@ -312,15 +312,15 @@
         "arch_results": {
           "A_scalar": {
             "recovery": 0.3175,
-            "regret": 6.4473
+            "regret": 69.1674
           },
           "B_objective_conditioned": {
             "recovery": 0.0794,
-            "regret": 20.2446
+            "regret": 6.9076
           },
           "C_causal_effect": {
-            "recovery": 0.6508,
-            "regret": 0.0838
+            "recovery": 0.0635,
+            "regret": 21.0678
           }
         }
       },
@@ -330,15 +330,15 @@
         "arch_results": {
           "A_scalar": {
             "recovery": 0.1795,
-            "regret": 611.4097
+            "regret": 682.1368
           },
           "B_objective_conditioned": {
             "recovery": 0.0513,
-            "regret": 716.3946
+            "regret": 662.6904
           },
           "C_causal_effect": {
-            "recovery": 0.0513,
-            "regret": 719.4198
+            "recovery": 0.0,
+            "regret": 756.7238
           }
         }
       },
@@ -366,15 +366,15 @@
         "arch_results": {
           "A_scalar": {
             "recovery": 0.1081,
-            "regret": 100.0497
+            "regret": 368.8265
           },
           "B_objective_conditioned": {
             "recovery": 0.1351,
-            "regret": 87.9826
+            "regret": 371.759
           },
           "C_causal_effect": {
-            "recovery": 0.1351,
-            "regret": 33.4252
+            "recovery": 0.2432,
+            "regret": 353.2641
           }
         }
       }
@@ -389,17 +389,17 @@
       "hub_load_threshold": 1781,
       "spectral_gap_threshold": 1801
     },
-    "generation_seconds": 35.69
+    "generation_seconds": 61.29
   },
   "manifest_evidence": {
     "manifest_exists": true,
     "manifest_valid": true,
     "release_mode": true,
-    "test_count": 2287,
-    "test_passed": 2287,
+    "test_count": 2309,
+    "test_passed": 2309,
     "test_failed": 0,
-    "manifest_file_count": 958
+    "manifest_file_count": 998
   },
   "audit_note": "Three-architecture LOMO comparison. No mechanism label in features. No utility_fn leakage. Candidate-level calibration. Real manifest gates. 100+ non-greedy cases per mechanism.",
-  "elapsed_seconds": 167.07
+  "elapsed_seconds": 200.95
 }

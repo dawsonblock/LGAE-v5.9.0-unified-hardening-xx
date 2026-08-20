@@ -72,25 +72,34 @@ class TestStructuralEffect:
 class TestObjectiveEvaluator:
     """Test the deterministic objective evaluator."""
 
-    def test_connectivity_threshold(self):
+    def test_connectivity_threshold_reached(self):
+        """Effect that reaches threshold gets full bonus."""
         spec = get_objective_spec("connectivity_threshold")
-        # Effect that reduces components by 1 → should give bonus.
+        # current=2, threshold=1: 2->1 reaches threshold, bonus=30.
         effects = StructuralEffect(delta_n_components=-1)
-        value = ObjectiveEvaluator.evaluate(effects, spec)
-        assert value > 0  # bonus for reducing components
+        value = ObjectiveEvaluator.evaluate(effects, spec, current_value=2.0)
+        assert value > 0  # bonus for reaching threshold
+
+    def test_connectivity_threshold_not_reached(self):
+        """Effect that moves toward but doesn't reach threshold gets 0."""
+        spec = get_objective_spec("connectivity_threshold")
+        # current=4, threshold=1: 4->3 does NOT reach threshold.
+        effects = StructuralEffect(delta_n_components=-1)
+        value = ObjectiveEvaluator.evaluate(effects, spec, current_value=4.0)
+        assert value == 0.0  # no bonus for partial progress
 
     def test_no_bonus_for_wrong_direction(self):
         spec = get_objective_spec("connectivity_threshold")
         # Effect that increases components → no bonus.
         effects = StructuralEffect(delta_n_components=1)
-        value = ObjectiveEvaluator.evaluate(effects, spec)
+        value = ObjectiveEvaluator.evaluate(effects, spec, current_value=3.0)
         assert value == 0.0
 
     def test_spectral_gap_maximize(self):
         spec = get_objective_spec("spectral_gap_threshold")
-        # Effect that increases spectral gap → bonus.
+        # current=0.0, threshold=0.5: 0.0+1.0=1.0 >= 0.5, bonus.
         effects = StructuralEffect(delta_spectral_gap=1.0)
-        value = ObjectiveEvaluator.evaluate(effects, spec)
+        value = ObjectiveEvaluator.evaluate(effects, spec, current_value=0.0)
         assert value > 0
 
 

@@ -34,6 +34,27 @@ from .objective_spec import (
 )
 
 
+def _get_current_observable_exp66(graph: GraphBuffers, spec: ObjectiveSpec) -> float:
+    """Get the current value of the observable for the objective spec.
+
+    Used for correct O(S+ΔS) - O(S) evaluation.
+    """
+    n = int(graph.num_nodes)
+
+    if spec.observable == "n_components":
+        return float(compute_component_info(graph, n).n_components)
+    elif spec.observable == "redundancy":
+        _, _, _, _, min_deg = _compute_degree_stats(graph, n)
+        return float(min_deg)
+    elif spec.observable == "hub_load":
+        _, _, max_deg, _, _ = _compute_degree_stats(graph, n)
+        return float(max_deg)
+    elif spec.observable == "spectral_gap":
+        return float(_compute_spectral_gap(graph, n))
+    else:
+        return 0.0
+
+
 @dataclass
 class StructuralEffect:
     """Predicted structural consequences of an action."""
@@ -300,7 +321,9 @@ class CausalEffectModel:
         effects = self.predict_effects(graph, z, action, threshold=threshold, horizon=horizon)
         if objective is None:
             return 0.0
-        return ObjectiveEvaluator.evaluate(effects, objective)
+        # Compute current observable value for absolute-state evaluation.
+        current_value = _get_current_observable_exp66(graph, objective)
+        return ObjectiveEvaluator.evaluate(effects, objective, current_value=current_value)
 
     @property
     def name(self) -> str:
@@ -316,15 +339,20 @@ class ObjectiveEvaluator:
     """
 
     @staticmethod
-    def evaluate(effects: StructuralEffect, spec: ObjectiveSpec) -> float:
+    def evaluate(effects: StructuralEffect, spec: ObjectiveSpec,
+                 current_value: float = 0.0) -> float:
         """Evaluate structural effects under the objective specification.
 
-        The evaluation is deterministic given the effects and spec.
-        No learning is needed here — the mapping is defined by the spec.
+        Computes O(S + ΔS) - O(S), not O(ΔS).
 
-        For threshold rewards: the bonus is proportional to how close
-        the effect moves the structure toward the threshold, with a
-        full bonus when the threshold is reached.
+        For threshold objectives:
+          predicted_after = current_value + effect_value
+          bonus = magnitude if predicted_after reaches threshold, else 0
+          minus bonus already collected at current_value.
+
+        This is the mathematically correct evaluation: an effect
+        that moves toward but doesn't reach the threshold gets 0
+        bonus, not partial credit.
         """
         # Map observable name to effect value.
         effect_map = {
@@ -335,26 +363,17 @@ class ObjectiveEvaluator:
         }
 
         effect_value = effect_map.get(spec.observable, 0.0)
+        predicted_after = current_value + effect_value
 
         if spec.reward_shape == "threshold":
-            # Threshold reward: full bonus when effect crosses threshold.
+            # Compute bonus at predicted_after and at current_value.
             if spec.direction == "minimize":
-                # Good: effect_value is negative (reducing the observable).
-                if effect_value <= -1:  # reduced by at least 1
-                    return spec.magnitude
-                elif effect_value < 0:
-                    # Partial credit proportional to progress.
-                    return spec.magnitude * abs(effect_value)
-                else:
-                    return 0.0
+                bonus_after = spec.magnitude if predicted_after <= spec.threshold else 0.0
+                bonus_current = spec.magnitude if current_value <= spec.threshold else 0.0
             else:  # maximize
-                # Good: effect_value is positive (increasing the observable).
-                if effect_value >= 1:  # increased by at least 1
-                    return spec.magnitude
-                elif effect_value > 0:
-                    return spec.magnitude * effect_value
-                else:
-                    return 0.0
+                bonus_after = spec.magnitude if predicted_after >= spec.threshold else 0.0
+                bonus_current = spec.magnitude if current_value >= spec.threshold else 0.0
+            return bonus_after - bonus_current
         else:
             # Linear reward.
             if spec.direction == "minimize":
