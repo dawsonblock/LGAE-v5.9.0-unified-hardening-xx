@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_5/snapshot.py
+# hypothesis_version: 6.151.4
+
+['A', 'B', 'C', 'D', 'E', 'ExperimentSnapshot', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'LGAE J > Fixed J', 'M', 'N', 'O', 'Z', 'authority_preserved', 'backend_config_hash', 'benchmark_seed', 'budget_ceilings', 'calibration_task_ids', 'criterion', 'gate_definitions', 'id', 'lgae_j_gt_fixed', 'model_id', 'n_calibrations > 0', 'name', 'objective_weights', 'prompt_hashes', 'provider', 'rollback_works', 'routing_config', 'snapshot_hash', 'snapshot_timestamp', 'source_commit', 'split_seed', 'test_task_ids', 'test_untouched', 'train_task_ids', 'w']

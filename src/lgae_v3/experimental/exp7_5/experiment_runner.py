@@ -36,10 +36,14 @@ from ..exp7_4.node_necessity_router import NodeNecessityRouter
 from ..exp7_4.conditions import run_lgae_node_necessity
 from .backend_config import BackendConfig, MOCK_CONFIG
 from .backends.openai_backend import OpenAIBackend, BudgetGuard, BackendStatus
+from .backends.deepseek_backend import DeepSeekBackend
+from .backends.response_cache import ResponseCache, CachedBackend
 from .prompts import load_all_prompts, get_prompt_hashes
 from .data_split import make_split, DataSplit
+from .snapshot import create_snapshot, ExperimentSnapshot, GATE_DEFINITIONS
 from .validation import (
     run_smoke_test, run_topology_sensitivity_check, run_node_ablation,
+    run_targeted_node_ablation,
     SmokeTestResult, TopologySensitivityResult, NodeAblationResult,
 )
 
@@ -63,6 +67,7 @@ class Exp75Result:
     manifest_evidence: dict[str, Any] = field(default_factory=dict)
     budget_summary: dict = field(default_factory=dict)
     shadow_transfer: dict = field(default_factory=dict)
+    cache_summary: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -83,6 +88,7 @@ class Exp75Result:
             "manifest_evidence": self.manifest_evidence,
             "budget_summary": self.budget_summary,
             "shadow_transfer": self.shadow_transfer,
+            "cache_summary": self.cache_summary,
         }
 
 
@@ -118,6 +124,8 @@ def create_backend_from_config(config: BackendConfig, budget: Optional[BudgetGua
         return MockModelBackend(seed=42)
     elif config.provider == "openai":
         return OpenAIBackend(config, budget=budget)
+    elif config.provider == "deepseek":
+        return DeepSeekBackend(config, budget=budget)
     else:
         return MockModelBackend(seed=42)
 
@@ -158,6 +166,11 @@ def run_exp7_5(
 
     # Create backend.
     backend = create_backend_from_config(backend_config, budget=budget)
+
+    # Wrap with response cache for deterministic calls.
+    cache = ResponseCache(cache_dir=".api_cache")
+    backend = CachedBackend(backend, cache)
+    result.cache_summary = {}  # type: ignore
 
     # Record provenance.
     if hasattr(backend, "get_provenance"):
@@ -205,7 +218,7 @@ def run_exp7_5(
     # === Phase 4: Node ablation ===
     if run_ablation:
         print("\n=== Phase 4: Node ablation ===")
-        ablation = run_node_ablation(backend, split.train[:30], weights, n_tasks=30)
+        ablation = run_targeted_node_ablation(backend, split.train, weights, n_per_family=5)
         result.node_ablation = ablation
         print(f"  {'Node':<15} {'ΔQ':>8} {'ΔTokens':>10} {'ΔLatency':>10} {'ΔJ':>8}")
         print(f"  {'-'*55}")
@@ -357,11 +370,41 @@ def run_exp7_5(
             "quality_diff_vs_dynamic": round(quality_diff_vs_dynamic, 4),
             "obj_vs_fixed": round(obj_vs_fixed, 4),
             "lgae_pareto_efficient": lgae_efficient,
+            # All-in cost analysis
+            "execution_cost_lgae": round(lgae.mean_cost, 4),
+            "execution_cost_dynamic": round(dynamic.mean_cost, 4),
+            "execution_cost_fixed": round(fixed.mean_cost, 4),
         }
+
+        # All-in cost: execution + shadow/adaptation
+        # Shadow cost = ablation + sensitivity + smoke test calls
+        if budget:
+            total_adaptation_cost = budget.dollar_cost - (
+                fixed.mean_cost * len(split.test) +
+                dynamic.mean_cost * len(split.test) +
+                lgae.mean_cost * len(split.test)
+            )
+            total_adaptation_cost = max(0, total_adaptation_cost)
+            result.summary["adaptation_cost"] = round(total_adaptation_cost, 4)
+            result.summary["all_in_cost_lgae"] = round(
+                lgae.mean_cost * len(split.test) + total_adaptation_cost, 4
+            )
+
+            # Break-even: how many tasks until adaptation cost is recovered
+            cost_saving_per_task = fixed.mean_cost - lgae.mean_cost
+            if cost_saving_per_task > 0 and total_adaptation_cost > 0:
+                result.summary["break_even_tasks"] = int(
+                    total_adaptation_cost / cost_saving_per_task
+                )
+            else:
+                result.summary["break_even_tasks"] = None
 
     # Budget summary.
     if budget:
         result.budget_summary = budget.summary()
+
+    # Cache summary.
+    result.cache_summary = cache.summary()
 
     # Manifest evidence.
     result.manifest_evidence = _check_manifest_evidence()

@@ -8,7 +8,9 @@ from lgae_v3.experimental.exp7_5 import (
     load_prompt, load_all_prompts, get_prompt_hashes, format_prompt,
     make_split, DataSplit,
     run_smoke_test, run_topology_sensitivity_check, run_node_ablation,
+    run_targeted_node_ablation,
     run_exp7_5, create_backend_from_config,
+    ResponseCache, CachedBackend,
 )
 from lgae_v3.experimental.exp7_2 import (
     MockModelBackend, ObjectiveWeights, generate_benchmark,
@@ -218,3 +220,63 @@ class TestNoSecretLeakage:
         for key, val in s.items():
             if isinstance(val, str):
                 assert "sk-" not in val
+
+
+class TestResponseCache:
+    """Test response caching."""
+
+    def test_cache_hit(self, tmp_path):
+        cache = ResponseCache(cache_dir=str(tmp_path / "cache"))
+        from lgae_v3.experimental.exp7_2.model_backend import Message, ModelResponse
+        msgs = [Message(role="user", content="test")]
+        # Put a response.
+        resp = ModelResponse(text="hello", tokens_in=10, tokens_out=5, status="SUCCESS")
+        cache.put("model", "system", msgs, 100, 0.0, "worker", resp)
+        # Get should return cached.
+        cached = cache.get("model", "system", msgs, 100, 0.0, "worker")
+        assert cached is not None
+        assert cached.text == "hello"
+        assert cache.n_hits == 1
+
+    def test_cache_miss(self, tmp_path):
+        cache = ResponseCache(cache_dir=str(tmp_path / "cache"))
+        from lgae_v3.experimental.exp7_2.model_backend import Message
+        msgs = [Message(role="user", content="test")]
+        cached = cache.get("model", "system", msgs, 100, 0.0, "worker")
+        assert cached is None
+        assert cache.n_misses == 1
+
+    def test_cached_backend(self, tmp_path):
+        cache = ResponseCache(cache_dir=str(tmp_path / "cache"))
+        mock = MockModelBackend(seed=42)
+        cached = CachedBackend(mock, cache)
+        from lgae_v3.experimental.exp7_2.model_backend import Message
+        msgs = [Message(role="user", content="What is 2+2?")]
+        r1 = cached.generate(role="worker", system_prompt="test", messages=msgs, max_tokens=100, temperature=0.0)
+        r2 = cached.generate(role="worker", system_prompt="test", messages=msgs, max_tokens=100, temperature=0.0)
+        assert r1.text == r2.text
+        assert cache.n_hits == 1
+
+    def test_cache_different_context_different_key(self, tmp_path):
+        cache = ResponseCache(cache_dir=str(tmp_path / "cache"))
+        from lgae_v3.experimental.exp7_2.model_backend import Message
+        msgs1 = [Message(role="user", content="task A")]
+        msgs2 = [Message(role="user", content="task B")]
+        from lgae_v3.experimental.exp7_2.model_backend import ModelResponse
+        cache.put("model", "sys", msgs1, 100, 0.0, "worker", ModelResponse(text="A", status="SUCCESS"))
+        # Different context should miss.
+        cached = cache.get("model", "sys", msgs2, 100, 0.0, "worker")
+        assert cached is None
+
+
+class TestTargetedAblation:
+    """Test targeted node ablation."""
+
+    def test_targeted_ablation_mock(self):
+        backend = MockModelBackend(seed=42)
+        weights = ObjectiveWeights()
+        tasks = generate_benchmark(n_per_class=5, seed=42)
+        results = run_targeted_node_ablation(backend, tasks, weights, n_per_family=3)
+        assert len(results) == 4  # all 4 nodes
+        for r in results:
+            assert r.n_tasks > 0

@@ -228,7 +228,7 @@ def run_node_ablation(
     tasks: list[BenchmarkTask],
     weights: ObjectiveWeights,
     *,
-    n_tasks: int = 30,
+    n_tasks: int = 10,
 ) -> list[NodeAblationResult]:
     """Ablate each optional node individually.
 
@@ -279,6 +279,105 @@ def run_node_ablation(
             latencies_without.append(rec_without.total_latency_ms)
             j_with_list.append(j_with)
             j_without_list.append(j_without)
+
+        results.append(NodeAblationResult(
+            node=node,
+            n_tasks=len(test_tasks),
+            delta_quality=float(np.mean(qualities_with) - np.mean(qualities_without)),
+            delta_tokens=float(np.mean(tokens_with) - np.mean(tokens_without)),
+            delta_latency=float(np.mean(latencies_with) - np.mean(latencies_without)),
+            delta_j=float(np.mean(j_with_list) - np.mean(j_without_list)),
+            quality_with=float(np.mean(qualities_with)),
+            quality_without=float(np.mean(qualities_without)),
+            tokens_with=float(np.mean(tokens_with)),
+            tokens_without=float(np.mean(tokens_without)),
+            j_with=float(np.mean(j_with_list)),
+            j_without=float(np.mean(j_without_list)),
+        ))
+
+    return results
+
+
+# Targeted node-task ablation: only ablate nodes where they matter most.
+NODE_TASK_PRIORITY = {
+    "researcher": ["research_synthesis", "simple_factual"],
+    "critic": ["coding_debugging", "multi_step_reasoning"],
+    "memory": ["memory_dependent"],
+    "verifier": ["coding_debugging", "verification_sensitive"],
+}
+
+
+def run_targeted_node_ablation(
+    backend: ModelBackend,
+    tasks: list[BenchmarkTask],
+    weights: ObjectiveWeights,
+    *,
+    n_per_family: int = 5,
+) -> list[NodeAblationResult]:
+    """Targeted ablation: only test nodes on task families where they matter.
+
+    This cuts cost dramatically vs exhaustive ablation.
+    Researcher: research + factual
+    Critic: coding + reasoning
+    Memory: memory-dependent
+    Verifier: coding + verification-sensitive
+    """
+    results = []
+    by_class: dict[str, list[BenchmarkTask]] = {}
+    for t in tasks:
+        by_class.setdefault(t.task_class, []).append(t)
+
+    for node in OPTIONAL_NODES:
+        priority_classes = NODE_TASK_PRIORITY.get(node, [])
+        test_tasks = []
+        for cls in priority_classes:
+            cls_tasks = by_class.get(cls, [])
+            test_tasks.extend(cls_tasks[:n_per_family])
+
+        if not test_tasks:
+            continue
+
+        qualities_with, qualities_without = [], []
+        tokens_with, tokens_without = [], []
+        latencies_with, latencies_without = [], []
+        j_with_list, j_without_list = [], []
+        task_classes_seen = []
+
+        for task in test_tasks:
+            # With the node.
+            nodes_with = create_default_nodes()
+            topo_with = create_default_topology(nodes_with)
+            runtime_with = AIRuntime(topo_with, backend)
+            rec_with = runtime_with.execute_task(task.task_id, task.input, task.task_class)
+            q_with = evaluate_quality(
+                task.task_class, rec_with.output, task.expected_output,
+                rec_with.verification_outcome, rec_with.output,
+            )
+            j_with = compute_objective_from_record(rec_with, weights)
+
+            # Without the node.
+            nodes_without = create_default_nodes()
+            topo_without = create_default_topology(nodes_without)
+            topo_without.bypass_node(node)
+            if node == "critic":
+                topo_without.add_edge("worker", "verifier", 1.0)
+            runtime_without = AIRuntime(topo_without, backend)
+            rec_without = runtime_without.execute_task(task.task_id, task.input, task.task_class)
+            q_without = evaluate_quality(
+                task.task_class, rec_without.output, task.expected_output,
+                rec_without.verification_outcome, rec_without.output,
+            )
+            j_without = compute_objective_from_record(rec_without, weights)
+
+            qualities_with.append(q_with)
+            qualities_without.append(q_without)
+            tokens_with.append(rec_with.total_tokens)
+            tokens_without.append(rec_without.total_tokens)
+            latencies_with.append(rec_with.total_latency_ms)
+            latencies_without.append(rec_without.total_latency_ms)
+            j_with_list.append(j_with)
+            j_without_list.append(j_without)
+            task_classes_seen.append(task.task_class)
 
         results.append(NodeAblationResult(
             node=node,

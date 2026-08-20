@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_5/backends/response_cache.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.8, 1024, '*.json', '.api_cache', 'SUCCESS', 'api_key_present', 'budget', 'cache_summary', 'cached', 'cached_at', 'cached_tokens', 'confidence', 'config', 'content', 'dollar_cost', 'dollars_saved', 'error', 'finish_reason', 'get_provenance', 'hit_rate', 'latency_ms', 'model_id', 'n_hits', 'n_misses', 'request_id', 'role', 'status', 'stop', 'text', 'tokens_in', 'tokens_out', 'tokens_saved', 'total_tokens', 'unknown', 'verify_model', 'w']

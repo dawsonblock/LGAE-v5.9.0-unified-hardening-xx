@@ -46,3 +46,4 @@ venv.bak/
 .vscode/
 *.swp
 *.swo
+.api_cache/

@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_5/backends/deepseek_backend.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.8, 500, 1000, 1024, '429', 'Budget exceeded', 'DEEPSEEK_API_KEY', 'Empty response', 'api_key_present', 'backend_version', 'base_url', 'budget', 'cached_tokens', 'completion_tokens', 'config_hash', 'content', 'id', 'model_id', 'prompt_tokens', 'provider', 'rate_limit', 'role', 'sdk_version', 'stop', 'system', 'timed out', 'timeout']
