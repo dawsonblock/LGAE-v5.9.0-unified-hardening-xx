@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_1/risk_metrics.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-06, 1.0, 5.0, 10.0, 'coverage', 'max_regret', 'mean_norm_regret', 'mean_regret', 'mean_savings', 'median_regret', 'n_tasks', 'normalized_regret', 'p95_regret', 'p99_regret', 'p_regret_gt_1', 'p_regret_gt_10', 'p_regret_gt_5', 'recovery', 'recovery_rate', 'regret', 'savings', 'tau_sigma', 'used_learned']

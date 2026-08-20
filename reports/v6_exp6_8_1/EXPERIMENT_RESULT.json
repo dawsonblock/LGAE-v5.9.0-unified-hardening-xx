@@ -1,0 +1,677 @@
+{
+  "audit_note": "Selective hybrid structural planning. Deterministic spectral oracle. Split state (exact+certified+learned). Arbitration: use learned only if sigma < tau_sigma and margin > tau_margin. Risk-aware metrics: median, P95, P99, P(regret > tau). Coverage-vs-risk curve.",
+  "lomo_results": [
+    {
+      "held_out_mechanism": "connectivity_threshold",
+      "n_train_samples": 7800,
+      "n_suboptimal": 100,
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.0,
+          "mean_norm_regret": 0.6196,
+          "mean_regret": 11.9702,
+          "median_regret": 12.1249,
+          "p95_regret": 30.8695,
+          "p99_regret": 32.6842,
+          "p_regret_gt_5": 0.56,
+          "avg_savings": 0.0,
+          "n_suboptimal": 100
+        },
+        "recursive": {
+          "recovery_rate": 0.26,
+          "mean_norm_regret": 1.8049,
+          "mean_regret": 4.6426,
+          "median_regret": 2.4646,
+          "p95_regret": 18.4787,
+          "p99_regret": 22.004,
+          "p_regret_gt_5": 0.32,
+          "avg_savings": 0.6923,
+          "n_suboptimal": 100
+        },
+        "hybrid": {
+          "recovery_rate": 0.0,
+          "mean_norm_regret": 0.6196,
+          "mean_regret": 11.9702,
+          "median_regret": 12.1249,
+          "p95_regret": 30.8695,
+          "p99_regret": 32.6842,
+          "p_regret_gt_5": 0.56,
+          "avg_savings": 0.6154,
+          "n_suboptimal": 100
+        }
+      },
+      "paired_cis": {
+        "recovery_hybrid_minus_greedy": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": 0.26,
+          "ci_95": [
+            0.18,
+            0.35
+          ]
+        }
+      },
+      "coverage_curve": {
+        "0.5": {
+          "tau_sigma": 0.5,
+          "coverage": 0.0,
+          "recovery_rate": 0.0,
+          "mean_regret": 11.970158769345064,
+          "median_regret": 12.124875972429994,
+          "p95_regret": 30.86945789520438,
+          "p99_regret": 32.6841880521301,
+          "mean_norm_regret": 0.6195585714298485,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "1.0": {
+          "tau_sigma": 1.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.0,
+          "mean_regret": 11.970158769345064,
+          "median_regret": 12.124875972429994,
+          "p95_regret": 30.86945789520438,
+          "p99_regret": 32.6841880521301,
+          "mean_norm_regret": 0.6195585714298485,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "2.0": {
+          "tau_sigma": 2.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.0,
+          "mean_regret": 11.970158769345064,
+          "median_regret": 12.124875972429994,
+          "p95_regret": 30.86945789520438,
+          "p99_regret": 32.6841880521301,
+          "mean_norm_regret": 0.6195585714298485,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "5.0": {
+          "tau_sigma": 5.0,
+          "coverage": 0.59,
+          "recovery_rate": 0.25,
+          "mean_regret": 1.4420174088542783,
+          "median_regret": 0.5173768043518067,
+          "p95_regret": 4.632776765823361,
+          "p99_regret": 18.524141005838743,
+          "mean_norm_regret": 0.1547126888932283,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "1000000000.0": {
+          "tau_sigma": 1000000000.0,
+          "coverage": 0.61,
+          "recovery_rate": 0.26,
+          "mean_regret": 1.184989142894745,
+          "median_regret": 0.38103809356689466,
+          "p95_regret": 3.697052898406979,
+          "p99_regret": 9.305533920288132,
+          "mean_norm_regret": 0.14044699572551225,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        }
+      },
+      "risk_metrics": {
+        "greedy": {
+          "mean_regret": 11.970158769345064,
+          "median_regret": 12.124875972429994,
+          "p95_regret": 30.86945789520438,
+          "p99_regret": 32.6841880521301,
+          "p_regret_gt_1": 0.66,
+          "p_regret_gt_5": 0.56,
+          "p_regret_gt_10": 0.52,
+          "max_regret": 32.8998831480495
+        },
+        "recursive": {
+          "mean_regret": 4.642649369716645,
+          "median_regret": 2.4646346569061284,
+          "p95_regret": 18.4786607336998,
+          "p99_regret": 22.004019504547163,
+          "p_regret_gt_1": 0.65,
+          "p_regret_gt_5": 0.32,
+          "p_regret_gt_10": 0.15,
+          "max_regret": 30.38326463699341
+        },
+        "hybrid": {
+          "mean_regret": 11.970158769345064,
+          "median_regret": 12.124875972429994,
+          "p95_regret": 30.86945789520438,
+          "p99_regret": 32.6841880521301,
+          "p_regret_gt_1": 0.66,
+          "p_regret_gt_5": 0.56,
+          "p_regret_gt_10": 0.52,
+          "max_regret": 32.8998831480495
+        }
+      }
+    },
+    {
+      "held_out_mechanism": "redundancy_threshold",
+      "n_train_samples": 7800,
+      "n_suboptimal": 100,
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.07,
+          "mean_norm_regret": 0.5355,
+          "mean_regret": 364.4128,
+          "median_regret": 1.1947,
+          "p95_regret": 1014.1558,
+          "p99_regret": 1109.3785,
+          "p_regret_gt_5": 0.46,
+          "avg_savings": 0.0,
+          "n_suboptimal": 100
+        },
+        "recursive": {
+          "recovery_rate": 0.28,
+          "mean_norm_regret": 2.5872,
+          "mean_regret": 197.2185,
+          "median_regret": 5.7371,
+          "p95_regret": 985.5139,
+          "p99_regret": 1105.831,
+          "p_regret_gt_5": 0.53,
+          "avg_savings": 0.6923,
+          "n_suboptimal": 100
+        },
+        "hybrid": {
+          "recovery_rate": 0.07,
+          "mean_norm_regret": 0.5355,
+          "mean_regret": 364.4128,
+          "median_regret": 1.1947,
+          "p95_regret": 1014.1558,
+          "p99_regret": 1109.3785,
+          "p_regret_gt_5": 0.46,
+          "avg_savings": 0.6154,
+          "n_suboptimal": 100
+        }
+      },
+      "paired_cis": {
+        "recovery_hybrid_minus_greedy": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": 0.21,
+          "ci_95": [
+            0.12,
+            0.3
+          ]
+        }
+      },
+      "coverage_curve": {
+        "0.5": {
+          "tau_sigma": 0.5,
+          "coverage": 0.0,
+          "recovery_rate": 0.07,
+          "mean_regret": 364.41279609216735,
+          "median_regret": 1.1946660995483398,
+          "p95_regret": 1014.1558046142593,
+          "p99_regret": 1109.3785244116539,
+          "mean_norm_regret": 0.5355345724203004,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "1.0": {
+          "tau_sigma": 1.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.07,
+          "mean_regret": 364.41279609216735,
+          "median_regret": 1.1946660995483398,
+          "p95_regret": 1014.1558046142593,
+          "p99_regret": 1109.3785244116539,
+          "mean_norm_regret": 0.5355345724203004,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "2.0": {
+          "tau_sigma": 2.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.07,
+          "mean_regret": 364.41279609216735,
+          "median_regret": 1.1946660995483398,
+          "p95_regret": 1014.1558046142593,
+          "p99_regret": 1109.3785244116539,
+          "mean_norm_regret": 0.5355345724203004,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "5.0": {
+          "tau_sigma": 5.0,
+          "coverage": 0.14,
+          "recovery_rate": 0.16,
+          "mean_regret": 295.7124200394563,
+          "median_regret": 0.5601322174072266,
+          "p95_regret": 1014.1558046142593,
+          "p99_regret": 1109.3785244116539,
+          "mean_norm_regret": 0.5060733313239414,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "1000000000.0": {
+          "tau_sigma": 1000000000.0,
+          "coverage": 0.18,
+          "recovery_rate": 0.19,
+          "mean_regret": 270.0583030046426,
+          "median_regret": 0.4175514698028565,
+          "p95_regret": 1014.1558046142593,
+          "p99_regret": 1142.426636403536,
+          "mean_norm_regret": 0.47644950992821256,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        }
+      },
+      "risk_metrics": {
+        "greedy": {
+          "mean_regret": 364.41279609216735,
+          "median_regret": 1.1946660995483398,
+          "p95_regret": 1014.1558046142593,
+          "p99_regret": 1109.3785244116539,
+          "p_regret_gt_1": 0.52,
+          "p_regret_gt_5": 0.46,
+          "p_regret_gt_10": 0.46,
+          "max_regret": 1265.9581500885888
+        },
+        "recursive": {
+          "mean_regret": 197.2184962334733,
+          "median_regret": 5.737050104141235,
+          "p95_regret": 985.5138911721981,
+          "p99_regret": 1105.8309725365098,
+          "p_regret_gt_1": 0.71,
+          "p_regret_gt_5": 0.53,
+          "p_regret_gt_10": 0.39,
+          "max_regret": 1141.1788433360095
+        },
+        "hybrid": {
+          "mean_regret": 364.41279609216735,
+          "median_regret": 1.1946660995483398,
+          "p95_regret": 1014.1558046142593,
+          "p99_regret": 1109.3785244116539,
+          "p_regret_gt_1": 0.52,
+          "p_regret_gt_5": 0.46,
+          "p_regret_gt_10": 0.46,
+          "max_regret": 1265.9581500885888
+        }
+      }
+    },
+    {
+      "held_out_mechanism": "hub_load_threshold",
+      "n_train_samples": 7800,
+      "n_suboptimal": 100,
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.08,
+          "mean_norm_regret": 0.2126,
+          "mean_regret": 44.32,
+          "median_regret": 0.2368,
+          "p95_regret": 500.9785,
+          "p99_regret": 787.3128,
+          "p_regret_gt_5": 0.06,
+          "avg_savings": 0.0,
+          "n_suboptimal": 100
+        },
+        "recursive": {
+          "recovery_rate": 0.01,
+          "mean_norm_regret": 4.3191,
+          "mean_regret": 116.0944,
+          "median_regret": 7.935,
+          "p95_regret": 737.1822,
+          "p99_regret": 1040.2661,
+          "p_regret_gt_5": 0.67,
+          "avg_savings": 0.6923,
+          "n_suboptimal": 100
+        },
+        "hybrid": {
+          "recovery_rate": 0.08,
+          "mean_norm_regret": 0.2126,
+          "mean_regret": 44.32,
+          "median_regret": 0.2368,
+          "p95_regret": 500.9785,
+          "p99_regret": 787.3128,
+          "p_regret_gt_5": 0.06,
+          "avg_savings": 0.6154,
+          "n_suboptimal": 100
+        }
+      },
+      "paired_cis": {
+        "recovery_hybrid_minus_greedy": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": -0.07,
+          "ci_95": [
+            -0.13,
+            -0.02
+          ]
+        }
+      },
+      "coverage_curve": {
+        "0.5": {
+          "tau_sigma": 0.5,
+          "coverage": 0.0,
+          "recovery_rate": 0.08,
+          "mean_regret": 44.320047791610456,
+          "median_regret": 0.23679609298706056,
+          "p95_regret": 500.97852845976354,
+          "p99_regret": 787.312797055562,
+          "mean_norm_regret": 0.21260724645429113,
+          "mean_savings": 0.6153984339014277,
+          "n_tasks": 100
+        },
+        "1.0": {
+          "tau_sigma": 1.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.08,
+          "mean_regret": 44.320047791610456,
+          "median_regret": 0.23679609298706056,
+          "p95_regret": 500.97852845976354,
+          "p99_regret": 787.312797055562,
+          "mean_norm_regret": 0.21260724645429113,
+          "mean_savings": 0.6153984339014277,
+          "n_tasks": 100
+        },
+        "2.0": {
+          "tau_sigma": 2.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.08,
+          "mean_regret": 44.320047791610456,
+          "median_regret": 0.23679609298706056,
+          "p95_regret": 500.97852845976354,
+          "p99_regret": 787.312797055562,
+          "mean_norm_regret": 0.21260724645429113,
+          "mean_savings": 0.6153984339014277,
+          "n_tasks": 100
+        },
+        "5.0": {
+          "tau_sigma": 5.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.08,
+          "mean_regret": 44.320047791610456,
+          "median_regret": 0.23679609298706056,
+          "p95_regret": 500.97852845976354,
+          "p99_regret": 787.312797055562,
+          "mean_norm_regret": 0.21260724645429113,
+          "mean_savings": 0.6153984339014277,
+          "n_tasks": 100
+        },
+        "1000000000.0": {
+          "tau_sigma": 1000000000.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.08,
+          "mean_regret": 44.320047791610456,
+          "median_regret": 0.23679609298706056,
+          "p95_regret": 500.97852845976354,
+          "p99_regret": 787.312797055562,
+          "mean_norm_regret": 0.21260724645429113,
+          "mean_savings": 0.6153984339014277,
+          "n_tasks": 100
+        }
+      },
+      "risk_metrics": {
+        "greedy": {
+          "mean_regret": 44.320047791610456,
+          "median_regret": 0.23679609298706056,
+          "p95_regret": 500.97852845976354,
+          "p99_regret": 787.312797055562,
+          "p_regret_gt_1": 0.16,
+          "p_regret_gt_5": 0.06,
+          "p_regret_gt_10": 0.06,
+          "max_regret": 1144.255526073498
+        },
+        "recursive": {
+          "mean_regret": 116.09435082186472,
+          "median_regret": 7.935048151016235,
+          "p95_regret": 737.1822424973669,
+          "p99_regret": 1040.266140530235,
+          "p_regret_gt_1": 0.98,
+          "p_regret_gt_5": 0.67,
+          "p_regret_gt_10": 0.44,
+          "max_regret": 1155.6072897987788
+        },
+        "hybrid": {
+          "mean_regret": 44.320047791610456,
+          "median_regret": 0.23679609298706056,
+          "p95_regret": 500.97852845976354,
+          "p99_regret": 787.312797055562,
+          "p_regret_gt_1": 0.16,
+          "p_regret_gt_5": 0.06,
+          "p_regret_gt_10": 0.06,
+          "max_regret": 1144.255526073498
+        }
+      }
+    },
+    {
+      "held_out_mechanism": "spectral_gap_threshold",
+      "n_train_samples": 7800,
+      "n_suboptimal": 100,
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.52,
+          "mean_norm_regret": 0.1138,
+          "mean_regret": 60.0387,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931,
+          "p99_regret": 590.3366,
+          "p_regret_gt_5": 0.45,
+          "avg_savings": 0.0,
+          "n_suboptimal": 100
+        },
+        "recursive": {
+          "recovery_rate": 0.02,
+          "mean_norm_regret": 0.489,
+          "mean_regret": 226.8995,
+          "median_regret": 179.4467,
+          "p95_regret": 687.7856,
+          "p99_regret": 808.2372,
+          "p_regret_gt_5": 0.97,
+          "avg_savings": 0.6923,
+          "n_suboptimal": 100
+        },
+        "hybrid": {
+          "recovery_rate": 0.52,
+          "mean_norm_regret": 0.1138,
+          "mean_regret": 60.0387,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931,
+          "p99_regret": 590.3366,
+          "p_regret_gt_5": 0.45,
+          "avg_savings": 0.6154,
+          "n_suboptimal": 100
+        }
+      },
+      "paired_cis": {
+        "recovery_hybrid_minus_greedy": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": -0.5,
+          "ci_95": [
+            -0.61,
+            -0.39
+          ]
+        }
+      },
+      "coverage_curve": {
+        "0.5": {
+          "tau_sigma": 0.5,
+          "coverage": 0.0,
+          "recovery_rate": 0.52,
+          "mean_regret": 60.03872644399198,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931349542613,
+          "p99_regret": 590.3365729571561,
+          "mean_norm_regret": 0.11379842188002633,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "1.0": {
+          "tau_sigma": 1.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.52,
+          "mean_regret": 60.03872644399198,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931349542613,
+          "p99_regret": 590.3365729571561,
+          "mean_norm_regret": 0.11379842188002633,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "2.0": {
+          "tau_sigma": 2.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.52,
+          "mean_regret": 60.03872644399198,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931349542613,
+          "p99_regret": 590.3365729571561,
+          "mean_norm_regret": 0.11379842188002633,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "5.0": {
+          "tau_sigma": 5.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.52,
+          "mean_regret": 60.03872644399198,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931349542613,
+          "p99_regret": 590.3365729571561,
+          "mean_norm_regret": 0.11379842188002633,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        },
+        "1000000000.0": {
+          "tau_sigma": 1000000000.0,
+          "coverage": 0.0,
+          "recovery_rate": 0.52,
+          "mean_regret": 60.03872644399198,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931349542613,
+          "p99_regret": 590.3365729571561,
+          "mean_norm_regret": 0.11379842188002633,
+          "mean_savings": 0.6153846153846152,
+          "n_tasks": 100
+        }
+      },
+      "risk_metrics": {
+        "greedy": {
+          "mean_regret": 60.03872644399198,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931349542613,
+          "p99_regret": 590.3365729571561,
+          "p_regret_gt_1": 0.48,
+          "p_regret_gt_5": 0.45,
+          "p_regret_gt_10": 0.45,
+          "max_regret": 599.3536936764567
+        },
+        "recursive": {
+          "mean_regret": 226.899463909497,
+          "median_regret": 179.44668812909225,
+          "p95_regret": 687.7856396852479,
+          "p99_regret": 808.2371633226546,
+          "p_regret_gt_1": 0.98,
+          "p_regret_gt_5": 0.97,
+          "p_regret_gt_10": 0.97,
+          "max_regret": 863.1113203659354
+        },
+        "hybrid": {
+          "mean_regret": 60.03872644399198,
+          "median_regret": 0.0,
+          "p95_regret": 407.1931349542613,
+          "p99_regret": 590.3365729571561,
+          "p_regret_gt_1": 0.48,
+          "p_regret_gt_5": 0.45,
+          "p_regret_gt_10": 0.45,
+          "max_regret": 599.3536936764567
+        }
+      }
+    }
+  ],
+  "gates": {
+    "A_connectivity_recovery_gt_greedy": {
+      "passed": false,
+      "description": "hybrid=0% vs greedy=0%"
+    },
+    "B_redundancy_recovery_gt_greedy": {
+      "passed": false,
+      "description": "hybrid=7% vs greedy=7%"
+    },
+    "C_hybrid_norm_regret_le_greedy": {
+      "passed": true,
+      "description": "hybrid=0.3704 vs greedy=0.3704"
+    },
+    "D_p95_regret_le_greedy": {
+      "passed": true,
+      "description": "hybrid_p95=488.30 vs greedy_p95=488.30"
+    },
+    "E_spectral_geq_greedy": {
+      "passed": true,
+      "description": "hybrid=52% vs greedy=52%"
+    },
+    "F_search_savings_gt_50": {
+      "passed": true,
+      "description": "avg savings: 61.5%"
+    },
+    "G_uncertainty_correlation": {
+      "passed": true,
+      "description": "lowest_cov_reg=0.00, highest_cov_reg=0.00"
+    },
+    "H_selective_improves_regret": {
+      "passed": true,
+      "description": "lowest_cov_reg=0.00, highest_cov_reg=0.00"
+    },
+    "I_exact_replay": {
+      "passed": true,
+      "description": "by design"
+    },
+    "J_qualification": {
+      "passed": false,
+      "description": "manifest_valid=False, failures=0"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "n_mechanisms": 4,
+    "n_valid_lomo": 4,
+    "conn_hybrid_recovery": 0.0,
+    "red_hybrid_recovery": 0.07,
+    "spec_hybrid_recovery": 0.52,
+    "avg_hybrid_norm_regret": 0.370375,
+    "avg_greedy_norm_regret": 0.370375,
+    "avg_savings": 0.6154
+  },
+  "training_info": {
+    "n_train_total": 10400,
+    "feature_dim": 76,
+    "target_dim": 3,
+    "n_train_per_mechanism": {
+      "connectivity_threshold": 2600,
+      "redundancy_threshold": 2600,
+      "hub_load_threshold": 2600,
+      "spectral_gap_threshold": 2600
+    }
+  },
+  "manifest_evidence": {
+    "manifest_exists": true,
+    "manifest_valid": false,
+    "release_mode": true,
+    "test_count": 2326,
+    "test_passed": 2326,
+    "test_failed": 0
+  }
+}
