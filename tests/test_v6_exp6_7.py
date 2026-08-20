@@ -135,8 +135,22 @@ class TestObjectiveEvaluatorV2:
                              direction="minimize", threshold=1.0,
                              magnitude=25.0, reward_shape="threshold")
         effects = ExtendedEffect(delta_n_components=-1)
-        value = ObjectiveEvaluatorV2.evaluate(effects, spec)
+        # current_value=2, threshold=1: 2->1 reaches threshold, bonus=25.
+        # At current=2, threshold not reached, bonus=0.
+        # So delta = 25 - 0 = 25.
+        value = ObjectiveEvaluatorV2.evaluate(effects, spec, current_value=2.0)
         assert value > 0
+
+    def test_threshold_not_reached(self):
+        """Effect that moves toward but doesn't reach threshold gets 0 bonus."""
+        spec = ObjectiveSpec(name="test", observable="n_components",
+                             direction="minimize", threshold=1.0,
+                             magnitude=25.0, reward_shape="threshold")
+        effects = ExtendedEffect(delta_n_components=-1)
+        # current_value=4, threshold=1: 4->3 does NOT reach threshold.
+        # bonus_after=0, bonus_current=0, delta=0.
+        value = ObjectiveEvaluatorV2.evaluate(effects, spec, current_value=4.0)
+        assert value == 0.0
 
     def test_linear_reward(self):
         spec = ObjectiveSpec(name="test", observable="spectral_gap",

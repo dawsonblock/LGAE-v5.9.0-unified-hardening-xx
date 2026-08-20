@@ -75,12 +75,17 @@ def generate_multi_operator_candidates(
     n = int(graph.num_nodes)
     candidates: list[tuple[str, int, int, dict]] = []
 
-    # ADD_EDGE: cross-component and within-component.
+    # ADD_EDGE: only non-existing edges (cross-component and within-component).
     comp_info = compute_component_info(graph, n)
+    existing_set = set()
+    for s, d in _get_existing_edges(graph, n):
+        existing_set.add((min(s, d), max(s, d)))
     cross_pairs = []
     within_pairs = []
     for u in range(n):
         for v in range(u + 1, n):
+            if (u, v) in existing_set:
+                continue  # Skip existing edges — ADD means new edge.
             if comp_info.component_ids[u] != comp_info.component_ids[v]:
                 cross_pairs.append((u, v))
             else:
@@ -135,10 +140,11 @@ def generate_multi_operator_training_data(
     Returns dict with X, y_residual, y_effects, mechanism labels.
     """
     from ...runtime.analytical_utility import AnalyticalUtilityOracle
-    from ..exp6_3.exact_mpc import apply_action as apply_act
+    from ..exp6_3.exact_mpc import apply_action as apply_act, apply_action_with_status
     from ..exp6_6.objective_spec import get_objective_spec
     from ..exp6_6.causal_effect_model import compute_effect_labels
     from .extended_effects import compute_extended_effect_labels
+    from .multi_operator_features import extract_multi_operator_features
 
     oracle = AnalyticalUtilityOracle()
 
@@ -169,7 +175,12 @@ def generate_multi_operator_training_data(
                 continue
 
             for action in candidates:
-                x = extract_observable_features(graph, z, action, threshold=config.threshold, horizon=2)
+                # Skip no-op/invalid actions.
+                status = apply_action_with_status(graph, action)
+                if status.status != "VALID":
+                    continue
+
+                x = extract_multi_operator_features(graph, z, action, threshold=config.threshold, horizon=2)
 
                 # Exact future residual.
                 mt, u, v, params = action
@@ -186,7 +197,11 @@ def generate_multi_operator_training_data(
                     delta_add = 0.0
 
                 next_graph = apply_act(graph, action)
-                exact_h1 = exact_mpc(next_graph, z, candidates, utility_fn, horizon=1, gamma=0.9)
+                # Regenerate candidates at next state for correct H=1.
+                next_candidates = generate_multi_operator_candidates(
+                    next_graph, z, config, rng=random.Random(config.seed + 1),
+                )
+                exact_h1 = exact_mpc(next_graph, z, next_candidates, utility_fn, horizon=1, gamma=0.9)
                 q_h2 = delta_add + 0.9 * exact_h1.total_value
                 future_residual = q_h2 - delta_add
 

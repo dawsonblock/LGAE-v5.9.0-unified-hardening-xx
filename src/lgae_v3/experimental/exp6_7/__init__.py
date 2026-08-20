@@ -11,6 +11,9 @@ from .multi_operator_candidates import (
     MUTATION_TYPES, generate_multi_operator_candidates,
     generate_multi_operator_training_data,
 )
+from .multi_operator_features import (
+    extract_multi_operator_features, MUTATION_TYPES_ORDERED,
+)
 from .extended_effects import (
     ExtendedEffect, compute_extended_effect_labels,
     EXTENDED_EFFECT_DIM,
@@ -30,6 +33,7 @@ from .experiment_runner import (
 __all__ = [
     "MUTATION_TYPES", "generate_multi_operator_candidates",
     "generate_multi_operator_training_data",
+    "extract_multi_operator_features", "MUTATION_TYPES_ORDERED",
     "ExtendedEffect", "compute_extended_effect_labels",
     "EXTENDED_EFFECT_DIM",
     "CausalEffectModelV2", "ObjectiveEvaluatorV2",

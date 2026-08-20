@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/runtime/analytical_utility.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 0.0001, 0.001, 0.5, 0.9999, 1.0, 2.0, 10.0, 'add_edge', 'bridge', 'contract_valid', 'edge_swap', 'factor', 'hub_connect', 'local_rewire', 'mae', 'max_err', 'n_candidates', 'new_target', 'passed', 'r2', 'remove_edge', 'reweight_down', 'reweight_up', 'rmse', 'tolerance', 'weight']

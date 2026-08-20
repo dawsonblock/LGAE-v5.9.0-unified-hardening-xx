@@ -24,6 +24,7 @@ from .objective_spec import ObjectiveSpec
 class HonestBeamResultV3:
     """Result of honest beam search v3."""
     first_action: tuple[str, int, int] = ("", 0, 0)
+    first_action_identity: object = None  # ActionIdentity or None
     best_sequence: list[tuple[str, int, int, dict]] = field(default_factory=list)
     total_value: float = float("-inf")
     nodes_expanded: int = 0
@@ -105,7 +106,9 @@ def honest_beam_search_v3(
                 step_val = (gamma ** depth) * delta_add + (gamma ** (depth + 1)) * v_residual
                 total = cum_val + step_val
                 new_seq = seq + [action]
-                new_first = first_key if first_key else f"{action[0]}_{action[1]}_{action[2]}"
+                # Use ActionIdentity for complete key (includes params).
+                from ..exp6_3.exact_mpc import ActionIdentity
+                new_first = first_key if first_key else ActionIdentity.from_action(action).key
 
                 if depth == 0:
                     if new_first not in first_values or total > first_values[new_first]:
@@ -124,7 +127,8 @@ def honest_beam_search_v3(
         beam = [(g, v, s, k) for v, g, s, k in candidates[:beam_width]]
 
     if beam:
-        best_val, best_graph, best_seq, best_key = beam[0]
+        # beam stores (graph, total, seq, key).
+        best_graph, best_val, best_seq, best_key = beam[0]
         result.total_value = best_val
         result.best_sequence = best_seq
         result.all_first_action_values = first_values
@@ -133,6 +137,9 @@ def honest_beam_search_v3(
         if best_seq:
             a = best_seq[0]
             result.first_action = (a[0], a[1], a[2])
+            # Set full ActionIdentity including params.
+            from ..exp6_3.exact_mpc import ActionIdentity
+            result.first_action_identity = ActionIdentity.from_action(a)
 
     result.wall_clock_seconds = time.time() - t_start
     return result

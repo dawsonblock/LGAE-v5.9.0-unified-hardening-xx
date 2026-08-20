@@ -11,13 +11,17 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 import json
+import sys
 import time
 import os
 import numpy as np
 import torch
 
 from ...types import GraphBuffers
-from ..exp6_3.exact_mpc import exact_mpc, greedy_one_step, apply_action as apply_act
+from ..exp6_3.exact_mpc import (
+    exact_mpc, greedy_one_step, apply_action as apply_act,
+    apply_action_with_status, ActionIdentity,
+)
 from ..exp6_5.multi_mechanism_data import (
     MECHANISM_NAMES,
     generate_mechanism_task_configs, MechanismTaskConfig, _make_graph_from_config,
@@ -29,6 +33,7 @@ from .multi_operator_candidates import (
     generate_multi_operator_candidates,
     generate_multi_operator_training_data,
 )
+from .multi_operator_features import extract_multi_operator_features
 from .causal_effect_model_v2 import (
     CausalEffectModelV2, ScalarResidualModelV2,
     ObjectiveEvaluatorV2, get_architecture_ladder_v2,
@@ -125,21 +130,30 @@ def _paired_bootstrap_ci(
 
 
 def _check_manifest_evidence() -> dict:
-    """Check real manifest/release evidence."""
+    """Check real manifest/release evidence using the actual manifest verifier."""
+    import subprocess
     evidence = {
         "manifest_exists": False, "manifest_valid": False,
         "release_mode": False, "test_count": 0, "test_passed": 0, "test_failed": 0,
+        "manifest_check_output": "",
     }
     manifest_path = os.path.join(os.getcwd(), "MANIFEST.sha256.json")
     if os.path.exists(manifest_path):
         evidence["manifest_exists"] = True
+        # Run the real manifest checker, not a surrogate.
         try:
-            with open(manifest_path) as f:
-                manifest = json.load(f)
-            if "files" in manifest and len(manifest["files"]) > 0:
+            result = subprocess.run(
+                [sys.executable, "scripts/generate_manifest.py", "--check"],
+                capture_output=True, text=True, timeout=30,
+                cwd=os.getcwd(),
+            )
+            evidence["manifest_check_output"] = result.stdout + result.stderr
+            # The real checker exits 0 if valid.
+            if result.returncode == 0:
                 evidence["manifest_valid"] = True
-        except Exception:
-            pass
+        except Exception as e:
+            evidence["manifest_check_output"] = f"ERROR: {e}"
+
     qual_path = os.path.join(os.getcwd(), "qualification_summary.json")
     if os.path.exists(qual_path):
         try:
@@ -156,8 +170,15 @@ def _check_manifest_evidence() -> dict:
 
 
 def _compute_regret(exact, model_result) -> float:
-    exact_key = f"{exact.first_action[0]}_{exact.first_action[1]}_{exact.first_action[2]}"
-    model_key = f"{model_result.first_action[0]}_{model_result.first_action[1]}_{model_result.first_action[2]}"
+    """Compute regret using full ActionIdentity (includes params)."""
+    if exact.first_action_identity is not None:
+        exact_key = exact.first_action_identity.key
+    else:
+        exact_key = f"{exact.first_action[0]}_{exact.first_action[1]}_{exact.first_action[2]}"
+    if model_result.first_action_identity is not None:
+        model_key = model_result.first_action_identity.key
+    else:
+        model_key = f"{model_result.first_action[0]}_{model_result.first_action[1]}_{model_result.first_action[2]}"
     exact_val = exact.all_first_action_values.get(exact_key, exact.total_value)
     model_val = exact.all_first_action_values.get(model_key, model_result.total_value)
     return float(exact_val - model_val)
@@ -190,9 +211,21 @@ def _generate_eval_tasks(
         if len(candidates) < 4:
             continue
         utility_fn = make_test_f_utility(mechanism, config.lambda_bonus, mech_threshold)
-        exact = exact_mpc(graph, z, candidates, utility_fn, horizon=2, gamma=0.9)
+        # Use state-conditioned MPC (regenerate candidates at each depth).
+        exact = exact_mpc(
+            graph, z, candidates, utility_fn, horizon=2, gamma=0.9,
+            regenerate_candidates=True,
+            candidate_generator=lambda g, z, **kw: generate_multi_operator_candidates(
+                g, z, config, rng=random.Random(config.seed + 100),
+            ),
+        )
         greedy = greedy_one_step(graph, z, candidates, utility_fn)
-        if greedy.first_action != exact.first_action:
+        # Compare using ActionIdentity (includes params).
+        exact_id = exact.first_action_identity
+        greedy_id = ActionIdentity.from_action(
+            (greedy.first_action[0], greedy.first_action[1], greedy.first_action[2], {})
+        ) if greedy.first_action[0] else None
+        if exact_id and greedy_id and exact_id != greedy_id:
             suboptimal_configs.append(config)
 
     return suboptimal_configs
@@ -295,7 +328,14 @@ def run_exp6_7(
 
             from ..exp6_4.test_f import make_test_f_utility
             utility_fn = make_test_f_utility(held_out, config.lambda_bonus, int(obj_spec.threshold))
-            exact = exact_mpc(graph, z, candidates, utility_fn, horizon=2, gamma=gamma)
+            # State-conditioned MPC: regenerate candidates at each depth.
+            exact = exact_mpc(
+                graph, z, candidates, utility_fn, horizon=2, gamma=gamma,
+                regenerate_candidates=True,
+                candidate_generator=lambda g, z2, **kw: generate_multi_operator_candidates(
+                    g, z2, config, rng=random.Random(config.seed + 100),
+                ),
+            )
             greedy = greedy_one_step(graph, z, candidates, utility_fn)
 
             for arch_name, model in architectures.items():
@@ -304,7 +344,13 @@ def run_exp6_7(
                     horizon=2, gamma=gamma, beam_width=2,
                     threshold=int(obj_spec.threshold), objective=obj_spec,
                 )
-                agree = bs.first_action == exact.first_action
+                # Compare using ActionIdentity (includes params).
+                bs_id = ActionIdentity.from_action(
+                    (bs.first_action[0], bs.first_action[1], bs.first_action[2],
+                     bs.best_sequence[0][3] if bs.best_sequence else {})
+                ) if bs.first_action[0] else None
+                agree = (bs_id is not None and exact.first_action_identity is not None
+                         and bs_id == exact.first_action_identity)
                 regret = _compute_regret(exact, bs)
                 savings = 1.0 - bs.nodes_expanded / max(exact.nodes_expanded, 1)
 
@@ -519,17 +565,29 @@ def run_exp6_7(
     # Gate H: Qualification integrity.
     gate_h = manifest_evidence["manifest_valid"] and manifest_evidence["test_failed"] == 0
 
-    # Gate I: Reward hold-out — C competitive on at least one variant.
-    reward_c_competitive = sum(1 for r in result.reward_holdout_results
-                               if r.arch_results.get("C_causal_effect_v2", {}).get("recovery_rate", 0) >=
-                               r.arch_results.get("A_scalar", {}).get("recovery_rate", 0) * 0.5
-                               and r.n_suboptimal >= 5)
-    gate_i = reward_c_competitive >= 1
+    # Gate I: Reward hold-out — C must meet all three conditions:
+    #   C_recovery >= 30%
+    #   C_recovery >= A_recovery - 10pp
+    #   Regret_C <= Regret_A + epsilon
+    # Zero-vs-zero does NOT count as successful transfer.
+    reward_strong = 0
+    for r in result.reward_holdout_results:
+        if r.n_suboptimal < 5:
+            continue
+        c_rate = r.arch_results.get("C_causal_effect_v2", {}).get("recovery_rate", 0)
+        a_rate = r.arch_results.get("A_scalar", {}).get("recovery_rate", 0)
+        c_reg = r.arch_results.get("C_causal_effect_v2", {}).get("avg_regret", 0)
+        a_reg = r.arch_results.get("A_scalar", {}).get("avg_regret", 0)
+        if c_rate >= 0.30 and c_rate >= a_rate - 0.10 and c_reg <= a_reg + 5.0:
+            reward_strong += 1
+    gate_i = reward_strong >= 1
 
     gates = {
         "A_sufficient_suboptimal": {
             "passed": gate_a,
-            "description": f"{n_sufficient}/4 mechanisms have >=50 suboptimal (hub_load known limitation)",
+            "description": f"{n_sufficient}/4 mechanisms have >=50 suboptimal — "
+                           f"{'PARTIAL' if gate_a else 'FAIL'} "
+                           f"(hub_load known mechanism design limitation)",
         },
         "B_c_beats_a_majority": {
             "passed": gate_b,
@@ -553,9 +611,10 @@ def run_exp6_7(
             "passed": gate_h,
             "description": f"manifest_valid={manifest_evidence['manifest_valid']}, failures={manifest_evidence['test_failed']}",
         },
-        "I_reward_holdout_c_competitive": {
+        "I_reward_holdout_strong": {
             "passed": gate_i,
-            "description": f"C competitive on {reward_c_competitive} reward variants",
+            "description": f"C meets strong reward criteria on {reward_strong} variants "
+                           f"(C>=30%, C>=A-10pp, Regret_C<=Regret_A+5)",
         },
     }
 
@@ -569,7 +628,7 @@ def run_exp6_7(
         "avg_savings": round(avg_savings, 4),
         "c_beats_a_count": c_beats_a,
         "reward_holdout_count": len(result.reward_holdout_results),
-        "reward_c_competitive": reward_c_competitive,
+        "reward_c_strong": reward_strong,
         "lomo_detail": [
             {
                 "mechanism": r.held_out_mechanism,

@@ -15,6 +15,38 @@ from ..exp6_6.objective_spec import ObjectiveSpec, encode_objective, OBJECTIVE_E
 from .extended_effects import ExtendedEffect, EXTENDED_EFFECT_DIM
 
 
+def _get_current_observable(graph: GraphBuffers, spec: ObjectiveSpec) -> float:
+    """Get the current value of the observable for the objective spec."""
+    n = int(graph.num_nodes)
+    import numpy as np
+
+    if spec.observable == "n_components":
+        from ..exp6_4.structural_features import compute_component_info
+        return float(compute_component_info(graph, n).n_components)
+    elif spec.observable == "redundancy":
+        from ..exp6_5.observable_features import _compute_degree_stats
+        _, _, _, _, min_deg = _compute_degree_stats(graph, n)
+        return float(min_deg)
+    elif spec.observable == "hub_load":
+        from ..exp6_5.observable_features import _compute_degree_stats
+        _, _, max_deg, _, _ = _compute_degree_stats(graph, n)
+        return float(max_deg)
+    elif spec.observable == "spectral_gap":
+        from ..exp6_5.observable_features import _compute_spectral_gap
+        return float(_compute_spectral_gap(graph, n))
+    elif spec.observable == "path_length":
+        from .extended_effects import _compute_avg_path_length
+        return float(_compute_avg_path_length(graph, n))
+    elif spec.observable == "efficiency":
+        from .extended_effects import _compute_global_efficiency
+        return float(_compute_global_efficiency(graph, n))
+    elif spec.observable == "curvature":
+        from .extended_effects import _compute_curvature_proxy
+        return float(_compute_curvature_proxy(graph, n))
+    else:
+        return 0.0
+
+
 class ScalarResidualModelV2:
     """Architecture A: F(S,a) -> R (scalar baseline)."""
 
@@ -122,7 +154,9 @@ class CausalEffectModelV2:
         if not self._fitted or objective is None:
             return 0.0
         effects = self.predict_effects(graph, z, action, threshold=threshold, horizon=horizon)
-        return ObjectiveEvaluatorV2.evaluate(effects, objective)
+        # Compute current observable value for absolute-state evaluation.
+        current_value = _get_current_observable(graph, objective)
+        return ObjectiveEvaluatorV2.evaluate(effects, objective, current_value=current_value)
 
     @property
     def name(self) -> str:
@@ -137,8 +171,23 @@ class ObjectiveEvaluatorV2:
     """
 
     @staticmethod
-    def evaluate(effects: ExtendedEffect, spec: ObjectiveSpec) -> float:
-        """Evaluate effects under the objective specification."""
+    def evaluate(
+        effects: ExtendedEffect, spec: ObjectiveSpec,
+        current_value: float = 0.0,
+    ) -> float:
+        """Evaluate effects under the objective specification.
+
+        Computes O(S + ΔS) - O(S), not O(ΔS).
+
+        For threshold objectives:
+          predicted_after = current_value + effect_value
+          bonus = magnitude if predicted_after reaches threshold, else 0
+          minus bonus already collected at current_value.
+
+        This is the mathematically correct evaluation: an effect
+        that moves toward but doesn't reach the threshold gets 0
+        bonus, not partial credit.
+        """
         effect_map = {
             "n_components": effects.delta_n_components,
             "redundancy": effects.delta_redundancy,
@@ -150,22 +199,19 @@ class ObjectiveEvaluatorV2:
         }
 
         effect_value = effect_map.get(spec.observable, 0.0)
+        predicted_after = current_value + effect_value
 
         if spec.reward_shape == "threshold":
+            # Compute bonus at predicted_after and at current_value.
             if spec.direction == "minimize":
-                if effect_value <= -1:
-                    return spec.magnitude
-                elif effect_value < 0:
-                    return spec.magnitude * abs(effect_value)
-                else:
-                    return 0.0
-            else:
-                if effect_value >= 1:
-                    return spec.magnitude
-                elif effect_value > 0:
-                    return spec.magnitude * effect_value
-                else:
-                    return 0.0
+                # Threshold reached when value <= spec.threshold.
+                bonus_after = spec.magnitude if predicted_after <= spec.threshold else 0.0
+                bonus_current = spec.magnitude if current_value <= spec.threshold else 0.0
+            else:  # maximize
+                # Threshold reached when value >= spec.threshold.
+                bonus_after = spec.magnitude if predicted_after >= spec.threshold else 0.0
+                bonus_current = spec.magnitude if current_value >= spec.threshold else 0.0
+            return bonus_after - bonus_current
         else:  # linear
             if spec.direction == "minimize":
                 return -effect_value * spec.magnitude

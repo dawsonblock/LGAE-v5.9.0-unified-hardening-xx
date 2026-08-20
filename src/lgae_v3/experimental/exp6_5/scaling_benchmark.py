@@ -183,9 +183,18 @@ def run_scaling_benchmark(
         result.search_savings = 1.0 - result.model_assisted_nodes / max(result.exact_mpc_nodes, 1)
         result.first_action_agreement = bs.first_action == exact.first_action
 
-        # Regret.
-        exact_key = f"{exact.first_action[0]}_{exact.first_action[1]}_{exact.first_action[2]}"
-        model_key = f"{bs.first_action[0]}_{bs.first_action[1]}_{bs.first_action[2]}"
+        # Regret using ActionIdentity for complete key matching.
+        from ..exp6_3.exact_mpc import ActionIdentity
+        if exact.first_action_identity is not None:
+            exact_key = exact.first_action_identity.key
+        else:
+            exact_key = f"{exact.first_action[0]}_{exact.first_action[1]}_{exact.first_action[2]}"
+        if hasattr(bs, 'first_action_identity') and bs.first_action_identity is not None:
+            model_key = bs.first_action_identity.key
+        elif bs.best_sequence:
+            model_key = ActionIdentity.from_action(bs.best_sequence[0]).key
+        else:
+            model_key = f"{bs.first_action[0]}_{bs.first_action[1]}_{bs.first_action[2]}"
         exact_val = exact.all_first_action_values.get(exact_key, exact.total_value)
         model_val = exact.all_first_action_values.get(model_key, bs.total_value)
         result.regret = float(exact_val - model_val)

@@ -87,8 +87,21 @@ class Exp64Result:
 
 
 def _compute_regret(exact: ExactPlan, model: HonestBeamResultV2) -> float:
-    exact_key = f"{exact.first_action[0]}_{exact.first_action[1]}_{exact.first_action[2]}"
-    model_key = f"{model.first_action[0]}_{model.first_action[1]}_{model.first_action[2]}"
+    """Compute regret using ActionIdentity for complete key matching."""
+    from ..exp6_3.exact_mpc import ActionIdentity
+    # Use ActionIdentity if available, fall back to old format.
+    if exact.first_action_identity is not None:
+        exact_key = exact.first_action_identity.key
+    else:
+        exact_key = f"{exact.first_action[0]}_{exact.first_action[1]}_{exact.first_action[2]}"
+    if hasattr(model, 'first_action_identity') and model.first_action_identity is not None:
+        model_key = model.first_action_identity.key
+    else:
+        # Build identity from the first action in best_sequence if available.
+        if model.best_sequence:
+            model_key = ActionIdentity.from_action(model.best_sequence[0]).key
+        else:
+            model_key = f"{model.first_action[0]}_{model.first_action[1]}_{model.first_action[2]}"
     exact_val = exact.all_first_action_values.get(exact_key, exact.total_value)
     model_val = exact.all_first_action_values.get(model_key, model.total_value)
     return float(exact_val - model_val)
@@ -96,8 +109,18 @@ def _compute_regret(exact: ExactPlan, model: HonestBeamResultV2) -> float:
 
 def _compute_greedy_improvement(exact: ExactPlan, greedy: ExactPlan,
                                  model: HonestBeamResultV2) -> float:
-    model_key = f"{model.first_action[0]}_{model.first_action[1]}_{model.first_action[2]}"
-    greedy_key = f"{greedy.first_action[0]}_{greedy.first_action[1]}_{greedy.first_action[2]}"
+    from ..exp6_3.exact_mpc import ActionIdentity
+    # Use ActionIdentity for complete key matching.
+    if hasattr(model, 'first_action_identity') and model.first_action_identity is not None:
+        model_key = model.first_action_identity.key
+    elif model.best_sequence:
+        model_key = ActionIdentity.from_action(model.best_sequence[0]).key
+    else:
+        model_key = f"{model.first_action[0]}_{model.first_action[1]}_{model.first_action[2]}"
+    if greedy.first_action_identity is not None:
+        greedy_key = greedy.first_action_identity.key
+    else:
+        greedy_key = f"{greedy.first_action[0]}_{greedy.first_action[1]}_{greedy.first_action[2]}"
     model_val = exact.all_first_action_values.get(model_key, model.total_value)
     greedy_val = exact.all_first_action_values.get(greedy_key, greedy.total_value)
     return float(model_val - greedy_val)

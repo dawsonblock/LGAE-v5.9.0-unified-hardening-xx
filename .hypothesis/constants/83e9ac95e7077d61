@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_7/multi_operator_candidates.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.5, 0.9, 1.0, 2.0, 200, 1000, 'X', 'add_edge', 'edge_swap', 'factor', 'mechanism', 'new_target', 'remove_edge', 'reweight_down', 'reweight_edge', 'reweight_up', 'weight', 'y_effects', 'y_residual']
