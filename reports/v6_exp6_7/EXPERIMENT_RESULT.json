@@ -6,31 +6,31 @@
       "n_suboptimal": 100,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.02,
-          "avg_regret": 20.8062,
+          "recovery_rate": 0.11,
+          "avg_regret": 11.8202,
           "avg_savings": 0.7692,
           "n_suboptimal": 100
         },
         "C_causal_effect_v2": {
-          "recovery_rate": 0.66,
-          "avg_regret": 0.0792,
+          "recovery_rate": 0.0,
+          "avg_regret": 11.9702,
           "avg_savings": 0.7692,
           "n_suboptimal": 100
         }
       },
       "paired_cis": {
         "recovery_C_minus_A": {
-          "mean_diff": 0.64,
+          "mean_diff": -0.11,
           "ci_95": [
-            0.54,
-            0.74
+            -0.17,
+            -0.05
           ]
         },
         "regret_A_minus_C": {
-          "mean_diff": 20.727,
+          "mean_diff": -0.15,
           "ci_95": [
-            19.0337,
-            22.4738
+            -0.6806,
+            0.1302
           ]
         }
       }
@@ -38,34 +38,34 @@
     {
       "held_out_mechanism": "redundancy_threshold",
       "n_train_samples": 7800,
-      "n_suboptimal": 13,
+      "n_suboptimal": 100,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.2308,
-          "avg_regret": 591.2704,
+          "recovery_rate": 0.03,
+          "avg_regret": 421.068,
           "avg_savings": 0.7692,
-          "n_suboptimal": 13
+          "n_suboptimal": 100
         },
         "C_causal_effect_v2": {
           "recovery_rate": 0.0,
-          "avg_regret": 772.392,
+          "avg_regret": 421.0279,
           "avg_savings": 0.7692,
-          "n_suboptimal": 13
+          "n_suboptimal": 100
         }
       },
       "paired_cis": {
         "recovery_C_minus_A": {
-          "mean_diff": -0.2308,
+          "mean_diff": -0.03,
           "ci_95": [
-            -0.4615,
+            -0.07,
             0.0
           ]
         },
         "regret_A_minus_C": {
-          "mean_diff": -181.1216,
+          "mean_diff": 0.0401,
           "ci_95": [
-            -380.6026,
-            1.091
+            -0.0045,
+            0.0983
           ]
         }
       }
@@ -73,34 +73,34 @@
     {
       "held_out_mechanism": "hub_load_threshold",
       "n_train_samples": 7800,
-      "n_suboptimal": 0,
+      "n_suboptimal": 100,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.0,
-          "avg_regret": 0.0,
-          "avg_savings": 0.0,
-          "n_suboptimal": 0
+          "recovery_rate": 0.03,
+          "avg_regret": 107.5763,
+          "avg_savings": 0.7692,
+          "n_suboptimal": 100
         },
         "C_causal_effect_v2": {
-          "recovery_rate": 0.0,
-          "avg_regret": 0.0,
-          "avg_savings": 0.0,
-          "n_suboptimal": 0
+          "recovery_rate": 0.03,
+          "avg_regret": 70.609,
+          "avg_savings": 0.7692,
+          "n_suboptimal": 100
         }
       },
       "paired_cis": {
         "recovery_C_minus_A": {
           "mean_diff": 0.0,
           "ci_95": [
-            0.0,
-            0.0
+            -0.05,
+            0.05
           ]
         },
         "regret_A_minus_C": {
-          "mean_diff": 0.0,
+          "mean_diff": 36.9673,
           "ci_95": [
-            0.0,
-            0.0
+            6.7815,
+            73.5726
           ]
         }
       }
@@ -112,30 +112,30 @@
       "arch_results": {
         "A_scalar": {
           "recovery_rate": 0.0,
-          "avg_regret": 242.7595,
+          "avg_regret": 214.6578,
           "avg_savings": 0.7692,
           "n_suboptimal": 100
         },
         "C_causal_effect_v2": {
-          "recovery_rate": 0.54,
-          "avg_regret": 38.8581,
+          "recovery_rate": 0.0,
+          "avg_regret": 215.8759,
           "avg_savings": 0.7692,
           "n_suboptimal": 100
         }
       },
       "paired_cis": {
         "recovery_C_minus_A": {
-          "mean_diff": 0.54,
+          "mean_diff": 0.0,
           "ci_95": [
-            0.4498,
-            0.64
+            0.0,
+            0.0
           ]
         },
         "regret_A_minus_C": {
-          "mean_diff": 203.9014,
+          "mean_diff": -1.2181,
           "ci_95": [
-            182.157,
-            225.2962
+            -7.3876,
+            4.4399
           ]
         }
       }
@@ -146,17 +146,17 @@
       "mechanism": "connectivity_threshold",
       "train_variant": "threshold",
       "test_variant": "linear",
-      "n_suboptimal": 10,
+      "n_suboptimal": 3,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.1,
-          "avg_regret": 0.1637,
-          "n_suboptimal": 10
+          "recovery_rate": 0.0,
+          "avg_regret": 1.1904,
+          "n_suboptimal": 3
         },
         "C_causal_effect_v2": {
           "recovery_rate": 0.0,
-          "avg_regret": 4.7547,
-          "n_suboptimal": 10
+          "avg_regret": 4.721,
+          "n_suboptimal": 3
         }
       }
     },
@@ -164,17 +164,17 @@
       "mechanism": "connectivity_threshold",
       "train_variant": "threshold",
       "test_variant": "composite",
-      "n_suboptimal": 9,
+      "n_suboptimal": 10,
       "arch_results": {
         "A_scalar": {
           "recovery_rate": 0.0,
-          "avg_regret": 10.4257,
-          "n_suboptimal": 9
+          "avg_regret": 33.4673,
+          "n_suboptimal": 10
         },
         "C_causal_effect_v2": {
           "recovery_rate": 0.0,
-          "avg_regret": 12.7586,
-          "n_suboptimal": 9
+          "avg_regret": 32.8323,
+          "n_suboptimal": 10
         }
       }
     },
@@ -182,17 +182,17 @@
       "mechanism": "redundancy_threshold",
       "train_variant": "threshold",
       "test_variant": "linear",
-      "n_suboptimal": 10,
+      "n_suboptimal": 7,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.6,
-          "avg_regret": 1.9216,
-          "n_suboptimal": 10
+          "recovery_rate": 0.0,
+          "avg_regret": 9.8709,
+          "n_suboptimal": 7
         },
         "C_causal_effect_v2": {
-          "recovery_rate": 0.3,
-          "avg_regret": 6.1779,
-          "n_suboptimal": 10
+          "recovery_rate": 0.1429,
+          "avg_regret": 9.8743,
+          "n_suboptimal": 7
         }
       }
     },
@@ -200,71 +200,71 @@
       "mechanism": "redundancy_threshold",
       "train_variant": "threshold",
       "test_variant": "composite",
+      "n_suboptimal": 7,
+      "arch_results": {
+        "A_scalar": {
+          "recovery_rate": 0.0,
+          "avg_regret": 9.8797,
+          "n_suboptimal": 7
+        },
+        "C_causal_effect_v2": {
+          "recovery_rate": 0.0,
+          "avg_regret": 9.8797,
+          "n_suboptimal": 7
+        }
+      }
+    },
+    {
+      "mechanism": "hub_load_threshold",
+      "train_variant": "threshold",
+      "test_variant": "linear",
+      "n_suboptimal": 0,
+      "arch_results": {
+        "A_scalar": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0,
+          "n_suboptimal": 0
+        },
+        "C_causal_effect_v2": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0,
+          "n_suboptimal": 0
+        }
+      }
+    },
+    {
+      "mechanism": "hub_load_threshold",
+      "train_variant": "threshold",
+      "test_variant": "composite",
+      "n_suboptimal": 0,
+      "arch_results": {
+        "A_scalar": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0,
+          "n_suboptimal": 0
+        },
+        "C_causal_effect_v2": {
+          "recovery_rate": 0.0,
+          "avg_regret": 0.0,
+          "n_suboptimal": 0
+        }
+      }
+    },
+    {
+      "mechanism": "spectral_gap_threshold",
+      "train_variant": "threshold",
+      "test_variant": "linear",
       "n_suboptimal": 10,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.6,
-          "avg_regret": 1.9247,
+          "recovery_rate": 0.1,
+          "avg_regret": 460.5207,
           "n_suboptimal": 10
         },
         "C_causal_effect_v2": {
           "recovery_rate": 0.0,
-          "avg_regret": 8.859,
+          "avg_regret": 462.0891,
           "n_suboptimal": 10
-        }
-      }
-    },
-    {
-      "mechanism": "hub_load_threshold",
-      "train_variant": "threshold",
-      "test_variant": "linear",
-      "n_suboptimal": 1,
-      "arch_results": {
-        "A_scalar": {
-          "recovery_rate": 0.0,
-          "avg_regret": 6.8792,
-          "n_suboptimal": 1
-        },
-        "C_causal_effect_v2": {
-          "recovery_rate": 0.0,
-          "avg_regret": 6.3835,
-          "n_suboptimal": 1
-        }
-      }
-    },
-    {
-      "mechanism": "hub_load_threshold",
-      "train_variant": "threshold",
-      "test_variant": "composite",
-      "n_suboptimal": 1,
-      "arch_results": {
-        "A_scalar": {
-          "recovery_rate": 0.0,
-          "avg_regret": 6.8792,
-          "n_suboptimal": 1
-        },
-        "C_causal_effect_v2": {
-          "recovery_rate": 0.0,
-          "avg_regret": 6.3835,
-          "n_suboptimal": 1
-        }
-      }
-    },
-    {
-      "mechanism": "spectral_gap_threshold",
-      "train_variant": "threshold",
-      "test_variant": "linear",
-      "n_suboptimal": 44,
-      "arch_results": {
-        "A_scalar": {
-          "recovery_rate": 0.6591,
-          "avg_regret": 20.2504,
-          "n_suboptimal": 44
-        },
-        "C_causal_effect_v2": {
-          "recovery_rate": 0.5455,
-          "avg_regret": 33.2313,
-          "n_suboptimal": 44
         }
       }
     },
@@ -272,17 +272,17 @@
       "mechanism": "spectral_gap_threshold",
       "train_variant": "threshold",
       "test_variant": "composite",
-      "n_suboptimal": 44,
+      "n_suboptimal": 10,
       "arch_results": {
         "A_scalar": {
-          "recovery_rate": 0.6591,
-          "avg_regret": 20.227,
-          "n_suboptimal": 44
+          "recovery_rate": 0.1,
+          "avg_regret": 460.4825,
+          "n_suboptimal": 10
         },
         "C_causal_effect_v2": {
-          "recovery_rate": 0.5227,
-          "avg_regret": 37.1389,
-          "n_suboptimal": 44
+          "recovery_rate": 0.0,
+          "avg_regret": 653.8955,
+          "n_suboptimal": 10
         }
       }
     }
@@ -290,19 +290,19 @@
   "gates": {
     "A_sufficient_suboptimal": {
       "passed": true,
-      "description": "2/4 mechanisms have >=50 suboptimal (hub_load known limitation)"
+      "description": "4/4 mechanisms have >=50 suboptimal \u2014 PARTIAL (hub_load known mechanism design limitation)"
     },
     "B_c_beats_a_majority": {
-      "passed": true,
-      "description": "C beats A in 2/2 valid LOMO"
+      "passed": false,
+      "description": "C beats A in 0/4 valid LOMO"
     },
     "C_best_recovery_gt_50": {
-      "passed": true,
-      "description": "best C recovery: 66%"
+      "passed": false,
+      "description": "best C recovery: 3%"
     },
     "D_paired_ci_excludes_zero": {
-      "passed": true,
-      "description": "CI for recovery C-A: [0.54, 0.74]"
+      "passed": false,
+      "description": "CI for recovery C-A: [-0.05, 0.05]"
     },
     "E_search_savings": {
       "passed": true,
@@ -317,62 +317,62 @@
       "description": "by design"
     },
     "H_qualification": {
-      "passed": true,
-      "description": "manifest_valid=True, failures=0"
+      "passed": false,
+      "description": "manifest_valid=False, failures=0"
     },
-    "I_reward_holdout_c_competitive": {
-      "passed": true,
-      "description": "C competitive on 4 reward variants"
+    "I_reward_holdout_strong": {
+      "passed": false,
+      "description": "C meets strong reward criteria on 0 variants (C>=30%, C>=A-10pp, Regret_C<=Regret_A+5)"
     }
   },
-  "all_gates_passed": true,
+  "all_gates_passed": false,
   "summary": {
     "n_mechanisms": 4,
-    "n_lomo_valid": 2,
-    "best_c_recovery": 0.66,
+    "n_lomo_valid": 4,
+    "best_c_recovery": 0.03,
     "avg_savings": 0.7692,
-    "c_beats_a_count": 2,
+    "c_beats_a_count": 0,
     "reward_holdout_count": 8,
-    "reward_c_competitive": 4,
+    "reward_c_strong": 0,
     "lomo_detail": [
       {
         "mechanism": "connectivity_threshold",
         "n_suboptimal": 100,
-        "C_recovery": 0.66,
-        "A_recovery": 0.02,
+        "C_recovery": 0.0,
+        "A_recovery": 0.11,
         "paired_ci": [
-          0.54,
-          0.74
+          -0.17,
+          -0.05
         ]
       },
       {
         "mechanism": "redundancy_threshold",
-        "n_suboptimal": 13,
+        "n_suboptimal": 100,
         "C_recovery": 0.0,
-        "A_recovery": 0.2308,
+        "A_recovery": 0.03,
         "paired_ci": [
-          -0.4615,
+          -0.07,
           0.0
         ]
       },
       {
         "mechanism": "hub_load_threshold",
-        "n_suboptimal": 0,
-        "C_recovery": 0.0,
-        "A_recovery": 0.0,
+        "n_suboptimal": 100,
+        "C_recovery": 0.03,
+        "A_recovery": 0.03,
         "paired_ci": [
-          0.0,
-          0.0
+          -0.05,
+          0.05
         ]
       },
       {
         "mechanism": "spectral_gap_threshold",
         "n_suboptimal": 100,
-        "C_recovery": 0.54,
+        "C_recovery": 0.0,
         "A_recovery": 0.0,
         "paired_ci": [
-          0.4498,
-          0.64
+          0.0,
+          0.0
         ]
       }
     ]
@@ -387,15 +387,16 @@
       "hub_load_threshold": 2600,
       "spectral_gap_threshold": 2600
     },
-    "generation_seconds": 64.23
+    "generation_seconds": 142.35
   },
   "manifest_evidence": {
     "manifest_exists": true,
-    "manifest_valid": true,
+    "manifest_valid": false,
     "release_mode": true,
-    "test_count": 2287,
-    "test_passed": 2287,
-    "test_failed": 0
+    "test_count": 2308,
+    "test_passed": 2308,
+    "test_failed": 0,
+    "manifest_check_output": "ERROR: file count mismatch: manifest=980, actual=997\n"
   },
   "audit_note": "Multi-operator causal structural model. 7 effect heads. Paired bootstrap CIs. Reward-formulation hold-out. No utility_fn leakage. No mechanism label in features."
 }

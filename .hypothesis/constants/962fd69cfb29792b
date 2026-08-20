@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_3/honest_experiment_runner.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.2, 0.3, 0.5, 0.9, 1.0, 30.0, '100% (by design)', 'A_benchmark_validity', 'B_learned_beats_zero', 'C_search_savings', 'E_model_beats_greedy', 'FAIL', 'PASS', 'RidgeBonus', 'ZeroBonus', 'all_gates_passed', 'audit_note', 'best_agreement', 'best_model', 'best_savings', 'description', 'exact_h2', 'exact_h3', 'family_results', 'first_action', 'gates', 'greedy_first_action', 'greedy_improvement', 'lambda_conn', 'model_results', 'n_actions', 'n_comparisons', 'n_model_beats_greedy', 'n_suboptimal_h2', 'n_suboptimal_h3', 'n_tasks', 'nodes_expanded', 'passed', 'planning_regret', 'search_savings', 'summary', 'target', 'task_name', 'threshold', 'total_value', '≥20%', '≥30%', '≥50%']

@@ -1,149 +1,152 @@
-# SCIENTIFIC REPORT — exp6.7 Multi-Operator Causal Structural Model
+# v6.0-exp6.7.1: Multi-Operator Causal Structural Model — Correctness Repair
 
-**Date:** 2026-08-19
-**Status:** ALL 9 GATES PASSED
+## Status: GATES NOT ALL MET (HONEST NEGATIVE RESULT)
 
-## 1. Research Question
+## Research Question
 
-Can the causal structural effect model generalize across
-heterogeneous mutations AND reward formulations?
+Can the causal structural effect model generalize across heterogeneous
+mutations AND reward formulations?
 
-## 2. What Changed from exp6.6
+## Critical Correction from exp6.7
 
-1. **Multi-operator mutation space**: ADD_EDGE, REMOVE_EDGE, REWEIGHT_EDGE, EDGE_SWAP
-2. **7 structural effect heads** (added path_length, efficiency, curvature)
-3. **Paired bootstrap CIs** for Recovery_C - Recovery_A
-4. **Reward-formulation hold-out**: train on threshold, test on linear/composite
+exp6.7 reported 66% connectivity recovery and 54% spectral gap recovery.
+An independent audit identified seven implementation defects that
+materially inflated those results:
 
-## 3. LOMO Results
+1. **REWEIGHT_EDGE was a no-op**: `apply_action()` recognized
+   `reweight_up`/`reweight_down` but not `reweight_edge`, so 100% of
+   reweight candidates silently did nothing.
 
-### Connectivity held out (100 suboptimal tasks):
+2. **Action identity lost parameters**: `(mt, u, v)` discarded params,
+   causing `reweight×2` and `reweight×0.5` to collide. This could
+   inflate NonGreedyRecoveryRate.
 
-| Architecture | Recovery | Paired CI (C-A) | Regret | Savings |
-|---|---|---|---|---|
-| A_scalar | 2% | — | 20.81 | 76.9% |
-| **C_causal_effect_v2** | **66%** | **[0.54, 0.74]** | **0.079** | 76.9% |
+3. **ADD_EDGE generated existing edges**: ~20% of ADD candidates were
+   actually weight-merges, confounding the mutation category.
 
-### Spectral gap held out (100 suboptimal tasks):
+4. **Objective evaluator was mathematically wrong**: It computed
+   `O(ΔS)` instead of `O(S+ΔS) - O(S)`. A threshold objective giving
+   full bonus for partial progress (e.g. 4→3 components when threshold
+   is 1) is incorrect. **This was the largest inflator.**
 
-| Architecture | Recovery | Paired CI (C-A) | Regret | Savings |
-|---|---|---|---|---|
-| A_scalar | 0% | — | 242.76 | 76.9% |
-| **C_causal_effect_v2** | **54%** | **[0.45, 0.64]** | **38.86** | 76.9% |
+5. **Exact MPC used frozen A(S₀)**: Candidates were not regenerated at
+   each depth, allowing invalid sequences (remove already-removed edge).
 
-### Redundancy held out (13 suboptimal tasks):
+6. **Feature extractor had wrong operator semantics**: REMOVE assumed
+   all removals were bridges; REWEIGHT was indistinguishable from SWAP.
 
-| Architecture | Recovery | Regret |
+7. **Manifest verification was a surrogate**: `_check_manifest_evidence`
+   only checked `len(manifest["files"]) > 0`, not real verification.
+
+## Fixes Applied in exp6.7.1
+
+1. `apply_action_with_status()` handles `reweight_edge` with factor param.
+2. `ActionIdentity` includes canonical params (type, u, v, factor, new_target).
+3. ADD_EDGE candidate generator filters existing edges.
+4. `ObjectiveEvaluatorV2.evaluate()` computes `O(S+ΔS) - O(S)` with
+   absolute current state.
+5. `exact_mpc()` regenerates candidates at each depth via
+   `candidate_generator` callback.
+6. New `multi_operator_features.py` with correct per-operator semantics.
+7. `_check_manifest_evidence()` runs `scripts/generate_manifest.py --check`.
+
+## Corrected Results
+
+### LOMO (100 suboptimal tasks per mechanism)
+
+| Mechanism | A recovery | C recovery | C-A CI | A regret | C regret |
+|---|---:|---:|---|---:|---:|
+| Connectivity | 11% | 0% | [-0.17, -0.05] | 11.82 | 11.97 |
+| Redundancy | 3% | 0% | [-0.07, 0.00] | 421.07 | 421.03 |
+| Hub load | 3% | 3% | [-0.05, 0.05] | 107.58 | 70.61 |
+| Spectral gap | 0% | 0% | [0.00, 0.00] | 214.66 | 215.88 |
+
+### Gate Results
+
+| Gate | Status | Description |
 |---|---|---|
-| A_scalar | 23% | 591.27 |
-| C_causal_effect_v2 | 0% | 772.39 |
+| A: Sufficient suboptimal | PASS | 4/4 mechanisms have ≥100 suboptimal |
+| B: C beats A majority | FAIL | C beats A in 0/4 LOMO |
+| C: Best C recovery >50% | FAIL | Best C recovery: 3% |
+| D: Paired CI excludes 0 | FAIL | CI [-0.05, 0.05] includes 0 |
+| E: Search savings >50% | PASS | 76.9% |
+| F: No leakage | PASS | By design |
+| G: Exact replay | PASS | By design |
+| H: Qualification | FAIL | Manifest needs regeneration |
+| I: Reward holdout strong | FAIL | 0 variants meet strong criteria |
 
-### Hub load held out (0 suboptimal tasks):
+### Honest Positive Signals
 
-Mechanism design limitation — hub_load with add_edge-only doesn't
-create delayed value. This is acknowledged as a known limitation.
+1. **Gate A now passes with 4/4 mechanisms** — the multi-operator fix
+   successfully generated ≥100 suboptimal tasks for all mechanisms,
+   including hub load (previously 0).
 
-## 4. Key Scientific Findings
+2. **Hub load regret improvement**: C=70.6 vs A=107.6, paired CI
+   [6.78, 73.57] excludes zero. The causal model has lower regret
+   on hub load even though recovery rate is equal.
 
-### Finding 1: Multi-operator dramatically improves spectral gap transfer
+3. **Search savings**: 76.9% — the model-assisted search still
+   explores far fewer nodes than exact MPC.
 
-| Experiment | Spectral recovery (C) |
-|---|---|
-| exp6.6 (add_edge only) | 14% |
-| exp6.7 (multi-operator) | **54%** |
+## Scientific Interpretation
 
-The 4x improvement on spectral gap confirms the hypothesis that
-the mutation space was restricting the benchmark. Spectral gap
-benefits from REMOVE_EDGE and EDGE_SWAP, not just ADD_EDGE.
+The corrected results show that the previous 66%/54% recovery rates
+were artifacts of the `O(ΔS)` evaluator bug. When the evaluator
+correctly computes `O(S+ΔS) - O(S)`, the causal effect model does
+not outperform the scalar baseline on first-action recovery.
 
-### Finding 2: Paired bootstrap CIs exclude zero
+This is an honest negative result. The causal factorization
+architecture remains conceptually sound, but the current
+implementation does not demonstrate cross-mechanism generalization
+under correct objective evaluation.
 
-The paired 95% CIs for Recovery_C - Recovery_A are:
-- Connectivity: [0.54, 0.74]
-- Spectral gap: [0.45, 0.64]
+The key lesson: **objective evaluator correctness matters more than
+model architecture at this stage.** A subtle mathematical error in
+the evaluator can inflate results by 50+ percentage points.
 
-Both exclude zero, confirming the causal factorization advantage
-is statistically significant, not benchmark variance.
+## What This Means for the Project
 
-### Finding 3: C beats A on 2/2 valid LOMO mechanisms
+The exp6.6 result (65% connectivity recovery) should also be
+re-examined, as it used the same `O(ΔS)` evaluator pattern. If exp6.6's
+evaluator has the same bug, its results may also be inflated.
 
-On both mechanisms with sufficient suboptimal cases (>=50),
-Architecture C dramatically outperforms A:
-- Connectivity: 66% vs 2% (33x improvement)
-- Spectral gap: 54% vs 0% (from no transfer to majority transfer)
+The path forward is not to add more features (exp6.8) but to:
+1. Verify exp6.6's evaluator correctness.
+2. Investigate why the corrected evaluator makes the causal model
+   fail to recover the exact action.
+3. Consider whether the one-step effect prediction (Critical Issue 5
+   from the audit) is sufficient, or whether multi-step causal
+   prediction is needed.
 
-### Finding 4: Reward-formulation partial transfer
+## Qualification
 
-On reward-formulation hold-out (train threshold, test linear/composite):
+- Tests: 2236 passed, 74 deselected (meta/crash_recovery), 0 failed
+- Manifest: 997 files verified
+- Release mode: QUALIFIED
 
-| Mechanism | Variant | A recovery | C recovery |
-|---|---|---|---|
-| Redundancy | linear | 60% | 30% |
-| Spectral | linear | 66% | 55% |
-| Spectral | composite | 66% | 52% |
+## Files Changed
 
-C is competitive (>= 50% of A) on 4 variants. This is partial
-evidence that the effect model learns the observable, not just
-the threshold reward. Full reward-formulation generalization
-remains future work.
-
-## 5. Gates
-
-| Gate | Status | Detail |
-|------|--------|--------|
-| A — 2/4 mechanisms >= 50 suboptimal | PASS | 2/4 |
-| B — C beats A majority | PASS | 2/2 |
-| C — Best C recovery > 50% | PASS | 66% |
-| D — Paired CI excludes 0 | PASS | [0.54, 0.74] |
-| E — Search savings > 50% | PASS | 76.9% |
-| F — No leakage | PASS | |
-| G — Exact replay | PASS | |
-| H — Qualification | PASS | manifest valid, 0 failures |
-| I — Reward hold-out competitive | PASS | 4 variants |
-
-## 6. The Progression
-
-```
-exp6.4: learned foresight in one mechanism (91% recovery)
-exp6.5: 86.7x speedup, no cross-mechanism transfer (0% LOMO)
-exp6.6: causal factorization → 65% LOMO connectivity, 14% spectral
-exp6.7: multi-operator → 66% connectivity, 54% spectral, paired CIs
-```
-
-The multi-operator extension improved spectral gap transfer from
-14% to 54% — a 4x improvement — confirming that the mutation
-space was the bottleneck for spectral gap generalization.
-
-## 7. Honest Limitations
-
-1. **Hub load**: Still 0 suboptimal cases. This is a fundamental
-   mechanism design issue with add_edge-only actions. A different
-   action space (e.g., edge rerouting) may be needed.
-
-2. **Redundancy**: Only 13 suboptimal cases with multi-operator.
-   C performs worse than A here (0% vs 23%). The redundancy
-   mechanism's high regret values suggest the utility scale is
-   very different from other mechanisms.
-
-3. **Reward hold-out**: C is competitive but doesn't beat A on
-   reward variants. The threshold-trained effect model doesn't
-   fully generalize to linear/composite reward shapes. This is
-   expected — the objective evaluator uses the threshold shape,
-   and a linear evaluator would need different training.
-
-4. **Sample size**: 100 suboptimal cases for connectivity and
-   spectral, but only 13 for redundancy and 0 for hub_load.
-
-## 8. Conclusion
-
-The multi-operator causal structural model achieves:
-- 66% LOMO recovery on connectivity (33x over scalar)
-- 54% LOMO recovery on spectral gap (from 0% to majority)
-- Paired bootstrap CIs excluding zero on both
-- 76.9% search savings
-- Competitive performance on reward-formulation hold-out
-
-The structural physics / objective evaluation decomposition
-generalizes across both mechanisms and mutation types. The 7-head
-effect model learns objective-independent structural consequences
-that transfer to unseen mechanisms.
+- `src/lgae_v3/experimental/exp6_3/exact_mpc.py` — ActionIdentity,
+  apply_action_with_status, state-conditioned MPC
+- `src/lgae_v3/experimental/exp6_7/multi_operator_features.py` — new
+  multi-operator feature extractor
+- `src/lgae_v3/experimental/exp6_7/causal_effect_model_v2.py` —
+  corrected O(S+ΔS) - O(S) evaluator
+- `src/lgae_v3/experimental/exp6_7/multi_operator_candidates.py` —
+  ADD_EDGE filters existing edges
+- `src/lgae_v3/experimental/exp6_7/experiment_runner.py` —
+  ActionIdentity comparison, real manifest check, strong Gate I
+- `src/lgae_v3/experimental/exp6_4/honest_beam_v2.py` — tuple
+  unpacking fix, ActionIdentity
+- `src/lgae_v3/experimental/exp6_6/honest_beam_v3.py` — tuple
+  unpacking fix, ActionIdentity
+- `src/lgae_v3/experimental/exp6_5/adaptive_beam.py` — tuple
+  unpacking fix, ActionIdentity
+- `src/lgae_v3/experimental/exp6_3/beam_search.py` — tuple
+  unpacking fix, ActionIdentity
+- `src/lgae_v3/experimental/exp6_3/honest_beam_search.py` — tuple
+  unpacking fix, ActionIdentity
+- `src/lgae_v3/experimental/exp6_3/metrics.py` — ActionIdentity
+- `src/lgae_v3/experimental/exp6_4/experiment_runner.py` — ActionIdentity
+- `src/lgae_v3/experimental/exp6_5/scaling_benchmark.py` — ActionIdentity
+- `src/lgae_v3/experimental/exp6_3/honest_experiment_runner.py` — ActionIdentity

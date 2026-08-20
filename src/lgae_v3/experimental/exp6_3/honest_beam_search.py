@@ -30,6 +30,7 @@ from ...runtime.analytical_utility import AnalyticalUtilityOracle
 class HonestBeamResult:
     """Result of honest beam search (no utility_fn leakage)."""
     first_action: tuple[str, int, int] = ("", 0, 0)
+    first_action_identity: object = None  # ActionIdentity or None
     best_sequence: list[tuple[str, int, int, dict]] = field(default_factory=list)
     total_value: float = float("-inf")
     nodes_expanded: int = 0
@@ -120,12 +121,15 @@ def honest_beam_search(
         beam = [(g, v, s, k) for v, g, s, k in candidates[:beam_width]]
 
     if beam:
-        best_val, best_graph, best_seq, best_key = beam[0]
+        # beam stores (graph, total, seq, key).
+        best_graph, best_val, best_seq, best_key = beam[0]
         result.total_value = best_val
         result.best_sequence = best_seq
         result.all_first_action_values = first_values
         if best_seq:
             a = best_seq[0]
             result.first_action = (a[0], a[1], a[2])
+            from .exact_mpc import ActionIdentity
+            result.first_action_identity = ActionIdentity.from_action(a)
 
     return result

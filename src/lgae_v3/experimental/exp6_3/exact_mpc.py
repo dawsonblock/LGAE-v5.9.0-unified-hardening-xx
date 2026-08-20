@@ -97,12 +97,9 @@ def apply_action_with_status(
     try:
         if mt in ("add_edge", "bridge", "local_rewire", "hub_connect"):
             weight = params.get("weight", 1.0)
-            # Check if edge already exists.
-            if _edge_exists(graph, u, v):
-                # AddEdge merges weight — this is a reweight, not an add.
-                # For scientific correctness, classify as NO_OP for ADD.
-                return ActionResult(new_graph, "NO_OP",
-                                    f"edge ({u},{v}) already exists")
+            # Note: AddEdge merges weight for existing edges.
+            # The exp6.7 candidate generator filters existing edges.
+            # Here we allow it (VALID) since it does change the graph.
             AddEdge(u=u, v=v, weight=weight).apply(new_graph)
             return ActionResult(new_graph, "VALID")
 
@@ -180,7 +177,11 @@ def _filter_valid_actions(
     graph: GraphBuffers,
     actions: list[tuple[str, int, int, dict]],
 ) -> list[tuple[str, int, int, dict]]:
-    """Filter to only actions that are VALID (not NO_OP or INVALID)."""
+    """Filter to only actions that are not INVALID.
+
+    NO_OP actions (e.g. reweight of non-existing edge) are excluded
+    since they don't change the graph. VALID actions are kept.
+    """
     valid = []
     for action in actions:
         result = apply_action_with_status(graph, action)

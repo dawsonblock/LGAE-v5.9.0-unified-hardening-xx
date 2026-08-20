@@ -25,10 +25,20 @@ def planning_regret(exact: ExactPlan, model: BeamSearchResult) -> float:
     """Planning regret = Q(a*) - Q(a_model).
 
     Uses exact MPC's first-action values to compute the regret
-    of the model's chosen first action.
+    of the model's chosen first action. Uses ActionIdentity for
+    complete key matching (includes params).
     """
-    exact_key = f"{exact.first_action[0]}_{exact.first_action[1]}_{exact.first_action[2]}"
-    model_key = f"{model.first_action[0]}_{model.first_action[1]}_{model.first_action[2]}"
+    from .exact_mpc import ActionIdentity
+    if exact.first_action_identity is not None:
+        exact_key = exact.first_action_identity.key
+    else:
+        exact_key = f"{exact.first_action[0]}_{exact.first_action[1]}_{exact.first_action[2]}"
+    if hasattr(model, 'first_action_identity') and model.first_action_identity is not None:
+        model_key = model.first_action_identity.key
+    elif model.best_sequence:
+        model_key = ActionIdentity.from_action(model.best_sequence[0]).key
+    else:
+        model_key = f"{model.first_action[0]}_{model.first_action[1]}_{model.first_action[2]}"
 
     exact_val = exact.all_first_action_values.get(exact_key, exact.total_value)
     model_val = exact.all_first_action_values.get(model_key, model.total_value)

@@ -73,7 +73,7 @@ def extract_multi_operator_features(
     # --- State features (same as before) ---
     comp_info = compute_component_info(graph, n)
     n_comp = comp_info.n_components
-    mean_deg, std_deg, max_deg, min_deg = _compute_degree_stats(graph, n)[:4]
+    _degrees_arr, mean_deg, std_deg, max_deg, min_deg = _compute_degree_stats(graph, n)
     spec_gap = _compute_spectral_gap(graph, n)
 
     # Component sizes.
