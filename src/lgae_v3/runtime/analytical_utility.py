@@ -38,7 +38,7 @@ class AnalyticalUtilityContract:
     topology_only_mutation: bool = True
     supported_mutations: frozenset[str] = frozenset({
         "add_edge", "remove_edge", "reweight_up", "reweight_down",
-        "bridge", "local_rewire", "hub_connect",
+        "bridge", "local_rewire", "hub_connect", "edge_swap",
     })
 
     def validate(self) -> bool:
@@ -165,6 +165,11 @@ class AnalyticalUtilityOracle:
             return self.delta_reweight(graph, z, u, v, params.get("factor", 2.0))
         elif mutation_type == "reweight_down":
             return self.delta_reweight(graph, z, u, v, params.get("factor", 0.5))
+        elif mutation_type == "edge_swap":
+            # Edge swap: remove (u,v), add (u, w) where w = params["new_target"].
+            w = params.get("new_target", v)
+            return (self.delta_remove_edge(graph, z, u, v) +
+                    self.delta_add_edge(graph, z, u, w, params.get("weight", 1.0)))
         else:
             return 0.0
 

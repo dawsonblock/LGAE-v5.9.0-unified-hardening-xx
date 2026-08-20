@@ -236,7 +236,27 @@ def extract_observable_features(
         deg_v_after = max(0, degrees[v] - 1)
         max_deg_after = max_deg  # conservative
         min_deg_after = min(min_deg, deg_u_after, deg_v_after)
+    elif mt == "reweight_edge" and u < n and v < n:
+        # Reweight doesn't change degree.
+        deg_u_after = degrees[u]
+        deg_v_after = degrees[v]
+        max_deg_after = max_deg
+        min_deg_after = min_deg
+    elif mt == "edge_swap" and u < n:
+        # Remove (u,v), add (u, new_target).
+        new_target = params.get("new_target", v) if params else v
+        deg_u_after = degrees[u]  # net zero change
+        deg_v_after = max(0, degrees[v] - 1)
+        if new_target < n:
+            deg_new = degrees[new_target] + 1
+            max_deg_after = max(max_deg, deg_new)
+            min_deg_after = min(min_deg, deg_v_after, deg_new)
+        else:
+            max_deg_after = max_deg
+            min_deg_after = min(min_deg, deg_v_after)
     else:
+        deg_u_after = degrees[u] if u < n else 0.0
+        deg_v_after = degrees[v] if v < n else 0.0
         max_deg_after = max_deg
         min_deg_after = min_deg
 

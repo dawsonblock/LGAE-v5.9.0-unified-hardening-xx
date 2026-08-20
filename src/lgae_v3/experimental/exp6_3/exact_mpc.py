@@ -42,6 +42,11 @@ def apply_action(graph: GraphBuffers, action: tuple[str, int, int, dict]) -> Gra
             PruneEdge(u=u, v=v).apply(new_graph)
         elif mt in ("reweight_up", "reweight_down"):
             ReweightAffinity(u=u, v=v, factor=params.get("factor", 2.0)).apply(new_graph)
+        elif mt == "edge_swap":
+            # Remove (u,v), add (u, new_target).
+            w = params.get("new_target", v)
+            PruneEdge(u=u, v=v).apply(new_graph)
+            AddEdge(u=u, v=w, weight=params.get("weight", 1.0)).apply(new_graph)
     except Exception:
         pass
     return new_graph
