@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_3/coverage_analysis.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.1, 0.95, 'alpha', 'coverage', 'cvar95', 'false_override_rate', 'mean', 'mean_regret', 'median', 'median_regret', 'n_overrides', 'n_total', 'override_precision', 'p95', 'p95_regret']

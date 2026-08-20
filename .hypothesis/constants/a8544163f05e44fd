@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_3/advantage_models.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.01, 0.05, 0.5, 0.95, 1.0, 2.0, 100, 300, 'A0_zero', 'A1_linear', 'A2_ridge', 'A3_mlp', 'A4_bootstrap_mlp', 'A5_quantile_mlp']

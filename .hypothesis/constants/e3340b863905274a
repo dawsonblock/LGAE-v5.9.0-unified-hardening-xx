@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_3/conformal_calibration.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.01, 0.025, 0.05, 0.1, 0.2, 0.95, 'coverage', 'cvar95', 'inf', 'override_precision', 'p95_regret']

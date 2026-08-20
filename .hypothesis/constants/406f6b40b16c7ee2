@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_3/ood_diagnostics.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1e-06, 'correlation', 'coverage', 'decile', 'deciles', 'is_monotonic', 'mean_ood_score', 'n']

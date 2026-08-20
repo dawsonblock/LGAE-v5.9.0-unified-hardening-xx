@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_3/risk_metrics.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1e-06, 0.95, 1.0, 95.0, 100, 2000, 'correlation', 'cvar95', 'decile', 'deciles', 'is_monotonic', 'max', 'mean', 'mean_advantage', 'mean_lcb', 'median', 'n', 'n_overrides', 'n_samples', 'override_precision', 'p90', 'p95', 'p99', 'spearman']

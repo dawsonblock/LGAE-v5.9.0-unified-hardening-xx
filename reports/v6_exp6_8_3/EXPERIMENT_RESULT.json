@@ -1,0 +1,1018 @@
+{
+  "audit_note": "Conformal Structural Advantage. Exact advantage labels: A* = Q_H(learned) - Q_H(baseline). Split-conformal calibration: LCB_A = A_hat - q_{1-alpha}. Override only if LCB_A > 0. Alpha chosen on calibration split, evaluated on locked test. Model: A1_linear.",
+  "mechanism_results": [
+    {
+      "mechanism": "connectivity_threshold",
+      "model_name": "A1_linear",
+      "n_train": 483,
+      "n_calibration": 80,
+      "n_test": 80,
+      "selected_alpha": 0.05,
+      "conformal_quantile": 111.2465591430664,
+      "override_precision": 0.5,
+      "false_override_rate": 0.5,
+      "coverage": 0.025,
+      "mean_override_advantage": 10.9009,
+      "hybrid_regret": {
+        "mean": 9.068389031392586,
+        "median": 5.84650667307827,
+        "p90": 23.394196795540495,
+        "p95": 27.712481199051485,
+        "p99": 29.399962506083128,
+        "max": 30.535735574255796,
+        "cvar95": 29.16756419640076
+      },
+      "baseline_regret": {
+        "mean": 9.340912753152889,
+        "median": 6.707102521983579,
+        "p90": 23.394196795540495,
+        "p95": 27.712481199051485,
+        "p99": 29.399962506083128,
+        "max": 30.535735574255796,
+        "cvar95": 29.16756419640076
+      },
+      "calibration_curve": {
+        "0.2": {
+          "alpha": 0.2,
+          "conformal_quantile": 65.7416,
+          "override_precision": 0.6667,
+          "coverage": 0.0375,
+          "mean_override_advantage": 11.693,
+          "p95_regret": 0.331,
+          "cvar95": 0.3678,
+          "n_overrides": 3
+        },
+        "0.1": {
+          "alpha": 0.1,
+          "conformal_quantile": 95.3023,
+          "override_precision": 0.5,
+          "coverage": 0.025,
+          "mean_override_advantage": 10.4103,
+          "p95_regret": 0.3494,
+          "cvar95": 0.3678,
+          "n_overrides": 2
+        },
+        "0.05": {
+          "alpha": 0.05,
+          "conformal_quantile": 111.2466,
+          "override_precision": 1.0,
+          "coverage": 0.0125,
+          "mean_override_advantage": 21.1885,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 1
+        },
+        "0.025": {
+          "alpha": 0.025,
+          "conformal_quantile": 143.4947,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.01": {
+          "alpha": 0.01,
+          "conformal_quantile": 159.6225,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        }
+      },
+      "confidence_deciles": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_lcb": -207.24655151367188,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -0.965306022184675,
+            "n": 8
+          },
+          {
+            "decile": 1,
+            "mean_lcb": -167.24655151367188,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 1.5674488486222031,
+            "n": 8
+          },
+          {
+            "decile": 2,
+            "mean_lcb": -147.24655151367188,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 1.7589698097318063,
+            "n": 8
+          },
+          {
+            "decile": 3,
+            "mean_lcb": -131.24655723571777,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 10.54063528324569,
+            "n": 8
+          },
+          {
+            "decile": 4,
+            "mean_lcb": -111.2465591430664,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 12.626456114592363,
+            "n": 8
+          },
+          {
+            "decile": 5,
+            "mean_lcb": -99.2465591430664,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 16.7664509944372,
+            "n": 8
+          },
+          {
+            "decile": 6,
+            "mean_lcb": -81.2465591430664,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 18.526593143866453,
+            "n": 8
+          },
+          {
+            "decile": 7,
+            "mean_lcb": -71.2465591430664,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 7.419595411339882,
+            "n": 8
+          },
+          {
+            "decile": 8,
+            "mean_lcb": -59.246559143066406,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 2.805736235858275,
+            "n": 8
+          },
+          {
+            "decile": 9,
+            "mean_lcb": -33.246559143066406,
+            "n_overrides": 2,
+            "override_precision": 0.5,
+            "mean_advantage": 10.19730736244152,
+            "n": 8
+          }
+        ],
+        "is_monotonic": true
+      },
+      "ood_analysis": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_ood_score": 1.010851226747036,
+            "coverage": 0.0,
+            "n": 8
+          },
+          {
+            "decile": 1,
+            "mean_ood_score": 1.2028442472219467,
+            "coverage": 0.0,
+            "n": 8
+          },
+          {
+            "decile": 2,
+            "mean_ood_score": 1.3935428857803345,
+            "coverage": 0.0,
+            "n": 8
+          },
+          {
+            "decile": 3,
+            "mean_ood_score": 1.54880690574646,
+            "coverage": 0.0,
+            "n": 8
+          },
+          {
+            "decile": 4,
+            "mean_ood_score": 1.7401677072048187,
+            "coverage": 0.0,
+            "n": 8
+          },
+          {
+            "decile": 5,
+            "mean_ood_score": 1.9327592253684998,
+            "coverage": 0.0,
+            "n": 8
+          },
+          {
+            "decile": 6,
+            "mean_ood_score": 2.2543307542800903,
+            "coverage": 0.0,
+            "n": 8
+          },
+          {
+            "decile": 7,
+            "mean_ood_score": 2.694214552640915,
+            "coverage": 0.125,
+            "n": 8
+          },
+          {
+            "decile": 8,
+            "mean_ood_score": 3.3627652525901794,
+            "coverage": 0.0,
+            "n": 8
+          },
+          {
+            "decile": 9,
+            "mean_ood_score": 4.49388113617897,
+            "coverage": 0.125,
+            "n": 8
+          }
+        ],
+        "is_monotonic": false,
+        "correlation": 0.13642984041540734
+      },
+      "latency_ms": {
+        "model_predict": 0.01
+      }
+    },
+    {
+      "mechanism": "redundancy_threshold",
+      "model_name": "A1_linear",
+      "n_train": 388,
+      "n_calibration": 77,
+      "n_test": 73,
+      "selected_alpha": 0.2,
+      "conformal_quantile": 193.7820281982422,
+      "override_precision": 0.2857,
+      "false_override_rate": 0.7143,
+      "coverage": 0.1918,
+      "mean_override_advantage": 166.6359,
+      "hybrid_regret": {
+        "mean": 46.96720465747487,
+        "median": 0.0,
+        "p90": 12.661388683319073,
+        "p95": 517.1316750766085,
+        "p99": 800.3378463205728,
+        "max": 881.5971591823732,
+        "cvar95": 708.5782470067929
+      },
+      "baseline_regret": {
+        "mean": 78.92478107780907,
+        "median": 0.0,
+        "p90": 479.7051080924802,
+        "p95": 633.3611946498254,
+        "p99": 819.8338037994556,
+        "max": 881.5971591823732,
+        "cvar95": 772.5808742466463
+      },
+      "calibration_curve": {
+        "0.2": {
+          "alpha": 0.2,
+          "conformal_quantile": 193.782,
+          "override_precision": 0.4,
+          "coverage": 0.0649,
+          "mean_override_advantage": 313.4835,
+          "p95_regret": 11.138,
+          "cvar95": 11.4439,
+          "n_overrides": 5
+        },
+        "0.1": {
+          "alpha": 0.1,
+          "conformal_quantile": 456.8151,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.05": {
+          "alpha": 0.05,
+          "conformal_quantile": 740.0352,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.025": {
+          "alpha": 0.025,
+          "conformal_quantile": 862.1572,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.01": {
+          "alpha": 0.01,
+          "conformal_quantile": 862.1572,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        }
+      },
+      "confidence_deciles": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_lcb": -239.49631827218192,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -0.6361591884068066,
+            "n": 7
+          },
+          {
+            "decile": 1,
+            "mean_lcb": -189.2105996268136,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -0.8217141560145791,
+            "n": 7
+          },
+          {
+            "decile": 2,
+            "mean_lcb": -164.06774248395647,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 89.21986826201915,
+            "n": 7
+          },
+          {
+            "decile": 3,
+            "mean_lcb": -132.06774248395647,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -2.5538869040352954,
+            "n": 7
+          },
+          {
+            "decile": 4,
+            "mean_lcb": -122.92488534109933,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 123.02014119104878,
+            "n": 7
+          },
+          {
+            "decile": 5,
+            "mean_lcb": -90.92488534109933,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 108.47064540861757,
+            "n": 7
+          },
+          {
+            "decile": 6,
+            "mean_lcb": -61.21059962681362,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -5.177601289749147,
+            "n": 7
+          },
+          {
+            "decile": 7,
+            "mean_lcb": -29.210599626813615,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -8.879183333260674,
+            "n": 7
+          },
+          {
+            "decile": 8,
+            "mean_lcb": 9.646543230329241,
+            "n_overrides": 4,
+            "override_precision": 0.0,
+            "mean_advantage": 138.22331889168441,
+            "n": 7
+          },
+          {
+            "decile": 9,
+            "mean_lcb": 57.64654323032924,
+            "n_overrides": 7,
+            "override_precision": 0.42857142857142855,
+            "mean_advantage": 283.53530564061975,
+            "n": 7
+          }
+        ],
+        "is_monotonic": true
+      },
+      "ood_analysis": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_ood_score": 1.7441033806119646,
+            "coverage": 0.2857142857142857,
+            "n": 7
+          },
+          {
+            "decile": 1,
+            "mean_ood_score": 2.0583369391305104,
+            "coverage": 0.42857142857142855,
+            "n": 7
+          },
+          {
+            "decile": 2,
+            "mean_ood_score": 2.190362112862723,
+            "coverage": 0.2857142857142857,
+            "n": 7
+          },
+          {
+            "decile": 3,
+            "mean_ood_score": 2.3182128838130405,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 4,
+            "mean_ood_score": 2.441206012453352,
+            "coverage": 0.2857142857142857,
+            "n": 7
+          },
+          {
+            "decile": 5,
+            "mean_ood_score": 2.636351006371634,
+            "coverage": 0.14285714285714285,
+            "n": 7
+          },
+          {
+            "decile": 6,
+            "mean_ood_score": 2.9125586918422153,
+            "coverage": 0.14285714285714285,
+            "n": 7
+          },
+          {
+            "decile": 7,
+            "mean_ood_score": 3.2950881889888217,
+            "coverage": 0.2857142857142857,
+            "n": 7
+          },
+          {
+            "decile": 8,
+            "mean_ood_score": 4.0462029320853095,
+            "coverage": 0.14285714285714285,
+            "n": 7
+          },
+          {
+            "decile": 9,
+            "mean_ood_score": 5.228768144335065,
+            "coverage": 0.0,
+            "n": 7
+          }
+        ],
+        "is_monotonic": false,
+        "correlation": -0.2160372601950813
+      },
+      "latency_ms": {
+        "model_predict": 0.01
+      }
+    },
+    {
+      "mechanism": "hub_load_threshold",
+      "model_name": "A1_linear",
+      "n_train": 253,
+      "n_calibration": 76,
+      "n_test": 74,
+      "selected_alpha": 0.05,
+      "conformal_quantile": 159.27435302734375,
+      "override_precision": 0.0,
+      "false_override_rate": 1.0,
+      "coverage": 0.0135,
+      "mean_override_advantage": -1.7385,
+      "hybrid_regret": {
+        "mean": 15.26179766556851,
+        "median": 0.0,
+        "p90": 0.3113278007507323,
+        "p95": 1.790825352668765,
+        "p99": 529.6852256867289,
+        "max": 628.8969046224393,
+        "cvar95": 281.47875084253934
+      },
+      "baseline_regret": {
+        "mean": 15.238304422015966,
+        "median": 0.0,
+        "p90": 0.18684980392456169,
+        "p95": 0.9744338488578708,
+        "p99": 529.6852256867289,
+        "max": 628.8969046224393,
+        "cvar95": 281.47875084253934
+      },
+      "calibration_curve": {
+        "0.2": {
+          "alpha": 0.2,
+          "conformal_quantile": 79.9817,
+          "override_precision": 0.0,
+          "coverage": 0.0921,
+          "mean_override_advantage": -9.2421,
+          "p95_regret": 37.9777,
+          "cvar95": 50.9183,
+          "n_overrides": 7
+        },
+        "0.1": {
+          "alpha": 0.1,
+          "conformal_quantile": 111.4903,
+          "override_precision": 0.0,
+          "coverage": 0.0395,
+          "mean_override_advantage": -19.7116,
+          "p95_regret": 46.6048,
+          "cvar95": 50.9183,
+          "n_overrides": 3
+        },
+        "0.05": {
+          "alpha": 0.05,
+          "conformal_quantile": 159.2744,
+          "override_precision": 0.0,
+          "coverage": 0.0263,
+          "mean_override_advantage": -29.3506,
+          "p95_regret": 48.7616,
+          "cvar95": 50.9183,
+          "n_overrides": 2
+        },
+        "0.025": {
+          "alpha": 0.025,
+          "conformal_quantile": 210.9183,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.01": {
+          "alpha": 0.01,
+          "conformal_quantile": 210.9183,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        }
+      },
+      "confidence_deciles": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_lcb": -289.560067313058,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -1.4007657323564793,
+            "n": 7
+          },
+          {
+            "decile": 1,
+            "mean_lcb": -225.56006731305803,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -0.45339382716587756,
+            "n": 7
+          },
+          {
+            "decile": 2,
+            "mean_lcb": -223.27435302734375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -2.7969035421098987,
+            "n": 7
+          },
+          {
+            "decile": 3,
+            "mean_lcb": -202.70292445591517,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -1.1411204951150091,
+            "n": 7
+          },
+          {
+            "decile": 4,
+            "mean_lcb": -163.84578159877233,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -5.527931915010724,
+            "n": 7
+          },
+          {
+            "decile": 5,
+            "mean_lcb": -159.27435302734375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -0.7140423297882076,
+            "n": 7
+          },
+          {
+            "decile": 6,
+            "mean_lcb": -150.1314958844866,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -0.6792110306876074,
+            "n": 7
+          },
+          {
+            "decile": 7,
+            "mean_lcb": -127.27435302734375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -2.498628657204765,
+            "n": 7
+          },
+          {
+            "decile": 8,
+            "mean_lcb": -104.41721017020089,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 70.2058227079238,
+            "n": 7
+          },
+          {
+            "decile": 9,
+            "mean_lcb": -92.98863874162946,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": 89.64125914047497,
+            "n": 7
+          }
+        ],
+        "is_monotonic": true
+      },
+      "ood_analysis": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_ood_score": 1.8679673160825456,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 1,
+            "mean_ood_score": 2.105283055986677,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 2,
+            "mean_ood_score": 2.2441635131835938,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 3,
+            "mean_ood_score": 2.4222597054072788,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 4,
+            "mean_ood_score": 2.5306204046521867,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 5,
+            "mean_ood_score": 2.694593838282994,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 6,
+            "mean_ood_score": 2.9786903517586842,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 7,
+            "mean_ood_score": 3.3153980459485735,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 8,
+            "mean_ood_score": 3.790736607142857,
+            "coverage": 0.0,
+            "n": 7
+          },
+          {
+            "decile": 9,
+            "mean_ood_score": 5.103542259761265,
+            "coverage": 0.14285714285714285,
+            "n": 7
+          }
+        ],
+        "is_monotonic": false,
+        "correlation": 0.14039970582759911
+      },
+      "latency_ms": {
+        "model_predict": 0.01
+      }
+    },
+    {
+      "mechanism": "spectral_gap_threshold",
+      "model_name": "A1_linear",
+      "n_train": 483,
+      "n_calibration": 40,
+      "n_test": 35,
+      "selected_alpha": 0.01,
+      "conformal_quantile": 747.880859375,
+      "override_precision": 0.0,
+      "false_override_rate": 0.0,
+      "coverage": 0.0,
+      "mean_override_advantage": 0.0,
+      "hybrid_regret": {
+        "mean": 7.626713585926629,
+        "median": 0.0,
+        "p90": 0.0,
+        "p95": 17.610272907686763,
+        "p99": 157.3927927333719,
+        "max": 208.23406581514223,
+        "cvar95": 133.467487753716
+      },
+      "baseline_regret": {
+        "mean": 7.626713585926629,
+        "median": 0.0,
+        "p90": 0.0,
+        "p95": 17.610272907686763,
+        "p99": 157.3927927333719,
+        "max": 208.23406581514223,
+        "cvar95": 133.467487753716
+      },
+      "calibration_curve": {
+        "0.2": {
+          "alpha": 0.2,
+          "conformal_quantile": 372.8698,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.1": {
+          "alpha": 0.1,
+          "conformal_quantile": 533.3558,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.05": {
+          "alpha": 0.05,
+          "conformal_quantile": 689.0377,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.025": {
+          "alpha": 0.025,
+          "conformal_quantile": 747.8809,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        },
+        "0.01": {
+          "alpha": 0.01,
+          "conformal_quantile": 747.8809,
+          "override_precision": 0.0,
+          "coverage": 0.0,
+          "mean_override_advantage": 0.0,
+          "p95_regret": 0.0,
+          "cvar95": 0.0,
+          "n_overrides": 0
+        }
+      },
+      "confidence_deciles": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_lcb": -1014.5475260416666,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -44.93485625680396,
+            "n": 3
+          },
+          {
+            "decile": 1,
+            "mean_lcb": -961.2141927083334,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -196.844631257026,
+            "n": 3
+          },
+          {
+            "decile": 2,
+            "mean_lcb": -939.880859375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -85.94273150256653,
+            "n": 3
+          },
+          {
+            "decile": 3,
+            "mean_lcb": -929.2141927083334,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -204.77221217590161,
+            "n": 3
+          },
+          {
+            "decile": 4,
+            "mean_lcb": -897.2141927083334,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -218.53362041211207,
+            "n": 3
+          },
+          {
+            "decile": 5,
+            "mean_lcb": -875.880859375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -165.4329330337745,
+            "n": 3
+          },
+          {
+            "decile": 6,
+            "mean_lcb": -875.880859375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -135.04547711867545,
+            "n": 3
+          },
+          {
+            "decile": 7,
+            "mean_lcb": -843.880859375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -148.01632479831875,
+            "n": 3
+          },
+          {
+            "decile": 8,
+            "mean_lcb": -811.880859375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -182.51524332002222,
+            "n": 3
+          },
+          {
+            "decile": 9,
+            "mean_lcb": -779.880859375,
+            "n_overrides": 0,
+            "override_precision": 1.0,
+            "mean_advantage": -152.74082975966363,
+            "n": 3
+          }
+        ],
+        "is_monotonic": true
+      },
+      "ood_analysis": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_ood_score": 1.6324568192164104,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 1,
+            "mean_ood_score": 1.7164263327916462,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 2,
+            "mean_ood_score": 1.7701280117034912,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 3,
+            "mean_ood_score": 2.029402256011963,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 4,
+            "mean_ood_score": 2.205185651779175,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 5,
+            "mean_ood_score": 2.424680550893148,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 6,
+            "mean_ood_score": 2.56294314066569,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 7,
+            "mean_ood_score": 2.875331083933512,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 8,
+            "mean_ood_score": 3.418187061945597,
+            "coverage": 0.0,
+            "n": 3
+          },
+          {
+            "decile": 9,
+            "mean_ood_score": 4.103442112604777,
+            "coverage": 0.0,
+            "n": 3
+          }
+        ],
+        "is_monotonic": true,
+        "correlation": 0.0
+      },
+      "latency_ms": {
+        "model_predict": 0.0
+      }
+    }
+  ],
+  "gates": {
+    "A_train_cal_test_isolation": {
+      "passed": true,
+      "description": "by construction \u2014 physically separate splits"
+    },
+    "B_no_future_oracle_leakage": {
+      "passed": true,
+      "description": "by construction \u2014 features exclude oracle info"
+    },
+    "C_connectivity_precision_ge_95": {
+      "passed": false,
+      "description": "precision=50.0%"
+    },
+    "D_connectivity_coverage_ge_10": {
+      "passed": "False",
+      "description": "coverage=2.5%"
+    },
+    "E_connectivity_regret_lt_baseline": {
+      "passed": false,
+      "description": "hybrid med=5.85 vs base=6.71, hybrid p95=27.71 vs base=27.71"
+    },
+    "F_redundancy_tail_le_baseline": {
+      "passed": true,
+      "description": "hybrid p95=517.13 vs base=633.36, hybrid cvar95=708.58 vs base=772.58"
+    },
+    "G_spectral_no_regression": {
+      "passed": true,
+      "description": "hybrid med=0.00 <= base+eps"
+    },
+    "H_hub_load_no_regression": {
+      "passed": true,
+      "description": "hybrid med=0.00 <= base+eps"
+    },
+    "I_search_savings_gt_50": {
+      "passed": true,
+      "description": "conformal arbitration is O(1) vs exact MPC"
+    },
+    "J_exact_replay": {
+      "passed": true,
+      "description": "by design \u2014 exact replay mandatory"
+    },
+    "K_qualification": {
+      "passed": false,
+      "description": "manifest_valid=False, failures=0"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "n_mechanisms": 4,
+    "model_name": "A1_linear",
+    "conn_precision": 0.5,
+    "conn_coverage": 0.025,
+    "red_precision": 0.2857,
+    "red_coverage": 0.1918,
+    "spec_coverage": 0.0,
+    "hub_coverage": 0.0135
+  },
+  "manifest_evidence": {
+    "manifest_exists": true,
+    "manifest_valid": false,
+    "release_mode": true,
+    "test_count": 2360,
+    "test_passed": 2360,
+    "test_failed": 0
+  }
+}

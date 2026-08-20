@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_3/pairwise_models.py
+# hypothesis_version: 6.151.4
+
+[0.0, 'coverage', 'cvar95', 'mean_regret', 'median_regret', 'override_precision', 'p95_regret']
