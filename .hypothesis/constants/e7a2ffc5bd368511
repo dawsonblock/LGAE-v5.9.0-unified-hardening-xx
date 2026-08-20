@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_4/downside_metrics.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1.0, 5.0, 'coverage', 'cvar_neg_5', 'downside_prob', 'n_overrides', 'n_samples', 'override_precision', 'risk_adjusted_score', 'spearman']

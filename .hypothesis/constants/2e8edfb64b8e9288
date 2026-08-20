@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_4/rich_features.py
+# hypothesis_version: 6.151.4
+
+[-1.0, 0.0, 1.0, 2.0, 5.0, 10.0, 30.0, 50.0, 100.0, 'F1_current', 'F2_action_effects', 'F3_local_topology', 'F4_full', 'add_edge', 'edge_swap', 'numpy', 'remove_edge', 'reweight_edge']

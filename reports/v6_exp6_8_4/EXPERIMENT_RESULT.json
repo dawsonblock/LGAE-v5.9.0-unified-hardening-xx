@@ -1,0 +1,557 @@
+{
+  "audit_note": "Advantage Model Identification. Four-axis sweep: target x features x model x data size. Question: is structural advantage actually learnable?",
+  "pareto_table": [
+    {
+      "model": "M2_gbt",
+      "target": "T2_normalized",
+      "features": "F1_current",
+      "n_train": 250,
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.2726,
+      "override_precision": 0.8889,
+      "coverage": 0.25,
+      "mean_override_advantage": 13.2225,
+      "downside_prob": 0.1111,
+      "cvar_neg_5": -0.5443,
+      "risk_adjusted_score": 13.162,
+      "p95_regret_hybrid": 20.9367,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 27.996,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 9
+    },
+    {
+      "model": "M2_gbt",
+      "target": "T2_normalized",
+      "features": "F1_current",
+      "n_train": 500,
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.0986,
+      "override_precision": 0.7143,
+      "coverage": 0.1944,
+      "mean_override_advantage": 7.2665,
+      "downside_prob": 0.2857,
+      "cvar_neg_5": -2.7476,
+      "risk_adjusted_score": 6.4814,
+      "p95_regret_hybrid": 27.4423,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 30.7118,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 7
+    },
+    {
+      "model": "M2_gbt",
+      "target": "T5_downside",
+      "features": "F1_current",
+      "n_train": 250,
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.2221,
+      "override_precision": 0.6667,
+      "coverage": 0.1667,
+      "mean_override_advantage": 4.565,
+      "downside_prob": 0.3333,
+      "cvar_neg_5": -14.8353,
+      "risk_adjusted_score": -0.3801,
+      "p95_regret_hybrid": 27.4423,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 30.7118,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 6
+    },
+    {
+      "model": "M2_gbt",
+      "target": "T5_downside",
+      "features": "F1_current",
+      "n_train": 500,
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.1853,
+      "override_precision": 0.625,
+      "coverage": 0.2222,
+      "mean_override_advantage": 4.8073,
+      "downside_prob": 0.375,
+      "cvar_neg_5": -14.8353,
+      "risk_adjusted_score": -0.756,
+      "p95_regret_hybrid": 27.4423,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 30.7118,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 8
+    },
+    {
+      "model": "M4_pairwise",
+      "target": "T2_normalized",
+      "features": "F1_current",
+      "n_train": 250,
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.2046,
+      "override_precision": 0.6667,
+      "coverage": 0.25,
+      "mean_override_advantage": 8.6964,
+      "downside_prob": 0.3333,
+      "cvar_neg_5": -12.6995,
+      "risk_adjusted_score": 4.4632,
+      "p95_regret_hybrid": 19.8906,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 24.7963,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 9
+    },
+    {
+      "model": "M4_pairwise",
+      "target": "T2_normalized",
+      "features": "F1_current",
+      "n_train": 500,
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.1694,
+      "override_precision": 0.6364,
+      "coverage": 0.3056,
+      "mean_override_advantage": 6.8714,
+      "downside_prob": 0.3636,
+      "cvar_neg_5": -12.6995,
+      "risk_adjusted_score": 2.2534,
+      "p95_regret_hybrid": 19.8906,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 24.7963,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 11
+    },
+    {
+      "model": "M4_pairwise",
+      "target": "T5_downside",
+      "features": "F1_current",
+      "n_train": 250,
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.2046,
+      "override_precision": 0.0,
+      "coverage": 0.0,
+      "mean_override_advantage": 0.0,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 0.0,
+      "risk_adjusted_score": 0.0,
+      "p95_regret_hybrid": 27.4423,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 30.7118,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 0
+    },
+    {
+      "model": "M4_pairwise",
+      "target": "T5_downside",
+      "features": "F1_current",
+      "n_train": 500,
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.1694,
+      "override_precision": 0.0,
+      "coverage": 0.0,
+      "mean_override_advantage": 0.0,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 0.0,
+      "risk_adjusted_score": 0.0,
+      "p95_regret_hybrid": 27.4423,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 30.7118,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 0
+    },
+    {
+      "model": "M2_gbt",
+      "target": "T2_normalized",
+      "features": "F1_current",
+      "n_train": 250,
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0616,
+      "override_precision": 1.0,
+      "coverage": 0.0312,
+      "mean_override_advantage": 380.0909,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 380.0909,
+      "risk_adjusted_score": 380.0909,
+      "p95_regret_hybrid": 537.2556,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 1
+    },
+    {
+      "model": "M2_gbt",
+      "target": "T2_normalized",
+      "features": "F1_current",
+      "n_train": 500,
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0315,
+      "override_precision": 1.0,
+      "coverage": 0.0312,
+      "mean_override_advantage": 511.7308,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 511.7308,
+      "risk_adjusted_score": 511.7308,
+      "p95_regret_hybrid": 511.6806,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 1
+    },
+    {
+      "model": "M2_gbt",
+      "target": "T5_downside",
+      "features": "F1_current",
+      "n_train": 250,
+      "mechanism": "redundancy_threshold",
+      "spearman": -0.0088,
+      "override_precision": 1.0,
+      "coverage": 0.0312,
+      "mean_override_advantage": 465.2309,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 465.2309,
+      "risk_adjusted_score": 465.2309,
+      "p95_regret_hybrid": 537.2556,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 1
+    },
+    {
+      "model": "M2_gbt",
+      "target": "T5_downside",
+      "features": "F1_current",
+      "n_train": 500,
+      "mechanism": "redundancy_threshold",
+      "spearman": -0.0374,
+      "override_precision": 0.0,
+      "coverage": 0.0,
+      "mean_override_advantage": 0.0,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 0.0,
+      "risk_adjusted_score": 0.0,
+      "p95_regret_hybrid": 537.2556,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 0
+    },
+    {
+      "model": "M4_pairwise",
+      "target": "T2_normalized",
+      "features": "F1_current",
+      "n_train": 250,
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0715,
+      "override_precision": 0.0,
+      "coverage": 0.0,
+      "mean_override_advantage": 0.0,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 0.0,
+      "risk_adjusted_score": 0.0,
+      "p95_regret_hybrid": 537.2556,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 0
+    },
+    {
+      "model": "M4_pairwise",
+      "target": "T2_normalized",
+      "features": "F1_current",
+      "n_train": 500,
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0513,
+      "override_precision": 0.0,
+      "coverage": 0.0,
+      "mean_override_advantage": 0.0,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 0.0,
+      "risk_adjusted_score": 0.0,
+      "p95_regret_hybrid": 537.2556,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 0
+    },
+    {
+      "model": "M4_pairwise",
+      "target": "T5_downside",
+      "features": "F1_current",
+      "n_train": 250,
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0715,
+      "override_precision": 0.0,
+      "coverage": 0.0,
+      "mean_override_advantage": 0.0,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 0.0,
+      "risk_adjusted_score": 0.0,
+      "p95_regret_hybrid": 537.2556,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 0
+    },
+    {
+      "model": "M4_pairwise",
+      "target": "T5_downside",
+      "features": "F1_current",
+      "n_train": 500,
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0513,
+      "override_precision": 0.0,
+      "coverage": 0.0,
+      "mean_override_advantage": 0.0,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 0.0,
+      "risk_adjusted_score": 0.0,
+      "p95_regret_hybrid": 537.2556,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 0
+    }
+  ],
+  "learning_curves": {
+    "M2_gbt_T2_normalized_F1_current_connectivity_threshold": [
+      {
+        "n_train": 250,
+        "spearman": 0.2726,
+        "coverage": 0.25,
+        "override_precision": 0.8889,
+        "mean_override_advantage": 13.2225,
+        "p95_regret_hybrid": 20.9367,
+        "cvar95_hybrid": 27.996
+      },
+      {
+        "n_train": 500,
+        "spearman": 0.0986,
+        "coverage": 0.1944,
+        "override_precision": 0.7143,
+        "mean_override_advantage": 7.2665,
+        "p95_regret_hybrid": 27.4423,
+        "cvar95_hybrid": 30.7118
+      }
+    ],
+    "M2_gbt_T5_downside_F1_current_connectivity_threshold": [
+      {
+        "n_train": 250,
+        "spearman": 0.2221,
+        "coverage": 0.1667,
+        "override_precision": 0.6667,
+        "mean_override_advantage": 4.565,
+        "p95_regret_hybrid": 27.4423,
+        "cvar95_hybrid": 30.7118
+      },
+      {
+        "n_train": 500,
+        "spearman": 0.1853,
+        "coverage": 0.2222,
+        "override_precision": 0.625,
+        "mean_override_advantage": 4.8073,
+        "p95_regret_hybrid": 27.4423,
+        "cvar95_hybrid": 30.7118
+      }
+    ],
+    "M4_pairwise_T2_normalized_F1_current_connectivity_threshold": [
+      {
+        "n_train": 250,
+        "spearman": 0.2046,
+        "coverage": 0.25,
+        "override_precision": 0.6667,
+        "mean_override_advantage": 8.6964,
+        "p95_regret_hybrid": 19.8906,
+        "cvar95_hybrid": 24.7963
+      },
+      {
+        "n_train": 500,
+        "spearman": 0.1694,
+        "coverage": 0.3056,
+        "override_precision": 0.6364,
+        "mean_override_advantage": 6.8714,
+        "p95_regret_hybrid": 19.8906,
+        "cvar95_hybrid": 24.7963
+      }
+    ],
+    "M4_pairwise_T5_downside_F1_current_connectivity_threshold": [
+      {
+        "n_train": 250,
+        "spearman": 0.2046,
+        "coverage": 0.0,
+        "override_precision": 0.0,
+        "mean_override_advantage": 0.0,
+        "p95_regret_hybrid": 27.4423,
+        "cvar95_hybrid": 30.7118
+      },
+      {
+        "n_train": 500,
+        "spearman": 0.1694,
+        "coverage": 0.0,
+        "override_precision": 0.0,
+        "mean_override_advantage": 0.0,
+        "p95_regret_hybrid": 27.4423,
+        "cvar95_hybrid": 30.7118
+      }
+    ],
+    "M2_gbt_T2_normalized_F1_current_redundancy_threshold": [
+      {
+        "n_train": 250,
+        "spearman": 0.0616,
+        "coverage": 0.0312,
+        "override_precision": 1.0,
+        "mean_override_advantage": 380.0909,
+        "p95_regret_hybrid": 537.2556,
+        "cvar95_hybrid": 702.0972
+      },
+      {
+        "n_train": 500,
+        "spearman": 0.0315,
+        "coverage": 0.0312,
+        "override_precision": 1.0,
+        "mean_override_advantage": 511.7308,
+        "p95_regret_hybrid": 511.6806,
+        "cvar95_hybrid": 702.0972
+      }
+    ],
+    "M2_gbt_T5_downside_F1_current_redundancy_threshold": [
+      {
+        "n_train": 250,
+        "spearman": -0.0088,
+        "coverage": 0.0312,
+        "override_precision": 1.0,
+        "mean_override_advantage": 465.2309,
+        "p95_regret_hybrid": 537.2556,
+        "cvar95_hybrid": 702.0972
+      },
+      {
+        "n_train": 500,
+        "spearman": -0.0374,
+        "coverage": 0.0,
+        "override_precision": 0.0,
+        "mean_override_advantage": 0.0,
+        "p95_regret_hybrid": 537.2556,
+        "cvar95_hybrid": 702.0972
+      }
+    ],
+    "M4_pairwise_T2_normalized_F1_current_redundancy_threshold": [
+      {
+        "n_train": 250,
+        "spearman": 0.0715,
+        "coverage": 0.0,
+        "override_precision": 0.0,
+        "mean_override_advantage": 0.0,
+        "p95_regret_hybrid": 537.2556,
+        "cvar95_hybrid": 702.0972
+      },
+      {
+        "n_train": 500,
+        "spearman": 0.0513,
+        "coverage": 0.0,
+        "override_precision": 0.0,
+        "mean_override_advantage": 0.0,
+        "p95_regret_hybrid": 537.2556,
+        "cvar95_hybrid": 702.0972
+      }
+    ],
+    "M4_pairwise_T5_downside_F1_current_redundancy_threshold": [
+      {
+        "n_train": 250,
+        "spearman": 0.0715,
+        "coverage": 0.0,
+        "override_precision": 0.0,
+        "mean_override_advantage": 0.0,
+        "p95_regret_hybrid": 537.2556,
+        "cvar95_hybrid": 702.0972
+      },
+      {
+        "n_train": 500,
+        "spearman": 0.0513,
+        "coverage": 0.0,
+        "override_precision": 0.0,
+        "mean_override_advantage": 0.0,
+        "p95_regret_hybrid": 537.2556,
+        "cvar95_hybrid": 702.0972
+      }
+    ]
+  },
+  "best_combination": {
+    "model": "M2_gbt",
+    "target": "T2_normalized",
+    "features": "F1_current",
+    "n_train": 500,
+    "mechanism": "redundancy_threshold",
+    "spearman": 0.0315,
+    "override_precision": 1.0,
+    "coverage": 0.0312,
+    "mean_override_advantage": 511.7308,
+    "risk_adjusted_score": 511.7308,
+    "p95_regret_hybrid": 511.6806,
+    "p95_regret_baseline": 537.2556,
+    "cvar95_hybrid": 702.0972,
+    "cvar95_baseline": 702.0972
+  },
+  "gates": {
+    "1_learning_curve_exists": {
+      "passed": false,
+      "description": "0/8 curves improve with data"
+    },
+    "2_positive_mean_advantage": {
+      "passed": true,
+      "description": "mean_adv=511.7308"
+    },
+    "3_p95_regret_le_baseline": {
+      "passed": true,
+      "description": "hybrid=511.68 vs base=537.26"
+    },
+    "4_cvar95_le_baseline": {
+      "passed": true,
+      "description": "hybrid=702.10 vs base=702.10"
+    },
+    "5_coverage_gt_5pct": {
+      "passed": false,
+      "description": "coverage=3.1%"
+    },
+    "6_spearman_gt_0": {
+      "passed": true,
+      "description": "spearman=0.0315"
+    },
+    "7_no_spectral_hub_regression": {
+      "passed": true,
+      "description": "by design \u2014 not tested in narrow experiment"
+    },
+    "8_qualification": {
+      "passed": false,
+      "description": "manifest_valid=False, failures=0"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "n_combinations": 16,
+    "n_learning_curves": 8,
+    "n_curves_with_improvement": 0,
+    "best_model": "M2_gbt",
+    "best_target": "T2_normalized",
+    "best_features": "F1_current",
+    "best_n_train": 500,
+    "best_spearman": 0.0315,
+    "best_risk_adjusted_score": 511.7308
+  },
+  "manifest_evidence": {
+    "manifest_exists": true,
+    "manifest_valid": false,
+    "release_mode": true,
+    "test_count": 2394,
+    "test_passed": 2394,
+    "test_failed": 0
+  }
+}
