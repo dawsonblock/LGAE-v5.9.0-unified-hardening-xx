@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_5/backends/openai_backend.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.8, 100.0, 500, 1000, 1024, 10000, 10000000, '429', 'API_ERROR', 'BUDGET_EXCEEDED', 'Budget exceeded', 'Empty response', 'INVALID_RESPONSE', 'OPENAI_API_KEY', 'RATE_LIMIT', 'SUCCESS', 'TIMEOUT', 'api_key_present', 'backend_version', 'budget', 'budget_exceeded', 'cached_tokens', 'config_hash', 'dollar_cost', 'id', 'input_tokens', 'input_tokens_details', 'max_api_calls', 'max_dollar_cost', 'max_tokens', 'model_id', 'n_calls', 'n_tokens', 'output_tokens', 'provider', 'rate_limit', 'sdk_version', 'stop', 'timed out', 'timeout']

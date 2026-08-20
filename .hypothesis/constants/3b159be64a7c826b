@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_5/backend_config.py
+# hypothesis_version: 6.151.4
+
+[0.0, 30.0, 512, 1024, 1000000, 'backend_version', 'config_hash', 'exp7.5-mock', 'exp7.5-openai-v1', 'exp7.5-v1', 'input_price_per_mtok', 'max_output_tokens', 'max_retries', 'mock', 'mock-v1', 'model_id', 'openai', 'provider', 'sdk_version', 'temperature', 'timeout_seconds']

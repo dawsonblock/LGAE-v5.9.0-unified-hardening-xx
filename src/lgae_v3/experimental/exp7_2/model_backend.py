@@ -34,14 +34,20 @@ class ModelResponse:
     confidence: float = 0.0
     finish_reason: str = "stop"
     error: Optional[str] = None
+    # Extended fields for exp7.5 (optional, backward-compatible)
+    cached_tokens: int = 0
+    model_id: str = ""
+    request_id: str = ""
+    status: str = "SUCCESS"
+    dollar_cost: float = 0.0
 
     @property
     def total_tokens(self) -> int:
-        return self.tokens_in + tokens_out if hasattr(self, 'tokens_out') else self.tokens_in
+        return self.tokens_in + self.tokens_out
 
     @property
     def success(self) -> bool:
-        return self.error is None
+        return self.error is None and self.status == "SUCCESS"
 
 
 @runtime_checkable

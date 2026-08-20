@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_5/validation.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.01, 0.02, 1.0, 100, 200, 256, 'EXCEPTION', 'SUCCESS', 'critic', 'delta_j', 'delta_latency', 'delta_quality', 'delta_tokens', 'diff', 'error', 'full_q', 'j_with', 'j_without', 'latency_ms', 'mean_quality_diff', 'memory', 'minimal_q', 'n_roles_succeeded', 'n_roles_tested', 'n_tasks', 'node', 'output_preview', 'passed', 'per_task', 'planner', 'quality_with', 'quality_without', 'researcher', 'role_results', 'status', 'std_quality_diff', 'success', 'tokens_in', 'tokens_out', 'tokens_with', 'tokens_without', 'user', 'verifier', 'worker']
