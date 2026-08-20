@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_2/objective.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.2, 0.3, 0.5, 1.0, 5000.0, 2000, 'call_budget', 'cost', 'lambda_calls', 'lambda_failures', 'lambda_latency', 'lambda_tokens', 'latency_budget_ms', 'quality', 'token_budget', 'w_quality']

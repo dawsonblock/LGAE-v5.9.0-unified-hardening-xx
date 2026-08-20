@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_2/topology_runtime.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.001, 0.01, 0.05, 0.2, 0.3, 0.5, 0.8, 1.0, -200, 1000, ':', 'AITopology', 'active', 'bad', 'confidence', 'critic', 'critic_outcome', 'destination', 'edge', 'edge_id', 'edges', 'fail', 'final_quality', 'general', 'good', 'highest_weight', 'input', 'latency_ms', 'memory', 'n_active_edges', 'n_edges', 'n_nodes', 'no output', 'node_id', 'nodes_executed', 'objective_value', 'pass', 'planner', 'reason', 'researcher', 'role', 'routing_decisions', 'source', 'success', 'task_class', 'task_id', 'tokens_in', 'tokens_out', 'topology_after', 'topology_before', 'total_cost', 'total_failures', 'total_latency_ms', 'total_llm_calls', 'total_tokens', 'verification_outcome', 'verifier', 'weight', 'worker']
