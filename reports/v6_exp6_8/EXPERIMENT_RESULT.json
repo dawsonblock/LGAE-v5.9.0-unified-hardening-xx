@@ -1,0 +1,265 @@
+{
+  "audit_note": "Exact-transition model-based structural planning. G_{t+1} = T_exact(G_t, a_t), z_{t+1} = F(G_t, z_t, a_t). Four systems: Greedy, Exact MPC, One-step causal, Recursive causal MPC. Correct O(S+dS)-O(S) evaluation. Normalized regret as primary metric. Error by horizon. Teacher-forced vs free rollout.",
+  "lomo_results": [
+    {
+      "held_out_mechanism": "connectivity_threshold",
+      "n_train_samples": 7800,
+      "n_suboptimal": 100,
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.0,
+          "normalized_regret": 0.6196,
+          "avg_savings": 0.0,
+          "n_suboptimal": 100
+        },
+        "one_step": {
+          "recovery_rate": 0.26,
+          "normalized_regret": 1.8049,
+          "avg_savings": 0.9231,
+          "n_suboptimal": 100
+        },
+        "recursive": {
+          "recovery_rate": 0.26,
+          "normalized_regret": 1.8049,
+          "avg_savings": 0.6923,
+          "n_suboptimal": 100
+        }
+      },
+      "paired_cis": {
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": 0.26,
+          "ci_95": [
+            0.18,
+            0.35
+          ]
+        },
+        "recovery_recursive_minus_one_step": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "rollout_errors": {
+        "1": 0.09178571741803583,
+        "2": 0.10990759951962437
+      },
+      "teacher_forced_recovery": 0.0,
+      "free_rollout_recovery": 0.26
+    },
+    {
+      "held_out_mechanism": "redundancy_threshold",
+      "n_train_samples": 7800,
+      "n_suboptimal": 100,
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.07,
+          "normalized_regret": 0.5355,
+          "avg_savings": 0.0,
+          "n_suboptimal": 100
+        },
+        "one_step": {
+          "recovery_rate": 0.25,
+          "normalized_regret": 2.6311,
+          "avg_savings": 0.9231,
+          "n_suboptimal": 100
+        },
+        "recursive": {
+          "recovery_rate": 0.28,
+          "normalized_regret": 2.5872,
+          "avg_savings": 0.6923,
+          "n_suboptimal": 100
+        }
+      },
+      "paired_cis": {
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": 0.21,
+          "ci_95": [
+            0.12,
+            0.3
+          ]
+        },
+        "recovery_recursive_minus_one_step": {
+          "mean_diff": 0.03,
+          "ci_95": [
+            -0.04,
+            0.1
+          ]
+        }
+      },
+      "rollout_errors": {
+        "1": 0.09369211862224726,
+        "2": 0.11828839917468131
+      },
+      "teacher_forced_recovery": 0.0,
+      "free_rollout_recovery": 0.28
+    },
+    {
+      "held_out_mechanism": "hub_load_threshold",
+      "n_train_samples": 7800,
+      "n_suboptimal": 100,
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.08,
+          "normalized_regret": 0.2126,
+          "avg_savings": 0.0,
+          "n_suboptimal": 100
+        },
+        "one_step": {
+          "recovery_rate": 0.01,
+          "normalized_regret": 4.3191,
+          "avg_savings": 0.9231,
+          "n_suboptimal": 100
+        },
+        "recursive": {
+          "recovery_rate": 0.03,
+          "normalized_regret": 3.728,
+          "avg_savings": 0.6923,
+          "n_suboptimal": 100
+        }
+      },
+      "paired_cis": {
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": -0.05,
+          "ci_95": [
+            -0.11,
+            0.01
+          ]
+        },
+        "recovery_recursive_minus_one_step": {
+          "mean_diff": 0.02,
+          "ci_95": [
+            0.0,
+            0.05
+          ]
+        }
+      },
+      "rollout_errors": {
+        "1": 0.08295634123347588,
+        "2": 0.10193844654726571
+      },
+      "teacher_forced_recovery": 0.0,
+      "free_rollout_recovery": 0.03
+    },
+    {
+      "held_out_mechanism": "spectral_gap_threshold",
+      "n_train_samples": 7800,
+      "n_suboptimal": 100,
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.52,
+          "normalized_regret": 0.1138,
+          "avg_savings": 0.0,
+          "n_suboptimal": 100
+        },
+        "one_step": {
+          "recovery_rate": 0.35,
+          "normalized_regret": 0.1837,
+          "avg_savings": 0.9231,
+          "n_suboptimal": 100
+        },
+        "recursive": {
+          "recovery_rate": 0.11,
+          "normalized_regret": 0.408,
+          "avg_savings": 0.6923,
+          "n_suboptimal": 100
+        }
+      },
+      "paired_cis": {
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": -0.41,
+          "ci_95": [
+            -0.52,
+            -0.29
+          ]
+        },
+        "recovery_recursive_minus_one_step": {
+          "mean_diff": -0.24,
+          "ci_95": [
+            -0.35,
+            -0.13
+          ]
+        }
+      },
+      "rollout_errors": {
+        "1": 0.09086903567069561,
+        "2": 0.11867941430493038
+      },
+      "teacher_forced_recovery": 0.0,
+      "free_rollout_recovery": 0.11
+    }
+  ],
+  "gates": {
+    "A_benchmark_validity": {
+      "passed": true,
+      "description": "4/4 mechanisms have >=100 non-greedy states"
+    },
+    "B_no_leakage": {
+      "passed": true,
+      "description": "by design"
+    },
+    "C_transition_legality": {
+      "passed": true,
+      "description": "exact_transition checks VALID"
+    },
+    "D_recursive_beats_one_step": {
+      "passed": false,
+      "description": "recursive beats one-step in 2/4 LOMO"
+    },
+    "E_normalized_regret_below_greedy": {
+      "passed": false,
+      "description": "recursive regret=2.1320 vs greedy=0.3704"
+    },
+    "F_recovery_gt_30": {
+      "passed": false,
+      "description": "best recursive recovery: 28%"
+    },
+    "G_search_savings": {
+      "passed": true,
+      "description": "avg savings: 69.2%"
+    },
+    "H_paired_ci_excludes_zero": {
+      "passed": true,
+      "description": "CI: [0.12, 0.3]"
+    },
+    "I_exact_replay": {
+      "passed": true,
+      "description": "by design"
+    },
+    "J_qualification": {
+      "passed": false,
+      "description": "manifest_valid=False, failures=0"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "n_mechanisms": 4,
+    "n_valid_lomo": 4,
+    "best_recursive_recovery": 0.28,
+    "avg_recursive_regret": 2.132025,
+    "avg_greedy_regret": 0.370375,
+    "avg_savings": 0.6923,
+    "recursive_beats_one_step": 2,
+    "n_sufficient_mechanisms": 4
+  },
+  "training_info": {
+    "n_train_total": 10400,
+    "feature_dim": 74,
+    "target_dim": 10,
+    "n_train_per_mechanism": {
+      "connectivity_threshold": 2600,
+      "redundancy_threshold": 2600,
+      "hub_load_threshold": 2600,
+      "spectral_gap_threshold": 2600
+    }
+  },
+  "manifest_evidence": {
+    "manifest_exists": true,
+    "manifest_valid": false,
+    "release_mode": true,
+    "test_count": 2310,
+    "test_passed": 2310,
+    "test_failed": 0
+  }
+}

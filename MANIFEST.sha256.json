@@ -5,7 +5,7 @@
     ".gitignore",
     "MANIFEST.sha256.json"
   ],
-  "file_count": 999,
+  "file_count": 1013,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -41,6 +41,11 @@
       "path": ".hypothesis/constants/03f6840cd317b3b3",
       "bytes": 502,
       "sha256": "d9bc492dcc8de194db3367c1c54ecb351e87bf5118415c6b22799d69e9ffc421"
+    },
+    {
+      "path": ".hypothesis/constants/048094f14a55c746",
+      "bytes": 1115,
+      "sha256": "d6585d132e44e1ff7d196d825126737c226a74b78b7c83835ffe9ebfeff35a3b"
     },
     {
       "path": ".hypothesis/constants/05aa02e0b09b3c1d",
@@ -146,6 +151,11 @@
       "path": ".hypothesis/constants/12a5ce6e96deeba7",
       "bytes": 220,
       "sha256": "0292f341d394efc6c64149b66930d0ef8b0af6851df1312e18b8d89d54a7c690"
+    },
+    {
+      "path": ".hypothesis/constants/12c55320d0701ce2",
+      "bytes": 340,
+      "sha256": "4580ed125dae69e8b383844fe0417bf7f9e0f34eb73002c81daf25b8ddcbfc27"
     },
     {
       "path": ".hypothesis/constants/1496d9dd19099c6a",
@@ -411,6 +421,11 @@
       "path": ".hypothesis/constants/2f4917ba00ebf6f8",
       "bytes": 217,
       "sha256": "7d38b01314faff6696d8e7cb0caa0778a9ed8ace0294bc1dfa813e48021e114b"
+    },
+    {
+      "path": ".hypothesis/constants/2fd196f338b310ec",
+      "bytes": 256,
+      "sha256": "2808e52d7e6574c6735d7b32d33268e06facd5fa57d524ac5c981be300120a75"
     },
     {
       "path": ".hypothesis/constants/31bef68b7822533e",
@@ -1533,6 +1548,11 @@
       "sha256": "7c77a0e04dacff76e881022027b83cc894a7c40cc4a01133a69ee782187123ba"
     },
     {
+      "path": ".hypothesis/constants/bfe564cacee867f4",
+      "bytes": 208,
+      "sha256": "0ba4de4ad54ac22f944f7a2f848427bbcd3b11b2d23f38e56273ba5cec688c20"
+    },
+    {
       "path": ".hypothesis/constants/c02bf30dafba40e3",
       "bytes": 387,
       "sha256": "6288d1f1d8091e33188e0b69d32b38c56387dd65aa348e672bf68b5835d9d9ab"
@@ -2008,6 +2028,11 @@
       "sha256": "5275fa0d179a139f5a3a42ed0a35be40347031b983fe8a8e80d17f60fedae4ae"
     },
     {
+      "path": ".hypothesis/constants/fb666e0ed471eb56",
+      "bytes": 325,
+      "sha256": "7da139cac857cdcaf098ed646e4760a9d7750926a677645f64efd2b32094edb4"
+    },
+    {
       "path": ".hypothesis/constants/fc25ff049d412f7b",
       "bytes": 174,
       "sha256": "3fb038292c4246f68d24efcf0bdede6e3661f0c65e9f7f1697f95e423574cfb4"
@@ -2090,12 +2115,12 @@
     {
       "path": ".hypothesis/unicode_data/15.0.0/codec-utf-8.json.gz",
       "bytes": 60,
-      "sha256": "e4dd944919295478a9e9488220a70d0c90b3bd2cc544a01058534e7cd84705d7"
+      "sha256": "883480bbd427c34f1182825254da9a1c99ee7b34be4d12994a5bf5b44ba80eb4"
     },
     {
       "path": ".pytest_report.xml",
-      "bytes": 298195,
-      "sha256": "e105777463785d8176e55ec19584f278254f9d9a81441b92aa43f401d87a26f0"
+      "bytes": 299940,
+      "sha256": "47e3929d39623966c2d5bc6efb49ef294118d8b7babf2ab1c66a3b10c04a2ad8"
     },
     {
       "path": "AUDIT_exp6.3_information_leakage.md",
@@ -2115,7 +2140,7 @@
     {
       "path": "BUILD_REPORT.md",
       "bytes": 5722,
-      "sha256": "fff8bd2a06e4555c4e841331007c0dac6575f9f1356a983d5b98ec28371ee283"
+      "sha256": "83ac2b6b21642a7f3ec18917f2c7c5c9ab59be5d92bf251cdd34c37f52cd029e"
     },
     {
       "path": "CHANGELOG.md",
@@ -2374,8 +2399,8 @@
     },
     {
       "path": "qualification_summary.json",
-      "bytes": 573,
-      "sha256": "d2b496d5cff4a9dcaa8ef3e6509744261c87a4b4fab754ea7b5d7e8972aa44a3"
+      "bytes": 575,
+      "sha256": "1651a2c53548aad184ef55049c65bef8dead428078c97f534902f0ba46588cd7"
     },
     {
       "path": "reasoning_qualification_report.json",
@@ -2385,7 +2410,7 @@
     {
       "path": "release_verification.json",
       "bytes": 1143,
-      "sha256": "51346fba201f6dd8d0dd0f2fb3abc9b060d90caa0315ae973b304f90a3971c1a"
+      "sha256": "4d20c0de2b4aed21a66b723861e0c0ecac79db8beaecadfe9f8d41dad75d036d"
     },
     {
       "path": "reports/v6_exp4_2/COMPETITION_TABLE.csv",
@@ -2633,6 +2658,16 @@
       "sha256": "3a8a7a01ac6c135fab8b90cfe3b67171e77a0c8c18b19cd3dbc53e0826c4724a"
     },
     {
+      "path": "reports/v6_exp6_8/EXPERIMENT_RESULT.json",
+      "bytes": 6894,
+      "sha256": "0a9466b4ba31aec250e0839cedc1603897a5378667bdfa3c7e4e4f3fb7a82f67"
+    },
+    {
+      "path": "reports/v6_exp6_8/SCIENTIFIC_REPORT.md",
+      "bytes": 5785,
+      "sha256": "32eb0895c1ab3e3e342d5cb604e35b1ff6829be522a7470a134ef8e54ef5e756"
+    },
+    {
       "path": "requirements-verified.txt",
       "bytes": 152,
       "sha256": "0c421822af99aa7beabd8824fc7696836379a6da8fd48fd19d795262c5eae7df"
@@ -2811,6 +2846,11 @@
       "path": "scripts/run_exp6_7_experiment.py",
       "bytes": 1605,
       "sha256": "8ba94a05ec3214f416489bd34ea1d4355c12c5c4d84660a1eacc05be8453b601"
+    },
+    {
+      "path": "scripts/run_exp6_8_experiment.py",
+      "bytes": 1996,
+      "sha256": "6f81a86cc666b1fe39086b4dc29353e53de6c7d52b5d19f658fde0b442ad4fc3"
     },
     {
       "path": "scripts/run_exp6_experiment.py",
@@ -3551,6 +3591,31 @@
       "path": "src/lgae_v3/experimental/exp6_7/reward_variants.py",
       "bytes": 6840,
       "sha256": "3e414800e3c4bbadd69666d3375beee8932b65565b64a548036c04461c8887d5"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_8/__init__.py",
+      "bytes": 889,
+      "sha256": "1191599de58331c1de268dd906657eb6f90d64e7fb6b1587151a45b7adf90f3a"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_8/experiment_runner.py",
+      "bytes": 24405,
+      "sha256": "5cd83efd02fb16ea8d90911d509aec2f0337fd8dc3895413378ba9c430666732"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_8/recursive_planner.py",
+      "bytes": 6743,
+      "sha256": "c6a0c9f8df61134c0894e142206fc84f235d2cdca837410b17d1f3a63b19a36c"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_8/structural_state.py",
+      "bytes": 3640,
+      "sha256": "f0228e8859a49214cf0291e7e40522f6e2229b5a94b94c9e3efee6d7184dce8e"
+    },
+    {
+      "path": "src/lgae_v3/experimental/exp6_8/transition_model.py",
+      "bytes": 6059,
+      "sha256": "5cb7b7497078aeaad8d44e57fd9c91c4e6c7b5b9d463d0fefa5ee887189bf887"
     },
     {
       "path": "src/lgae_v3/experimental/experiment_registry.py",
@@ -5001,6 +5066,11 @@
       "path": "tests/test_v6_exp6_7.py",
       "bytes": 9120,
       "sha256": "325a2c23c6a79166916c64dc10d42b7c762ae78a9b3590e38ea3c8ec55468f51"
+    },
+    {
+      "path": "tests/test_v6_exp6_8.py",
+      "bytes": 9191,
+      "sha256": "0727d4f57e1e63d3d4d9e0efca2c18d46fd0c29f1bd8b1c9ca2f2dfbc1e0fe11"
     }
   ]
 }
