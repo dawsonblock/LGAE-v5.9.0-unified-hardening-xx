@@ -1,0 +1,873 @@
+{
+  "audit_note": "Calibrated selective planning. Ensemble uncertainty (M=5). LCB-margin arbitration: use learned only if LCB(Q_learned - Q_greedy) > 0. Kappa chosen on calibration split, evaluated on locked test. CVaR95 and tail risk. Monotonic risk-by-uncertainty deciles.",
+  "lomo_results": [
+    {
+      "held_out_mechanism": "connectivity_threshold",
+      "n_train_samples": 7800,
+      "n_calibration": 50,
+      "n_test": 50,
+      "calibrated_kappa": 5.0,
+      "calibration_metrics": {
+        "0.0": {
+          "cvar95": 10.7528,
+          "mean_norm_regret": 2.1521,
+          "avg_recovery": 0.14,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.74
+        },
+        "0.5": {
+          "cvar95": 8.2959,
+          "mean_norm_regret": 1.8483,
+          "avg_recovery": 0.0,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.34
+        },
+        "1.0": {
+          "cvar95": 4.8079,
+          "mean_norm_regret": 1.0218,
+          "avg_recovery": 0.0,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.14
+        },
+        "1.5": {
+          "cvar95": 3.6629,
+          "mean_norm_regret": 0.7715,
+          "avg_recovery": 0.0,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.04
+        },
+        "2.0": {
+          "cvar95": 3.6629,
+          "mean_norm_regret": 0.7715,
+          "avg_recovery": 0.0,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.04
+        },
+        "3.0": {
+          "cvar95": 2.5693,
+          "mean_norm_regret": 0.6929,
+          "avg_recovery": 0.0,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.02
+        },
+        "5.0": {
+          "cvar95": 0.9598,
+          "mean_norm_regret": 0.5773,
+          "avg_recovery": 0.0,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.0
+        }
+      },
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.0,
+          "mean_norm_regret": 0.6618,
+          "mean_regret": 13.1703,
+          "median_regret": 13.1944,
+          "p95_regret": 30.9723,
+          "p99_regret": 32.7931,
+          "cvar95": 32.2156,
+          "avg_savings": 0.0,
+          "n_test": 50
+        },
+        "recursive": {
+          "recovery_rate": 0.3,
+          "mean_norm_regret": 1.6243,
+          "mean_regret": 4.1235,
+          "median_regret": 1.9163,
+          "p95_regret": 19.0304,
+          "p99_regret": 25.8759,
+          "cvar95": 23.652,
+          "avg_savings": 0.6923,
+          "n_test": 50
+        },
+        "hybrid": {
+          "recovery_rate": 0.0,
+          "mean_norm_regret": 0.6618,
+          "mean_regret": 13.1703,
+          "median_regret": 13.1944,
+          "p95_regret": 30.9723,
+          "p99_regret": 32.7931,
+          "cvar95": 32.2156,
+          "avg_savings": 0.6154,
+          "n_test": 50,
+          "coverage": 0.0
+        }
+      },
+      "paired_cis": {
+        "recovery_hybrid_minus_greedy": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": 0.3,
+          "ci_95": [
+            0.18,
+            0.42
+          ]
+        }
+      },
+      "uncertainty_correlation": {
+        "correlation": -0.10578261108510001,
+        "spearman": -0.026170468187274906,
+        "n_samples": 50
+      },
+      "risk_deciles": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_uncertainty": 1.391851337693014,
+            "mean_regret": 0.24632140868575947,
+            "median_regret": 0.16538942831810524,
+            "p95_regret": 0.6048062319428505,
+            "n": 5
+          },
+          {
+            "decile": 1,
+            "mean_uncertainty": 1.6167099320888276,
+            "mean_regret": 0.6362117666007938,
+            "median_regret": 0.8933181372662731,
+            "p95_regret": 0.9323432057237836,
+            "n": 5
+          },
+          {
+            "decile": 2,
+            "mean_uncertainty": 1.8775209525164798,
+            "mean_regret": 0.7733403492131863,
+            "median_regret": 0.9273346866905581,
+            "p95_regret": 0.9547908600288424,
+            "n": 5
+          },
+          {
+            "decile": 3,
+            "mean_uncertainty": 2.071397252745686,
+            "mean_regret": 0.7333710658773586,
+            "median_regret": 0.9011731258220527,
+            "p95_regret": 0.9432881878820821,
+            "n": 5
+          },
+          {
+            "decile": 4,
+            "mean_uncertainty": 2.3035539573640884,
+            "mean_regret": 0.8379801629191972,
+            "median_regret": 0.9206832829086561,
+            "p95_regret": 0.958989694939258,
+            "n": 5
+          },
+          {
+            "decile": 5,
+            "mean_uncertainty": 2.5568014549352736,
+            "mean_regret": 0.9025280215514151,
+            "median_regret": 0.8820305995360146,
+            "p95_regret": 0.9442126436227954,
+            "n": 5
+          },
+          {
+            "decile": 6,
+            "mean_uncertainty": 2.7540056773445496,
+            "mean_regret": 0.6111306274742072,
+            "median_regret": 0.9235181978141239,
+            "p95_regret": 0.9250343727844498,
+            "n": 5
+          },
+          {
+            "decile": 7,
+            "mean_uncertainty": 2.9502562549708884,
+            "mean_regret": 0.6802504975942727,
+            "median_regret": 0.9232946134369342,
+            "p95_regret": 0.9357135158973863,
+            "n": 5
+          },
+          {
+            "decile": 8,
+            "mean_uncertainty": 3.4731899536036623,
+            "mean_regret": 0.5870431672072808,
+            "median_regret": 0.8536538938186327,
+            "p95_regret": 0.9011078822712312,
+            "n": 5
+          },
+          {
+            "decile": 9,
+            "mean_uncertainty": 4.163410902635192,
+            "mean_regret": 0.6098501203043005,
+            "median_regret": 0.5205628580334507,
+            "p95_regret": 0.8829232845765478,
+            "n": 5
+          }
+        ],
+        "is_monotonic": false
+      }
+    },
+    {
+      "held_out_mechanism": "redundancy_threshold",
+      "n_train_samples": 7800,
+      "n_calibration": 50,
+      "n_test": 50,
+      "calibrated_kappa": 5.0,
+      "calibration_metrics": {
+        "0.0": {
+          "cvar95": 10.6602,
+          "mean_norm_regret": 2.339,
+          "avg_recovery": 0.28,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.92
+        },
+        "0.5": {
+          "cvar95": 10.6602,
+          "mean_norm_regret": 2.2181,
+          "avg_recovery": 0.28,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.9
+        },
+        "1.0": {
+          "cvar95": 8.6954,
+          "mean_norm_regret": 1.3021,
+          "avg_recovery": 0.26,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.54
+        },
+        "1.5": {
+          "cvar95": 5.3102,
+          "mean_norm_regret": 0.825,
+          "avg_recovery": 0.1,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.16
+        },
+        "2.0": {
+          "cvar95": 3.6332,
+          "mean_norm_regret": 0.6159,
+          "avg_recovery": 0.1,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.08
+        },
+        "3.0": {
+          "cvar95": 1.1686,
+          "mean_norm_regret": 0.4738,
+          "avg_recovery": 0.08,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.02
+        },
+        "5.0": {
+          "cvar95": 0.9985,
+          "mean_norm_regret": 0.4447,
+          "avg_recovery": 0.08,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.0
+        }
+      },
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.06,
+          "mean_norm_regret": 0.6264,
+          "mean_regret": 442.9977,
+          "median_regret": 582.9094,
+          "p95_regret": 1056.0153,
+          "p99_regret": 1188.4591,
+          "cvar95": 1155.5318,
+          "avg_savings": 0.0,
+          "n_test": 50
+        },
+        "recursive": {
+          "recovery_rate": 0.32,
+          "mean_norm_regret": 2.7951,
+          "mean_regret": 224.7518,
+          "median_regret": 7.2529,
+          "p95_regret": 1013.0666,
+          "p99_regret": 1120.687,
+          "cvar95": 1092.8005,
+          "avg_savings": 0.6923,
+          "n_test": 50
+        },
+        "hybrid": {
+          "recovery_rate": 0.06,
+          "mean_norm_regret": 0.6264,
+          "mean_regret": 442.9977,
+          "median_regret": 582.9094,
+          "p95_regret": 1056.0153,
+          "p99_regret": 1188.4591,
+          "cvar95": 1155.5318,
+          "avg_savings": 0.6154,
+          "n_test": 50,
+          "coverage": 0.0
+        }
+      },
+      "paired_cis": {
+        "recovery_hybrid_minus_greedy": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": 0.26,
+          "ci_95": [
+            0.12,
+            0.38
+          ]
+        }
+      },
+      "uncertainty_correlation": {
+        "correlation": 0.007542682303583286,
+        "spearman": 0.20414925897363753,
+        "n_samples": 50
+      },
+      "risk_deciles": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_uncertainty": 1.0525493705988103,
+            "mean_regret": 0.26592433871965926,
+            "median_regret": 0.12193845435347951,
+            "p95_regret": 0.8312224578617435,
+            "n": 5
+          },
+          {
+            "decile": 1,
+            "mean_uncertainty": 1.1881652728007013,
+            "mean_regret": 0.40974806778255807,
+            "median_regret": 0.03543382534942529,
+            "p95_regret": 0.9987718599386536,
+            "n": 5
+          },
+          {
+            "decile": 2,
+            "mean_uncertainty": 1.2848047202933144,
+            "mean_regret": 0.6513984748051065,
+            "median_regret": 0.9953475138990895,
+            "p95_regret": 0.9969799924706272,
+            "n": 5
+          },
+          {
+            "decile": 3,
+            "mean_uncertainty": 1.4029405390522398,
+            "mean_regret": 0.7313320268219284,
+            "median_regret": 0.9975218144147099,
+            "p95_regret": 0.9984464199324548,
+            "n": 5
+          },
+          {
+            "decile": 4,
+            "mean_uncertainty": 1.5773184263516395,
+            "mean_regret": 0.6892382987110915,
+            "median_regret": 0.9960762476761605,
+            "p95_regret": 0.9975519188750507,
+            "n": 5
+          },
+          {
+            "decile": 5,
+            "mean_uncertainty": 1.7583314931345462,
+            "mean_regret": 0.8045971120945536,
+            "median_regret": 0.996886637734597,
+            "p95_regret": 0.99741301446956,
+            "n": 5
+          },
+          {
+            "decile": 6,
+            "mean_uncertainty": 3.093185456493392,
+            "mean_regret": 0.8193880065909601,
+            "median_regret": 0.9968335414302393,
+            "p95_regret": 0.9979018239195206,
+            "n": 5
+          },
+          {
+            "decile": 7,
+            "mean_uncertainty": 3.5993649490112425,
+            "mean_regret": 0.5235444774441931,
+            "median_regret": 0.3210087061136114,
+            "p95_regret": 0.9963378677047762,
+            "n": 5
+          },
+          {
+            "decile": 8,
+            "mean_uncertainty": 3.7565135173952364,
+            "mean_regret": 0.6499095820418705,
+            "median_regret": 0.9929066886412596,
+            "p95_regret": 0.9976378151498395,
+            "n": 5
+          },
+          {
+            "decile": 9,
+            "mean_uncertainty": 4.422293345602978,
+            "mean_regret": 0.7187974533133492,
+            "median_regret": 0.9954984138874673,
+            "p95_regret": 0.997099674117544,
+            "n": 5
+          }
+        ],
+        "is_monotonic": false
+      }
+    },
+    {
+      "held_out_mechanism": "hub_load_threshold",
+      "n_train_samples": 7800,
+      "n_calibration": 50,
+      "n_test": 50,
+      "calibrated_kappa": 3.0,
+      "calibration_metrics": {
+        "0.0": {
+          "cvar95": 12.7448,
+          "mean_norm_regret": 4.1131,
+          "avg_recovery": 0.0,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 1.0
+        },
+        "0.5": {
+          "cvar95": 12.7448,
+          "mean_norm_regret": 4.037,
+          "avg_recovery": 0.0,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.98
+        },
+        "1.0": {
+          "cvar95": 11.93,
+          "mean_norm_regret": 2.9536,
+          "avg_recovery": 0.08,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.68
+        },
+        "1.5": {
+          "cvar95": 6.4692,
+          "mean_norm_regret": 1.1173,
+          "avg_recovery": 0.1,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.3
+        },
+        "2.0": {
+          "cvar95": 1.4317,
+          "mean_norm_regret": 0.3002,
+          "avg_recovery": 0.12,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.08
+        },
+        "3.0": {
+          "cvar95": 0.9977,
+          "mean_norm_regret": 0.2396,
+          "avg_recovery": 0.12,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.0
+        },
+        "5.0": {
+          "cvar95": 0.9977,
+          "mean_norm_regret": 0.2396,
+          "avg_recovery": 0.12,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.0
+        }
+      },
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.04,
+          "mean_norm_regret": 0.1856,
+          "mean_regret": 29.1595,
+          "median_regret": 0.2004,
+          "p95_regret": 1.2685,
+          "p99_regret": 722.6167,
+          "cvar95": 481.3905,
+          "avg_savings": 0.0,
+          "n_test": 50
+        },
+        "recursive": {
+          "recovery_rate": 0.02,
+          "mean_norm_regret": 4.5252,
+          "mean_regret": 63.2442,
+          "median_regret": 7.2333,
+          "p95_regret": 656.1707,
+          "p99_regret": 732.4229,
+          "cvar95": 708.1305,
+          "avg_savings": 0.6924,
+          "n_test": 50
+        },
+        "hybrid": {
+          "recovery_rate": 0.04,
+          "mean_norm_regret": 0.1856,
+          "mean_regret": 29.1595,
+          "median_regret": 0.2004,
+          "p95_regret": 1.2685,
+          "p99_regret": 722.6167,
+          "cvar95": 481.3905,
+          "avg_savings": 0.6154,
+          "n_test": 50,
+          "coverage": 0.0
+        }
+      },
+      "paired_cis": {
+        "recovery_hybrid_minus_greedy": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": -0.02,
+          "ci_95": [
+            -0.1,
+            0.04
+          ]
+        }
+      },
+      "uncertainty_correlation": {
+        "correlation": 0.007331162968849837,
+        "spearman": 0.2694902639495607,
+        "n_samples": 50
+      },
+      "risk_deciles": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_uncertainty": 1.3302934108034228,
+            "mean_regret": 0.055784075277790016,
+            "median_regret": 0.04769015299530979,
+            "p95_regret": 0.11105935788942271,
+            "n": 5
+          },
+          {
+            "decile": 1,
+            "mean_uncertainty": 1.5771041798606493,
+            "mean_regret": 0.046870572639445704,
+            "median_regret": 0.01675053726509791,
+            "p95_regret": 0.1528215655360493,
+            "n": 5
+          },
+          {
+            "decile": 2,
+            "mean_uncertainty": 1.7784215225493074,
+            "mean_regret": 0.3914877224705407,
+            "median_regret": 0.2759846552865387,
+            "p95_regret": 0.8570807929877668,
+            "n": 5
+          },
+          {
+            "decile": 3,
+            "mean_uncertainty": 1.9107701630735743,
+            "mean_regret": 0.12100588232112922,
+            "median_regret": 0.07220179614905681,
+            "p95_regret": 0.27128575562105456,
+            "n": 5
+          },
+          {
+            "decile": 4,
+            "mean_uncertainty": 2.079376234903646,
+            "mean_regret": 0.10407016290844726,
+            "median_regret": 0.1480409753732119,
+            "p95_regret": 0.16716756859173426,
+            "n": 5
+          },
+          {
+            "decile": 5,
+            "mean_uncertainty": 2.285961922481996,
+            "mean_regret": 0.29191664539899886,
+            "median_regret": 0.3188477931720817,
+            "p95_regret": 0.4429559971266748,
+            "n": 5
+          },
+          {
+            "decile": 6,
+            "mean_uncertainty": 2.5050759246554555,
+            "mean_regret": 0.08037277932846185,
+            "median_regret": 0.07685221025442539,
+            "p95_regret": 0.1457681928109648,
+            "n": 5
+          },
+          {
+            "decile": 7,
+            "mean_uncertainty": 2.747898561170148,
+            "mean_regret": 0.3399697315401782,
+            "median_regret": 0.3210087061136114,
+            "p95_regret": 0.5880045799120882,
+            "n": 5
+          },
+          {
+            "decile": 8,
+            "mean_uncertainty": 3.373092089315125,
+            "mean_regret": 0.30352958127217383,
+            "median_regret": 0.19852208765971405,
+            "p95_regret": 0.8521717044787794,
+            "n": 5
+          },
+          {
+            "decile": 9,
+            "mean_uncertainty": 5.317689503853535,
+            "mean_regret": 0.12108860307095326,
+            "median_regret": 0.10832271314848461,
+            "p95_regret": 0.1942416616633249,
+            "n": 5
+          }
+        ],
+        "is_monotonic": false
+      }
+    },
+    {
+      "held_out_mechanism": "spectral_gap_threshold",
+      "n_train_samples": 7800,
+      "n_calibration": 50,
+      "n_test": 50,
+      "calibrated_kappa": 2.0,
+      "calibration_metrics": {
+        "0.0": {
+          "cvar95": 0.8301,
+          "mean_norm_regret": 0.4697,
+          "avg_recovery": 0.04,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 1.0
+        },
+        "0.5": {
+          "cvar95": 0.8301,
+          "mean_norm_regret": 0.437,
+          "avg_recovery": 0.06,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.92
+        },
+        "1.0": {
+          "cvar95": 0.7774,
+          "mean_norm_regret": 0.2439,
+          "avg_recovery": 0.32,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.4
+        },
+        "1.5": {
+          "cvar95": 0.6444,
+          "mean_norm_regret": 0.1442,
+          "avg_recovery": 0.48,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.12
+        },
+        "2.0": {
+          "cvar95": 0.5847,
+          "mean_norm_regret": 0.1066,
+          "avg_recovery": 0.5,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.0
+        },
+        "3.0": {
+          "cvar95": 0.5847,
+          "mean_norm_regret": 0.1066,
+          "avg_recovery": 0.5,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.0
+        },
+        "5.0": {
+          "cvar95": 0.5847,
+          "mean_norm_regret": 0.1066,
+          "avg_recovery": 0.5,
+          "avg_greedy_recovery": 0.0,
+          "coverage": 0.0
+        }
+      },
+      "arch_results": {
+        "greedy": {
+          "recovery_rate": 0.54,
+          "mean_norm_regret": 0.121,
+          "mean_regret": 66.3891,
+          "median_regret": 0.0,
+          "p95_regret": 483.5685,
+          "p99_regret": 594.8907,
+          "cvar95": 589.0052,
+          "avg_savings": 0.0,
+          "n_test": 50
+        },
+        "recursive": {
+          "recovery_rate": 0.0,
+          "mean_norm_regret": 0.5084,
+          "mean_regret": 228.6596,
+          "median_regret": 172.3644,
+          "p95_regret": 665.4738,
+          "p99_regret": 756.9693,
+          "cvar95": 729.4927,
+          "avg_savings": 0.6923,
+          "n_test": 50
+        },
+        "hybrid": {
+          "recovery_rate": 0.54,
+          "mean_norm_regret": 0.121,
+          "mean_regret": 66.3891,
+          "median_regret": 0.0,
+          "p95_regret": 483.5685,
+          "p99_regret": 594.8907,
+          "cvar95": 589.0052,
+          "avg_savings": 0.6154,
+          "n_test": 50,
+          "coverage": 0.0
+        }
+      },
+      "paired_cis": {
+        "recovery_hybrid_minus_greedy": {
+          "mean_diff": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "recovery_recursive_minus_greedy": {
+          "mean_diff": -0.54,
+          "ci_95": [
+            -0.68,
+            -0.4
+          ]
+        }
+      },
+      "uncertainty_correlation": {
+        "correlation": -0.04673011683822561,
+        "spearman": 0.20447818350213579,
+        "n_samples": 50
+      },
+      "risk_deciles": {
+        "deciles": [
+          {
+            "decile": 0,
+            "mean_uncertainty": 1.0279609503116585,
+            "mean_regret": 0.19272380979708448,
+            "median_regret": 0.0,
+            "p95_regret": 0.6017431166093943,
+            "n": 5
+          },
+          {
+            "decile": 1,
+            "mean_uncertainty": 1.2360022991467527,
+            "mean_regret": 0.0,
+            "median_regret": 0.0,
+            "p95_regret": 0.0,
+            "n": 5
+          },
+          {
+            "decile": 2,
+            "mean_uncertainty": 1.3549603674885418,
+            "mean_regret": 0.12853502772970818,
+            "median_regret": 0.0,
+            "p95_regret": 0.5115841864211838,
+            "n": 5
+          },
+          {
+            "decile": 3,
+            "mean_uncertainty": 1.4516816588421395,
+            "mean_regret": 0.13838800771962126,
+            "median_regret": 0.0,
+            "p95_regret": 0.4618354058043726,
+            "n": 5
+          },
+          {
+            "decile": 4,
+            "mean_uncertainty": 1.5608747388018456,
+            "mean_regret": 0.12609782550932122,
+            "median_regret": 0.0034644460184571854,
+            "p95_regret": 0.347124782961098,
+            "n": 5
+          },
+          {
+            "decile": 5,
+            "mean_uncertainty": 1.6382827915939895,
+            "mean_regret": 0.11126506790460607,
+            "median_regret": 0.0,
+            "p95_regret": 0.342405760997569,
+            "n": 5
+          },
+          {
+            "decile": 6,
+            "mean_uncertainty": 1.7817180783224924,
+            "mean_regret": 0.0544554834777131,
+            "median_regret": 0.03135199207984661,
+            "p95_regret": 0.14214717883961764,
+            "n": 5
+          },
+          {
+            "decile": 7,
+            "mean_uncertainty": 1.9755015509340232,
+            "mean_regret": 0.2750824704142709,
+            "median_regret": 0.23240854274005207,
+            "p95_regret": 0.6041597066615841,
+            "n": 5
+          },
+          {
+            "decile": 8,
+            "mean_uncertainty": 2.316855312382878,
+            "mean_regret": 0.01632344652192228,
+            "median_regret": 0.0,
+            "p95_regret": 0.06078841921355829,
+            "n": 5
+          },
+          {
+            "decile": 9,
+            "mean_uncertainty": 3.0273526621438682,
+            "mean_regret": 0.1668223061480953,
+            "median_regret": 0.15437244296884584,
+            "p95_regret": 0.36464936052420843,
+            "n": 5
+          }
+        ],
+        "is_monotonic": false
+      }
+    }
+  ],
+  "gates": {
+    "1_calibration_split": {
+      "passed": true,
+      "description": "by design"
+    },
+    "2_connectivity_full": {
+      "passed": false,
+      "description": "rec=0%>0%, med=13.19<13.19, p95=30.97<30.97"
+    },
+    "3_redundancy_tail": {
+      "passed": false,
+      "description": "med=582.91<582.91, p95=1056.02<=1056.02, cvar95=1155.53<=1155.53"
+    },
+    "4_spectral_no_regression": {
+      "passed": true,
+      "description": "hybrid=54% >= greedy=54%"
+    },
+    "5_hub_load_no_regression": {
+      "passed": true,
+      "description": "hybrid=4% >= greedy=4%"
+    },
+    "6_uncertainty_error_corr": {
+      "passed": false,
+      "description": "avg corr: -0.034"
+    },
+    "7_monotonic_risk_deciles": {
+      "passed": false,
+      "description": "0/4 monotonic"
+    },
+    "8_coverage_gt_10pct_2mechanisms": {
+      "passed": false,
+      "description": "0 mechanisms > 10% coverage"
+    },
+    "9_search_savings": {
+      "passed": true,
+      "description": "avg savings: 61.5%"
+    },
+    "10_qualification": {
+      "passed": false,
+      "description": "manifest_valid=False, failures=0"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "n_mechanisms": 4,
+    "n_valid_lomo": 4,
+    "conn_hybrid_recovery": 0.0,
+    "red_hybrid_recovery": 0.06,
+    "spec_hybrid_recovery": 0.54,
+    "avg_uncertainty_corr": -0.034409720662723124,
+    "monotonic_count": 0,
+    "coverage_count": 0,
+    "avg_savings": 0.6154
+  },
+  "training_info": {
+    "n_train_total": 10400,
+    "feature_dim": 76,
+    "target_dim": 3,
+    "n_ensemble": 5
+  },
+  "manifest_evidence": {
+    "manifest_exists": true,
+    "manifest_valid": false,
+    "release_mode": true,
+    "test_count": 2344,
+    "test_passed": 2344,
+    "test_failed": 0
+  }
+}

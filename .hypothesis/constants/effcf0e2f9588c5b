@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp6_8_2/extended_risk_metrics.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1e-06, 95.0, 'correlation', 'cvar95', 'cvar99', 'decile', 'deciles', 'is_monotonic', 'mean_regret', 'mean_uncertainty', 'median_regret', 'n', 'n_samples', 'p95_regret', 'spearman']
