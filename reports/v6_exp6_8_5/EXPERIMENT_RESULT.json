@@ -1,0 +1,273 @@
+{
+  "audit_note": "Full Structural Advantage Features. Test whether F4 (rich structural features) breaks the F1 ceiling. Model: M2_gbt, Target: T2_normalized. Hard stop: if F4 doesn't improve, freeze and move to exp7.",
+  "learning_curves": [
+    {
+      "n_train": 250,
+      "feature_level": "F1_current",
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.2726,
+      "override_precision": 0.8889,
+      "coverage": 0.25,
+      "mean_override_advantage": 13.2225,
+      "downside_prob": 0.1111,
+      "cvar_neg_5": -0.5443,
+      "risk_adjusted_score": 13.162,
+      "p95_regret_hybrid": 20.9367,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 27.996,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 9,
+      "rmse": 12.5276
+    },
+    {
+      "n_train": 500,
+      "feature_level": "F1_current",
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.0986,
+      "override_precision": 0.7143,
+      "coverage": 0.1944,
+      "mean_override_advantage": 7.2665,
+      "downside_prob": 0.2857,
+      "cvar_neg_5": -2.7476,
+      "risk_adjusted_score": 6.4814,
+      "p95_regret_hybrid": 27.4423,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 30.7118,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 7,
+      "rmse": 13.5047
+    },
+    {
+      "n_train": 250,
+      "feature_level": "F4_full",
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.0919,
+      "override_precision": 0.4545,
+      "coverage": 0.3056,
+      "mean_override_advantage": 1.9747,
+      "downside_prob": 0.5455,
+      "cvar_neg_5": -12.6995,
+      "risk_adjusted_score": -4.9523,
+      "p95_regret_hybrid": 23.7502,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 29.6044,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 11,
+      "rmse": 15.5765
+    },
+    {
+      "n_train": 500,
+      "feature_level": "F4_full",
+      "mechanism": "connectivity_threshold",
+      "spearman": 0.1346,
+      "override_precision": 0.5714,
+      "coverage": 0.1944,
+      "mean_override_advantage": 2.2088,
+      "downside_prob": 0.4286,
+      "cvar_neg_5": -12.6995,
+      "risk_adjusted_score": -3.2338,
+      "p95_regret_hybrid": 27.4423,
+      "p95_regret_baseline": 27.4423,
+      "cvar95_hybrid": 30.7118,
+      "cvar95_baseline": 30.7118,
+      "n_test": 36,
+      "n_overrides": 7,
+      "rmse": 14.2316
+    },
+    {
+      "n_train": 250,
+      "feature_level": "F1_current",
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0616,
+      "override_precision": 1.0,
+      "coverage": 0.0312,
+      "mean_override_advantage": 380.0909,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 380.0909,
+      "risk_adjusted_score": 380.0909,
+      "p95_regret_hybrid": 537.2556,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 1,
+      "rmse": 205.4758
+    },
+    {
+      "n_train": 500,
+      "feature_level": "F1_current",
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0315,
+      "override_precision": 1.0,
+      "coverage": 0.0312,
+      "mean_override_advantage": 511.7308,
+      "downside_prob": 0.0,
+      "cvar_neg_5": 511.7308,
+      "risk_adjusted_score": 511.7308,
+      "p95_regret_hybrid": 511.6806,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 702.0972,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 1,
+      "rmse": 209.7506
+    },
+    {
+      "n_train": 250,
+      "feature_level": "F4_full",
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0609,
+      "override_precision": 0.6667,
+      "coverage": 0.0938,
+      "mean_override_advantage": 420.0711,
+      "downside_prob": 0.3333,
+      "cvar_neg_5": -40.7593,
+      "risk_adjusted_score": 406.4847,
+      "p95_regret_hybrid": 472.9013,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 540.0917,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 3,
+      "rmse": 256.3859
+    },
+    {
+      "n_train": 500,
+      "feature_level": "F4_full",
+      "mechanism": "redundancy_threshold",
+      "spearman": 0.0154,
+      "override_precision": 0.5,
+      "coverage": 0.125,
+      "mean_override_advantage": 313.9687,
+      "downside_prob": 0.5,
+      "cvar_neg_5": -40.7593,
+      "risk_adjusted_score": 293.5891,
+      "p95_regret_hybrid": 472.9013,
+      "p95_regret_baseline": 537.2556,
+      "cvar95_hybrid": 540.0917,
+      "cvar95_baseline": 702.0972,
+      "n_test": 32,
+      "n_overrides": 4,
+      "rmse": 216.5792
+    }
+  ],
+  "f1_vs_f4_comparison": {
+    "connectivity_threshold": {
+      "F1_current": [
+        {
+          "n_train": 250,
+          "spearman": 0.2726,
+          "coverage": 0.25,
+          "p95_regret_hybrid": 20.9367,
+          "rmse": 12.5276
+        },
+        {
+          "n_train": 500,
+          "spearman": 0.0986,
+          "coverage": 0.1944,
+          "p95_regret_hybrid": 27.4423,
+          "rmse": 13.5047
+        }
+      ],
+      "F4_full": [
+        {
+          "n_train": 250,
+          "spearman": 0.0919,
+          "coverage": 0.3056,
+          "p95_regret_hybrid": 23.7502,
+          "rmse": 15.5765
+        },
+        {
+          "n_train": 500,
+          "spearman": 0.1346,
+          "coverage": 0.1944,
+          "p95_regret_hybrid": 27.4423,
+          "rmse": 14.2316
+        }
+      ]
+    },
+    "redundancy_threshold": {
+      "F1_current": [
+        {
+          "n_train": 250,
+          "spearman": 0.0616,
+          "coverage": 0.0312,
+          "p95_regret_hybrid": 537.2556,
+          "rmse": 205.4758
+        },
+        {
+          "n_train": 500,
+          "spearman": 0.0315,
+          "coverage": 0.0312,
+          "p95_regret_hybrid": 511.6806,
+          "rmse": 209.7506
+        }
+      ],
+      "F4_full": [
+        {
+          "n_train": 250,
+          "spearman": 0.0609,
+          "coverage": 0.0938,
+          "p95_regret_hybrid": 472.9013,
+          "rmse": 256.3859
+        },
+        {
+          "n_train": 500,
+          "spearman": 0.0154,
+          "coverage": 0.125,
+          "p95_regret_hybrid": 472.9013,
+          "rmse": 216.5792
+        }
+      ]
+    }
+  },
+  "decision": "F4_MATERIALLY_IMPROVES",
+  "gates": {
+    "1_f4_beats_f1": {
+      "passed": true,
+      "description": "F4=0.1346 vs F1=0.0986"
+    },
+    "2_f4_learning_curve": {
+      "passed": true,
+      "description": "F4 improves with N: True"
+    },
+    "3_positive_mean_advantage": {
+      "passed": true,
+      "description": "mean_adv=420.0711"
+    },
+    "4_p95_le_baseline": {
+      "passed": true,
+      "description": "P95=472.90 vs 537.26"
+    },
+    "5_coverage_gt_5pct": {
+      "passed": true,
+      "description": "coverage=9.4%"
+    },
+    "6_qualification": {
+      "passed": false,
+      "description": "manifest_valid=False, failures=0"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "decision": "F4_MATERIALLY_IMPROVES",
+    "f4_spearman_final": 0.1346,
+    "f1_spearman_final": 0.0986,
+    "f4_improves_with_data": true,
+    "f4_beats_f1": true,
+    "best_f4_spearman": 0.0609,
+    "best_f4_coverage": 0.0938,
+    "best_f4_p95_regret": 472.9013,
+    "best_f4_risk_adjusted_score": 406.4847
+  },
+  "manifest_evidence": {
+    "manifest_exists": true,
+    "manifest_valid": false,
+    "test_count": 2415,
+    "test_passed": 2415,
+    "test_failed": 0
+  }
+}
