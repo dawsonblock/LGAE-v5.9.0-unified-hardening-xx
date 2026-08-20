@@ -1,0 +1,528 @@
+{
+  "audit_note": "Real AI Topology. First test of whether structural adaptation improves an AI system per unit compute. Three conditions: Fixed, Dynamic, LGAE. Models/prompts/tasks/tokens/tools held constant. LGAE controls only routing topology.",
+  "objective_weights": {
+    "w_quality": 1.0,
+    "lambda_tokens": 0.001,
+    "lambda_latency": 0.01,
+    "lambda_failures": 0.5,
+    "lambda_calls": 0.05
+  },
+  "condition_results": [
+    {
+      "condition_name": "A_fixed",
+      "mean_quality": 0.9167,
+      "mean_tokens": 498.5,
+      "mean_latency_ms": 0.0,
+      "mean_calls": 4.0,
+      "mean_failures": 0.0,
+      "mean_objective": 0.2181,
+      "mean_cost": 0.6985,
+      "success_rate": 1.0,
+      "per_class": {
+        "simple_factual": {
+          "quality": 0.9,
+          "tokens": 500.0,
+          "latency": 0.0347,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2,
+          "success": 1.0,
+          "cost": 0.7
+        },
+        "verification_sensitive": {
+          "quality": 1.0,
+          "tokens": 497.65,
+          "latency": 0.0357,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.3023,
+          "success": 1.0,
+          "cost": 0.6977
+        },
+        "memory_dependent": {
+          "quality": 0.9,
+          "tokens": 496.65,
+          "latency": 0.0325,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2033,
+          "success": 1.0,
+          "cost": 0.6967
+        },
+        "research_synthesis": {
+          "quality": 0.9,
+          "tokens": 491.3,
+          "latency": 0.0336,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2087,
+          "success": 1.0,
+          "cost": 0.6913
+        },
+        "coding_debugging": {
+          "quality": 0.9,
+          "tokens": 497.65,
+          "latency": 0.0341,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2023,
+          "success": 1.0,
+          "cost": 0.6977
+        },
+        "multi_step_reasoning": {
+          "quality": 0.9,
+          "tokens": 508.0,
+          "latency": 0.0328,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.192,
+          "success": 1.0,
+          "cost": 0.708
+        }
+      },
+      "final_topology_summary": {
+        "n_nodes": 5,
+        "n_edges": 9,
+        "n_active_edges": 9,
+        "edges": [
+          {
+            "edge_id": "planner->worker",
+            "source": "planner",
+            "destination": "worker",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "worker->critic",
+            "source": "worker",
+            "destination": "critic",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "critic->verifier",
+            "source": "critic",
+            "destination": "verifier",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "memory->planner",
+            "source": "memory",
+            "destination": "planner",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "planner->memory",
+            "source": "planner",
+            "destination": "memory",
+            "weight": 0.5,
+            "active": true
+          },
+          {
+            "edge_id": "memory->worker",
+            "source": "memory",
+            "destination": "worker",
+            "weight": 0.5,
+            "active": true
+          },
+          {
+            "edge_id": "worker->memory",
+            "source": "worker",
+            "destination": "memory",
+            "weight": 0.3,
+            "active": true
+          },
+          {
+            "edge_id": "critic->worker",
+            "source": "critic",
+            "destination": "worker",
+            "weight": 0.3,
+            "active": true
+          },
+          {
+            "edge_id": "verifier->planner",
+            "source": "verifier",
+            "destination": "planner",
+            "weight": 0.2,
+            "active": true
+          }
+        ]
+      },
+      "n_mutations": 0
+    },
+    {
+      "condition_name": "B_dynamic",
+      "mean_quality": 0.9167,
+      "mean_tokens": 470.5,
+      "mean_latency_ms": 0.0,
+      "mean_calls": 3.83,
+      "mean_failures": 0.0,
+      "mean_objective": 0.2545,
+      "mean_cost": 0.6622,
+      "success_rate": 1.0,
+      "per_class": {
+        "simple_factual": {
+          "quality": 0.9,
+          "tokens": 332.0,
+          "latency": 0.0253,
+          "calls": 3.0,
+          "failures": 0.0,
+          "objective": 0.418,
+          "success": 1.0,
+          "cost": 0.482
+        },
+        "verification_sensitive": {
+          "quality": 1.0,
+          "tokens": 497.65,
+          "latency": 0.0331,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.3023,
+          "success": 1.0,
+          "cost": 0.6977
+        },
+        "memory_dependent": {
+          "quality": 0.9,
+          "tokens": 496.65,
+          "latency": 0.0348,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2033,
+          "success": 1.0,
+          "cost": 0.6967
+        },
+        "research_synthesis": {
+          "quality": 0.9,
+          "tokens": 491.3,
+          "latency": 0.0325,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2087,
+          "success": 1.0,
+          "cost": 0.6913
+        },
+        "coding_debugging": {
+          "quality": 0.9,
+          "tokens": 497.65,
+          "latency": 0.0339,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2023,
+          "success": 1.0,
+          "cost": 0.6977
+        },
+        "multi_step_reasoning": {
+          "quality": 0.9,
+          "tokens": 508.0,
+          "latency": 0.0323,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.192,
+          "success": 1.0,
+          "cost": 0.708
+        }
+      },
+      "final_topology_summary": {
+        "n_nodes": 5,
+        "n_edges": 9,
+        "n_active_edges": 9,
+        "edges": [
+          {
+            "edge_id": "planner->worker",
+            "source": "planner",
+            "destination": "worker",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "worker->critic",
+            "source": "worker",
+            "destination": "critic",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "critic->verifier",
+            "source": "critic",
+            "destination": "verifier",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "memory->planner",
+            "source": "memory",
+            "destination": "planner",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "planner->memory",
+            "source": "planner",
+            "destination": "memory",
+            "weight": 0.5,
+            "active": true
+          },
+          {
+            "edge_id": "memory->worker",
+            "source": "memory",
+            "destination": "worker",
+            "weight": 0.5,
+            "active": true
+          },
+          {
+            "edge_id": "worker->memory",
+            "source": "worker",
+            "destination": "memory",
+            "weight": 0.3,
+            "active": true
+          },
+          {
+            "edge_id": "critic->worker",
+            "source": "critic",
+            "destination": "worker",
+            "weight": 0.3,
+            "active": true
+          },
+          {
+            "edge_id": "verifier->planner",
+            "source": "verifier",
+            "destination": "planner",
+            "weight": 0.2,
+            "active": true
+          }
+        ]
+      },
+      "n_mutations": 0
+    },
+    {
+      "condition_name": "C_lgae",
+      "mean_quality": 0.9167,
+      "mean_tokens": 498.5,
+      "mean_latency_ms": 0.0,
+      "mean_calls": 4.0,
+      "mean_failures": 0.0,
+      "mean_objective": 0.2181,
+      "mean_cost": 0.6985,
+      "success_rate": 1.0,
+      "per_class": {
+        "simple_factual": {
+          "quality": 0.9,
+          "tokens": 500.0,
+          "latency": 0.0336,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2,
+          "success": 1.0,
+          "cost": 0.7
+        },
+        "verification_sensitive": {
+          "quality": 1.0,
+          "tokens": 497.65,
+          "latency": 0.0341,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.3023,
+          "success": 1.0,
+          "cost": 0.6977
+        },
+        "memory_dependent": {
+          "quality": 0.9,
+          "tokens": 496.65,
+          "latency": 0.0344,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2033,
+          "success": 1.0,
+          "cost": 0.6967
+        },
+        "research_synthesis": {
+          "quality": 0.9,
+          "tokens": 491.3,
+          "latency": 0.0333,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2087,
+          "success": 1.0,
+          "cost": 0.6913
+        },
+        "coding_debugging": {
+          "quality": 0.9,
+          "tokens": 497.65,
+          "latency": 0.0331,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.2023,
+          "success": 1.0,
+          "cost": 0.6977
+        },
+        "multi_step_reasoning": {
+          "quality": 0.9,
+          "tokens": 508.0,
+          "latency": 0.0327,
+          "calls": 4.0,
+          "failures": 0.0,
+          "objective": 0.192,
+          "success": 1.0,
+          "cost": 0.708
+        }
+      },
+      "final_topology_summary": {
+        "n_nodes": 5,
+        "n_edges": 9,
+        "n_active_edges": 9,
+        "edges": [
+          {
+            "edge_id": "planner->worker",
+            "source": "planner",
+            "destination": "worker",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "worker->critic",
+            "source": "worker",
+            "destination": "critic",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "critic->verifier",
+            "source": "critic",
+            "destination": "verifier",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "memory->planner",
+            "source": "memory",
+            "destination": "planner",
+            "weight": 1.0,
+            "active": true
+          },
+          {
+            "edge_id": "planner->memory",
+            "source": "planner",
+            "destination": "memory",
+            "weight": 0.5,
+            "active": true
+          },
+          {
+            "edge_id": "memory->worker",
+            "source": "memory",
+            "destination": "worker",
+            "weight": 0.5,
+            "active": true
+          },
+          {
+            "edge_id": "worker->memory",
+            "source": "worker",
+            "destination": "memory",
+            "weight": 0.3,
+            "active": true
+          },
+          {
+            "edge_id": "critic->worker",
+            "source": "critic",
+            "destination": "worker",
+            "weight": 0.3,
+            "active": true
+          },
+          {
+            "edge_id": "verifier->planner",
+            "source": "verifier",
+            "destination": "planner",
+            "weight": 0.2,
+            "active": true
+          }
+        ]
+      },
+      "n_mutations": 0
+    }
+  ],
+  "pareto_analysis": {
+    "points": [
+      {
+        "name": "A_fixed",
+        "quality": 0.9166666666666669,
+        "cost": 0.6985420058767,
+        "pareto_efficient": false
+      },
+      {
+        "name": "B_dynamic",
+        "quality": 0.9166666666666669,
+        "cost": 0.66220865325133,
+        "pareto_efficient": true
+      },
+      {
+        "name": "C_lgae",
+        "quality": 0.9166666666666669,
+        "cost": 0.6985420021017392,
+        "pareto_efficient": false
+      }
+    ],
+    "pareto_front": [
+      {
+        "name": "B_dynamic",
+        "quality": 0.9166666666666669,
+        "cost": 0.66220865325133,
+        "pareto_efficient": true
+      }
+    ]
+  },
+  "gates": {
+    "1_lgae_pareto_efficient": {
+      "passed": false,
+      "description": "LGAE on Pareto frontier: False"
+    },
+    "2_cost_reduction_20pct": {
+      "passed": false,
+      "description": "cost_reduction=0.0%, quality_change=+0.0000"
+    },
+    "3_quality_improvement_10pct": {
+      "passed": false,
+      "description": "quality_change=+0.0000"
+    },
+    "4_objective_improvement": {
+      "passed": true,
+      "description": "LGAE J=0.2181 vs Fixed J=0.2181"
+    },
+    "5_no_regression": {
+      "passed": true,
+      "description": "quality diff=+0.0000, failure diff=+0.00"
+    },
+    "6_mutations_applied": {
+      "passed": false,
+      "description": "n_mutations=0"
+    },
+    "7_qualification": {
+      "passed": false,
+      "description": "manifest_valid=False, failures=0"
+    }
+  },
+  "all_gates_passed": false,
+  "summary": {
+    "fixed_quality": 0.9166666666666669,
+    "fixed_cost": 0.6985420058767,
+    "fixed_objective": 0.21812466078996662,
+    "dynamic_quality": 0.9166666666666669,
+    "dynamic_cost": 0.66220865325133,
+    "dynamic_objective": 0.25445801341533664,
+    "lgae_quality": 0.9166666666666669,
+    "lgae_cost": 0.6985420021017392,
+    "lgae_objective": 0.21812466456492743,
+    "cost_reduction": 0.0,
+    "quality_change": 0.0,
+    "token_reduction": 0.0,
+    "obj_improvement": 0.0,
+    "lgae_mutations": 0
+  },
+  "manifest_evidence": {
+    "manifest_exists": true,
+    "manifest_valid": false,
+    "test_count": 2421,
+    "test_passed": 2421,
+    "test_failed": 0
+  }
+}

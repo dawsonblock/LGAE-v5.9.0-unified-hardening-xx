@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_1/ai_node.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.05, 0.5, 0.7, 0.75, 0.8, 0.85, 0.9, 512, 1000, 1024, 'ACCEPT', 'GOOD', 'PASS', 'critic', 'fail', 'max_tokens', 'memory', 'mock', 'mock-v1', 'model', 'pass', 'planner', 'provider', 'temperature', 'verifier', 'worker']

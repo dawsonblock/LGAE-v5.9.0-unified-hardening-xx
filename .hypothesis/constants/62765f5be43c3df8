@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_1/topology_controller.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-06, 0.01, 0.1, '-inf', 'best_objective', 'current_topology', 'total_applied', 'total_proposed']

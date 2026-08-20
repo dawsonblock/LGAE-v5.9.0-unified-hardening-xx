@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_1/benchmark.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.1, 0.2, 0.5, 0.6, 0.7, 0.8, 1.0, 'coding_debugging', 'memory', 'memory_dependent', 'multi_step_reasoning', 'research_synthesis', 'simple_factual', 'verifier']
