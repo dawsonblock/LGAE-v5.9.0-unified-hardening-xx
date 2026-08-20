@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_3/conditions.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.05, 0.1, 0.2, 1.0, 'calls', 'cost', 'input', 'objective', 'qpt', 'quality', 'task_class', 'task_id', 'tokens']
