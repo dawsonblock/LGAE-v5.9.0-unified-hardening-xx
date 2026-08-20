@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_4/task_embedding.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 1.0, 10.0, 30.0, 1000.0, 1000, '\\b[a-z]+\\b', 'analyze', 'assumption', 'bug', 'calculate', 'capital', 'category_scores', 'check', 'code', 'coding', 'compile', 'comprehensive', 'confirm', 'context', 'correct', 'debug', 'deduce', 'define', 'derive', 'embedding_dim', 'error', 'evidence', 'factual', 'fix', 'function', 'gather', 'history', 'infer', 'information', 'list', 'logical', 'manual_features', 'memory', 'multi-step', 'name', 'past', 'previous', 'program', 'proof', 'prove', 'reason', 'reasoning', 'recall', 'remember', 'research', 'script', 'snippet', 'solve', 'sources', 'steps', 'stored', 'summary', 'syntax', 'synthesize', 'test', 'topic', 'validate', 'vector_dim', 'verification', 'verify', 'what', 'when', 'where', 'who']

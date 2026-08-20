@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_4/marginal_value.py
+# hypothesis_version: 6.151.4
+
+[0.0, 1e-10, 0.3, 1.0, 100, 'confidence', 'critic', 'delta_j', 'include', 'j_with', 'j_without', 'mean_delta_j', 'memory', 'n_samples', 'researcher', 'std_delta_j', 'task_input', 'verifier']

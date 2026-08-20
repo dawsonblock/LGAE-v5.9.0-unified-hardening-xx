@@ -1,0 +1,4 @@
+# file: /Users/dawsonblock/Downloads/LGAE-v5.9.0-unified-hardening-5.10-canonical-runtime/src/lgae_v3/experimental/exp7_4/node_necessity_router.py
+# hypothesis_version: 6.151.4
+
+[0.0, 0.01, 1.0, 1.5, 'confidence', 'count', 'critic', 'estimator_summary', 'exclude_counts', 'excluded', 'general', 'include', 'include_counts', 'included', 'input', 'memory', 'n_calibrations', 'n_decisions', 'planner', 'researcher', 'task_class', 'task_id', 'verifier', 'worker']
